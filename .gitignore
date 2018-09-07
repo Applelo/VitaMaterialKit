@@ -1,0 +1,26 @@
+# Files
+*.o
+*.elf
+*.self
+*.velf
+*.bin
+*.vpk
+*.sfo
+*.cbp
+
+
+.DS_Store
+.idea
+
+# CMake data
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+vita3k.log
