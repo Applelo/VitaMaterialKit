@@ -34,6 +34,11 @@ typedef enum TextStyle {
 class Texts {
 private:
     std::map<std::string, vita2d_font*> fonts;
+    const char *type;
+    int height;
+    unsigned int size;
+
+
     std::string uppercase(std::string text);
     void drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic);
 public:

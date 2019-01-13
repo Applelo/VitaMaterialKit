@@ -48,7 +48,7 @@ add_executable(${SHORT_NAME}
         src/kit/ui/Texts.cpp
         src/kit/ui/Theme.cpp
         src/kit/ui/Icons.cpp
-        )
+        src/kit/ui/IconsCodes.h)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}
@@ -81,7 +81,7 @@ vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         sce_sys/livearea/contents/startup.png   sce_sys/livearea/contents/startup.png
         sce_sys/livearea/contents/template.xml  sce_sys/livearea/contents/template.xml
 
-        assets/fonts/materialdesignicons.ttf        assets/fonts/materialdesignicons.ttf
+        assets/fonts/mdi/materialdesignicons-webfont.ttf assets/fonts/mdi/materialdesignicons-webfont.ttf
         assets/fonts/Roboto/Roboto-Black.ttf        assets/fonts/Roboto/Roboto-Black.ttf
         assets/fonts/Roboto/Roboto-BlackItalic.ttf  assets/fonts/Roboto/Roboto-BlackItalic.ttf
         assets/fonts/Roboto/Roboto-Bold.ttf         assets/fonts/Roboto/Roboto-Bold.ttf

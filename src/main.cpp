@@ -8,6 +8,7 @@
 
 #include "kit/ui/Theme.hpp"
 #include "kit/ui/Texts.hpp"
+#include "kit/ui/Icons.hpp"
 
 int main() {
 
@@ -35,12 +36,29 @@ int main() {
     theme = new Theme(primaryThemeColor, secondaryThemeColor);
     auto *texts = new Texts;
 
+    auto *icons = new Icons;
+
     while (1) {
 
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-       
+        /*texts->draw("test", 0, 0, H1, theme->getPrimaryRGBA().text);
+        texts->draw("test", 0, 70, H2, theme->getPrimaryRGBA().text);
+        texts->draw("test", 0, 140, H3, theme->getPrimaryRGBA().text);
+        texts->draw("test", 0, 210, H4, theme->getPrimaryRGBA().text);
+        texts->draw("test", 0, 280, H5, theme->getPrimaryRGBA().text);
+        texts->draw("test", 0, 350, H6, theme->getPrimaryRGBA().text);
+
+        texts->draw("test", 480, 0, H1, theme->getPrimaryRGBA().text, true);
+        texts->draw("test", 480, 70, H2, theme->getPrimaryRGBA().text, true);
+        texts->draw("test", 480, 140, H3, theme->getPrimaryRGBA().text, true);
+        texts->draw("test", 480, 210, H4, theme->getPrimaryRGBA().text, true);
+        texts->draw("test", 480, 280, H5, theme->getPrimaryRGBA().text, true);
+        texts->draw("test", 480, 350, H6, theme->getPrimaryRGBA().text, true);*/
+
+        icons->draw(ICON_MDI_APPLE, 0, 0);
+
 
         vita2d_end_drawing();
         vita2d_swap_buffers();

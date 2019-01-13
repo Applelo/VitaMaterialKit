@@ -43,9 +43,8 @@ void Texts::init(std::string family) {
 }
 
 void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
-    const char *type = "Regular";
-    int height;
-    unsigned int size = 16;
+    type = "Regular";
+    size = 16;
 
     switch (textStyle) {
         case H1:
