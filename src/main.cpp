@@ -58,6 +58,8 @@ int main() {
         texts->draw("test", 480, 350, H6, theme->getPrimaryRGBA().text, true);*/
 
         icons->draw(ICON_MDI_APPLE, 0, 0);
+        icons->draw(ICON_MDI_MICROSOFT, 50, 0);
+        icons->draw(ICON_MDI_GOOGLE, 100, 0);
 
 
         vita2d_end_drawing();
