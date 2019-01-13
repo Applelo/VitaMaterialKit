@@ -43,47 +43,60 @@ void Texts::init(std::string family) {
 }
 
 void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
+    const char *type = "Regular";
+    int height;
+    unsigned int size = 16;
+
     switch (textStyle) {
         case H1:
-            vita2d_font_draw_text(fonts[italic ? "LightItalic" : "Light"], x, y, color, 96, text.c_str());
+            type = italic ? "LightItalic" : "Light";
+            size = 96;
             break;
         case H2:
-            vita2d_font_draw_text(fonts[italic ? "LightItalic" : "Light"], x, y, color, 60, text.c_str());
+            type = italic ? "LightItalic" : "Light";
+            size = 60;
             break;
         case H3:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 48, text.c_str());
+            type = italic ? "Italic" : "Regular";
+            size = 48;
             break;
         case H4:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 34, text.c_str());
+            type = italic ? "Italic" : "Regular";
+            size = 34;
             break;
         case H5:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 24, text.c_str());
+            type = italic ? "Italic" : "Regular";
+            size = 24;
             break;
         case H6:
-            vita2d_font_draw_text(fonts[italic ? "MediumItalic" : "Medium"], x, y, color, 20, text.c_str());
+            type = italic ? "MediumItalic" : "Medium";
+            size = 20;
             break;
         case Sub1:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 16, text.c_str());
+        case Body1:
+            type = italic ? "Italic" : "Regular";
+            size = 16;
             break;
         case Sub2:
-            vita2d_font_draw_text(fonts[italic ? "MediumItalic" : "Medium"], x, y, color, 14, text.c_str());
-            break;
-        case Body1:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 16, text.c_str());
-            break;
         case Body2:
-            vita2d_font_draw_text(fonts[italic ? "MediumItalic" : "Medium"], x, y, color, 14, text.c_str());
-            break;
         case Button:
-            vita2d_font_draw_text(fonts[italic ? "MediumItalic" : "Medium"], x, y, color, 14, this->uppercase(text).c_str());
+            type = italic ? "MediumItalic" : "Medium";
+            size = 14;
             break;
         case Caption:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 12, text.c_str());
+            type = italic ? "Italic" : "Regular";
+            size = 12;
             break;
         case Overline:
-            vita2d_font_draw_text(fonts[italic ? "RegularItalic" : "Regular"], x, y, color, 10, this->uppercase(text).c_str());
+            type = italic ? "Italic" : "Regular";
+            size = 10;
             break;
     }
+
+    //width = vita2d_font_text_width(fonts[type], size, text.c_str());
+    height = vita2d_font_text_height(fonts[type], size, text.c_str());
+
+    vita2d_font_draw_text(fonts[type], x, y + (height/4*3), color, size, text.c_str());
 }
 
 //Draw with Material Style

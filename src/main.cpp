@@ -40,7 +40,7 @@ int main() {
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-        texts->draw("test", 20, 20, H1, theme->getPrimaryRGBA().text);
+       
 
         vita2d_end_drawing();
         vita2d_swap_buffers();
