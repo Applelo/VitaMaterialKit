@@ -1,10 +1,10 @@
 
 #include "Buttons.hpp"
 
-Buttons::Buttons(const Touch &touch, const Pad &pad, const Theme &theme) : touch(touch), pad(pad), theme(theme) {
-    this->touch = touch;
-    this->pad = pad;
-    this->theme = theme;
+Buttons::Buttons(Touch *touch, Pad *pad, Theme *theme) {
+    this->touch = &touch;
+    this->pad = &pad;
+    this->theme = &theme;
     this->icons = new Icons();
 }
 

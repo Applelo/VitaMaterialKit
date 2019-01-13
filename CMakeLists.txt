@@ -15,9 +15,9 @@ endif ()
 
 ## Define project parameters here
 # Name of the project
-set(SHORT_NAME vita_material_kit)
-set(PSVITAIP "192.168.0.15")
-set(VITA3K_PATH "/Applications/Vita3K.app/Contents/MacOS/")
+set(SHORT_NAME VitaMaterialKit)
+set(PSVITAIP "192.168.1.37")
+set(VITA3K_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
 project(${SHORT_NAME})
 # This line adds Vita helper macros, must go after project definition in order
 # to build Vita specific artifacts (self/vpk).
@@ -36,9 +36,8 @@ set(VITA_VERSION "01.00")
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11 -fpermissive")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fpermissive")
-
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fpermissive -std=gnu11 -Wall ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fpermissive -std=c++11 -Wall ")
 
 include_directories(
         ../common
@@ -46,49 +45,23 @@ include_directories(
 
 add_executable(${SHORT_NAME}
         src/main.cpp
-
-        src/utils/Pad.cpp
-        src/utils/Touch.cpp
-        src/utils/IME.cpp
-        src/utils/Net.cpp
-        src/utils/I18n.cpp
-
-        src/ui/Fonts.cpp
-        src/ui/Texts.cpp
-        src/ui/Buttons.cpp
-        src/ui/Icons.cpp
-        src/ui/Theme.cpp)
+        src/kit/ui/Texts.cpp
+        src/kit/ui/Theme.cpp
+        src/kit/ui/Icons.cpp
+        )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}
-        crypto
-        expat
-        curl
-        ssl
-        z
-        crypto
-        opus
-
-        jansson
-
-        SceDisplay_stub
-        SceCtrl_stub
-        SceTouch_stub
-        SceHttp_stub
-        SceNet_stub
-        SceSysmodule_stub
-        SceNetCtl_stub
-        SceCommonDialog_stub
-        SceIme_stub
-        SceAppUtil_stub
-        SceRegistryMgr_stub
-        ScePower_stub
-
         vita2d
+        SceDisplay_stub
         SceGxm_stub
+        SceSysmodule_stub
+        SceCtrl_stub
         ScePgf_stub
         ScePvf_stub
         SceCommonDialog_stub
+        SceNet_stub_weak
+        SceNetCtl_stub_weak
         freetype
         png
         jpeg
@@ -98,31 +71,29 @@ target_link_libraries(${SHORT_NAME}
         )
 
 
-vita_create_self(eboot.bin ${SHORT_NAME} UNSAFE)
+vita_create_self(eboot.bin ${SHORT_NAME})
 vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         VERSION ${VITA_VERSION}
         NAME ${VITA_APP_NAME}
-        FILE sce_sys/icon0.png sce_sys/icon0.png
-        sce_sys/changeinfo.xml sce_sys/changeinfo.xml
-        sce_sys/livearea/pic0.png sce_sys/pic0.png
+        FILE sce_sys/icon0.png      sce_sys/icon0.png
+        sce_sys/livearea/pic0.png   sce_sys/livearea/pic0.png
+        sce_sys/livearea/contents/bg.png        sce_sys/livearea/contents/bg.png
+        sce_sys/livearea/contents/startup.png   sce_sys/livearea/contents/startup.png
+        sce_sys/livearea/contents/template.xml  sce_sys/livearea/contents/template.xml
 
-        sce_sys/livearea/contents/bg.png sce_sys/livearea/contents/bg.png
-        sce_sys/livearea/contents/startup.png sce_sys/livearea/contents/startup.png
-        sce_sys/livearea/contents/template.xml sce_sys/livearea/contents/template.xml
-
-        assets/fonts/materialdesignicons.ttf assets/fonts/materialdesignicons.ttf
-        assets/fonts/Roboto/Roboto-Black.ttf assets/fonts/Roboto/Roboto-Black.ttf
-        assets/fonts/Roboto/Roboto-BlackItalic.ttf assets/fonts/Roboto/Roboto-BlackItalic.ttf
-        assets/fonts/Roboto/Roboto-Bold.ttf assets/fonts/Roboto/Roboto-Bold.ttf
-        assets/fonts/Roboto/Roboto-BoldItalic.ttf assets/fonts/Roboto/Roboto-BoldItalic.ttf
-        assets/fonts/Roboto/Roboto-Italic.ttf.ttf assets/fonts/Roboto/Roboto-Italic.ttf
-        assets/fonts/Roboto/Roboto-Light.ttf assets/fonts/Roboto/Roboto-Light.ttf
-        assets/fonts/Roboto/Roboto-LightItalic.ttf assets/fonts/Roboto/Roboto-LightItalic.ttf
-        assets/fonts/Roboto/Roboto-Medium.ttf assets/fonts/Roboto/Roboto-Medium.ttf
+        assets/fonts/materialdesignicons.ttf        assets/fonts/materialdesignicons.ttf
+        assets/fonts/Roboto/Roboto-Black.ttf        assets/fonts/Roboto/Roboto-Black.ttf
+        assets/fonts/Roboto/Roboto-BlackItalic.ttf  assets/fonts/Roboto/Roboto-BlackItalic.ttf
+        assets/fonts/Roboto/Roboto-Bold.ttf         assets/fonts/Roboto/Roboto-Bold.ttf
+        assets/fonts/Roboto/Roboto-BoldItalic.ttf   assets/fonts/Roboto/Roboto-BoldItalic.ttf
+        assets/fonts/Roboto/Roboto-Italic.ttf       assets/fonts/Roboto/Roboto-Italic.ttf
+        assets/fonts/Roboto/Roboto-Light.ttf        assets/fonts/Roboto/Roboto-Light.ttf
+        assets/fonts/Roboto/Roboto-LightItalic.ttf  assets/fonts/Roboto/Roboto-LightItalic.ttf
+        assets/fonts/Roboto/Roboto-Medium.ttf       assets/fonts/Roboto/Roboto-Medium.ttf
         assets/fonts/Roboto/Roboto-MediumItalic.ttf assets/fonts/Roboto/Roboto-MediumItalic.ttf
-        assets/fonts/Roboto/Roboto-Regular.ttf assets/fonts/Roboto/Roboto-Regular.ttf
-        assets/fonts/Roboto/Roboto-Thin.ttf assets/fonts/Roboto/Roboto-Thin.ttf
-        assets/fonts/Roboto/Roboto-ThinItalic.ttf assets/fonts/Roboto/Roboto-ThinItalic.ttf
+        assets/fonts/Roboto/Roboto-Regular.ttf      assets/fonts/Roboto/Roboto-Regular.ttf
+        assets/fonts/Roboto/Roboto-Thin.ttf         assets/fonts/Roboto/Roboto-Thin.ttf
+        assets/fonts/Roboto/Roboto-ThinItalic.ttf   assets/fonts/Roboto/Roboto-ThinItalic.ttf
 
         i18n/en.json i18n/en.json
         i18n/fr.json i18n/fr.json

@@ -12,10 +12,10 @@ Theme::Theme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary) {
 
 }
 
-int Theme::convertHexToRGBA(char *hex) {
+unsigned int Theme::convertHexToRGBA(const char *hex) {
     int r, g, b;
     sscanf(hex, "#%02x%02x%02x", &r, &g, &b);
-    return RGBA8(r, g, b, 255);
+    return (unsigned int) RGBA8(r, g, b, 255);
 }
 
 colorSchemeRGBA Theme::colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex) {

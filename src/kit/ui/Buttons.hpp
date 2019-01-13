@@ -9,12 +9,12 @@
 
 class Buttons {
 private:
-    Touch touch;
-    Pad pad;
-    Theme theme;
+    Touch **touch;
+    Pad **pad;
+    Theme **theme;
     Icons *icons;
 public:
-    Buttons(const Touch &touch, const Pad &pad, const Theme &theme);
+    Buttons(Touch *touch, Pad *pad, Theme *theme);
 
     void textDraw(int x, int y, char *text, bool dense = false);
     void textDraw(int x, int y, char *text, char* icon, bool dense = false);

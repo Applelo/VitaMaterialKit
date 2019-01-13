@@ -4,19 +4,21 @@
 
 #include <cstdio>
 #include <vita2d.h>
+#define PRIMARY_BACKGROUND_COLOR RGBA(225, 226, 225)
+#define SECONDARY_BACKGROUND_COLOR RGBA(245, 245, 246)
 
 typedef struct{
-    char *normal;
-    char *light;
-    char *dark;
-    char *text;
+    const char *normal;
+    const char *light;
+    const char *dark;
+    const char *text;
 } colorSchemeHEX;
 
 typedef struct{
-    int normal;
-    int light;
-    int dark;
-    int text;
+    unsigned int normal;
+    unsigned int light;
+    unsigned int dark;
+    unsigned int text;
 } colorSchemeRGBA;
 
 class Theme {
@@ -27,7 +29,7 @@ private:
     colorSchemeRGBA secondaryRGBA;
 
     colorSchemeRGBA colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex);
-    int convertHexToRGBA(char *hex);
+    unsigned int convertHexToRGBA(const char *hex);
 
 public:
     Theme();
