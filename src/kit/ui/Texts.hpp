@@ -31,16 +31,27 @@ typedef enum TextStyle {
     Overline
 } TextStyle;
 
+typedef struct TextStyleData {
+    const char *type;
+    unsigned int size;
+    bool uppercase;
+} TextStyleData;
+
+typedef struct TextData {
+    int width;
+    int height;
+} TextData;
+
 class Texts {
 private:
     std::map<std::string, vita2d_font*> fonts;
-    const char *type;
-    int height;
-    unsigned int size;
+    TextData textData;
+    TextStyleData textStyleData;
 
-
-    std::string uppercase(std::string text);
+    std::string toUppercase(std::string text);
     void drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic);
+    void calcTextStyleData(TextStyle textStyle, bool italic = false);
+    void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
 public:
     Texts();
     explicit Texts(std::string family);
@@ -57,6 +68,8 @@ public:
 
     void draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, bool uppercase = false);
     void draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, unsigned int color, bool uppercase = false);
+
+    TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
 
 };
 

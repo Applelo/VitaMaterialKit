@@ -18,7 +18,6 @@ Texts::~Texts() {
 }
 
 void Texts::init(std::string family) {
-
     SceIoDirent gDir;
     std::string fontsPath = DEFAULT_FONTS_PATH;
     fontsPath = fontsPath + family;
@@ -43,59 +42,10 @@ void Texts::init(std::string family) {
 }
 
 void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
-    type = "Regular";
-    size = 16;
 
-    switch (textStyle) {
-        case H1:
-            type = italic ? "LightItalic" : "Light";
-            size = 96;
-            break;
-        case H2:
-            type = italic ? "LightItalic" : "Light";
-            size = 60;
-            break;
-        case H3:
-            type = italic ? "Italic" : "Regular";
-            size = 48;
-            break;
-        case H4:
-            type = italic ? "Italic" : "Regular";
-            size = 34;
-            break;
-        case H5:
-            type = italic ? "Italic" : "Regular";
-            size = 24;
-            break;
-        case H6:
-            type = italic ? "MediumItalic" : "Medium";
-            size = 20;
-            break;
-        case Sub1:
-        case Body1:
-            type = italic ? "Italic" : "Regular";
-            size = 16;
-            break;
-        case Sub2:
-        case Body2:
-        case Button:
-            type = italic ? "MediumItalic" : "Medium";
-            size = 14;
-            break;
-        case Caption:
-            type = italic ? "Italic" : "Regular";
-            size = 12;
-            break;
-        case Overline:
-            type = italic ? "Italic" : "Regular";
-            size = 10;
-            break;
-    }
+    this->calcTextData(text, textStyle, italic);
 
-    //width = vita2d_font_text_width(fonts[type], size, text.c_str());
-    height = vita2d_font_text_height(fonts[type], size, text.c_str());
-
-    vita2d_font_draw_text(fonts[type], x, y + (height/4*3), color, size, text.c_str());
+    vita2d_font_draw_text(fonts[textStyleData.type], x, y + textData.height, color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 //Draw with Material Style
@@ -109,25 +59,100 @@ void Texts::draw(std::string text, int x, int y, TextStyle textStyle, unsigned i
 
 //Draw with selected font type
 void Texts::draw(std::string text, int x, int y, char *fontType, unsigned int size, bool uppercase) {
-    vita2d_font_draw_text(fonts[fontType], x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->uppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(fonts[fontType], x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 void Texts::draw(std::string text, int x, int y, char *fontType, unsigned int size, unsigned int color, bool uppercase) {
-    vita2d_font_draw_text(fonts[fontType], x, y, color, size, uppercase ? this->uppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(fonts[fontType], x, y, color, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 
 //Draw with chosen font
 void Texts::draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, bool uppercase) {
-    vita2d_font_draw_text(font, x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->uppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(font, x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 void Texts::draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, unsigned int color, bool uppercase) {
-    vita2d_font_draw_text(font, x, y, color, size, uppercase ? this->uppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(font, x, y, color, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
+TextData Texts::getTextData(std::string text, TextStyle textStyle, bool italic) {
+    this->calcTextData(text, textStyle, italic);
+
+    return textData;
+}
+
+//private
+
 //set text to uppercase
-std::string Texts::uppercase(std::string text) {
+std::string Texts::toUppercase(std::string text) {
     std::transform(text.begin(), text.end(),text.begin(), ::toupper);
     return text;
+}
+
+void Texts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
+
+    this->calcTextStyleData(textStyle, italic);
+
+    textData.width = vita2d_font_text_width(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    textData.height = vita2d_font_text_height(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+}
+
+void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
+
+    textStyleData.type = "Regular";
+    textStyleData.size = 16;
+    textStyleData.uppercase = false;
+
+    switch (textStyle) {
+        case H1:
+            textStyleData.type = italic ? "LightItalic" : "Light";
+            textStyleData.size = 96;
+            break;
+        case H2:
+            textStyleData.type = italic ? "LightItalic" : "Light";
+            textStyleData.size = 60;
+            break;
+        case H3:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 48;
+            break;
+        case H4:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 34;
+            break;
+        case H5:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 24;
+            break;
+        case H6:
+            textStyleData.type = italic ? "MediumItalic" : "Medium";
+            textStyleData.size = 20;
+            break;
+        case Sub1:
+        case Body1:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 16;
+            break;
+        case Sub2:
+        case Body2:
+            textStyleData.type = italic ? "MediumItalic" : "Medium";
+            textStyleData.size = 14;
+            break;
+        case Button:
+            textStyleData.type = italic ? "MediumItalic" : "Medium";
+            textStyleData.size = 26;//normalement 14
+            textStyleData.uppercase = true;
+            break;
+        case Caption:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 12;
+            break;
+        case Overline:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 10;
+            textStyleData.uppercase = true;
+            break;
+
+    }
 }

@@ -48,6 +48,7 @@ add_executable(${SHORT_NAME}
         src/kit/ui/Texts.cpp
         src/kit/ui/Theme.cpp
         src/kit/ui/Icons.cpp
+        src/kit/ui/Buttons.cpp
         )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -57,7 +58,6 @@ target_link_libraries(${SHORT_NAME}
         SceGxm_stub
         SceSysmodule_stub
         SceCtrl_stub
-        ScePgf_stub
         ScePvf_stub
         SceCommonDialog_stub
         SceNet_stub_weak

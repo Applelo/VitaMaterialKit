@@ -4,29 +4,27 @@
 #include "../utils/Touch.hpp"
 #include "../utils/Pad.hpp"
 
-#include "Theme.hpp"
+#include "Texts.hpp"
 #include "Icons.hpp"
+#include "Theme.hpp"
 
 class Buttons {
 private:
-    Touch **touch;
-    Pad **pad;
-    Theme **theme;
     Icons *icons;
+    Texts *texts;
+    Theme *theme;
 public:
-    Buttons(Touch *touch, Pad *pad, Theme *theme);
+    Buttons(Theme *theme);
 
-    void textDraw(int x, int y, char *text, bool dense = false);
-    void textDraw(int x, int y, char *text, char* icon, bool dense = false);
+    void textDraw(std::string text, int x, int y, const char* icon);
 
-    void raisedDraw(int x, int y, char *text, bool dense = false);
-    void raisedDraw(int x, int y, char *text, char* icon, bool dense = false);
+    //void outlinedDraw(char *text, int x, int y);
+    //void outlinedDraw(char* icon, char *text, int x, int y);
 
-    void unlevelatedDraw(int x, int y, char *text, bool dense = false);
-    void unlevelatedDraw(int x, int y, char *text, char* icon, bool dense = false);
+    void containedDraw(std::string text, int x, int y, const char *icon = "");
 
-    void outlinedDraw(int x, int y, char *text, bool dense = false);
-    void outlinedDraw(int x, int y, char *text, char* icon, bool dense = false);
+    //void floatDraw(char *icon, int x, int y);
+    //void floatDraw(char* icon, char *text, int x, int y);
 
 };
 
