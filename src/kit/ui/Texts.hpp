@@ -5,6 +5,8 @@
 
 #include <map>
 #include <iostream>
+#include <math.h>
+#include <algorithm>
 
 #include <psp2/io/fcntl.h>
 #include <psp2/io/dirent.h>
@@ -35,11 +37,13 @@ typedef struct TextStyleData {
     const char *type;
     unsigned int size;
     bool uppercase;
+    double offset;
 } TextStyleData;
 
 typedef struct TextData {
     int width;
     int height;
+
 } TextData;
 
 class Texts {

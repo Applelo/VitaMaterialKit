@@ -17,7 +17,7 @@ endif ()
 # Name of the project
 set(SHORT_NAME VitaMaterialKit)
 set(PSVITAIP "192.168.1.37")
-set(VITA3K_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
+
 project(${SHORT_NAME})
 # This line adds Vita helper macros, must go after project definition in order
 # to build Vita specific artifacts (self/vpk).
@@ -32,6 +32,9 @@ set(VITA_APP_NAME "VitaMaterialKit")
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION "01.00")
+
+set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
+set(VITA3K_FOLDER_PATH "/Users/Applelo/Library/Application\ Support/Vita3K/Vita3K/ux0/app/${VITA_TITLEID}")
 
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
@@ -121,7 +124,13 @@ add_custom_target(copy_vpk
         )
 
 add_custom_target(emulator
-        COMMAND ${VITA3K_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${SHORT_NAME}.vpk
+        COMMAND cp eboot.bin ${VITA3K_FOLDER_PATH}/eboot.bin
+        COMMAND ${VITA3K_APP_PATH} -r ${VITA_TITLEID}
+        DEPENDS eboot.bin
+        )
+
+add_custom_target(emulator_vpk
+        COMMAND ${VITA3K_APP_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${SHORT_NAME}.vpk
         DEPENDS ${SHORT_NAME}.vpk
         )
 

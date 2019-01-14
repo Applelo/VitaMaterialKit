@@ -37,7 +37,8 @@ int main() {
     auto *texts = new Texts;
     auto *icons = new Icons;
     auto *buttons = new Buttons(theme);
-    TextData textData = texts->getTextData("test", H1);
+    TextData textData = texts->getTextData("abcdefghijklmnopqrstuvwxyz", H1);
+    TextData textDataUp = texts->getTextData("ABCDEFGHIJKLMNOPQRSTUVWXYZ", H1);
 
     while (1) {
 
@@ -45,7 +46,9 @@ int main() {
         vita2d_clear_screen();
 
         vita2d_draw_rectangle(0, 0, textData.width, textData.height, theme->getSecondaryRGBA().normal);
-        texts->draw("test", 0, 0, H1, theme->getPrimaryRGBA().text);
+        vita2d_draw_rectangle(0, 300, textDataUp.width, textDataUp.height, theme->getSecondaryRGBA().normal);
+        texts->draw("abcdefghijklmnopqrstuvwxyz", 0, 0, H1, theme->getPrimaryRGBA().text);
+        texts->draw("ABCĘEFGHIJKLMNOPQRSTUVWXYZ", 0, 300, H1, theme->getPrimaryRGBA().text);
 
 
         /*texts->draw("test", 0, 140, H3, theme->getPrimaryRGBA().text);

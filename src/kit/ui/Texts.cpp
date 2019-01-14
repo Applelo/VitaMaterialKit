@@ -1,6 +1,3 @@
-#include <utility>
-
-#include <algorithm>
 #include "Texts.hpp"
 
 Texts::Texts() {
@@ -42,10 +39,9 @@ void Texts::init(std::string family) {
 }
 
 void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
+    this->calcTextStyleData(textStyle, italic);
 
-    this->calcTextData(text, textStyle, italic);
-
-    vita2d_font_draw_text(fonts[textStyleData.type], x, y + textData.height, color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(fonts[textStyleData.type], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 //Draw with Material Style
@@ -77,7 +73,7 @@ void Texts::draw(std::string text, int x, int y, vita2d_font *font, unsigned int
 }
 
 TextData Texts::getTextData(std::string text, TextStyle textStyle, bool italic) {
-    this->calcTextData(text, textStyle, italic);
+    this->calcTextData(std::move(text), textStyle, italic);
 
     return textData;
 }
@@ -155,4 +151,6 @@ void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
             break;
 
     }
+
+    textStyleData.offset = textStyleData.size * 0.24;//correct font height
 }
