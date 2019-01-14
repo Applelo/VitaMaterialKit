@@ -52,7 +52,9 @@ add_executable(${SHORT_NAME}
         src/kit/ui/Theme.cpp
         src/kit/ui/Icons.cpp
         src/kit/ui/Buttons.cpp
+
         src/kit/utils/I18n.cpp
+        src/kit/utils/IME.cpp
         )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -125,13 +127,13 @@ add_custom_target(copy_vpk
         DEPENDS ${SHORT_NAME}.vpk
         )
 
-add_custom_target(emulator
+add_custom_target(emulate
         COMMAND cp eboot.bin ${VITA3K_FOLDER_PATH}/eboot.bin
         COMMAND ${VITA3K_APP_PATH} -r ${VITA_TITLEID}
         DEPENDS eboot.bin
         )
 
-add_custom_target(emulator_vpk
+add_custom_target(emulate_vpk
         COMMAND ${VITA3K_APP_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${SHORT_NAME}.vpk
         DEPENDS ${SHORT_NAME}.vpk
         )

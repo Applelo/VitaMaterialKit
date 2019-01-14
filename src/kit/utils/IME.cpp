@@ -48,10 +48,10 @@ void IME::utf8_to_utf16(uint8_t *src, uint16_t *dst) {
 	*dst = '\0';
 }
  
-void IME::initImeDialog(char *title, char *initial_text, int max_text_length) {
+void IME::initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int imeType) {
     // Convert UTF8 to UTF16
 	utf8_to_utf16((uint8_t *)title, ime_title_utf16);
-	utf8_to_utf16((uint8_t *)initial_text, ime_initial_text_utf16);
+	utf8_to_utf16((uint8_t *)initialText, ime_initial_text_utf16);
  
     SceImeDialogParam param;
 	sceImeDialogParamInit(&param);
@@ -59,15 +59,13 @@ void IME::initImeDialog(char *title, char *initial_text, int max_text_length) {
 	param.sdkVersion = 0x03150021,
 	param.supportedLanguages = 0x0001FFFF;
 	param.languagesForced = SCE_TRUE;
-	param.type = SCE_IME_TYPE_BASIC_LATIN;
+	param.type = imeType;
 	param.title = ime_title_utf16;
-	param.maxTextLength = max_text_length;
+	param.maxTextLength = (SceUInt32) maxTextLength;
 	param.initialText = ime_initial_text_utf16;
 	param.inputTextBuffer = ime_input_text_utf16;
 
-	//int res = 
 	sceImeDialogInit(&param);
-	return ;
 }
 
 void IME::oslOskGetText(char *text){
@@ -76,44 +74,20 @@ void IME::oslOskGetText(char *text){
 	strcpy(text,(char*)ime_input_text_utf8);
 }
 
-
-int IME::checkArray(char string[], int length) {
-    int i;
-
-    // This next line could as well be a call to `strlen`.
-    // But you shouldn't let it access `string` when `i` is >= `length`. 
-    for(i=0; string[i] != '\0'; i++);
-
-    // This should be `>=`.  If `i` is 15, you accessed (in the loop above)
-    // `string[15]`, which is past the end of the array.
-    if(i > length) {
-        return 1;
-    }
-
-    return 0;
-}
-
-std::string IME::getUserText(char title[] ){
-	char emptytext[] = "";
-	return getUserText(title , emptytext);
-}
-
-
-
-std::string IME::getUserText(char title[] , char showtext[]) {
+std::string IME::getUserText(const char *title , const char *showtext, unsigned int imeType) {
     bool shown_dial = false;
    
     char userText[512];
     strcpy(userText, showtext);
+   	int run = 1;
    
    
-   
-    while (1) {
+    while (run) {
         vita2d_start_drawing();
         vita2d_clear_screen();
        
         if (!shown_dial) {
-            initImeDialog(title, userText, 128);
+            initImeDialog(title, userText, 128, imeType);
             shown_dial = true;
             }
        
@@ -131,7 +105,7 @@ std::string IME::getUserText(char title[] , char showtext[]) {
  
             sceImeDialogTerm();
             shown_dial = 0;
-            break;
+            run = 0;
 		}
        
         vita2d_end_drawing();
@@ -145,11 +119,15 @@ std::string IME::getUserText(char title[] , char showtext[]) {
 
 
 IME::IME(){
-	
+	SceAppUtilInitParam initParam;
+	SceAppUtilBootParam bootParam;
+	SceCommonDialogConfigParam dialogParam;
 
-	sceAppUtilInit(&(SceAppUtilInitParam){}, &(SceAppUtilBootParam){});
-	sceCommonDialogSetConfigParam(&(SceCommonDialogConfigParam){});
- 
+	memset(&initParam, 0, sizeof(SceAppUtilInitParam));
+	memset(&bootParam, 0, sizeof(SceAppUtilBootParam));
+	memset(&dialogParam, 0, sizeof(SceCommonDialogConfigParam));
 
+	sceAppUtilInit(&initParam, &bootParam);
+	sceCommonDialogSetConfigParam(&dialogParam);
 }
 

@@ -3,12 +3,12 @@
 #include "I18n.hpp"
 
 I18n::I18n() {
-    SceAppUtilInitParam init_param;
-    SceAppUtilBootParam boot_param;
-    memset(&init_param, 0, sizeof(SceAppUtilInitParam));
-    memset(&boot_param, 0, sizeof(SceAppUtilBootParam));
+    SceAppUtilInitParam initParam;
+    SceAppUtilBootParam bootParam;
+    memset(&initParam, 0, sizeof(SceAppUtilInitParam));
+    memset(&bootParam, 0, sizeof(SceAppUtilBootParam));
 
-    sceAppUtilInit(&init_param, &boot_param);
+    sceAppUtilInit(&initParam, &bootParam);
     sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_LANG, &defaultLang);
     this->setCurrentLanguage(defaultLang);
 }

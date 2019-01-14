@@ -39,14 +39,12 @@
 class IME{
 	public: 
 		IME();
-		std::string getUserText(char title[]);
-		std::string getUserText(char title[], char showtext[]);
-		int checkArray(char string[] , int length);
+		std::string getUserText(const char *title, const char *showText = "", unsigned int imeType = SCE_IME_TYPE_BASIC_LATIN);
 		
 	private:
 
-		void oslOskGetText(char text[]);
-		void initImeDialog(char *title, char *initial_text, int max_text_length);
+		void oslOskGetText(char *text);
+		void initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int imeType = SCE_IME_TYPE_BASIC_LATIN);
 		void utf16_to_utf8(uint16_t *src, uint8_t *dst);
 		void utf8_to_utf16(uint8_t *src, uint16_t *dst);
 	

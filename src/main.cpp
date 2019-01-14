@@ -12,6 +12,7 @@
 #include "kit/ui/Buttons.hpp"
 
 #include "kit/utils/I18n.hpp"
+#include "kit/utils/IME.hpp"
 
 int main() {
 
@@ -39,17 +40,18 @@ int main() {
     auto *texts = new Texts;
     auto *icons = new Icons;
     auto *buttons = new Buttons(theme);
-    TextData textData = texts->getTextData("abcdefghijklmnopqrstuvwxyz", H1);
-    TextData textDataUp = texts->getTextData("ABCDEFGHIJKLMNOPQRSTUVWXYZ", H1);
 
     auto *currentLang = new I18n();
     auto *frLang = new I18n(SCE_SYSTEM_PARAM_LANG_FRENCH);
     auto *enLang = new I18n(SCE_SYSTEM_PARAM_LANG_ENGLISH_US);
+    IME *ime = new IME();
 
     while (1) {
 
         vita2d_start_drawing();
         vita2d_clear_screen();
+
+        ime->getUserText((char*)"Edit message" , "", SCE_IME_TYPE_NUMBER);
 
         //icons->draw(ICON_MDI_APPLE, 0, 0);
         //icons->draw(ICON_MDI_ACCOUNT_KEY, 0, 0);
