@@ -51,19 +51,6 @@ int main() {
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-
-        /*texts->draw("test", 0, 140, H3, theme->getPrimaryRGBA().text);
-        texts->draw("test", 0, 210, H4, theme->getPrimaryRGBA().text);
-        texts->draw("test", 0, 280, H5, theme->getPrimaryRGBA().text);
-        texts->draw("test", 0, 350, H6, theme->getPrimaryRGBA().text);
-
-        texts->draw("test", 480, 0, H1, theme->getPrimaryRGBA().text, true);
-        texts->draw("test", 480, 70, H2, theme->getPrimaryRGBA().text, true);
-        texts->draw("test", 480, 140, H3, theme->getPrimaryRGBA().text, true);
-        texts->draw("test", 480, 210, H4, theme->getPrimaryRGBA().text, true);
-        texts->draw("test", 480, 280, H5, theme->getPrimaryRGBA().text, true);
-        texts->draw("test", 480, 350, H6, theme->getPrimaryRGBA().text, true);*/
-
         //icons->draw(ICON_MDI_APPLE, 0, 0);
         //icons->draw(ICON_MDI_ACCOUNT_KEY, 0, 0);
         //icons->draw(ICON_MDI_MICROSOFT, 0, 0);
@@ -80,9 +67,11 @@ int main() {
         buttons->floatDraw(ICON_MDI_PLUS, 50, 450);
         buttons->floatDraw(ICON_MDI_PLUS, 300, 450, "Extended Float");*/
 
-        texts->draw(0, 140, Body1, theme->getPrimaryRGBA().text, currentLang->getI18nByCat("test")["phrase"]);
+        /*texts->draw(0, 140, Body1, theme->getPrimaryRGBA().text, currentLang->getI18nByCat("test")["phrase"]);
         texts->draw(0, 210, Body1, theme->getPrimaryRGBA().text, frLang->getI18nByCat("test")["phrase"]);
-        texts->draw(0, 280, Body1, theme->getPrimaryRGBA().text, enLang->getI18nByCat("test")["phrase"]);
+        texts->draw(0, 280, Body1, theme->getPrimaryRGBA().text, enLang->getI18nByCat("test")["phrase"]);*/
+
+
 
         vita2d_end_drawing();
         vita2d_swap_buffers();
