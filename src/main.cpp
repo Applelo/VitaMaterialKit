@@ -62,12 +62,17 @@ int main() {
         //icons->draw(ICON_MDI_ACCOUNT_KEY, 0, 0);
         //icons->draw(ICON_MDI_MICROSOFT, 0, 0);
 
-        //buttons->textDraw("test", 0, 0, ICON_MDI_PLUS);
+        buttons->textDraw("Text", 50, 0);
+        buttons->textDraw("Text & Icon", 300, 0, ICON_MDI_ACCOUNT);
 
-        //buttons->textDraw("Apple", 480, 0, ICON_MDI_APPLE);
+        buttons->containedDraw("Contained", 50, 150);
+        buttons->containedDraw("Contained & Icon", 300, 150, ICON_MDI_ACCOUNT);
 
+        buttons->outlinedDraw("Outlined", 50, 300);
+        buttons->outlinedDraw("Outlined & Icon", 300, 300, ICON_MDI_ACCOUNT);
 
-        buttons->floatDraw(ICON_MDI_PLUS, 0, 0, "Click");
+        buttons->floatDraw(ICON_MDI_PLUS, 50, 450);
+        buttons->floatDraw(ICON_MDI_PLUS, 300, 450, "Extended Float");
 
         vita2d_end_drawing();
         vita2d_swap_buffers();
