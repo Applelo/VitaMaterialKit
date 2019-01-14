@@ -152,5 +152,5 @@ void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
     }
 
-    textStyleData.offset = textStyleData.size * 0.24;//correct font height
+    textStyleData.offset = textStyleData.size * 0.24;//correct font position
 }

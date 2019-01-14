@@ -10,25 +10,40 @@ Buttons::Buttons(Theme *theme) {
 }
 
 void Buttons::textDraw(std::string text, int x, int y, const char* icon) {
-    if (icon) {
-        icons->draw(icon, x + 10, y + 10, theme->getSecondaryRGBA().text, 24);
-        texts->draw(std::move(text), x + 48, y, Button, theme->getSecondaryRGBA().text, false);
+    if (strlen(icon) > 0) {
+        icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
+        texts->draw(text, x + 20 + 26 + 10, y + 10 + 2, Button, theme->getSecondaryRGBA().text);
     }
     else {
-
+        texts->draw(text, x + 20, y + 10 + 2, Button, theme->getSecondaryRGBA().text);
     }
 }
 
 
-//void Buttons::outlinedDraw(char *icon, char *text, int x, int y, const char *icon) {
+void Buttons::outlinedDraw(std::string text, int x, int y, const char *icon) {
+    TextData textData = texts->getTextData(text, Button);
+    if (strlen(icon) > 0) {
+        this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, icon);
+    }
+    else {
+        this->drawOutlinedRectangle(x, y, textData.width + 40, textData.height + 20, theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, icon);
+    }
+}
 
-//}
 
-//rework after to use textDraw instead + add container
 void Buttons::containedDraw(std::string text, int x, int y, const char *icon) {
     TextData textData = texts->getTextData(text, Button);
-    vita2d_draw_rectangle(x, y, textData.width, textData.height, theme->getSecondaryRGBA().normal);
-    texts->draw(text, x, y, Button, theme->getSecondaryRGBA().text);
+
+    if (strlen(icon) > 0) {
+        vita2d_draw_rectangle(x, y, textData.width + 76, textData.height + 20, theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, icon);
+    }
+    else {
+        vita2d_draw_rectangle(x, y, textData.width + 40, textData.height + 20, theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, icon);
+    }
 }
 
 //void Buttons::floatDraw(char *icon, int x, int y) {
@@ -38,4 +53,15 @@ void Buttons::containedDraw(std::string text, int x, int y, const char *icon) {
 //void Buttons::floatDraw(char *icon, char *text, int x, int y) {
 
 //}
+
+void Buttons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color) {
+    x += 1;
+    y += 1;
+    w -= 1;
+    h -= 1;
+    vita2d_draw_line(x, y, x + w, y, color); //top
+    vita2d_draw_line(x + w, y, x + w, y + h, color); //right
+    vita2d_draw_line(x, y + h, x + w, y + h, color); //bottom
+    vita2d_draw_line(x, y, x, y + h, color); //left
+}
 

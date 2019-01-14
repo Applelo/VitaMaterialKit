@@ -13,13 +13,14 @@ private:
     Icons *icons;
     Texts *texts;
     Theme *theme;
+
+    void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     Buttons(Theme *theme);
 
-    void textDraw(std::string text, int x, int y, const char* icon);
+    void textDraw(std::string text, int x, int y, const char* icon = "");
 
-    //void outlinedDraw(char *text, int x, int y);
-    //void outlinedDraw(char* icon, char *text, int x, int y);
+    void outlinedDraw(std::string text, int x, int y, const char* icon = "");
 
     void containedDraw(std::string text, int x, int y, const char *icon = "");
 

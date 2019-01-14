@@ -45,11 +45,6 @@ int main() {
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-        vita2d_draw_rectangle(0, 0, textData.width, textData.height, theme->getSecondaryRGBA().normal);
-        vita2d_draw_rectangle(0, 300, textDataUp.width, textDataUp.height, theme->getSecondaryRGBA().normal);
-        texts->draw("abcdefghijklmnopqrstuvwxyz", 0, 0, H1, theme->getPrimaryRGBA().text);
-        texts->draw("ABCĘEFGHIJKLMNOPQRSTUVWXYZ", 0, 300, H1, theme->getPrimaryRGBA().text);
-
 
         /*texts->draw("test", 0, 140, H3, theme->getPrimaryRGBA().text);
         texts->draw("test", 0, 210, H4, theme->getPrimaryRGBA().text);
@@ -63,16 +58,16 @@ int main() {
         texts->draw("test", 480, 280, H5, theme->getPrimaryRGBA().text, true);
         texts->draw("test", 480, 350, H6, theme->getPrimaryRGBA().text, true);*/
 
-        /*icons->draw(ICON_MDI_APPLE, 0, 0);
-        icons->draw(ICON_MDI_MICROSOFT, 50, 0);
-        icons->draw(ICON_MDI_GOOGLE, 100, 0);*/
+        //icons->draw(ICON_MDI_APPLE, 0, 0);
+        //icons->draw(ICON_MDI_ACCOUNT_KEY, 0, 0);
+        //icons->draw(ICON_MDI_MICROSOFT, 0, 0);
 
         //buttons->textDraw("test", 0, 0, ICON_MDI_PLUS);
 
         //buttons->textDraw("Apple", 480, 0, ICON_MDI_APPLE);
 
-        //buttons->containedDraw("Test", 0, 0);
 
+        buttons->outlinedDraw("Hello", 0, 0, ICON_MDI_PLUS);
 
         vita2d_end_drawing();
         vita2d_swap_buffers();
