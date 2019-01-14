@@ -24,8 +24,7 @@ public:
 
     void containedDraw(std::string text, int x, int y, const char *icon = "");
 
-    //void floatDraw(char *icon, int x, int y);
-    //void floatDraw(char* icon, char *text, int x, int y);
+    void floatDraw(const char *icon, int x, int y, std::string text = "");
 
 };
 

@@ -67,7 +67,7 @@ int main() {
         //buttons->textDraw("Apple", 480, 0, ICON_MDI_APPLE);
 
 
-        buttons->outlinedDraw("Hello", 0, 0, ICON_MDI_PLUS);
+        buttons->floatDraw(ICON_MDI_PLUS, 0, 0, "Click");
 
         vita2d_end_drawing();
         vita2d_swap_buffers();

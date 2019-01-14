@@ -12,10 +12,10 @@ Buttons::Buttons(Theme *theme) {
 void Buttons::textDraw(std::string text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
-        texts->draw(text, x + 20 + 26 + 10, y + 10 + 2, Button, theme->getSecondaryRGBA().text);
+        texts->draw(text, x + 56, y + 12, Button, theme->getSecondaryRGBA().text);
     }
     else {
-        texts->draw(text, x + 20, y + 10 + 2, Button, theme->getSecondaryRGBA().text);
+        texts->draw(text, x + 20, y + 12, Button, theme->getSecondaryRGBA().text);
     }
 }
 
@@ -46,13 +46,24 @@ void Buttons::containedDraw(std::string text, int x, int y, const char *icon) {
     }
 }
 
-//void Buttons::floatDraw(char *icon, int x, int y) {
+void Buttons::floatDraw(const char *icon, int x, int y, std::string text) {
+    if (text.length() > 0) {
+        TextData textData = texts->getTextData(text, Button);
+        int circleHeight = (textData.height + 20) / 2;
 
-//}
+        vita2d_draw_fill_circle(x + circleHeight, y + circleHeight, circleHeight, theme->getSecondaryRGBA().normal);
+        vita2d_draw_rectangle(x + textData.height, y, textData.width + 30, textData.height + 20, theme->getSecondaryRGBA().normal);
+        vita2d_draw_fill_circle(x + circleHeight + textData.width + 30, y + circleHeight, circleHeight, theme->getSecondaryRGBA().normal);
 
-//void Buttons::floatDraw(char *icon, char *text, int x, int y) {
+        this->textDraw(text, x, y, icon);
+    }
+    else {
+        vita2d_draw_fill_circle(x + 25, y + 25, 25, theme->getSecondaryRGBA().normal);
+        icons->draw(icon, x + 10, y + 8, theme->getSecondaryRGBA().text, 30);
+    }
+}
 
-//}
+
 
 void Buttons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color) {
     x += 1;
