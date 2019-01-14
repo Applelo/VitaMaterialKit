@@ -1,4 +1,3 @@
-
 #ifndef VITA_MATERIAL_KIT_TEXT_HPP
 #define VITA_MATERIAL_KIT_TEXT_HPP
 
@@ -13,8 +12,10 @@
 
 #include "vita2d.h"
 
+
 #define DEFAULT_FONT_COLOR RGBA8(255, 255, 255, 255)
 #define DEFAULT_FONTS_PATH "app0:assets/fonts/"
+#define DEFAULT_SIZE_OFFSET 12
 
 //see https://material.io/design/typography/the-type-system.html#type-scale
 typedef enum TextStyle {
@@ -32,6 +33,7 @@ typedef enum TextStyle {
     Caption,
     Overline
 } TextStyle;
+
 
 typedef struct TextStyleData {
     const char *type;
@@ -54,6 +56,8 @@ private:
 
     std::string toUppercase(std::string text);
     void drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic);
+    void drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color);
+
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
 public:
@@ -64,14 +68,19 @@ public:
 
     void init(std::string family);
 
-    void draw(std::string text, int x, int y, TextStyle textStyle, bool italic = false);
-    void draw(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic = false);
+    //Material Style
+    void draw(int x, int y, TextStyle textStyle, std::string text);
+    void draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text);
+    void draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
 
-    void draw(std::string text, int x, int y, char *fontType, unsigned int size, bool uppercase = false);
-    void draw(std::string text, int x, int y, char *fontType, unsigned int size, unsigned int color, bool uppercase = false);
+    void drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...);
 
-    void draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, bool uppercase = false);
-    void draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, unsigned int color, bool uppercase = false);
+    //Do with your style
+    void draw(int x, int y, TextStyleData _textStyleData, std::string text);
+    void draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
+
+    void drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...);
+
 
     TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
 

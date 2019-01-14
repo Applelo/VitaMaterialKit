@@ -1,10 +1,12 @@
 #ifndef VITA_MATERIAL_KIT_TOUCH_HPP
 #define VITA_MATERIAL_KIT_TOUCH_HPP
 
-#include <psp2/touch.h>
 #include <string.h>
-#include "mathtools.hpp"
 #include <stdlib.h>
+
+#include <psp2/touch.h>
+
+#include "mathtools.hpp"
 
 #define SLEEP_CLICK_NORMAL 150000
 #define SLEEP_CLICK_EXTENDED 350000
@@ -15,16 +17,18 @@
 class Touch{
 	public:
 		Touch();
-		void read();
+
 		SceTouchData touch_old[SCE_TOUCH_PORT_MAX_NUM];
 		SceTouchData touch[SCE_TOUCH_PORT_MAX_NUM];
-		vector2 getClickPoint();
 		vector2 lastClickPoint;
 		vector2 lastTouchPoint;
 		bool clicking;
 		bool scrolling;
 		int scrollDirX ;
 		int scrollDirY;
+
+		vector2 getClickPoint();
+		void read();
 
 	private:
 		vector2 emptyClickPoint;

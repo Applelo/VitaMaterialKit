@@ -1,3 +1,4 @@
+#include <stdarg.h>
 #include "Texts.hpp"
 
 Texts::Texts() {
@@ -44,37 +45,58 @@ void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsig
     vita2d_font_draw_text(fonts[textStyleData.type], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
-//Draw with Material Style
-void Texts::draw(std::string text, int x, int y, TextStyle textStyle, bool italic) {
-    this->drawFinal(std::move(text), x, y, textStyle, DEFAULT_FONT_COLOR, italic);
+void Texts::drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color) {
+    vita2d_font_draw_text(fonts[_textStyleData.type], x, (int) floor(y + _textStyleData.size - _textStyleData.offset), color, _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
-void Texts::draw(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
+//Draw with Material Style
+void Texts::draw(int x, int y, TextStyle textStyle, std::string text) {
+    this->drawFinal(std::move(text), x, y, textStyle, DEFAULT_FONT_COLOR, false);
+}
+
+void Texts::draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text) {
+    this->drawFinal(std::move(text), x, y, textStyle, color, false);
+}
+
+void Texts::draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text) {
     this->drawFinal(std::move(text), x, y, textStyle, color, italic);
 }
 
-//Draw with selected font type
-void Texts::draw(std::string text, int x, int y, char *fontType, unsigned int size, bool uppercase) {
-    vita2d_font_draw_text(fonts[fontType], x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
+void Texts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...) {
+    char buf[1024];
+    va_list argPtr;
+
+    va_start(argPtr, text);
+    vsnprintf(buf, sizeof(buf), text, argPtr);
+    va_end(argPtr);
+
+    this->drawFinal(buf, x, y, textStyle, color, italic);
 }
 
-void Texts::draw(std::string text, int x, int y, char *fontType, unsigned int size, unsigned int color, bool uppercase) {
-    vita2d_font_draw_text(fonts[fontType], x, y, color, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
+//Draw with your style
+void Texts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
+    this->drawFinal(std::move(text), x, y, _textStyleData, DEFAULT_FONT_COLOR);
+}
+
+void Texts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
+    this->drawFinal(std::move(text), x, y, _textStyleData, color);
+}
+
+void Texts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...) {
+    char buf[1024];
+    va_list argPtr;
+
+    va_start(argPtr, text);
+    vsnprintf(buf, sizeof(buf), text, argPtr);
+    va_end(argPtr);
+
+    this->drawFinal(buf, x, y, _textStyleData, color);
 }
 
 
-//Draw with chosen font
-void Texts::draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, bool uppercase) {
-    vita2d_font_draw_text(font, x, y, DEFAULT_FONT_COLOR, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
-}
-
-void Texts::draw(std::string text, int x, int y, vita2d_font *font, unsigned int size, unsigned int color, bool uppercase) {
-    vita2d_font_draw_text(font, x, y, color, size, uppercase ? this->toUppercase(text).c_str() : text.c_str());
-}
-
+//utils
 TextData Texts::getTextData(std::string text, TextStyle textStyle, bool italic) {
     this->calcTextData(std::move(text), textStyle, italic);
-
     return textData;
 }
 
@@ -93,6 +115,7 @@ void Texts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
     textData.width = vita2d_font_text_width(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
     textData.height = vita2d_font_text_height(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
+
 
 void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
@@ -137,7 +160,7 @@ void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
             break;
         case Button:
             textStyleData.type = italic ? "MediumItalic" : "Medium";
-            textStyleData.size = 26;//normalement 14
+            textStyleData.size = 14;
             textStyleData.uppercase = true;
             break;
         case Caption:
@@ -151,6 +174,7 @@ void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
             break;
 
     }
+    textStyleData.size += DEFAULT_SIZE_OFFSET;
 
     textStyleData.offset = textStyleData.size * 0.24;//correct font position
 }

@@ -12,10 +12,10 @@ Buttons::Buttons(Theme *theme) {
 void Buttons::textDraw(std::string text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
-        texts->draw(text, x + 56, y + 12, Button, theme->getSecondaryRGBA().text);
+        texts->draw(x + 56, y + 12, Button, theme->getSecondaryRGBA().text, text);
     }
     else {
-        texts->draw(text, x + 20, y + 12, Button, theme->getSecondaryRGBA().text);
+        texts->draw(x + 20, y + 12, Button, theme->getSecondaryRGBA().text, text);
     }
 }
 

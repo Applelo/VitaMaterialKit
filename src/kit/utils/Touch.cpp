@@ -50,10 +50,6 @@ void Touch::read(){
 	}
 }
 
-vector2 Touch::getClickPoint(){
+vector2 Touch::getClickPoint() {
 	return lastClickPoint;
 }
-
-
-
-

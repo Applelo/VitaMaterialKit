@@ -52,6 +52,7 @@ add_executable(${SHORT_NAME}
         src/kit/ui/Theme.cpp
         src/kit/ui/Icons.cpp
         src/kit/ui/Buttons.cpp
+        src/kit/utils/I18n.cpp
         )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -61,10 +62,11 @@ target_link_libraries(${SHORT_NAME}
         SceGxm_stub
         SceSysmodule_stub
         SceCtrl_stub
-        ScePvf_stub
         SceCommonDialog_stub
         SceNet_stub_weak
         SceNetCtl_stub_weak
+        SceAppUtil_stub
+        jansson
         freetype
         png
         jpeg
@@ -98,7 +100,7 @@ vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         assets/fonts/Roboto/Roboto-Thin.ttf         assets/fonts/Roboto/Roboto-Thin.ttf
         assets/fonts/Roboto/Roboto-ThinItalic.ttf   assets/fonts/Roboto/Roboto-ThinItalic.ttf
 
-        i18n/en.json i18n/en.json
+        i18n/en_us.json i18n/en_us.json
         i18n/fr.json i18n/fr.json
         )
 

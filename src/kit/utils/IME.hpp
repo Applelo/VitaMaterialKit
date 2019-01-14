@@ -44,9 +44,6 @@ class IME{
 		int checkArray(char string[] , int length);
 		
 	private:
-	
-
-
 
 		void oslOskGetText(char text[]);
 		void initImeDialog(char *title, char *initial_text, int max_text_length);
