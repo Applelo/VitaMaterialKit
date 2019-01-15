@@ -51,11 +51,13 @@ int main() {
         vita2d_start_drawing();
         vita2d_clear_screen();
 
-        ime->getUserText((char*)"Edit message" , "", SCE_IME_TYPE_NUMBER);
+        //ime->getUserText((char*)"Edit message" , "", SCE_IME_TYPE_NUMBER);
 
         //icons->draw(ICON_MDI_APPLE, 0, 0);
         //icons->draw(ICON_MDI_ACCOUNT_KEY, 0, 0);
         //icons->draw(ICON_MDI_MICROSOFT, 0, 0);
+
+        buttons->textDraw("Text", 50, 0);
 
         /*buttons->textDraw("Text", 50, 0);
         buttons->textDraw("Text & Icon", 300, 0, ICON_MDI_ACCOUNT);

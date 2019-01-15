@@ -9,7 +9,7 @@ Buttons::Buttons(Theme *theme) {
     this->icons = new Icons();
 }
 
-void Buttons::textDraw(std::string text, int x, int y, const char* icon) {
+void Buttons::textDraw(const char *text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
         texts->draw(x + 56, y + 12, Button, theme->getSecondaryRGBA().text, text);
@@ -20,7 +20,7 @@ void Buttons::textDraw(std::string text, int x, int y, const char* icon) {
 }
 
 
-void Buttons::outlinedDraw(std::string text, int x, int y, const char *icon) {
+void Buttons::outlinedDraw(const char *text, int x, int y, const char *icon) {
     TextData textData = texts->getTextData(text, Button);
     if (strlen(icon) > 0) {
         this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, theme->getSecondaryRGBA().normal);
@@ -33,7 +33,7 @@ void Buttons::outlinedDraw(std::string text, int x, int y, const char *icon) {
 }
 
 
-void Buttons::containedDraw(std::string text, int x, int y, const char *icon) {
+void Buttons::containedDraw(const char *text, int x, int y, const char *icon) {
     TextData textData = texts->getTextData(text, Button);
 
     if (strlen(icon) > 0) {
@@ -46,8 +46,8 @@ void Buttons::containedDraw(std::string text, int x, int y, const char *icon) {
     }
 }
 
-void Buttons::floatDraw(const char *icon, int x, int y, std::string text) {
-    if (text.length() > 0) {
+void Buttons::floatDraw(const char *icon, int x, int y, const char *text) {
+    if (strlen(text) > 0) {
         TextData textData = texts->getTextData(text, Button);
         int circleHeight = (textData.height + 20) / 2;
 

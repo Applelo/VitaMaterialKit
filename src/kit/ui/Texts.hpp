@@ -54,35 +54,35 @@ private:
     TextData textData;
     TextStyleData textStyleData;
 
-    std::string toUppercase(std::string text);
-    void drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic);
-    void drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color);
+    const char * toUppercase(const char *text);
+    void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text);
+    void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text);
 
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
-    void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
+    void calcTextData(const char *text, TextStyle textStyle, bool italic = false);
 public:
     Texts();
-    explicit Texts(std::string family);
+    Texts(const char *family);
 
     ~Texts();
 
     void init(std::string family);
 
     //Material Style
-    void draw(int x, int y, TextStyle textStyle, std::string text);
-    void draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text);
-    void draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
+    void draw(int x, int y, TextStyle textStyle, const char *text);
+    void draw(int x, int y, TextStyle textStyle, unsigned int color, const char *text);
+    void draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text);
 
     void drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...);
 
     //Do with your style
-    void draw(int x, int y, TextStyleData _textStyleData, std::string text);
-    void draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
+    void draw(int x, int y, TextStyleData _textStyleData, const char *text);
+    void draw(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text);
 
     void drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...);
 
 
-    TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
+    TextData getTextData(const char *text, TextStyle textStyle, bool italic = false);
 
 };
 

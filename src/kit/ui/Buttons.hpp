@@ -18,13 +18,13 @@ private:
 public:
     Buttons(Theme *theme);
 
-    void textDraw(std::string text, int x, int y, const char* icon = "");
+    void textDraw(const char *text, int x, int y, const char* icon = "");
 
-    void outlinedDraw(std::string text, int x, int y, const char* icon = "");
+    void outlinedDraw(const char *text, int x, int y, const char* icon = "");
 
-    void containedDraw(std::string text, int x, int y, const char *icon = "");
+    void containedDraw(const char *text, int x, int y, const char *icon = "");
 
-    void floatDraw(const char *icon, int x, int y, std::string text = "");
+    void floatDraw(const char *icon, int x, int y, const char *text = "");
 
 };
 
