@@ -83,6 +83,7 @@ public:
 
 
     TextData getTextData(const char *text, TextStyle textStyle, bool italic = false);
+    TextData getTextData(const char *text, TextStyleData _textStyleData);
 
 };
 

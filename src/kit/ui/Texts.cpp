@@ -101,6 +101,13 @@ TextData Texts::getTextData(const char * text, TextStyle textStyle, bool italic)
     return textData;
 }
 
+TextData Texts::getTextData(const char *text, TextStyleData _textStyleData) {
+    textData.width = vita2d_font_text_width(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text) : text);
+    textData.height = vita2d_font_text_height(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text) : text);
+
+    return textData;
+}
+
 //private
 
 //set text to uppercase
@@ -182,3 +189,4 @@ void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
     textStyleData.offset = textStyleData.size * 0.24;//correct font position
 }
+
