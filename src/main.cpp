@@ -8,6 +8,7 @@ int main() {
     Ui *ui;
     ui = new Ui();
 
+
     Welcome *welcome;
     welcome = new Welcome("Welcome");
 

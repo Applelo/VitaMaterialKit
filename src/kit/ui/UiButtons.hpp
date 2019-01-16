@@ -19,7 +19,7 @@ private:
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
-    UiButtons(UiTheme *theme);
+    UiButtons();
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
     TouchZoneEvent textDraw(const char *text, int x, int y, const char* icon = "");

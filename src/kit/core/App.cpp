@@ -2,7 +2,7 @@
 
 App::App(Ui *ui, const char *firstView) {
 
-    this->ui = new Ui();
+    this->ui = ui;
     this->viewsController = new ViewsController((char*) firstView);
 
     this->touch = new Touch();
@@ -37,8 +37,10 @@ void App::main() {
         pad->read();
         touch->read();
 
-        views[viewsController->getActualView()]->content();
-        views[viewsController->getActualView()]->controls();
+        ui->getTexts().draw(0, 0, H1, "test");
+
+        //views[viewsController->getActualView()]->content();
+        //views[viewsController->getActualView()]->controls();
 
         this->checkExit();
 

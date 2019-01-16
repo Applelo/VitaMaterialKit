@@ -5,11 +5,11 @@
 
 UiButtons::UiButtons(UiTheme *theme) {
     this->theme = theme;
-    this->texts = new UiTexts();
+    this->texts = new Texts();
     this->icons = new UiIcons();
 }
 
-UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
+UiButtons::UiButtons(UiTheme *theme, Texts *texts, UiIcons *icons) {
     this->theme = theme;
     this->texts = texts;
     this->icons = icons;
