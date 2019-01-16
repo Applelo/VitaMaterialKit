@@ -7,6 +7,9 @@ App::App(Theme *theme, const char *firstView) {
     this->texts = new Texts();
     this->theme = theme;
 
+    this->touch = new Touch();
+    this->pad = new Pad();
+
     run = 1;
 
     vita2d_init();
@@ -35,6 +38,9 @@ void App::main() {
     while (run) {
         vita2d_start_drawing();
         vita2d_clear_screen();
+
+        pad->read();
+        touch->read();
 
         views[viewsController->getActualView()]->content();
         views[viewsController->getActualView()]->controls();

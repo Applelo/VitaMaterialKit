@@ -9,10 +9,16 @@
 #include "View.hh"
 #include "../ui/Texts.hpp"
 #include "ViewsController.hh"
+#include "../utils/Touch.hpp"
+#include "../utils/Pad.hpp"
 
 class App {
 private:
     ViewsController *viewsController;
+
+    Touch *touch;
+    Pad *pad;
+
     Theme *theme;
     Texts *texts;
     std::map<const char *, View *> views;

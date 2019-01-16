@@ -21,7 +21,7 @@
 
 //see https://material.io/design/typography/the-type-system.html#type-scale
 typedef enum TextStyle {
-    H1,
+    H1 = 1,
     H2,
     H3,
     H4,
