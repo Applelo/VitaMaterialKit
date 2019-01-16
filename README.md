@@ -6,9 +6,9 @@ Wiki will be available soon to explain how to create an app and details each fun
 
 ## Showcase
 
-* Vita-CTP-Shortcut
-#* HueVita
-#* VitaKodiRemote
+* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
+
+(More to come :smiley: )
 
 ## Changelog
 
@@ -25,7 +25,7 @@ cmake .
 make
 ```
 
-You can also use this followed commands to send directly built files :
+You can also use this followed commands to send directly built files and launch Vita3K :
 
 ```shell
 #send eboot.bin file with FTP
