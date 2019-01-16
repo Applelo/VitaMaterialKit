@@ -6,6 +6,8 @@
 #include <iostream>
 #include <math.h>
 #include <algorithm>
+#include <stdarg.h>
+#include <string.h>
 
 #include <psp2/io/fcntl.h>
 #include <psp2/io/dirent.h>

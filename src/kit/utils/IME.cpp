@@ -80,7 +80,7 @@ std::string IME::getUserText(const char *title , const char *showtext, unsigned 
     char userText[512];
     strcpy(userText, showtext);
    	int run = 1;
-   
+
    
     while (run) {
         vita2d_start_drawing();
@@ -91,7 +91,7 @@ std::string IME::getUserText(const char *title , const char *showtext, unsigned 
             shown_dial = true;
             }
        
-        SceCommonDialogStatus status = sceImeDialogGetStatus();
+        status = sceImeDialogGetStatus();
        
         if (status == (SceCommonDialogStatus)IME_DIALOG_RESULT_FINISHED) {
             SceImeDialogResult result;
@@ -129,5 +129,9 @@ IME::IME(){
 
 	sceAppUtilInit(&initParam, &bootParam);
 	sceCommonDialogSetConfigParam(&dialogParam);
+}
+
+SceCommonDialogStatus IME::getStatus() const {
+	return status;
 }
 

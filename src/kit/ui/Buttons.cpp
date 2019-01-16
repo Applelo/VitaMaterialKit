@@ -9,6 +9,12 @@ Buttons::Buttons(Theme *theme) {
     this->icons = new Icons();
 }
 
+Buttons::Buttons(Theme *theme, Texts *texts, Icons *icons) {
+    this->theme = theme;
+    this->texts = texts;
+    this->icons = icons;
+}
+
 void Buttons::textDraw(const char *text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);

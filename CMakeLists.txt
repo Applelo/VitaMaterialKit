@@ -31,8 +31,9 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "01.00")
+set(VITA_VERSION "00.50")
 
+#Vita3K PATHS
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
 set(VITA3K_FOLDER_PATH "/Users/Applelo/Library/Application\ Support/Vita3K/Vita3K/ux0/app/${VITA_TITLEID}")
 
@@ -48,6 +49,8 @@ include_directories(
 
 add_executable(${SHORT_NAME}
         src/main.cpp
+
+        src/kit/core/App.cpp
         src/kit/ui/Texts.cpp
         src/kit/ui/Theme.cpp
         src/kit/ui/Icons.cpp
@@ -55,7 +58,11 @@ add_executable(${SHORT_NAME}
 
         src/kit/utils/I18n.cpp
         src/kit/utils/IME.cpp
-        )
+        src/kit/utils/Pad.cpp
+        src/kit/utils/Touch.cpp
+        src/kit/core/View.cpp
+
+        src/views/Welcome.cpp src/kit/core/ViewsController.cpp src/kit/core/ViewsController.hh src/kit/core/UiEvent.cpp src/kit/core/UiEvent.hh)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}
@@ -64,10 +71,12 @@ target_link_libraries(${SHORT_NAME}
         SceGxm_stub
         SceSysmodule_stub
         SceCtrl_stub
+        SceTouch_stub
         SceCommonDialog_stub
         SceNet_stub_weak
         SceNetCtl_stub_weak
         SceAppUtil_stub
+        SceRegistryMgr_stub
         jansson
         freetype
         png

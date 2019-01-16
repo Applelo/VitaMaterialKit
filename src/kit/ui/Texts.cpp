@@ -1,5 +1,3 @@
-#include <stdarg.h>
-#include <string.h>
 #include "Texts.hpp"
 
 Texts::Texts() {
@@ -52,7 +50,7 @@ void Texts::drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int c
 
 //Draw with Material Style
 void Texts::draw(int x, int y, TextStyle textStyle,  const char *text) {
-    this->drawFinal(x, y, textStyle, DEFAULT_FONT_COLOR, false, text);
+    this->drawFinal(x, y, textStyle, (unsigned int)DEFAULT_FONT_COLOR, false, text);
 }
 
 void Texts::draw(int x, int y, TextStyle textStyle, unsigned int color,  const char *text) {
@@ -76,7 +74,7 @@ void Texts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool it
 
 //Draw with your style
 void Texts::draw(int x, int y, TextStyleData _textStyleData, const char *text) {
-    this->drawFinal(x, y, _textStyleData, DEFAULT_FONT_COLOR, text);
+    this->drawFinal(x, y, _textStyleData, (unsigned int)DEFAULT_FONT_COLOR, text);
 }
 
 void Texts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text) {

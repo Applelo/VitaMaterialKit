@@ -17,6 +17,7 @@ private:
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     Buttons(Theme *theme);
+    Buttons(Theme *theme, Texts *texts, Icons *icons);
 
     void textDraw(const char *text, int x, int y, const char* icon = "");
 

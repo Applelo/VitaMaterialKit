@@ -37,18 +37,18 @@
 
 
 class IME{
-	public: 
+	public:
 		IME();
 		std::string getUserText(const char *title, const char *showText = "", unsigned int imeType = SCE_IME_TYPE_BASIC_LATIN);
+		SceCommonDialogStatus getStatus() const;
 		
 	private:
+		SceCommonDialogStatus status;
 
 		void oslOskGetText(char *text);
 		void initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int imeType = SCE_IME_TYPE_BASIC_LATIN);
 		void utf16_to_utf8(uint16_t *src, uint8_t *dst);
 		void utf8_to_utf16(uint8_t *src, uint16_t *dst);
-	
-	
 };
 
 #endif
