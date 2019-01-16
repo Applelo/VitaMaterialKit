@@ -1,25 +1,17 @@
 #ifndef VITAMATERIALKIT_VIEW_HH
 #define VITAMATERIALKIT_VIEW_HH
 
-#include "../ui/Texts.hpp"
 #include "ViewsController.hh"
-#include "../ui/Theme.hpp"
+#include "Ui.hh"
 
-typedef struct ViewConfig {
-    bool texts;
-    bool ctrl;
-    bool touch;
-    bool icons;
-} ViewConfig;
 
 class View {
 protected:
  const char *name;
-
- Theme *theme = nullptr;
- Texts *texts = nullptr;
+ Ui *ui;
  ViewsController *viewsController;
-
+ Pad *pad;
+ Touch *touch;
 
 public:
     View(const char *name);
@@ -27,12 +19,12 @@ public:
     virtual void content();
     virtual void controls();
 
-
     const char *getName() const;
 
     void setViewsController(ViewsController *viewsController);
-    void setTexts(Texts *texts);
-    void setTheme(Theme *theme);
+    void setUi(Ui *ui);
+    void setPad(Pad *pad);
+    void setTouch(Touch *touch);
 
 
 };

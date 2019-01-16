@@ -51,18 +51,22 @@ add_executable(${SHORT_NAME}
         src/main.cpp
 
         src/kit/core/App.cpp
-        src/kit/ui/Texts.cpp
-        src/kit/ui/Theme.cpp
-        src/kit/ui/Icons.cpp
-        src/kit/ui/Buttons.cpp
+        src/kit/core/ViewsController.cpp
+        src/kit/core/UiEvent.cpp
+        src/kit/core/View.cpp
 
         src/kit/utils/I18n.cpp
         src/kit/utils/IME.cpp
         src/kit/utils/Pad.cpp
         src/kit/utils/Touch.cpp
-        src/kit/core/View.cpp
 
-        src/views/Welcome.cpp src/kit/core/ViewsController.cpp src/kit/core/ViewsController.hh src/kit/core/UiEvent.cpp src/kit/core/UiEvent.hh)
+        src/kit/ui/Texts.cpp
+        src/kit/ui/Theme.cpp
+        src/kit/ui/Icons.cpp
+        src/kit/ui/Buttons.cpp
+
+        src/views/Welcome.cpp
+        src/kit/core/Ui.cpp src/kit/core/Ui.hh)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}

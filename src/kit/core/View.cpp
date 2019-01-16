@@ -9,21 +9,26 @@ const char *View::getName() const {
 }
 
 void View::content() {
-//nia
+//display stuff go here
 }
 
 void View::controls() {
-//nio
+//controls go here
 }
 
-void View::setTexts(Texts *texts) {
-    this->texts = texts;
+void View::setUi(Ui *ui) {
+    View::ui = ui;
 }
 
 void View::setViewsController(ViewsController *viewsController) {
-    this->viewsController = viewsController;
+    View::viewsController = viewsController;
 }
 
-void View::setTheme(Theme *theme) {
-    this->theme = theme;
+void View::setPad(Pad *pad) {
+    View::pad = pad;
 }
+
+void View::setTouch(Touch *touch) {
+    View::touch = touch;
+}
+

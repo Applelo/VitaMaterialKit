@@ -10,5 +10,6 @@ Welcome::Welcome(const char *name) : View(name) {
 }
 
 void Welcome::content() {
-    texts->draw(0,0,H1, "Welcome");
+    ui->texts->draw(0,0,H1, "Welcome");
+
 }

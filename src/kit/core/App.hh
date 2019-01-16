@@ -5,12 +5,11 @@
 
 #include <vita2d.h>
 #include <map>
-#include "../ui/Theme.hpp"
 #include "View.hh"
-#include "../ui/Texts.hpp"
 #include "ViewsController.hh"
 #include "../utils/Touch.hpp"
 #include "../utils/Pad.hpp"
+#include "Ui.hh"
 
 class App {
 private:
@@ -19,16 +18,15 @@ private:
     Touch *touch;
     Pad *pad;
 
-    Theme *theme;
-    Texts *texts;
+    Ui *ui;
+
     std::map<const char *, View *> views;
     int run;
 public:
-    App(Theme *them, const char *firstView);
+    App(Ui *ui, const char *firstView);
     ~App();
 
     void insertView(View *view);
-    void insertView(View *view, ViewConfig viewConfig);
     void main();
     void checkExit();
 };

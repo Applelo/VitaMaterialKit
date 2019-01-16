@@ -1,11 +1,9 @@
 #include "App.hh"
 
-App::App(Theme *theme, const char *firstView) {
+App::App(Ui *ui, const char *firstView) {
 
+    this->ui = new Ui();
     this->viewsController = new ViewsController((char*) firstView);
-
-    this->texts = new Texts();
-    this->theme = theme;
 
     this->touch = new Touch();
     this->pad = new Pad();
@@ -24,15 +22,12 @@ App::~App() {
 
 void App::insertView(View *view) {
     view->setViewsController(viewsController);
-    view->setTexts(texts);
+    view->setUi(ui);
+    view->setPad(pad);
+    view->setTouch(touch);
     views[view->getName()] = view;
 }
 
-void App::insertView(View *view, ViewConfig viewConfig) {
-    view->setViewsController(viewsController);
-    view->setTexts(texts);
-    views[view->getName()] = view;
-}
 
 void App::main() {
     while (run) {

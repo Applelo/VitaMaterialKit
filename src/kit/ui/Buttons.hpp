@@ -7,25 +7,28 @@
 #include "Texts.hpp"
 #include "Icons.hpp"
 #include "Theme.hpp"
+#include "../core/UiEvent.hh"
 
-class Buttons {
+class Buttons final : public UiEvent {
 private:
     Icons *icons;
     Texts *texts;
     Theme *theme;
+    TouchZoneEvent touchZoneEvent;
+    TextData textData;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     Buttons(Theme *theme);
     Buttons(Theme *theme, Texts *texts, Icons *icons);
 
-    void textDraw(const char *text, int x, int y, const char* icon = "");
+    TouchZoneEvent textDraw(const char *text, int x, int y, const char* icon = "");
 
-    void outlinedDraw(const char *text, int x, int y, const char* icon = "");
+    TouchZoneEvent outlinedDraw(const char *text, int x, int y, const char* icon = "");
 
-    void containedDraw(const char *text, int x, int y, const char *icon = "");
+    TouchZoneEvent containedDraw(const char *text, int x, int y, const char *icon = "");
 
-    void floatDraw(const char *icon, int x, int y, const char *text = "");
+    TouchZoneEvent floatDraw(const char *icon, int x, int y, const char *text = "");
 
 };
 
