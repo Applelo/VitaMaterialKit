@@ -4,23 +4,23 @@
 #include "../utils/Touch.hpp"
 #include "../utils/Pad.hpp"
 
-#include "Texts.hpp"
-#include "Icons.hpp"
-#include "Theme.hpp"
+#include "UiTexts.hpp"
+#include "UiIcons.hpp"
+#include "UiTheme.hpp"
 #include "../core/UiEvent.hh"
 
-class Buttons final : public UiEvent {
+class UiButtons final : public UiEvent {
 private:
-    Icons *icons;
-    Texts *texts;
-    Theme *theme;
+    UiIcons *icons;
+    UiTexts *texts;
+    UiTheme *theme;
     TouchZoneEvent touchZoneEvent;
     TextData textData;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
-    Buttons(Theme *theme);
-    Buttons(Theme *theme, Texts *texts, Icons *icons);
+    UiButtons(UiTheme *theme);
+    UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
     TouchZoneEvent textDraw(const char *text, int x, int y, const char* icon = "");
 

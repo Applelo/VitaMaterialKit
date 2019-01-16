@@ -1,6 +1,7 @@
-#include "kit/ui/Theme.hpp"
+#include "kit/ui/UiTheme.hpp"
 #include "kit/core/App.hh"
 #include "views/Welcome.hh"
+#include "views/Texts.hh"
 
 int main() {
 
@@ -10,8 +11,12 @@ int main() {
     Welcome *welcome;
     welcome = new Welcome("Welcome");
 
+    Texts *texts;
+    texts = new Texts("Texts");
+
     auto *app = new App(ui, "Welcome");
     app->insertView(welcome);
+    app->insertView(texts);
 
     app->main();
 

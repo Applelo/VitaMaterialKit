@@ -50,7 +50,7 @@ typedef struct TextData {
 
 } TextData;
 
-class Texts {
+class UiTexts {
 private:
     std::map<std::string, vita2d_font*> fonts;
     TextData textData;
@@ -63,10 +63,10 @@ private:
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(const char *text, TextStyle textStyle, bool italic = false);
 public:
-    Texts();
-    Texts(const char *family);
+    UiTexts();
+    UiTexts(const char *family);
 
-    ~Texts();
+    ~UiTexts();
 
     void init(std::string family);
 

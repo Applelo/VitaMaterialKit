@@ -61,13 +61,13 @@ add_executable(${SHORT_NAME}
         src/kit/utils/Pad.cpp
         src/kit/utils/Touch.cpp
 
-        src/kit/ui/Texts.cpp
-        src/kit/ui/Theme.cpp
-        src/kit/ui/Icons.cpp
-        src/kit/ui/Buttons.cpp
+        src/kit/ui/UiTexts.cpp
+        src/kit/ui/UiTheme.cpp
+        src/kit/ui/UiIcons.cpp
+        src/kit/ui/UiButtons.cpp
 
         src/views/Welcome.cpp
-        )
+        src/views/Texts.cpp)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}

@@ -1,21 +1,21 @@
 #include <utility>
 
 
-#include "Buttons.hpp"
+#include "UiButtons.hpp"
 
-Buttons::Buttons(Theme *theme) {
+UiButtons::UiButtons(UiTheme *theme) {
     this->theme = theme;
-    this->texts = new Texts();
-    this->icons = new Icons();
+    this->texts = new UiTexts();
+    this->icons = new UiIcons();
 }
 
-Buttons::Buttons(Theme *theme, Texts *texts, Icons *icons) {
+UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
     this->theme = theme;
     this->texts = texts;
     this->icons = icons;
 }
 
-TouchZoneEvent Buttons::textDraw(const char *text, int x, int y, const char* icon) {
+TouchZoneEvent UiButtons::textDraw(const char *text, int x, int y, const char* icon) {
     textData = texts->getTextData(text, Button);
     touchZoneEvent.x = x;
     touchZoneEvent.y = y;
@@ -39,7 +39,7 @@ TouchZoneEvent Buttons::textDraw(const char *text, int x, int y, const char* ico
 }
 
 
-TouchZoneEvent Buttons::outlinedDraw(const char *text, int x, int y, const char *icon) {
+TouchZoneEvent UiButtons::outlinedDraw(const char *text, int x, int y, const char *icon) {
     textData = texts->getTextData(text, Button);
     touchZoneEvent.x = x;
     touchZoneEvent.y = y;
@@ -57,7 +57,7 @@ TouchZoneEvent Buttons::outlinedDraw(const char *text, int x, int y, const char 
 }
 
 
-TouchZoneEvent Buttons::containedDraw(const char *text, int x, int y, const char *icon) {
+TouchZoneEvent UiButtons::containedDraw(const char *text, int x, int y, const char *icon) {
     textData = texts->getTextData(text, Button);
     touchZoneEvent.x = x;
     touchZoneEvent.y = y;
@@ -80,7 +80,7 @@ TouchZoneEvent Buttons::containedDraw(const char *text, int x, int y, const char
     return touchZoneEvent;
 }
 
-TouchZoneEvent Buttons::floatDraw(const char *icon, int x, int y, const char *text) {
+TouchZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, const char *text) {
     touchZoneEvent.x = x;
     touchZoneEvent.y = y;
 
@@ -110,7 +110,7 @@ TouchZoneEvent Buttons::floatDraw(const char *icon, int x, int y, const char *te
 
 
 
-void Buttons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color) {
+void UiButtons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color) {
     x += 1;
     y += 1;
     w -= 1;

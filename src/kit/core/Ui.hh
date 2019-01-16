@@ -2,18 +2,18 @@
 #define VITAMATERIALKIT_UI_HH
 
 
-#include "../ui/Theme.hpp"
-#include "../ui/Icons.hpp"
-#include "../ui/Texts.hpp"
-#include "../ui/Buttons.hpp"
+#include "../ui/UiTheme.hpp"
+#include "../ui/UiIcons.hpp"
+#include "../ui/UiTexts.hpp"
+#include "../ui/UiButtons.hpp"
 
 //if you don't want to load all ui, override initUi function
 class Ui {
 public:
-    Theme *theme;
-    Texts *texts;
-    Buttons *buttons;
-    Icons *icons;
+    UiTheme *theme;
+    UiTexts *texts;
+    UiButtons *buttons;
+    UiIcons *icons;
 
     Ui();
 

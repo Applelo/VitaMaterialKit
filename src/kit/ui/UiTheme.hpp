@@ -21,7 +21,7 @@ typedef struct{
     unsigned int text;
 } colorSchemeRGBA;
 
-class Theme {
+class UiTheme {
 private:
     colorSchemeHEX primaryHEX;
     colorSchemeHEX secondaryHEX;
@@ -32,8 +32,8 @@ private:
     unsigned int convertHexToRGBA(const char *hex);
 
 public:
-    Theme();
-    Theme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary);
+    UiTheme();
+    UiTheme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary);
 
     const colorSchemeHEX &getPrimaryHEX() const;
 

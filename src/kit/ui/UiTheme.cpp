@@ -1,8 +1,8 @@
-#include "Theme.hpp"
+#include "UiTheme.hpp"
 
-Theme::Theme() = default;
+UiTheme::UiTheme() = default;
 
-Theme::Theme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary) {
+UiTheme::UiTheme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary) {
 
     this->primaryHEX = primary;
     this->secondaryHEX = secondary;
@@ -12,13 +12,13 @@ Theme::Theme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary) {
 
 }
 
-unsigned int Theme::convertHexToRGBA(const char *hex) {
+unsigned int UiTheme::convertHexToRGBA(const char *hex) {
     int r, g, b;
     sscanf(hex, "#%02x%02x%02x", &r, &g, &b);
     return (unsigned int) RGBA8(r, g, b, 255);
 }
 
-colorSchemeRGBA Theme::colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex) {
+colorSchemeRGBA UiTheme::colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex) {
     colorSchemeRGBA rgba;
 
     rgba.normal = this->convertHexToRGBA(hex.normal);
@@ -29,19 +29,19 @@ colorSchemeRGBA Theme::colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex) {
     return rgba;
 }
 
-const colorSchemeHEX &Theme::getPrimaryHEX() const {
+const colorSchemeHEX &UiTheme::getPrimaryHEX() const {
     return primaryHEX;
 }
 
-const colorSchemeHEX &Theme::getSecondaryHEX() const {
+const colorSchemeHEX &UiTheme::getSecondaryHEX() const {
     return secondaryHEX;
 }
 
-const colorSchemeRGBA &Theme::getPrimaryRGBA() const {
+const colorSchemeRGBA &UiTheme::getPrimaryRGBA() const {
     return primaryRGBA;
 }
 
-const colorSchemeRGBA &Theme::getSecondaryRGBA() const {
+const colorSchemeRGBA &UiTheme::getSecondaryRGBA() const {
     return secondaryRGBA;
 }
 

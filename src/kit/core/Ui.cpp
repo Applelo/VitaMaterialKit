@@ -16,10 +16,10 @@ void Ui::init() {
     secondaryThemeColor.light = "#c1d5e0";
     secondaryThemeColor.text = "#fafafa";
 
-    this->theme = new Theme(primaryThemeColor, secondaryThemeColor);
-    this->texts = new Texts();
-    this->icons = new Icons();
-    this->buttons = new Buttons(theme, texts, icons);
+    this->theme = new UiTheme(primaryThemeColor, secondaryThemeColor);
+    this->texts = new UiTexts();
+    this->icons = new UiIcons();
+    this->buttons = new UiButtons(theme, texts, icons);
 }
 
 
