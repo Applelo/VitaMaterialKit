@@ -1,21 +1,21 @@
 #include <stdarg.h>
-#include "Texts.hpp"
+#include "UiTexts.hpp"
 
-Texts::Texts() {
+UiTexts::UiTexts() {
     this->init("Roboto");
 }
 
-Texts::Texts(std::string family) {
+UiTexts::UiTexts(std::string family) {
     this->init(std::move(family));
 }
 
-Texts::~Texts() {
+UiTexts::~UiTexts() {
     for (const auto& kv : this->fonts) {
         vita2d_free_font(kv.second);
     }
 }
 
-void Texts::init(std::string family) {
+void UiTexts::init(std::string family) {
     SceIoDirent gDir;
     std::string fontsPath = DEFAULT_FONTS_PATH;
     fontsPath = fontsPath + family;
@@ -39,30 +39,30 @@ void Texts::init(std::string family) {
     sceIoClose(fd);
 }
 
-void Texts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
+void UiTexts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
     this->calcTextStyleData(textStyle, italic);
 
     vita2d_font_draw_text(fonts[textStyleData.type], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
-void Texts::drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color) {
+void UiTexts::drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color) {
     vita2d_font_draw_text(fonts[_textStyleData.type], x, (int) floor(y + _textStyleData.size - _textStyleData.offset), color, _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 //Draw with Material Style
-void Texts::draw(int x, int y, TextStyle textStyle, std::string text) {
+void UiTexts::draw(int x, int y, TextStyle textStyle, std::string text) {
     this->drawFinal(std::move(text), x, y, textStyle, DEFAULT_FONT_COLOR, false);
 }
 
-void Texts::draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text) {
+void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text) {
     this->drawFinal(std::move(text), x, y, textStyle, color, false);
 }
 
-void Texts::draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text) {
+void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text) {
     this->drawFinal(std::move(text), x, y, textStyle, color, italic);
 }
 
-void Texts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...) {
+void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...) {
     char buf[1024];
     va_list argPtr;
 

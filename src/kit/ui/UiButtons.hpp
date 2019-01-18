@@ -1,22 +1,22 @@
-#ifndef VITA_MATERIAL_KIT_BUTTON_HPP
-#define VITA_MATERIAL_KIT_BUTTON_HPP
+#ifndef VITA_MATERIAL_KIT_UI_BUTTON_HPP
+#define VITA_MATERIAL_KIT_UI_BUTTON_HPP
 
 #include "../utils/Touch.hpp"
 #include "../utils/Pad.hpp"
 
-#include "Texts.hpp"
-#include "Icons.hpp"
+#include "UiTexts.hpp"
+#include "UiIcons.hpp"
 #include "Theme.hpp"
 
-class Buttons {
+class UiButtons {
 private:
-    Icons *icons;
+    UiIcons *icons;
     Texts *texts;
     Theme *theme;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
-    Buttons(Theme *theme);
+    UiButtons(Theme *theme);
 
     void textDraw(std::string text, int x, int y, const char* icon = "");
 
