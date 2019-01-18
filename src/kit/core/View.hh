@@ -5,6 +5,7 @@
 #include "Ui.hh"
 
 
+
 class View {
 protected:
  const char *name;

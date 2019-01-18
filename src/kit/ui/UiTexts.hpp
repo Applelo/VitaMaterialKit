@@ -16,6 +16,7 @@
 
 
 #define DEFAULT_FONT_COLOR RGBA8(255, 255, 255, 255)
+#define FONTS_MAX_SIZE
 #define DEFAULT_FONTS_PATH "app0:assets/fonts/"
 #define DEFAULT_SIZE_OFFSET 12
 
@@ -52,7 +53,7 @@ typedef struct TextData {
 
 class UiTexts {
 private:
-    std::map<std::string, vita2d_font*> fonts;
+    std::map<std::string, vita2d_font* [FONTS_MAX_SIZE]> fonts;
     TextData textData;
     TextStyleData textStyleData;
 
@@ -63,6 +64,7 @@ private:
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(const char *text, TextStyle textStyle, bool italic = false);
 public:
+    UiTexts(std::map<std::string, vita2d_font* [FONTS_MAX_SIZE]> fonts);
     UiTexts();
     UiTexts(const char *family);
 

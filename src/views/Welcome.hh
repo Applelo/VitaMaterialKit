@@ -4,6 +4,7 @@
 #include "../kit/core/View.hh"
 
 class Welcome: public View {
+
 public:
     Welcome(const char *name);
     void content() override;

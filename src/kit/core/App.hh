@@ -20,11 +20,11 @@ private:
 
     Ui *ui;
 
+
     std::map<const char *, View *> views;
     int run;
 public:
     App(Ui *ui, const char *firstView);
-    ~App();
 
     void insertView(View *view);
     void main();

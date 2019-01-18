@@ -1,6 +1,5 @@
-
-#ifndef VITA_MATERIAL_KIT_ICONS_HPP
-#define VITA_MATERIAL_KIT_ICONS_HPP
+#ifndef VITA_MATERIAL_KIT_UI_ICONS_HPP
+#define VITA_MATERIAL_KIT_UI_ICONS_HPP
 
 #include <vita2d.h>
 #include <string>
@@ -17,10 +16,9 @@ class UiIcons {
         vita2d_font *font;
     public:
         UiIcons();
-        UiIcons(const char *path);
         void draw(const char* iconCode, int x, int y, unsigned int color = DEFAULT_MATERIAL_ICON_COLOR, unsigned int size = DEFAULT_MATERIAL_ICON_SIZE);
 
 };
 
 
-#endif //VITA_MATERIAL_KIT_ICONS_HPP
+#endif //VITA_MATERIAL_KIT_UI_ICONS_HPP
