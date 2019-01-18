@@ -1,6 +1,6 @@
 //see https://material.io/tools/color/#!/
-#ifndef VITA_MATERIAL_KIT_THEME_HPP
-#define VITA_MATERIAL_KIT_THEME_HPP
+#ifndef VITA_MATERIAL_KIT_UI_THEME_HPP
+#define VITA_MATERIAL_KIT_UI_THEME_HPP
 
 #include <cstdio>
 #include <vita2d.h>
@@ -46,4 +46,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_THEME_HPP
+#endif //VITA_MATERIAL_KIT_UI_THEME_HPP

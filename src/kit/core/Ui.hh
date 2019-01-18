@@ -9,18 +9,18 @@
 
 //if you don't want to load all ui, override initUi function, to set your own theme override initTheme option
 class Ui {
+protected:
+    colorSchemeHEX primaryThemeColor;
+    colorSchemeHEX secondaryThemeColor;
 public:
     UiTheme *theme;
     UiTexts *texts;
     UiButtons *buttons;
-    UiIcons icons;
-
-    std::map<std::string, vita2d_font*> roboto;
-    vita2d_font *mdi;
+    UiIcons *icons;
 
     Ui();
-    void loadFonts();
 
+    virtual void initTheme();
     virtual void init();
 };
 

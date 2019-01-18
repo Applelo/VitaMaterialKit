@@ -12,15 +12,15 @@ App::App(Ui *ui, const char *firstView) {
 
 
 void App::insertView(View *view) {
-    view->setViewsController(viewsController);
-    view->setUi(ui);
-    view->setPad(pad);
-    view->setTouch(touch);
+    view->setViewsController(this->viewsController);
+    view->setUi(this->ui);
+    view->setPad(this->pad);
+    view->setTouch(this->touch);
     views[view->getName()] = view;
 }
 
 
-void App::main() {
+int App::main() {
     vita2d_init();
     vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
 
@@ -32,7 +32,7 @@ void App::main() {
         touch->read();
 
         views[viewsController->getActualView()]->content();
-        //views[viewsController->getActualView()]->controls();
+        views[viewsController->getActualView()]->controls();
 
         this->checkExit();
 
@@ -42,6 +42,7 @@ void App::main() {
 
     vita2d_fini();
     sceKernelExitProcess(0);
+    return 0;
 }
 
 void App::checkExit() {

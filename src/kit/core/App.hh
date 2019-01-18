@@ -27,7 +27,7 @@ public:
     App(Ui *ui, const char *firstView);
 
     void insertView(View *view);
-    void main();
+    int main();
     void checkExit();
 };
 
