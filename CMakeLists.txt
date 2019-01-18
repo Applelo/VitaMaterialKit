@@ -49,10 +49,23 @@ include_directories(
 add_executable(${SHORT_NAME}
         src/main.cpp
 
+        src/kit/core/App.cpp
+        src/kit/core/ViewsController.cpp
+        src/kit/core/View.cpp
+        src/kit/core/Ui.cpp
+        src/kit/core/UiEvent.cpp
+
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp
         src/kit/ui/UiTexts.cpp
+
+        src/kit/utils/I18n.cpp
+        src/kit/utils/IME.cpp
+        src/kit/utils/Pad.cpp
+        src/kit/utils/Touch.cpp
+
+        src/views/Welcome.cpp
         )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -62,10 +75,10 @@ target_link_libraries(${SHORT_NAME}
         SceGxm_stub
         SceSysmodule_stub
         SceCtrl_stub
+        SceTouch_stub
         SceCommonDialog_stub
-        SceNet_stub_weak
-        SceNetCtl_stub_weak
         SceAppUtil_stub
+        SceRegistryMgr_stub
         jansson
         freetype
         png

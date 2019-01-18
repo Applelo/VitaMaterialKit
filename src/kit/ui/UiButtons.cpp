@@ -9,6 +9,12 @@ UiButtons::UiButtons(UiTheme *theme) {
     this->icons = new UiIcons();
 }
 
+UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
+    this->theme = theme;
+    this->texts = texts;
+    this->icons = icons;
+}
+
 void UiButtons::textDraw(std::string text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
@@ -75,4 +81,5 @@ void UiButtons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int c
     vita2d_draw_line(x, y + h, x + w, y + h, color); //bottom
     vita2d_draw_line(x, y, x, y + h, color); //left
 }
+
 

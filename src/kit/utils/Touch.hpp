@@ -6,13 +6,16 @@
 
 #include <psp2/touch.h>
 
-#include "mathtools.hpp"
-
 #define SLEEP_CLICK_NORMAL 150000
 #define SLEEP_CLICK_EXTENDED 350000
 
 #define MIN_DIST_TO_SCROLL_Y 2
 #define MIN_DIST_TO_SCROLL_X 2
+
+typedef struct{
+	int x;
+	int y;
+}vector2;
 
 class Touch{
 	public:

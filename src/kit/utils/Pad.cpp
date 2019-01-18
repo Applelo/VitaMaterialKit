@@ -4,8 +4,6 @@ Pad::Pad(){
 	buttonAssign = checkButtonAssign();
 	sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
 	sceCtrlPeekBufferPositive(0, &vitapad, 1);
-	//left_analog_calibration_x = vitapad.lx;
-	//left_analog_calibration_y = vitapad.ly;
 }
 
 
@@ -100,7 +98,7 @@ int Pad::checkButtonAssign(){
 	
 	int ret = 0;
 	
-	if(buttonAssign!=-1)
+	if(buttonAssign != -1)
 		return buttonAssign;
 
 	ret = sceRegMgrGetKeyInt("/CONFIG/SYSTEM", "button_assign", &buttonAssign);

@@ -17,6 +17,7 @@ private:
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     UiButtons(UiTheme *theme);
+    UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
     void textDraw(std::string text, int x, int y, const char* icon = "");
 

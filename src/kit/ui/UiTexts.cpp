@@ -117,6 +117,13 @@ void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 }
 
 
+TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
+    textData.width = vita2d_font_text_width(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    textData.height = vita2d_font_text_height(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+
+    return textData;
+}
+
 void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
     textStyleData.type = "Regular";

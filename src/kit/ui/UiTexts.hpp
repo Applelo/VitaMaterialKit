@@ -62,7 +62,7 @@ private:
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
 public:
     UiTexts();
-    explicit UiTexts(std::string family);
+    UiTexts(std::string family);
 
     ~UiTexts();
 
@@ -83,6 +83,7 @@ public:
 
 
     TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
+    TextData getTextData(std::string text, TextStyleData _textStyleData);
 
 };
 
