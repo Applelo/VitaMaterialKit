@@ -3,10 +3,10 @@
 
 #include "UiButtons.hpp"
 
-UiButtons::UiButtons(Theme *theme) {
+UiButtons::UiButtons(UiTheme *theme) {
     this->theme = theme;
-    this->texts = new Texts();
-    this->icons = new Icons();
+    this->texts = new UiTexts();
+    this->icons = new UiIcons();
 }
 
 void UiButtons::textDraw(std::string text, int x, int y, const char* icon) {

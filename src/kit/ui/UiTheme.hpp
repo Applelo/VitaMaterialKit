@@ -1,6 +1,6 @@
 //see https://material.io/tools/color/#!/
-#ifndef VITA_MATERIAL_KIT_THEME_HPP
-#define VITA_MATERIAL_KIT_THEME_HPP
+#ifndef VITA_MATERIAL_KIT_UI_THEME_HPP
+#define VITA_MATERIAL_KIT_UI_THEME_HPP
 
 #include <cstdio>
 #include <vita2d.h>
@@ -21,7 +21,7 @@ typedef struct{
     unsigned int text;
 } colorSchemeRGBA;
 
-class Theme {
+class UiTheme {
 private:
     colorSchemeHEX primaryHEX;
     colorSchemeHEX secondaryHEX;
@@ -32,8 +32,8 @@ private:
     unsigned int convertHexToRGBA(const char *hex);
 
 public:
-    Theme();
-    Theme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary);
+    UiTheme();
+    UiTheme(const colorSchemeHEX &primary, const colorSchemeHEX &secondary);
 
     const colorSchemeHEX &getPrimaryHEX() const;
 
@@ -46,4 +46,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_THEME_HPP
+#endif //VITA_MATERIAL_KIT_UI_THEME_HPP

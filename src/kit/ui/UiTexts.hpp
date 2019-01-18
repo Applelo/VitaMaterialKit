@@ -1,5 +1,5 @@
-#ifndef VITA_MATERIAL_KIT_TEXT_HPP
-#define VITA_MATERIAL_KIT_TEXT_HPP
+#ifndef VITA_MATERIAL_KIT_UI_TEXT_HPP
+#define VITA_MATERIAL_KIT_UI_TEXT_HPP
 
 
 #include <map>
@@ -48,7 +48,7 @@ typedef struct TextData {
 
 } TextData;
 
-class Texts {
+class UiTexts {
 private:
     std::map<std::string, vita2d_font*> fonts;
     TextData textData;
@@ -61,10 +61,10 @@ private:
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
 public:
-    Texts();
-    explicit Texts(std::string family);
+    UiTexts();
+    explicit UiTexts(std::string family);
 
-    ~Texts();
+    ~UiTexts();
 
     void init(std::string family);
 
@@ -87,4 +87,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_TEXT_HPP
+#endif //VITA_MATERIAL_KIT_UI_TEXT_HPP

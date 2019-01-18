@@ -6,13 +6,14 @@
 
 #include <vita2d.h>
 
-#include "kit/ui/Theme.hpp"
+#include "kit/ui/UiTheme.hpp"
 #include "kit/ui/UiTexts.hpp"
 #include "kit/ui/UiIcons.hpp"
 
 
 #include "kit/utils/I18n.hpp"
 #include "kit/utils/IME.hpp"
+#include "kit/ui/UiButtons.hpp"
 
 int main() {
 
@@ -32,13 +33,14 @@ int main() {
     secondaryThemeColor.light = "#c1d5e0";
     secondaryThemeColor.text = "#fafafa";
 
-    Theme *theme;
+    UiTheme *theme;
 
     vita2d_init();
     vita2d_set_clear_color(RGBA8(0x40, 0x40, 0x40, 0xFF));
-    theme = new Theme(primaryThemeColor, secondaryThemeColor);
+    theme = new UiTheme(primaryThemeColor, secondaryThemeColor);
     auto *icons = new UiIcons();
-    auto *buttons = new UiButtons();
+    auto *buttons = new UiButtons(theme);
+    auto *texts = new UiTexts();
 
 
     while (1) {
@@ -64,9 +66,8 @@ int main() {
         buttons->floatDraw(ICON_MDI_PLUS, 50, 450);
         buttons->floatDraw(ICON_MDI_PLUS, 300, 450, "Extended Float");
 
-        /*texts->draw(0, 140, Body1, theme->getPrimaryRGBA().text, currentLang->getI18nByCat("test")["phrase"]);
-        texts->draw(0, 210, Body1, theme->getPrimaryRGBA().text, frLang->getI18nByCat("test")["phrase"]);
-        texts->draw(0, 280, Body1, theme->getPrimaryRGBA().text, enLang->getI18nByCat("test")["phrase"]);*/
+        texts->draw(0, 140, Body1, theme->getPrimaryRGBA().text, "yolo");
+
 
 
 

@@ -49,9 +49,10 @@ include_directories(
 add_executable(${SHORT_NAME}
         src/main.cpp
 
-        src/kit/ui/Theme.cpp
+        src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp
+        src/kit/ui/UiTexts.cpp
         )
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.

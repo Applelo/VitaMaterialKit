@@ -6,17 +6,17 @@
 
 #include "UiTexts.hpp"
 #include "UiIcons.hpp"
-#include "Theme.hpp"
+#include "UiTheme.hpp"
 
 class UiButtons {
 private:
     UiIcons *icons;
-    Texts *texts;
-    Theme *theme;
+   UiTexts *texts;
+    UiTheme *theme;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
-    UiButtons(Theme *theme);
+    UiButtons(UiTheme *theme);
 
     void textDraw(std::string text, int x, int y, const char* icon = "");
 
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_BUTTON_HPP
+#endif //VITA_MATERIAL_KIT_UI_BUTTON_HPP

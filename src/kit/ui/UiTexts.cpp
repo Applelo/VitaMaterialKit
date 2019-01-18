@@ -74,15 +74,15 @@ void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool 
 }
 
 //Draw with your style
-void Texts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
+void UiTexts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
     this->drawFinal(std::move(text), x, y, _textStyleData, DEFAULT_FONT_COLOR);
 }
 
-void Texts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
+void UiTexts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
     this->drawFinal(std::move(text), x, y, _textStyleData, color);
 }
 
-void Texts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...) {
+void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...) {
     char buf[1024];
     va_list argPtr;
 
@@ -95,7 +95,7 @@ void Texts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color
 
 
 //utils
-TextData Texts::getTextData(std::string text, TextStyle textStyle, bool italic) {
+TextData UiTexts::getTextData(std::string text, TextStyle textStyle, bool italic) {
     this->calcTextData(std::move(text), textStyle, italic);
     return textData;
 }
@@ -103,12 +103,12 @@ TextData Texts::getTextData(std::string text, TextStyle textStyle, bool italic) 
 //private
 
 //set text to uppercase
-std::string Texts::toUppercase(std::string text) {
+std::string UiTexts::toUppercase(std::string text) {
     std::transform(text.begin(), text.end(),text.begin(), ::toupper);
     return text;
 }
 
-void Texts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
+void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 
     this->calcTextStyleData(textStyle, italic);
 
@@ -117,7 +117,7 @@ void Texts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 }
 
 
-void Texts::calcTextStyleData(TextStyle textStyle, bool italic) {
+void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
     textStyleData.type = "Regular";
     textStyleData.size = 16;
