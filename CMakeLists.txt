@@ -69,12 +69,6 @@ add_executable(${SHORT_NAME}
         src/views/Welcome.cpp
         )
 
-        src/kit/ui/UiTexts.cpp
-        src/kit/ui/UiTheme.cpp
-        src/kit/ui/UiIcons.cpp
-        src/kit/ui/UiButtons.cpp
-
-        src/views/Welcome.cpp)
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
 target_link_libraries(${SHORT_NAME}
