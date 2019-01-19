@@ -11,6 +11,8 @@ typedef struct TouchZoneEvent {
 } TouchZoneEvent;
 
 class UiEvent {
+protected:
+    TouchZoneEvent touchZoneEvent;
 public:
     bool onPad(bool selector, bool button);
     bool onTouch(TouchZoneEvent touchZoneEvent, vector2 touchInfo);

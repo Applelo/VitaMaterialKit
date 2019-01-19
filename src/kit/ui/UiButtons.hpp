@@ -7,25 +7,27 @@
 #include "UiTexts.hpp"
 #include "UiIcons.hpp"
 #include "UiTheme.hpp"
+#include "../core/UiEvent.hh"
 
-class UiButtons {
+class UiButtons : public UiEvent {
 private:
     UiIcons *icons;
-   UiTexts *texts;
+    UiTexts *texts;
     UiTheme *theme;
+    TextData textData;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     UiButtons(UiTheme *theme);
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
-    void textDraw(std::string text, int x, int y, const char* icon = "");
+    TouchZoneEvent textDraw(std::string text, int x, int y, const char* icon = "");
 
-    void outlinedDraw(std::string text, int x, int y, const char* icon = "");
+    TouchZoneEvent outlinedDraw(std::string text, int x, int y, const char* icon = "");
 
-    void containedDraw(std::string text, int x, int y, const char *icon = "");
+    TouchZoneEvent containedDraw(std::string text, int x, int y, const char *icon = "");
 
-    void floatDraw(const char *icon, int x, int y, std::string text = "");
+    TouchZoneEvent floatDraw(const char *icon, int x, int y, std::string text = "");
 
 };
 

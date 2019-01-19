@@ -8,18 +8,18 @@
 
 class View {
 protected:
- const char *name;
+ std::string name;
  Ui *ui;
  ViewsController *viewsController;
  Utils *utils;
 
 public:
-    View(const char *name);
+    View(std::string name);
 
-    virtual void content();
+    virtual void contents();
     virtual void controls();
 
-    const char *getName() const;
+    std::string getName() const;
 
     void setViewsController(ViewsController *viewsController);
     void setUi(Ui *ui);

@@ -4,10 +4,12 @@
 #include "../kit/core/View.hh"
 
 class Welcome: public View {
-
+private:
+    TouchZoneEvent touchZoneEvent;
 public:
     Welcome(const char *name);
-    void content() override;
+    void contents() override;
+    void controls() override;
 };
 
 #endif //VITAMATERIALKIT_WELCOME_HH

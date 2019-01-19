@@ -1,14 +1,14 @@
 #include "View.hh"
 
-View::View(const char *name)  {
+View::View(std::string name)  {
     this->name = name;
 }
 
-const char *View::getName() const {
+std::string View::getName() const {
     return name;
 }
 
-void View::content() {
+void View::contents() {
 //display stuff go here
 }
 

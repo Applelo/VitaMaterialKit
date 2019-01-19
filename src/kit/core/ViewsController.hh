@@ -4,14 +4,16 @@
 #define VIEWS_CONTROLLER_EXIT "VIEWS_CONTROLLER_EXIT"
 #define VIEWS_CONTROLLER_EXIT_LOOP "VIEWS_CONTROLLER_EXIT_LOOP"
 
+#include <string>
+
 class ViewsController {
 private:
-    char *actualView;
+    std::string actualView;
 public:
-    ViewsController(char *actualView);
+    ViewsController(std::string actualView);
 
-    char *getActualView() const;
-    void setActualView(char *actualView);
+    std::string getActualView();
+    void setActualView(std::string actualView);
 };
 
 

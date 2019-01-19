@@ -11,12 +11,12 @@
 #include "../utils/Pad.hpp"
 
 class Utils {
-    Touch *touch;
-    Pad *pad;
-    I18n *i18n;
 protected:
     virtual void init();
 public:
+    Touch *touch;
+    Pad *pad;
+    I18n *i18n;
     Utils();
     virtual void read();
 };

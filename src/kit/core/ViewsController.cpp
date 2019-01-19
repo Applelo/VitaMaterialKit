@@ -1,12 +1,12 @@
 #include "ViewsController.hh"
 
-ViewsController::ViewsController(char *actualView) : actualView(actualView) {}
+ViewsController::ViewsController(std::string actualView) : actualView(actualView) {}
 
-char *ViewsController::getActualView() const {
+std::string ViewsController::getActualView() {
     return actualView;
 }
 
-void ViewsController::setActualView(char *actualView) {
-    ViewsController::actualView = actualView;
+void ViewsController::setActualView(std::string actualView) {
+    this->actualView = actualView;
 }
 

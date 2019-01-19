@@ -17,15 +17,17 @@ private:
     Utils *utils;
 
     Ui *ui;
-    std::map<const char *, View *> views;
+    std::map<std::string, View *> views;
     int run;
-    void insertView(View *view);
-    void main();
     void checkExit();
     void initVita2d();
+    void debug();
 public:
     App(const char *firstView);
     App(Ui *ui, Utils *utils, const char *firstView);
+
+    void insertView(View *view);
+    void main();
 };
 
 
