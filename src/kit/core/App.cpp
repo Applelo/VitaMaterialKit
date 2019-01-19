@@ -1,6 +1,9 @@
 #include "App.hh"
 
 App::App(const char *firstView) {
+    vita2d_init();
+    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
+
     this->ui = new Ui();
     this->viewsController = new ViewsController((char*) firstView);
 
@@ -11,6 +14,9 @@ App::App(const char *firstView) {
 };
 
 App::App(Ui *ui, const char *firstView) {
+    vita2d_init();
+    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
+
     this->ui = ui;
     this->viewsController = new ViewsController((char*) firstView);
 
@@ -31,8 +37,6 @@ void App::insertView(View *view) {
 
 
 void App::main() {
-    vita2d_init();
-    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
 
     while (run) {
         vita2d_start_drawing();

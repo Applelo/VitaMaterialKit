@@ -12,6 +12,8 @@ class Ui {
 protected:
     colorSchemeHEX primaryThemeColor;
     colorSchemeHEX secondaryThemeColor;
+    virtual void initTheme();
+    virtual void init();
 public:
     UiTheme *theme;
     UiTexts *texts;
@@ -19,9 +21,6 @@ public:
     UiIcons *icons;
 
     Ui();
-
-    virtual void initTheme();
-    virtual void init();
 };
 
 

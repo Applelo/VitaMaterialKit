@@ -54,6 +54,7 @@ add_executable(${SHORT_NAME}
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
         src/kit/core/Ui.cpp
+        src/kit/core/Utils.cpp
         src/kit/core/UiEvent.cpp
 
         src/kit/ui/UiTheme.cpp

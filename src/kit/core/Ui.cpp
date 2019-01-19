@@ -1,13 +1,13 @@
 #include "Ui.hh"
 
 Ui::Ui() {
+    this->initTheme();
     this->init();
 }
 
 void Ui::init() {
-    this->initTheme();
     this->theme = new UiTheme(primaryThemeColor, secondaryThemeColor);
-    this->texts = new UiTexts();
+    this->texts = new UiTexts(this->theme);
     icons = new UiIcons();
     this->buttons = new UiButtons(this->theme, this->texts, this->icons);
 }
