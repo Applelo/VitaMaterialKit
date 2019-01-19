@@ -7,6 +7,10 @@ class Welcome: public View {
 private:
     TouchZoneEvent buttonsTZE;
     TouchZoneEvent i18nTZE;
+    TouchZoneEvent iconsTZE;
+    TouchZoneEvent textsTZE;
+    TouchZoneEvent exitTZE;
+
 public:
     Welcome(const char *name);
     void contents() override;

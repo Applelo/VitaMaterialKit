@@ -70,7 +70,7 @@ add_executable(${SHORT_NAME}
         src/views/Welcome.cpp
         src/views/I18nSample.cpp
         src/views/ButtonsSample.cpp
-        )
+        src/views/IconsSample.cpp)
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
