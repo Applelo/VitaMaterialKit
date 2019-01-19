@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-01-19.
-//
-
 #include "IconsSample.hh"
 
 IconsSample::IconsSample(const std::string &name) : View(name) {

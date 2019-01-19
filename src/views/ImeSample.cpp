@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-01-19.
-//
-
 #include "ImeSample.hh"
 
 ImeSample::ImeSample(const std::string &name) : View(name) {
