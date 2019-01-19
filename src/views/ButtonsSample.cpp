@@ -22,8 +22,12 @@ void ButtonsSample::contents() {
 
     ui->buttons->floatDraw(ICON_MDI_PLUS, 50, 450);
     ui->buttons->floatDraw(ICON_MDI_PLUS, 300, 450, "Extended Float");
+
+    back = ui->buttons->containedDraw("Back", 800, 480);
 }
 
 void ButtonsSample::controls() {
-
+    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint)) {
+        viewsController->setActualView("Welcome");
+    }
 }

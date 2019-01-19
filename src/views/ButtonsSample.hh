@@ -9,6 +9,8 @@
 #include "../kit/core/View.hh"
 
 class ButtonsSample : public View {
+private:
+    TouchZoneEvent back;
 public:
     ButtonsSample(std::string name);
 

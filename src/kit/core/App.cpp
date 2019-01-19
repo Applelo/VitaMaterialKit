@@ -37,12 +37,16 @@ void App::main() {
 
         this->utils->read();
 
+        this->beforeView();
+
         if (this->views.find(viewsController->getActualView()) != this->views.end()) {
             this->views[viewsController->getActualView()]->contents();
             this->views[viewsController->getActualView()]->controls();
         }
 
-        if (DEBUG) {
+        this->afterView();
+
+        if (DEBUG_APP == 1) {
             this->debug();
         }
 
@@ -83,5 +87,13 @@ void App::debug() {
                          "*%s* : %s", kv.first.c_str(), kv.second != nullptr ? "true" : "false");
         i++;
     }
+
+}
+
+void App::beforeView() {
+
+}
+
+void App::afterView() {
 
 }

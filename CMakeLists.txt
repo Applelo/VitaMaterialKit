@@ -68,7 +68,9 @@ add_executable(${SHORT_NAME}
         src/kit/utils/Touch.cpp
 
         src/views/Welcome.cpp
-        src/views/ButtonsSample.cpp src/views/ButtonsSample.hh)
+        src/views/I18nSample.cpp
+        src/views/ButtonsSample.cpp
+        )
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.

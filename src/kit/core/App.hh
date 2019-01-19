@@ -10,6 +10,8 @@
 #include "Ui.hh"
 #include "Utils.hh"
 
+#define DEBUG_APP 0
+
 class App {
 private:
     ViewsController *viewsController;
@@ -22,6 +24,10 @@ private:
     void checkExit();
     void initVita2d();
     void debug();
+
+protected:
+    virtual void beforeView();
+    virtual void afterView();
 public:
     App(const char *firstView);
     App(Ui *ui, Utils *utils, const char *firstView);

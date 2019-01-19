@@ -5,13 +5,19 @@ Welcome::Welcome(const char *name) : View(name) {
 }
 
 void Welcome::contents() {
-    ui->texts->draw(0, 0, H1,  TEXT_PRIMARY, "Welcome");
-    touchZoneEvent = ui->buttons->floatDraw(ICON_MDI_PLUS, 300, 450, "Go Buttons sample");
+    ui->texts->draw(10, 10, Body1, TEXT_PRIMARY, "Choose a sample :");
+
+    buttonsTZE = ui->buttons->containedDraw("Buttons", 10, 60, ICON_MDI_MOUSE);
+    i18nTZE = ui->buttons->containedDraw("I18n", 10, 130, ICON_MDI_TRANSLATE);
 }
 
 void Welcome::controls() {
-    if (ui->buttons->onTouch(touchZoneEvent, utils->touch->lastClickPoint)) {
+    if (ui->buttons->onTouch(buttonsTZE, utils->touch->lastClickPoint)) {
         viewsController->setActualView("ButtonsSample");
+    }
+
+    if (ui->buttons->onTouch(i18nTZE, utils->touch->lastClickPoint)) {
+        viewsController->setActualView("I18nSample");
     }
 }
 
