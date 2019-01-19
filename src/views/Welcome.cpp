@@ -10,7 +10,8 @@ void Welcome::contents() {
     buttonsTZE = ui->buttons->containedDraw("Buttons", 10, 60, ICON_MDI_MOUSE);
     i18nTZE = ui->buttons->containedDraw("I18n", 10, 130, ICON_MDI_TRANSLATE);
     iconsTZE = ui->buttons->containedDraw("Icons", 10, 200, ICON_MDI_ICE_CREAM);
-
+    textsTZE = ui->buttons->containedDraw("Texts", 10, 270, ICON_MDI_FORMAT_FONT);
+    imeTZE = ui->buttons->containedDraw("IME", 10, 340, ICON_MDI_KEYBOARD);
 
     exitTZE = ui->buttons->containedDraw("Exit", 800, 480);
 }
@@ -26,6 +27,14 @@ void Welcome::controls() {
 
     if (ui->buttons->onTouch(iconsTZE, utils->touch->lastClickPoint)) {
         viewsController->setActualView("IconsSample");
+    }
+
+    if (ui->buttons->onTouch(textsTZE, utils->touch->lastClickPoint)) {
+        viewsController->setActualView("TextsSample");
+    }
+
+    if (ui->buttons->onTouch(imeTZE, utils->touch->lastClickPoint)) {
+        viewsController->setActualView("ImeSample");
     }
 
     if (ui->buttons->onTouch(exitTZE, utils->touch->lastClickPoint)) {

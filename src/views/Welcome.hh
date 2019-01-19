@@ -9,6 +9,7 @@ private:
     TouchZoneEvent i18nTZE;
     TouchZoneEvent iconsTZE;
     TouchZoneEvent textsTZE;
+    TouchZoneEvent imeTZE;
     TouchZoneEvent exitTZE;
 
 public:
