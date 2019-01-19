@@ -19,15 +19,16 @@ private:
     Pad *pad;
 
     Ui *ui;
-
-
+    UiIcons *icons;
+    vita2d_font *font;
     std::map<const char *, View *> views;
     int run;
 public:
+    App(const char *firstView);
     App(Ui *ui, const char *firstView);
 
     void insertView(View *view);
-    int main();
+    void main();
     void checkExit();
 };
 

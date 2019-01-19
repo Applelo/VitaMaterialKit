@@ -39,27 +39,27 @@ void UiTexts::init(std::string family) {
     sceIoClose(fd);
 }
 
-void UiTexts::drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic) {
+void UiTexts::drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text) {
     this->calcTextStyleData(textStyle, italic);
 
     vita2d_font_draw_text(fonts[textStyleData.type], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
-void UiTexts::drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color) {
+void UiTexts::drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
     vita2d_font_draw_text(fonts[_textStyleData.type], x, (int) floor(y + _textStyleData.size - _textStyleData.offset), color, _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
 }
 
 //Draw with Material Style
 void UiTexts::draw(int x, int y, TextStyle textStyle, std::string text) {
-    this->drawFinal(std::move(text), x, y, textStyle, DEFAULT_FONT_COLOR, false);
+    this->drawFinal(x, y, textStyle, DEFAULT_FONT_COLOR, false, std::move(text));
 }
 
 void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text) {
-    this->drawFinal(std::move(text), x, y, textStyle, color, false);
+    this->drawFinal(x, y, textStyle, color, false, std::move(text));
 }
 
 void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text) {
-    this->drawFinal(std::move(text), x, y, textStyle, color, italic);
+    this->drawFinal(x, y, textStyle, color, italic, std::move(text));
 }
 
 void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...) {
@@ -70,16 +70,16 @@ void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool 
     vsnprintf(buf, sizeof(buf), text, argPtr);
     va_end(argPtr);
 
-    this->drawFinal(buf, x, y, textStyle, color, italic);
+    this->drawFinal(x, y, textStyle, color, italic, buf);
 }
 
 //Draw with your style
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
-    this->drawFinal(std::move(text), x, y, _textStyleData, DEFAULT_FONT_COLOR);
+    this->drawFinal(x, y, _textStyleData, DEFAULT_FONT_COLOR, std::move(text));
 }
 
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
-    this->drawFinal(std::move(text), x, y, _textStyleData, color);
+    this->drawFinal(x, y, _textStyleData, color, std::move(text));
 }
 
 void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...) {
@@ -90,7 +90,7 @@ void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int col
     vsnprintf(buf, sizeof(buf), text, argPtr);
     va_end(argPtr);
 
-    this->drawFinal(buf, x, y, _textStyleData, color);
+    this->drawFinal(x, y, _textStyleData, color, buf);
 }
 
 
@@ -112,14 +112,13 @@ void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 
     this->calcTextStyleData(textStyle, italic);
 
-    textData.width = vita2d_font_text_width(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
-    textData.height = vita2d_font_text_height(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    vita2d_font_text_dimensions(fonts[textStyleData.type], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
 }
 
 
 TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
-    textData.width = vita2d_font_text_width(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
-    textData.height = vita2d_font_text_height(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+
+    vita2d_font_text_dimensions(fonts[_textStyleData.type], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
 
     return textData;
 }

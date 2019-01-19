@@ -17,7 +17,7 @@ class UiIcons {
         vita2d_font *font;
     public:
         UiIcons();
-        UiIcons(const char *path);
+        explicit UiIcons(const char *path);
         void draw(const char* iconCode, int x, int y, unsigned int color = DEFAULT_MATERIAL_ICON_COLOR, unsigned int size = DEFAULT_MATERIAL_ICON_SIZE);
 
 };

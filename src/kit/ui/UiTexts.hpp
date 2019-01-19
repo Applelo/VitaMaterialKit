@@ -55,8 +55,8 @@ private:
     TextStyleData textStyleData;
 
     std::string toUppercase(std::string text);
-    void drawFinal(std::string text, int x, int y, TextStyle textStyle, unsigned int color, bool italic);
-    void drawFinal(std::string text, int x, int y, TextStyleData _textStyleData, unsigned int color);
+    void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
+    void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
     void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
