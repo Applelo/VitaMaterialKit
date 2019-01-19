@@ -1,8 +1,7 @@
 #include "App.hh"
 
 App::App(const char *firstView) {
-    vita2d_init();
-    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
+    this->initVita2d();
 
     this->ui = new Ui();
     this->utils = new Utils();
@@ -12,8 +11,7 @@ App::App(const char *firstView) {
 };
 
 App::App(Ui *ui, Utils *utils, const char *firstView) {
-    vita2d_init();
-    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
+    this->initVita2d();
 
     this->ui = ui;
     this->utils = utils;
@@ -61,4 +59,9 @@ void App::checkExit() {
         vita2d_fini();
         sceKernelExitProcess(0);
     }
+}
+
+void App::initVita2d() {
+    vita2d_init();
+    vita2d_set_clear_color((unsigned int) RGBA8(218, 219, 219, 255));
 }

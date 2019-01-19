@@ -19,13 +19,13 @@ private:
     Ui *ui;
     std::map<const char *, View *> views;
     int run;
-public:
-    App(const char *firstView);
-    App(Ui *ui, Utils *utils, const char *firstView);
-
     void insertView(View *view);
     void main();
     void checkExit();
+    void initVita2d();
+public:
+    App(const char *firstView);
+    App(Ui *ui, Utils *utils, const char *firstView);
 };
 
 
