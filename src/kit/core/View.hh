@@ -3,7 +3,7 @@
 
 #include "ViewsController.hh"
 #include "Ui.hh"
-
+#include "Utils.hh"
 
 
 class View {
@@ -11,8 +11,7 @@ protected:
  const char *name;
  Ui *ui;
  ViewsController *viewsController;
- Pad *pad;
- Touch *touch;
+ Utils *utils;
 
 public:
     View(const char *name);
@@ -24,8 +23,7 @@ public:
 
     void setViewsController(ViewsController *viewsController);
     void setUi(Ui *ui);
-    void setPad(Pad *pad);
-    void setTouch(Touch *touch);
+    void setUtils(Utils *utils);
 
 
 };

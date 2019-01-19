@@ -7,25 +7,21 @@
 #include <map>
 #include "View.hh"
 #include "ViewsController.hh"
-#include "../utils/Touch.hpp"
-#include "../utils/Pad.hpp"
 #include "Ui.hh"
+#include "Utils.hh"
 
 class App {
 private:
     ViewsController *viewsController;
 
-    Touch *touch;
-    Pad *pad;
+    Utils *utils;
 
     Ui *ui;
-    UiIcons *icons;
-    vita2d_font *font;
     std::map<const char *, View *> views;
     int run;
 public:
     App(const char *firstView);
-    App(Ui *ui, const char *firstView);
+    App(Ui *ui, Utils *utils, const char *firstView);
 
     void insertView(View *view);
     void main();

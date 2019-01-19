@@ -24,11 +24,8 @@ void View::setViewsController(ViewsController *viewsController) {
     View::viewsController = viewsController;
 }
 
-void View::setPad(Pad *pad) {
-    View::pad = pad;
+void View::setUtils(Utils *utils) {
+    View::utils = utils;
 }
 
-void View::setTouch(Touch *touch) {
-    View::touch = touch;
-}
 

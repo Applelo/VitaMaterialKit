@@ -6,8 +6,19 @@
 #define VITAMATERIALKIT_UTILS_HH
 
 
-class Utils {
+#include "../utils/I18n.hpp"
+#include "../utils/Touch.hpp"
+#include "../utils/Pad.hpp"
 
+class Utils {
+    Touch *touch;
+    Pad *pad;
+    I18n *i18n;
+protected:
+    virtual void init();
+public:
+    Utils();
+    virtual void read();
 };
 
 
