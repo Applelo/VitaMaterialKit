@@ -3,19 +3,20 @@
 
 #include "../utils/Touch.hpp"
 
-typedef struct TouchZoneEvent {
+typedef struct ZoneEvent {
     int x;
     int y;
     int width;
     int height;
-} TouchZoneEvent;
+    bool selector;
+} ZoneEvent;
 
 class UiEvent {
 protected:
-    TouchZoneEvent touchZoneEvent;
+    ZoneEvent zoneEvent;
 public:
-    bool onPad(bool selector, bool button);
-    bool onTouch(TouchZoneEvent touchZoneEvent, vector2 touchInfo);
+    bool onPad(ZoneEvent zoneEvent, bool button);
+    bool onTouch(ZoneEvent zoneEvent, vector2 touchInfo);
 };
 
 

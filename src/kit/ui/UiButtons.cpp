@@ -15,98 +15,103 @@ UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
     this->icons = icons;
 }
 
-TouchZoneEvent UiButtons::textDraw(std::string text, int x, int y, const char* icon) {
+ZoneEvent UiButtons::textDraw(std::string text, int x, int y, bool selected, const char* icon) {
     textData = texts->getTextData(text, Button);
-    touchZoneEvent.x = x;
-    touchZoneEvent.y = y;
 
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, ICON_SECONDARY, 30);
         texts->draw(x + 56, y + 12, Button, TEXT_SECONDARY, text);
 
-        touchZoneEvent.width = textData.width + 76;
-        touchZoneEvent.height = textData.height + 20;
+        zoneEvent.width = textData.width + 76;
+        zoneEvent.height = textData.height + 20;
     }
     else {
         texts->draw(x + 20, y + 12, Button, TEXT_SECONDARY, text);
 
-        touchZoneEvent.width = textData.width + 40;
-        touchZoneEvent.height = textData.height + 20;
+        zoneEvent.width = textData.width + 40;
+        zoneEvent.height = textData.height + 20;
     }
 
-    return touchZoneEvent;
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.selector = selected;
+
+    return zoneEvent;
 }
 
 
-TouchZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, const char *icon) {
+ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, bool selected, const char *icon) {
     textData = texts->getTextData(text, Button);
 
-    touchZoneEvent.x = x;
-    touchZoneEvent.y = y;
-
     if (strlen(icon) > 0) {
-        this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, icon);
+        this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, false, icon);
     }
     else {
-        this->drawOutlinedRectangle(x, y, textData.width + 40, textData.height + 20, theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, icon);
+        this->drawOutlinedRectangle(x, y, textData.width + 40, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, false);
     }
 
-    return touchZoneEvent;
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.selector = selected;
+    return zoneEvent;
 }
 
 
-TouchZoneEvent UiButtons::containedDraw(std::string text, int x, int y, const char *icon) {
+ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, bool selected, const char *icon) {
     textData = texts->getTextData(text, Button);
 
-    touchZoneEvent.x = x;
-    touchZoneEvent.y = y;
-
     if (strlen(icon) > 0) {
-        vita2d_draw_rectangle(x, y, textData.width + 76, textData.height + 20, theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, icon);
+        vita2d_draw_rectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, false, icon);
 
-        touchZoneEvent.width = textData.width + 76;
-        touchZoneEvent.height = textData.height + 20;
+        zoneEvent.width = textData.width + 76;
+        zoneEvent.height = textData.height + 20;
     }
     else {
-        vita2d_draw_rectangle(x, y, textData.width + 40, textData.height + 20, theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, icon);
+        vita2d_draw_rectangle(x, y, textData.width + 40, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        this->textDraw(text, x, y, false);
 
-        touchZoneEvent.width = textData.width + 40;
-        touchZoneEvent.height = textData.height + 20;
+        zoneEvent.width = textData.width + 40;
+        zoneEvent.height = textData.height + 20;
     }
 
-    return touchZoneEvent;
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.selector = selected;
+
+    return zoneEvent;
 }
 
-TouchZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, std::string text) {
-    touchZoneEvent.x = x;
-    touchZoneEvent.y = y;
+ZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, bool selected, std::string text) {
 
     if (text.length() > 0) {
         TextData textData = texts->getTextData(text, Button);
         int circleHeight = (textData.height + 20) / 2;
 
-        vita2d_draw_fill_circle(x + circleHeight, y + circleHeight, circleHeight, theme->getSecondaryRGBA().normal);
-        vita2d_draw_rectangle(x + textData.height, y, textData.width + 30, textData.height + 20, theme->getSecondaryRGBA().normal);
-        vita2d_draw_fill_circle(x + circleHeight + textData.width + 30, y + circleHeight, circleHeight, theme->getSecondaryRGBA().normal);
+        vita2d_draw_fill_circle(x + circleHeight, y + circleHeight, circleHeight, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        vita2d_draw_rectangle(x + textData.height, y, textData.width + 30, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        vita2d_draw_fill_circle(x + circleHeight + textData.width + 30, y + circleHeight, circleHeight, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
 
-        this->textDraw(text, x, y, icon);
+        this->textDraw(text, x, y, false, icon);
 
-        touchZoneEvent.width = textData.width + 76;
-        touchZoneEvent.height = textData.height + 20;
+        zoneEvent.width = textData.width + 76;
+        zoneEvent.height = textData.height + 20;
     }
     else {
-        vita2d_draw_fill_circle(x + 25, y + 25, 25, theme->getSecondaryRGBA().normal);
+        vita2d_draw_fill_circle(x + 25, y + 25, 25, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
         icons->draw(icon, x + 10, y + 8, ICON_SECONDARY, 30);
 
-        touchZoneEvent.width = 50;
-        touchZoneEvent.height = 50;
+        zoneEvent.width = 50;
+        zoneEvent.height = 50;
     }
 
-    return touchZoneEvent;
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.selector = selected;
+
+    return zoneEvent;
 }
 
 

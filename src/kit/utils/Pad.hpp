@@ -18,7 +18,7 @@ class Pad{
 		bool left_analog_moving , right_analog_moving;
 		int left_analog_calibrated_x , left_analog_calibrated_y , right_analog_calibrated_x , right_analog_calibrated_y;
 		unsigned char lx , ly , rx , ry;
-		
+		bool clicking;
 	private:
 		unsigned char left_analog_calibration_x = 128;
 		unsigned char left_analog_calibration_y = 128;

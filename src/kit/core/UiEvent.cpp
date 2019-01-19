@@ -1,9 +1,9 @@
 #include "UiEvent.hh"
 
-bool UiEvent::onPad(bool selector, bool button) {
-    return selector && button;
+bool UiEvent::onPad(ZoneEvent zoneEvent, bool button) {
+    return zoneEvent.selector && button;
 }
 
-bool UiEvent::onTouch(TouchZoneEvent tZ, vector2 touchInfo) {
-    return (touchInfo.x > tZ.x && touchInfo.y > tZ.y && touchInfo.x < tZ.x + tZ.width && touchInfo.y < tZ.y + tZ.height);
+bool UiEvent::onTouch(ZoneEvent zE, vector2 touchInfo) {
+    return (touchInfo.x > zE.x && touchInfo.y > zE.y && touchInfo.x < zE.x + zE.width && touchInfo.y < zE.y + zE.height);
 }

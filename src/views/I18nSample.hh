@@ -5,7 +5,7 @@
 
 class I18nSample: public View {
 private:
-    TouchZoneEvent back;
+    ZoneEvent back;
     I18n *frLang = new I18n(SCE_SYSTEM_PARAM_LANG_FRENCH);
     I18n *enLang = new I18n(SCE_SYSTEM_PARAM_LANG_ENGLISH_US);
 public:

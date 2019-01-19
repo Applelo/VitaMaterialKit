@@ -15,19 +15,20 @@ private:
     UiTexts *texts;
     UiTheme *theme;
     TextData textData;
+    ZoneEvent zoneEvent;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     UiButtons(UiTheme *theme);
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
-    TouchZoneEvent textDraw(std::string text, int x, int y, const char* icon = "");
+    ZoneEvent textDraw(std::string text, int x, int y, bool selected = false, const char* icon = "");
 
-    TouchZoneEvent outlinedDraw(std::string text, int x, int y, const char* icon = "");
+    ZoneEvent outlinedDraw(std::string text, int x, int y, bool selected = false, const char* icon = "");
 
-    TouchZoneEvent containedDraw(std::string text, int x, int y, const char *icon = "");
+    ZoneEvent containedDraw(std::string text, int x, int y, bool selected = false, const char *icon = "");
 
-    TouchZoneEvent floatDraw(const char *icon, int x, int y, std::string text = "");
+    ZoneEvent floatDraw(const char *icon, int x, int y, bool selected = false, std::string text = "");
 
 };
 

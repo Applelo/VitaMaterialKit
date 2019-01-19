@@ -6,7 +6,7 @@
 
 class IconsSample : public View {
 private:
-    TouchZoneEvent back;
+    ZoneEvent back;
 public:
     IconsSample(const std::string &name);
 

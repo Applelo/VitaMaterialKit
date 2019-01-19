@@ -6,7 +6,7 @@
 
 class TextsSample : public View {
 private:
-    TouchZoneEvent back;
+    ZoneEvent back;
 public:
     TextsSample(const std::string &name);
 

@@ -6,7 +6,7 @@
 
 class ButtonsSample : public View {
 private:
-    TouchZoneEvent back;
+    ZoneEvent back;
 public:
     ButtonsSample(std::string name);
 

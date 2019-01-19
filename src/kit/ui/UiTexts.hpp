@@ -14,7 +14,7 @@
 #include "UiTheme.hpp"
 
 
-#define DEFAULT_FONT_COLOR RGBA8(255, 255, 255, 255)
+#define DEFAULT_FONT_COLOR RGBA8(0, 0, 0, 255)
 #define DEFAULT_FONTS_PATH "app0:assets/fonts/"
 #define DEFAULT_SIZE_OFFSET 12
 

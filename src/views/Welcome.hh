@@ -5,12 +5,13 @@
 
 class Welcome: public View {
 private:
-    TouchZoneEvent buttonsTZE;
-    TouchZoneEvent i18nTZE;
-    TouchZoneEvent iconsTZE;
-    TouchZoneEvent textsTZE;
-    TouchZoneEvent imeTZE;
-    TouchZoneEvent exitTZE;
+    ZoneEvent buttonsTZE;
+    ZoneEvent i18nTZE;
+    ZoneEvent iconsTZE;
+    ZoneEvent textsTZE;
+    ZoneEvent imeTZE;
+    ZoneEvent exitTZE;
+    int selector;
 
 public:
     Welcome(const char *name);

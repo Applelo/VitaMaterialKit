@@ -69,7 +69,7 @@ void Pad::read(){
 	 
 	
 	if(abs(vitapad.lx - left_analog_calibration_x) > DEADZONE){
-		left_analog_calibrated_x =  static_cast<int>((vitapad.lx - left_analog_calibration_x)/8);  // dont change these ... -> crashing when scrolling. no idea why! >_>
+		left_analog_calibrated_x =  static_cast<int>((vitapad.lx - left_analog_calibration_x)/8);
 	}else{
 		left_analog_calibrated_x = 0;
 	}
@@ -88,10 +88,9 @@ void Pad::read(){
 	}else{
 		right_analog_calibrated_y = 0;
 	}
-	
 
-	
-	
+	clicking = select || start || up || right || down || left || lefttrigger || righttrigger || triangle || circle || cross || square || volup || voldown || left_analog_moving || right_analog_moving;
+
 }
 
 int Pad::checkButtonAssign(){

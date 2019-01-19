@@ -7,7 +7,7 @@
 
 class ImeSample: public View {
 private:
-    TouchZoneEvent back, keyboard;
+    ZoneEvent back, keyboard;
     IME *ime;
     std::string result = "My text shows here";
 public:
