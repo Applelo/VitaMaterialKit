@@ -17,11 +17,11 @@ UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
 
 void UiButtons::textDraw(std::string text, int x, int y, const char* icon) {
     if (strlen(icon) > 0) {
-        icons->draw(icon, x + 15, y + 6, theme->getSecondaryRGBA().text, 30);
-        texts->draw(x + 56, y + 12, Button, theme->getSecondaryRGBA().text, text);
+        icons->draw(icon, x + 15, y + 6, ICON_SECONDARY, 30);
+        texts->draw(x + 56, y + 12, Button, TEXT_SECONDARY, text);
     }
     else {
-        texts->draw(x + 20, y + 12, Button, theme->getSecondaryRGBA().text, text);
+        texts->draw(x + 20, y + 12, Button, TEXT_SECONDARY, text);
     }
 }
 
@@ -65,7 +65,7 @@ void UiButtons::floatDraw(const char *icon, int x, int y, std::string text) {
     }
     else {
         vita2d_draw_fill_circle(x + 25, y + 25, 25, theme->getSecondaryRGBA().normal);
-        icons->draw(icon, x + 10, y + 8, theme->getSecondaryRGBA().text, 30);
+        icons->draw(icon, x + 10, y + 8, ICON_SECONDARY, 30);
     }
 }
 
