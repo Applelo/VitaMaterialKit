@@ -5,7 +5,46 @@
 #include <psp2/registrymgr.h>
 #include <math.h>
 
-#define DEADZONE 25
+#define PAD_ANALOG_DEADZONE 25
+#define PAD_ANALOG_CALIBRATION 128
+
+typedef struct PadButtons {
+    bool up;
+    bool right;
+    bool down;
+    bool left;
+
+    bool cross;
+    bool circle;
+    bool triangle;
+    bool square;
+
+    bool leftTrigger;
+    bool rightTrigger;
+
+    bool start;
+    bool select;
+
+    bool volup;
+    bool voldown;
+
+    bool clicking;
+} PadButtons;
+
+typedef struct PadAnalog {
+	unsigned int x;
+	unsigned int y;
+
+	int xCalibrated;
+	int yCalibrated;
+
+	bool moving;
+} PadAnalog;
+
+typedef enum PadAnalogPosition {
+	PAD_ANALOG_LEFT,
+	PAD_ANALOG_RIGHT
+} PadAnalogPosition;
 
 
 class Pad{
@@ -14,19 +53,20 @@ class Pad{
 		Pad();
 		~Pad();
 		void read();
-		bool up , right , down , left , cross , circle , triangle , square , lefttrigger , righttrigger , start , select, volup , voldown;
-		bool left_analog_moving , right_analog_moving;
-		int left_analog_calibrated_x , left_analog_calibrated_y , right_analog_calibrated_x , right_analog_calibrated_y;
-		unsigned char lx , ly , rx , ry;
-		bool clicking;
+		PadButtons pressed, held, released;
+		PadAnalog right, left;
 	private:
-		unsigned char left_analog_calibration_x = 128;
-		unsigned char left_analog_calibration_y = 128;
-		unsigned char right_analog_calibration_x = 128;
-		unsigned char right_analog_calibration_y = 128;
-		int buttonAssign = -1;
-		int checkButtonAssign();
-		SceCtrlData vitapad;
+		int buttonAssign;
+		SceCtrlData ctrlPeek, ctrlPress;
+
+        int checkButtonAssign();
+        PadButtons resetPadButtons(PadButtons padButtons);
+        PadAnalog resetPadAnalog(PadAnalog padAnalog);
+        bool getButtonStatus(unsigned int buttons, SceCtrlButtons sceCtrlButtons);
+
+        PadAnalog readAnalog(SceCtrlData sceCtrlData, PadAnalog padAnalog, PadAnalogPosition padAnalogPosition);
+        PadButtons readButtons(unsigned int buttons, PadButtons padButtons);
+
 	
 };
 

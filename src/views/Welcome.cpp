@@ -22,41 +22,41 @@ void Welcome::controls() {
 
     //events
     if (ui->buttons->onTouch(buttonsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(buttonsTZE, utils->pad->cross)) {
+        ui->buttons->onPad(buttonsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("ButtonsSample");
     }
 
     if (ui->buttons->onTouch(i18nTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(i18nTZE, utils->pad->cross)
+        ui->buttons->onPad(i18nTZE, utils->pad->pressed.cross)
     ) {
         viewsController->setActualView("I18nSample");
     }
 
     if (ui->buttons->onTouch(iconsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(iconsTZE, utils->pad->cross)) {
+        ui->buttons->onPad(iconsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("IconsSample");
     }
 
     if (ui->buttons->onTouch(textsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(textsTZE, utils->pad->cross)) {
+        ui->buttons->onPad(textsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("TextsSample");
     }
 
     if (ui->buttons->onTouch(imeTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(imeTZE, utils->pad->cross)) {
+        ui->buttons->onPad(imeTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("ImeSample");
     }
 
     if (ui->buttons->onTouch(exitTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(exitTZE, utils->pad->cross)) {
+        ui->buttons->onPad(exitTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView(VIEWS_CONTROLLER_EXIT);
     }
 
     //pad
-    if (utils->pad->down) {
+    if (utils->pad->pressed.down) {
         selector++;
     }
-    if (utils->pad->up) {
+    if (utils->pad->pressed.up) {
         selector--;
     }
     if (selector > 6)
@@ -64,11 +64,11 @@ void Welcome::controls() {
     if (selector == 0)
         selector = 6;
 
-    //touch
+    //touch & pad switch
     if (utils->touch->clicking) {
         selector = -1;
     }
-    if (utils->pad->clicking && selector == -1) {
+    if (utils->pad->held.clicking && selector == -1) {
         selector = 1;
     }
 
