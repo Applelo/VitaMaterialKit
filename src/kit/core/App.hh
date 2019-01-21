@@ -30,7 +30,6 @@ protected:
     virtual void afterView();
 public:
     App(const char *firstView);
-    App(Ui *ui, Utils *utils, const char *firstView);
 
     void insertView(View *view);
     void main();
