@@ -154,6 +154,7 @@ TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
     return textData;
 }
 
+//You can override this function to put your style here (if you don't want to use roboto at all)
 void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
     textStyleData.type = "Regular";

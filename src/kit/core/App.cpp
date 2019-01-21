@@ -10,16 +10,6 @@ App::App(const char *firstView) {
     run = 1;
 };
 
-App::App(Ui *ui, Utils *utils, const char *firstView) {
-    this->initVita2d();
-
-    this->ui = ui;
-    this->utils = utils;
-    this->viewsController = new ViewsController((char*) firstView);
-
-    run = 1;
-}
-
 
 void App::insertView(View *view) {
     view->setViewsController(this->viewsController);
