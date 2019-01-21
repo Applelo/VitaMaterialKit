@@ -7,8 +7,8 @@
 #include <map>
 #include "View.hh"
 #include "ViewsController.hh"
-#include "Ui.hh"
-#include "Utils.hh"
+#include "../Ui.hh"
+#include "../Utils.hh"
 
 #define DEBUG_APP 0
 
@@ -30,7 +30,6 @@ protected:
     virtual void afterView();
 public:
     App(const char *firstView);
-    App(Ui *ui, Utils *utils, const char *firstView);
 
     void insertView(View *view);
     void main();

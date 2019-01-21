@@ -2,9 +2,9 @@
 #define VITAMATERIALKIT_UTILS_HH
 
 
-#include "../utils/I18n.hpp"
-#include "../utils/Touch.hpp"
-#include "../utils/Pad.hpp"
+#include "utils/I18n.hpp"
+#include "utils/Touch.hpp"
+#include "utils/Pad.hpp"
 
 class Utils {
 protected:

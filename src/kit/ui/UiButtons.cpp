@@ -9,24 +9,38 @@ UiButtons::UiButtons(UiTheme *theme) {
     this->icons = new UiIcons();
 }
 
+UiButtons::UiButtons(UiTheme *theme, TextStyle textStyle) {
+    this->theme = theme;
+    this->texts = new UiTexts();
+    this->icons = new UiIcons();
+    this->textStyle = textStyle;
+}
+
 UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons) {
     this->theme = theme;
     this->texts = texts;
     this->icons = icons;
 }
 
+UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons, TextStyle textStyle) {
+    this->theme = theme;
+    this->texts = texts;
+    this->icons = icons;
+    this->textStyle = textStyle;
+}
+
 ZoneEvent UiButtons::textDraw(std::string text, int x, int y, bool selected, const char* icon) {
-    textData = texts->getTextData(text, Button);
+    textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
         icons->draw(icon, x + 15, y + 6, ICON_SECONDARY, 30);
-        texts->draw(x + 56, y + 12, Button, TEXT_SECONDARY, text);
+        texts->draw(x + 56, y + 12, textStyle, TEXT_SECONDARY, text);
 
         zoneEvent.width = textData.width + 76;
         zoneEvent.height = textData.height + 20;
     }
     else {
-        texts->draw(x + 20, y + 12, Button, TEXT_SECONDARY, text);
+        texts->draw(x + 20, y + 12, textStyle, TEXT_SECONDARY, text);
 
         zoneEvent.width = textData.width + 40;
         zoneEvent.height = textData.height + 20;
@@ -41,7 +55,7 @@ ZoneEvent UiButtons::textDraw(std::string text, int x, int y, bool selected, con
 
 
 ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, bool selected, const char *icon) {
-    textData = texts->getTextData(text, Button);
+    textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
         this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
@@ -60,7 +74,7 @@ ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, bool selected,
 
 
 ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, bool selected, const char *icon) {
-    textData = texts->getTextData(text, Button);
+    textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
         vita2d_draw_rectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
@@ -87,7 +101,7 @@ ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, bool selected
 ZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, bool selected, std::string text) {
 
     if (text.length() > 0) {
-        TextData textData = texts->getTextData(text, Button);
+        TextData textData = texts->getTextData(text, textStyle);
         int circleHeight = (textData.height + 20) / 2;
 
         vita2d_draw_fill_circle(x + circleHeight, y + circleHeight, circleHeight, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
@@ -126,5 +140,6 @@ void UiButtons::drawOutlinedRectangle(int x, int y, int w, int h, unsigned int c
     vita2d_draw_line(x, y + h, x + w, y + h, color); //bottom
     vita2d_draw_line(x, y, x, y + h, color); //left
 }
+
 
 

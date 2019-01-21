@@ -16,11 +16,14 @@ private:
     UiTheme *theme;
     TextData textData;
     ZoneEvent zoneEvent;
+    TextStyle textStyle = Button;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
 public:
     UiButtons(UiTheme *theme);
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);
+    UiButtons(UiTheme *theme, TextStyle textStyle);
+    UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons, TextStyle textStyle);
 
     ZoneEvent textDraw(std::string text, int x, int y, bool selected = false, const char* icon = "");
 

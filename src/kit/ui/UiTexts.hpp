@@ -65,8 +65,10 @@ private:
     void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
     void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
-    void calcTextStyleData(TextStyle textStyle, bool italic = false);
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
+
+protected:
+    virtual void calcTextStyleData(TextStyle textStyle, bool italic = false);
 public:
     UiTexts();
     UiTexts(UiTheme *theme);

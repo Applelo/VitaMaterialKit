@@ -12,7 +12,12 @@ Wiki will be available soon to explain how to create an app and details each fun
 
 ## Changelog
 
-### Version 0.5 - First Version
+### Version 0.5.1
+
+- Improve Texts, Buttons functions to use customs texts fonts
+- Ui and Utils don't need to be override (problem with app system). You need to write you want to use directly in Ui and Utils class.
+
+### Version 0.5
 
 - Initial Release
 
