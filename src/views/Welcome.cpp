@@ -6,16 +6,16 @@ Welcome::Welcome(const char *name) : View(name) {
 }
 
 void Welcome::contents() {
-    ui->texts->draw(10, 10, Body1, TEXT_PRIMARY, "Choose a sample :");
+    ui->texts->draw(10, 10, Body1, THEME_PRIMARY, "Choose a sample :");
 
-    buttonsTZE = ui->buttons->containedDraw("Buttons", 10, 60, selector == 1, ICON_MDI_MOUSE);
-    i18nTZE = ui->buttons->containedDraw("I18n", 10, 130, selector == 2,ICON_MDI_TRANSLATE);
-    iconsTZE = ui->buttons->containedDraw("Icons", 10, 200, selector == 3, ICON_MDI_ICE_CREAM);
-    textsTZE = ui->buttons->containedDraw("Texts", 10, 270, selector == 4, ICON_MDI_FORMAT_FONT);
-    imeTZE = ui->buttons->containedDraw("IME", 10, 340, selector == 5, ICON_MDI_KEYBOARD);
-    checkboxesTZE = ui->buttons->containedDraw("Checkboxes", 10, 410, selector == 6, ICON_MDI_CHECK);
+    buttonsTZE = ui->buttons->containedDraw("Buttons", 10, 60, THEME_PRIMARY, selector == 1, ICON_MDI_MOUSE);
+    i18nTZE = ui->buttons->containedDraw("I18n", 10, 130, THEME_PRIMARY, selector == 2,ICON_MDI_TRANSLATE);
+    iconsTZE = ui->buttons->containedDraw("Icons", 10, 200, THEME_PRIMARY, selector == 3, ICON_MDI_ICE_CREAM);
+    textsTZE = ui->buttons->containedDraw("Texts", 10, 270, THEME_PRIMARY, selector == 4, ICON_MDI_FORMAT_FONT);
+    imeTZE = ui->buttons->containedDraw("IME", 10, 340, THEME_PRIMARY, selector == 5, ICON_MDI_KEYBOARD);
+    checkboxesTZE = ui->buttons->containedDraw("Checkboxes", 10, 410, THEME_PRIMARY, selector == 6, ICON_MDI_CHECK);
 
-    exitTZE = ui->buttons->containedDraw("Exit", 800, 480, selector == NUMBER_OF_BUTTONS);
+    exitTZE = ui->buttons->containedDraw("Exit", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS);
 }
 
 void Welcome::controls() {

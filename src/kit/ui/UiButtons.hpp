@@ -25,13 +25,13 @@ public:
     UiButtons(UiTheme *theme, TextStyle textStyle);
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons, TextStyle textStyle);
 
-    ZoneEvent textDraw(std::string text, int x, int y, bool selected = false, const char* icon = "");
+    ZoneEvent textDraw(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false, const char* icon = "");
 
-    ZoneEvent outlinedDraw(std::string text, int x, int y, bool selected = false, const char* icon = "");
+    ZoneEvent outlinedDraw(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false, const char* icon = "");
 
-    ZoneEvent containedDraw(std::string text, int x, int y, bool selected = false, const char *icon = "");
+    ZoneEvent containedDraw(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false, const char *icon = "");
 
-    ZoneEvent floatDraw(const char *icon, int x, int y, bool selected = false, std::string text = "");
+    ZoneEvent floatDraw(const char *icon, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false, std::string text = "");
 
 };
 

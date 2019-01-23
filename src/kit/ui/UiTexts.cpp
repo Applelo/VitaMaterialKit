@@ -68,8 +68,8 @@ void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, std::s
     this->drawFinal(x, y, textStyle, color, false, std::move(text));
 }
 
-void UiTexts::draw(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, std::string text) {
-    this->drawFinal(x, y, textStyle, textThemeColor == TEXT_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, false, std::move(text));
+void UiTexts::draw(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, std::string text) {
+    this->drawFinal(x, y, textStyle, textThemeColor == THEME_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, false, std::move(text));
 }
 
 
@@ -77,8 +77,8 @@ void UiTexts::draw(int x, int y, TextStyle textStyle, unsigned int color, bool i
     this->drawFinal(x, y, textStyle, color, italic, std::move(text));
 }
 
-void UiTexts::draw(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, bool italic, std::string text) {
-    this->drawFinal(x, y, textStyle, textThemeColor == TEXT_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, italic, std::move(text));
+void UiTexts::draw(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, bool italic, std::string text) {
+    this->drawFinal(x, y, textStyle, textThemeColor == THEME_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, italic, std::move(text));
 }
 
 void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...) {
@@ -92,7 +92,7 @@ void UiTexts::drawF(int x, int y, TextStyle textStyle, unsigned int color, bool 
     this->drawFinal(x, y, textStyle, color, italic, buf);
 }
 
-void UiTexts::drawF(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, bool italic, const char *text, ...) {
+void UiTexts::drawF(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, bool italic, const char *text, ...) {
     char buf[1024];
     va_list argPtr;
 
@@ -100,13 +100,13 @@ void UiTexts::drawF(int x, int y, TextStyle textStyle, TextThemeColor textThemeC
     vsnprintf(buf, sizeof(buf), text, argPtr);
     va_end(argPtr);
 
-    this->drawFinal(x, y, textStyle, textThemeColor == TEXT_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, italic, buf);
+    this->drawFinal(x, y, textStyle, textThemeColor == THEME_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, italic, buf);
 }
 
 
 //Draw with your style
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
-    this->drawFinal(x, y, _textStyleData, DEFAULT_FONT_COLOR, std::move(text));
+    this->drawFinal(x, y, _textStyleData, (unsigned int) DEFAULT_FONT_COLOR, std::move(text));
 }
 
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {

@@ -29,18 +29,18 @@ UiButtons::UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons, TextStyle t
     this->textStyle = textStyle;
 }
 
-ZoneEvent UiButtons::textDraw(std::string text, int x, int y, bool selected, const char* icon) {
+ZoneEvent UiButtons::textDraw(std::string text, int x, int y, TypeTheme typeTheme, bool selected, const char* icon) {
     textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
-        icons->draw(icon, x + 15, y + 6, ICON_SECONDARY, 30);
-        texts->draw(x + 56, y + 12, textStyle, TEXT_SECONDARY, text);
+        icons->draw(icon, x + 15, y + 6, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, 30);
+        texts->draw(x + 56, y + 12, textStyle, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, text);
 
         zoneEvent.width = textData.width + 76;
         zoneEvent.height = textData.height + 20;
     }
     else {
-        texts->draw(x + 20, y + 12, textStyle, TEXT_SECONDARY, text);
+        texts->draw(x + 20, y + 12, textStyle, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, text);
 
         zoneEvent.width = textData.width + 40;
         zoneEvent.height = textData.height + 20;
@@ -54,16 +54,16 @@ ZoneEvent UiButtons::textDraw(std::string text, int x, int y, bool selected, con
 }
 
 
-ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, bool selected, const char *icon) {
+ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, TypeTheme typeTheme, bool selected, const char *icon) {
     textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
         this->drawOutlinedRectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, false, icon);
+        this->textDraw(text, x, y, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, false, icon);
     }
     else {
         this->drawOutlinedRectangle(x, y, textData.width + 40, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, false);
+        this->textDraw(text, x, y, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, false);
     }
 
     zoneEvent.x = x;
@@ -73,19 +73,19 @@ ZoneEvent UiButtons::outlinedDraw(std::string text, int x, int y, bool selected,
 }
 
 
-ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, bool selected, const char *icon) {
+ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, TypeTheme typeTheme, bool selected, const char *icon) {
     textData = texts->getTextData(text, textStyle);
 
     if (strlen(icon) > 0) {
         vita2d_draw_rectangle(x, y, textData.width + 76, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, false, icon);
+        this->textDraw(text, x, y, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, false, icon);
 
         zoneEvent.width = textData.width + 76;
         zoneEvent.height = textData.height + 20;
     }
     else {
         vita2d_draw_rectangle(x, y, textData.width + 40, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
-        this->textDraw(text, x, y, false);
+        this->textDraw(text, x, y, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, false);
 
         zoneEvent.width = textData.width + 40;
         zoneEvent.height = textData.height + 20;
@@ -98,7 +98,7 @@ ZoneEvent UiButtons::containedDraw(std::string text, int x, int y, bool selected
     return zoneEvent;
 }
 
-ZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, bool selected, std::string text) {
+ZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, TypeTheme typeTheme, bool selected, std::string text) {
 
     if (text.length() > 0) {
         TextData textData = texts->getTextData(text, textStyle);
@@ -108,14 +108,14 @@ ZoneEvent UiButtons::floatDraw(const char *icon, int x, int y, bool selected, st
         vita2d_draw_rectangle(x + textData.height, y, textData.width + 30, textData.height + 20, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
         vita2d_draw_fill_circle(x + circleHeight + textData.width + 30, y + circleHeight, circleHeight, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
 
-        this->textDraw(text, x, y, false, icon);
+        this->textDraw(text, x, y, typeTheme, false, icon);
 
         zoneEvent.width = textData.width + 76;
         zoneEvent.height = textData.height + 20;
     }
     else {
         vita2d_draw_fill_circle(x + 25, y + 25, 25, selected ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
-        icons->draw(icon, x + 10, y + 8, ICON_SECONDARY, 30);
+        icons->draw(icon, x + 10, y + 8, typeTheme == THEME_PRIMARY ? THEME_PRIMARY : THEME_SECONDARY, 30);
 
         zoneEvent.width = 50;
         zoneEvent.height = 50;

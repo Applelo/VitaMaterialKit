@@ -49,11 +49,6 @@ typedef struct TextData {
 
 } TextData;
 
-typedef enum TextThemeColor {
-    TEXT_PRIMARY,
-    TEXT_SECONDARY
-} TextThemeColor;
-
 class UiTexts {
 private:
     std::map<std::string, vita2d_font*> fonts;
@@ -81,13 +76,13 @@ public:
 
     //Material Style
     void draw(int x, int y, TextStyle textStyle, std::string text);
-    void draw(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, std::string text);
+    void draw(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, std::string text);
     void draw(int x, int y, TextStyle textStyle, unsigned int color, std::string text);
     void draw(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
-    void draw(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, bool italic, std::string text);
+    void draw(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, bool italic, std::string text);
 
     void drawF(int x, int y, TextStyle textStyle, unsigned int color, bool italic, const char *text, ...);
-    void drawF(int x, int y, TextStyle textStyle, TextThemeColor textThemeColor, bool italic, const char *text, ...);
+    void drawF(int x, int y, TextStyle textStyle, TypeTheme textThemeColor, bool italic, const char *text, ...);
 
 
         //Do with your style

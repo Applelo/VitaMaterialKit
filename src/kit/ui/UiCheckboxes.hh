@@ -32,6 +32,9 @@ public:
 
     UiCheckboxesStatus onPadAuto(ZoneEventCheckboxes zoneEvent, bool button);
     UiCheckboxesStatus onTouchAuto(ZoneEventCheckboxes zoneEvent, vector2 touchInfo);
+
+    bool onPad(ZoneEventCheckboxes zoneEvent, bool button);
+    bool onTouch(ZoneEventCheckboxes zoneEvent, vector2 touchInfo);
 };
 
 
