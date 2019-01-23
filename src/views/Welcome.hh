@@ -3,6 +3,8 @@
 
 #include "../kit/core/View.hh"
 
+#define NUMBER_OF_BUTTONS 7
+
 class Welcome: public View {
 private:
     ZoneEvent buttonsTZE;
@@ -10,6 +12,7 @@ private:
     ZoneEvent iconsTZE;
     ZoneEvent textsTZE;
     ZoneEvent imeTZE;
+    ZoneEvent checkboxesTZE;
     ZoneEvent exitTZE;
     int selector;
 

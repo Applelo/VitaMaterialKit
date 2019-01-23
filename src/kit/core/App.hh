@@ -14,20 +14,19 @@
 
 class App {
 private:
-    ViewsController *viewsController;
-
-    Utils *utils;
-
-    Ui *ui;
-    std::map<std::string, View *> views;
-    int run;
     void checkExit();
     void initVita2d();
-    void debug();
 
 protected:
+    Utils *utils;
+    Ui *ui;
+    ViewsController *viewsController;
+    std::map<std::string, View *> views;
+    int run;
+
     virtual void beforeView();
     virtual void afterView();
+    virtual void debug();
 public:
     App(const char *firstView);
 

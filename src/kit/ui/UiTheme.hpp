@@ -29,7 +29,6 @@ private:
     colorSchemeRGBA secondaryRGBA;
 
     colorSchemeRGBA colorSchemeHEXToColorShemeRGBA(colorSchemeHEX hex);
-    unsigned int convertHexToRGBA(const char *hex);
 
 public:
     UiTheme();
@@ -42,6 +41,8 @@ public:
     const colorSchemeRGBA &getPrimaryRGBA() const;
 
     const colorSchemeRGBA &getSecondaryRGBA() const;
+
+    unsigned int convertHexToRGBA(const char *hex, unsigned int alpha = 255);
 
 };
 
