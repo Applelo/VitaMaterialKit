@@ -1,0 +1,14 @@
+//
+// Created by Loïs Boubault on 2019-01-23.
+//
+
+#ifndef VITAMATERIALKIT_UITEXTFIELDS_HH
+#define VITAMATERIALKIT_UITEXTFIELDS_HH
+
+
+class UiTextFields {
+
+};
+
+
+#endif //VITAMATERIALKIT_UITEXTFIELDS_HH

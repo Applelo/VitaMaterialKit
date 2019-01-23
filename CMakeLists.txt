@@ -61,6 +61,8 @@ add_executable(${SHORT_NAME}
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp
         src/kit/ui/UiTexts.cpp
+        src/kit/ui/UiCheckboxes.cpp
+        src/kit/ui/UiTextFields.cpp
 
         src/kit/utils/I18n.cpp
         src/kit/utils/IME.cpp
@@ -70,7 +72,11 @@ add_executable(${SHORT_NAME}
         src/views/Welcome.cpp
         src/views/I18nSample.cpp
         src/views/ButtonsSample.cpp
-        src/views/IconsSample.cpp src/views/TextsSample.cpp src/views/TextsSample.hh src/views/ImeSample.cpp src/views/ImeSample.hh src/kit/ui/UiCheckboxes.cpp src/kit/ui/UiCheckboxes.hh src/views/CheckboxesSample.cpp src/views/CheckboxesSample.hh)
+        src/views/IconsSample.cpp
+        src/views/TextsSample.cpp
+        src/views/ImeSample.cpp
+        src/views/CheckboxesSample.cpp
+        )
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
