@@ -55,7 +55,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         texts->draw(x + 12, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
     }
 
-
+    texts->draw(x + TEXTFIELD_PADDING, y, Body1, text);
 
 
 
@@ -63,8 +63,8 @@ ZoneEventTextField UiTextFields::filledDraw(
 }
 
 void UiTextFields::init() {
-    bottomTextStyleData.size = 14;
-    bottomTextStyleData.offset = 1;
+    bottomTextStyleData.size = 16;
+    bottomTextStyleData.offset = 0;
     bottomTextStyleData.uppercase = false;
     bottomTextStyleData.type = "Regular";
 }

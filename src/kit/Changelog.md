@@ -3,6 +3,8 @@
 ## Version 0.5.3
 * Add TextFields class (filledDraw only)
 * Improve theme (in all ui components) to match with Material Design
+* Add dynamic import font for texts (fix size issue & load only fonts needed)
+* Add missing function in UiTexts class
 * Add textfields sample
 
 ## Version 0.5.2

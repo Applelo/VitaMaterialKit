@@ -14,13 +14,13 @@
 #include "UiTheme.hpp"
 
 
-#define DEFAULT_FONT_COLOR RGBA8(0, 0, 0, 255)
-#define DEFAULT_FONTS_PATH "app0:assets/fonts/"
-#define DEFAULT_SIZE_OFFSET 12
+#define TEXTS_DEFAULT_FONT_COLOR (unsigned int) RGBA8(0, 0, 0, 255)
+#define TEXTS_DEFAULT_FONTS_PATH "app0:assets/fonts/"
+#define TEXTS_DEFAULT_SIZE_OFFSET 12
 
 //see https://material.io/design/typography/the-type-system.html#type-scale
 typedef enum TextStyle {
-    H1,
+    H1 = 1,
     H2,
     H3,
     H4,
@@ -51,16 +51,19 @@ typedef struct TextData {
 
 class UiTexts {
 private:
-    std::map<std::string, vita2d_font*> fonts;
+    std::map< std::pair<std::string, int>, vita2d_font *> fonts;
     TextData textData;
     TextStyleData textStyleData;
     UiTheme *theme;
+    std::pair<std::string, int> keyFont;
+    std::string family, fontPath;
 
     std::string toUppercase(std::string text);
     void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
     void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
+    std::pair<std::string, int> loadFont(std::string type, int size);
 
 protected:
     virtual void calcTextStyleData(TextStyle textStyle, bool italic = false);
@@ -71,8 +74,6 @@ public:
     UiTexts(std::string family, UiTheme *theme);
 
     ~UiTexts();
-
-    void init(std::string family);
 
     //Material Style
     void draw(int x, int y, TextStyle textStyle, std::string text);
@@ -90,10 +91,15 @@ public:
     void draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
     void drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...);
+    void drawF(int x, int y, TextStyleData _textStyleData,  TypeTheme textThemeColor, const char *text, ...);
 
-
+    //TextData functions
     TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
     TextData getTextData(std::string text, TextStyleData _textStyleData);
+
+    //Dynamic import
+    void cleanFonts();
+    void cleanFont(std::string type, int size);
 
 };
 
