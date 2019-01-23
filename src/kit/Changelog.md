@@ -1,5 +1,10 @@
 #Changelog
 
+##Version 0.5.2
+* Add Checkbox class
+* Improve Theme class
+* Add checkbox sample
+
 ##Version 0.5.1
 
 * Improve Texts, Buttons functions to use customs texts fonts

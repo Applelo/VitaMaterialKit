@@ -16,7 +16,6 @@ class App {
 private:
     void checkExit();
     void initVita2d();
-    void debug();
 
 protected:
     Utils *utils;
@@ -27,6 +26,7 @@ protected:
 
     virtual void beforeView();
     virtual void afterView();
+    virtual void debug();
 public:
     App(const char *firstView);
 

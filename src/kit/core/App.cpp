@@ -5,6 +5,7 @@ App::App(const char *firstView) {
 
     this->ui = new Ui();
     this->utils = new Utils();
+
     this->viewsController = new ViewsController(firstView);
 
     run = 1;
@@ -66,14 +67,14 @@ void App::initVita2d() {
 
 void App::debug() {
 
-    ui->texts->drawF(0, 0, Body1, RGBA8(255, 0, 0, 255), false,
+    ui->texts->drawF(0, 0, Body1, (unsigned int)RGBA8(255, 0, 0, 255), false,
             "Current view: *%s*\nView found: %s",
             viewsController->getActualView().c_str(),
             this->views.find(viewsController->getActualView()) != this->views.end() ? "true" : "false"
     );
     int i = 0;
     for(auto const &kv : views) {
-        ui->texts->drawF(600, 25 * i, Body1, RGBA8(255, 0, 0, 255), false,
+        ui->texts->drawF(600, 25 * i, Body1, (unsigned int)RGBA8(255, 0, 0, 255), false,
                          "*%s* : %s", kv.first.c_str(), kv.second != nullptr ? "true" : "false");
         i++;
     }

@@ -6,8 +6,11 @@
 #include "views/IconsSample.hh"
 #include "views/TextsSample.hh"
 #include "views/ImeSample.hh"
+#include "views/CheckboxesSample.hh"
 
 int main() {
+
+    auto *app = new App("I18nSample");//declare first to avoid problem
 
     auto *welcome = new Welcome("Welcome");
     auto *i18nSample = new I18nSample("I18nSample");
@@ -15,14 +18,15 @@ int main() {
     auto *iconsSample = new IconsSample("IconsSample");
     auto *textsSample = new TextsSample("TextsSample");
     auto *imeSample = new ImeSample("ImeSample");
-    
-    auto *app = new App("Welcome");
+    auto *checkboxesSample = new CheckboxesSample("CheckboxesSample");
+
     app->insertView(welcome);
     app->insertView(buttonsSample);
     app->insertView(i18nSample);
     app->insertView(iconsSample);
     app->insertView(imeSample);
     app->insertView(textsSample);
+    app->insertView(checkboxesSample);
 
     app->main();
 
