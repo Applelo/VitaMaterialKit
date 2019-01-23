@@ -10,7 +10,7 @@
 
 int main() {
 
-    auto *app = new App("I18nSample");//declare first to avoid problem
+    auto *app = new App("Welcome");//declare first to avoid problem
 
     auto *welcome = new Welcome("Welcome");
     auto *i18nSample = new I18nSample("I18nSample");
