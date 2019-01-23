@@ -35,7 +35,8 @@ private:
     UiTexts *texts;
     UiIcons *icons;
     ZoneEventTextField zoneEventTextField;
-    TextStyleData bottomTextStyleData;
+    TextStyleData bottomTextStyleData, mainTextStyleData;
+    TextData textDataText;
     void init();
 public:
     UiTextFields(UiTheme *theme);

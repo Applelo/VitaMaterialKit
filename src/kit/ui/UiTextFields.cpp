@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "UiTextFields.hh"
 
 UiTextFields::UiTextFields(UiTheme *theme) : theme(theme) {
@@ -55,7 +57,19 @@ ZoneEventTextField UiTextFields::filledDraw(
         texts->draw(x + 12, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
     }
 
-    texts->draw(x + TEXTFIELD_PADDING, y, Body1, text);
+    textDataText = texts->getTextData(text, Body1);
+    if (text.length() > 0) {
+        texts->draw(x + TEXTFIELD_PADDING, y, bottomTextStyleData, std::move(label));
+        texts->draw(x + TEXTFIELD_PADDING, y + 22, mainTextStyleData, std::move(text));
+    }
+    else {
+        if (selector) {
+
+        }
+        else {
+            texts->draw(x + TEXTFIELD_PADDING, y + (textDataText.height / 2), Body1, std::move(label));
+        }
+    }
 
 
 
@@ -67,5 +81,10 @@ void UiTextFields::init() {
     bottomTextStyleData.offset = 0;
     bottomTextStyleData.uppercase = false;
     bottomTextStyleData.type = "Regular";
+
+    mainTextStyleData.size = 20;
+    mainTextStyleData.offset = 0;
+    mainTextStyleData.uppercase = false;
+    mainTextStyleData.type = "Regular";
 }
 

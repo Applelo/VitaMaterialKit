@@ -1,7 +1,7 @@
-#include <utility>
-
-#include <stdarg.h>
 #include "UiTexts.hpp"
+
+#include <utility>
+#include <stdarg.h>
 
 UiTexts::UiTexts() {
     family = "Roboto";
@@ -13,12 +13,12 @@ UiTexts::UiTexts(UiTheme *theme) {
 }
 
 UiTexts::UiTexts(std::string family) {
-    this->family = family;
+    this->family = std::move(family);
 }
 
 UiTexts::UiTexts(std::string family, UiTheme *theme) {
     this->theme = theme;
-    this->family = family;
+    this->family = std::move(family);
 }
 
 UiTexts::~UiTexts() {
@@ -209,6 +209,7 @@ void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 }
 
 //dynamic import
+//app0:assets/fonts/family/family-type.ttf
 std::pair<std::string, int> UiTexts::loadFont(std::string type, int size) {
     keyFont = std::make_pair(type, size);
 
