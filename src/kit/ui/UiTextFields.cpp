@@ -35,6 +35,8 @@ ZoneEventTextField UiTextFields::filledDraw(
         int charCounter
         ) {
 
+    prefixPos = 0, suffixPos = 0;
+
     //draw background
     vita2d_draw_rectangle(x, y, TEXTFIELD_WIDTH, TEXTFIELD_HEIGTH, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
 
@@ -51,38 +53,51 @@ ZoneEventTextField UiTextFields::filledDraw(
 
     //draw helper
     if (errorText.length() > 0) {
-        texts->draw(x + 12, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
+        texts->draw(x + TEXTFIELD_PADDING, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
     }
     else if (helperText.length() > 0) {
-        texts->draw(x + 12, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
+        texts->draw(x + TEXTFIELD_PADDING, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
+    }
+
+    if (prefixText.length() > 0) {
+
     }
 
     textDataText = texts->getTextData(text, Body1);
     if (text.length() > 0) {
-        texts->draw(x + TEXTFIELD_PADDING, y, bottomTextStyleData, std::move(label));
-        texts->draw(x + TEXTFIELD_PADDING, y + 22, mainTextStyleData, std::move(text));
+        if (selector) {
+            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
+        }
+        else {
+            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, std::move(label));
+        }
+
+        texts->draw(x + TEXTFIELD_PADDING, y + 30, mainTextStyleData, std::move(text));
     }
     else {
         if (selector) {
-
+            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
         }
         else {
-            texts->draw(x + TEXTFIELD_PADDING, y + (textDataText.height / 2), Body1, std::move(label));
+            texts->draw(x + TEXTFIELD_PADDING, y + 26, Body1, errorText.length() > 0 ? TEXTFIELD_ERROR_COLOR : (typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal), std::move(label));
         }
     }
 
 
+    if (suffixText.length() > 0) {
+
+    }
 
     return zoneEventTextField;
 }
 
 void UiTextFields::init() {
-    bottomTextStyleData.size = 16;
+    bottomTextStyleData.size = 18;
     bottomTextStyleData.offset = 0;
     bottomTextStyleData.uppercase = false;
     bottomTextStyleData.type = "Regular";
 
-    mainTextStyleData.size = 20;
+    mainTextStyleData.size = 26;
     mainTextStyleData.offset = 0;
     mainTextStyleData.uppercase = false;
     mainTextStyleData.type = "Regular";

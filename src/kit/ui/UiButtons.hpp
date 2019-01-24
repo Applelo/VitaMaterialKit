@@ -19,6 +19,7 @@ private:
     TextStyle textStyle = Button;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
+    void textDrawFinal(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, const char* icon = "");
 public:
     UiButtons(UiTheme *theme);
     UiButtons(UiTheme *theme, UiTexts *texts, UiIcons *icons);

@@ -18,9 +18,9 @@ int main() {
     auto *textsSample = new TextsSample("TextsSample");
     auto *imeSample = new ImeSample("ImeSample");
     auto *checkboxesSample = new CheckboxesSample("CheckboxesSample");
-    auto *textFieldsSample = new TextFieldsSample("TextsFieldsSample");
+    auto *textFieldsSample = new TextFieldsSample("TextFieldsSample");
 
-    auto *app = new App("TextsFieldsSample");
+    auto *app = new App("TextFieldsSample");
 
     app->insertView(welcome);
     app->insertView(buttonsSample);

@@ -10,9 +10,9 @@
 //https://material.io/design/components/text-fields.html
 
 //positions / dimensions
-#define TEXTFIELD_PADDING 12
-#define TEXTFIELD_WIDTH 280
-#define TEXTFIELD_HEIGTH 56
+#define TEXTFIELD_PADDING 20
+#define TEXTFIELD_WIDTH 300
+#define TEXTFIELD_HEIGTH 76
 
 //colors
 #define TEXTFIELD_BACKGROUND_NOFOCUS_COLOR (unsigned int) RGBA8(242, 242, 242, 255)
@@ -37,6 +37,7 @@ private:
     ZoneEventTextField zoneEventTextField;
     TextStyleData bottomTextStyleData, mainTextStyleData;
     TextData textDataText;
+    int prefixPos, suffixPos;
     void init();
 public:
     UiTextFields(UiTheme *theme);

@@ -14,6 +14,7 @@ void Welcome::contents() {
     textsTZE = ui->buttons->containedDraw("Texts", 10, 270, THEME_PRIMARY, selector == 4, ICON_MDI_FORMAT_FONT);
     imeTZE = ui->buttons->containedDraw("IME", 10, 340, THEME_PRIMARY, selector == 5, ICON_MDI_KEYBOARD);
     checkboxesTZE = ui->buttons->containedDraw("Checkboxes", 10, 410, THEME_PRIMARY, selector == 6, ICON_MDI_CHECK);
+    textfieldsTZE = ui->buttons->containedDraw("TextFields", 10, 480, THEME_PRIMARY, selector == 7, ICON_MDI_INBOX);
 
     exitTZE = ui->buttons->containedDraw("Exit", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS);
 }
@@ -51,6 +52,11 @@ void Welcome::controls() {
     if (ui->buttons->onTouch(checkboxesTZE, utils->touch->lastClickPoint) ||
         ui->buttons->onPad(checkboxesTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("CheckboxesSample");
+    }
+
+    if (ui->buttons->onTouch(textfieldsTZE, utils->touch->lastClickPoint) ||
+        ui->buttons->onPad(textfieldsTZE, utils->pad->pressed.cross)) {
+        viewsController->setActualView("TextFieldsSample");
     }
 
     if (ui->buttons->onTouch(exitTZE, utils->touch->lastClickPoint) ||
