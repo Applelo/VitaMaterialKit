@@ -37,7 +37,7 @@ typedef enum TextStyle {
 
 
 typedef struct TextStyleData {
-    const char *type;
+    std::string type;
     unsigned int size;
     bool uppercase;
     double offset;
@@ -51,11 +51,11 @@ typedef struct TextData {
 
 class UiTexts {
 private:
-    std::map< std::pair<std::string, int>, vita2d_font *> fonts;
+    std::map< std::pair<std::string, unsigned int>, vita2d_font *> fonts;
     TextData textData;
     TextStyleData textStyleData;
     UiTheme *theme;
-    std::pair<std::string, int> keyFont;
+    std::pair<std::string, unsigned int> keyFont;
     std::string family, fontPath;
 
     std::string toUppercase(std::string text);
@@ -63,7 +63,7 @@ private:
     void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
     void calcTextData(std::string text, TextStyle textStyle, bool italic = false);
-    std::pair<std::string, int> loadFont(std::string type, int size);
+    std::pair<std::string, unsigned int> loadFont(std::string type, unsigned int size);
 
 protected:
     virtual void calcTextStyleData(TextStyle textStyle, bool italic = false);

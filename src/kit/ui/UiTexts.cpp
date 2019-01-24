@@ -1,3 +1,7 @@
+#include <utility>
+
+#include <utility>
+
 #include "UiTexts.hpp"
 
 #include <utility>
@@ -85,11 +89,11 @@ void UiTexts::drawF(int x, int y, TextStyle textStyle, TypeTheme textThemeColor,
 
 //Draw with your style
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, std::string text) {
-    this->drawFinal(x, y, _textStyleData, TEXTS_DEFAULT_FONT_COLOR, std::move(text));
+    this->drawFinal(x, y, std::move(_textStyleData), TEXTS_DEFAULT_FONT_COLOR, std::move(text));
 }
 
 void UiTexts::draw(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
-    this->drawFinal(x, y, _textStyleData, color, std::move(text));
+    this->drawFinal(x, y, std::move(_textStyleData), color, std::move(text));
 }
 
 void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int color, const char *text, ...) {
@@ -100,7 +104,7 @@ void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, unsigned int col
     vsnprintf(buf, sizeof(buf), text, argPtr);
     va_end(argPtr);
 
-    this->drawFinal(x, y, _textStyleData, color, buf);
+    this->drawFinal(x, y, std::move(_textStyleData), color, buf);
 }
 
 void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, TypeTheme typeTheme, const char *text, ...) {
@@ -111,7 +115,7 @@ void UiTexts::drawF(int x, int y, TextStyleData _textStyleData, TypeTheme typeTh
     vsnprintf(buf, sizeof(buf), text, argPtr);
     va_end(argPtr);
 
-    this->drawFinal(x, y, _textStyleData, typeTheme == THEME_PRIMARY ? this->theme->getPrimaryRGBA().text : this->theme->getSecondaryRGBA().text, buf);
+    this->drawFinal(x, y, std::move(_textStyleData), typeTheme == THEME_PRIMARY ? this->theme->getPrimaryRGBA().text : this->theme->getSecondaryRGBA().text, buf);
 }
 
 
@@ -130,6 +134,7 @@ std::string UiTexts::toUppercase(std::string text) {
 }
 
 void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
+
     this->calcTextStyleData(textStyle, italic);
     this->loadFont(textStyleData.type, textStyleData.size);
 
@@ -138,8 +143,8 @@ void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 
 
 TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
-    this->loadFont(textStyleData.type, textStyleData.size);
 
+    this->loadFont(std::string(_textStyleData.type), textStyleData.size);
     vita2d_font_text_dimensions(fonts[keyFont], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
 
     return textData;
@@ -210,7 +215,7 @@ void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
 //dynamic import
 //app0:assets/fonts/family/family-type.ttf
-std::pair<std::string, int> UiTexts::loadFont(std::string type, int size) {
+std::pair<std::string, unsigned int> UiTexts::loadFont(std::string type, unsigned int size) {
     keyFont = std::make_pair(type, size);
 
     if (fonts.find(keyFont) == fonts.end()) {

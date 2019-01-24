@@ -35,7 +35,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         int charCounter
         ) {
 
-    prefixPos = 0, suffixPos = 0;
+    prefixIconPos = TEXTFIELD_PADDING, prefixTextPos = 2;
 
     //draw background
     vita2d_draw_rectangle(x, y, TEXTFIELD_WIDTH, TEXTFIELD_HEIGTH, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
@@ -51,41 +51,63 @@ ZoneEventTextField UiTextFields::filledDraw(
         vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - 1), TEXTFIELD_WIDTH, 1, TEXTFIELD_NOFOCUSBAR_COLOR);
     }
 
-    //draw helper
-    if (errorText.length() > 0) {
-        texts->draw(x + TEXTFIELD_PADDING, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
-    }
-    else if (helperText.length() > 0) {
-        texts->draw(x + TEXTFIELD_PADDING, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
-    }
-
-    if (prefixText.length() > 0) {
-
-    }
-
-    textDataText = texts->getTextData(text, Body1);
-    if (text.length() > 0) {
-        if (selector) {
-            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
-        }
-        else {
-            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, std::move(label));
-        }
-
-        texts->draw(x + TEXTFIELD_PADDING, y + 30, mainTextStyleData, std::move(text));
+    if (strlen(leadingIcon) > 0) {
+        icons->draw(leadingIcon, x + TEXTFIELD_PADDING, y + 20, TEXTFIELD_HELPER_COLOR, TEXTFIELD_ICONS_SIZE);
+        prefixIconPos += TEXTFIELD_ICONS_SIZE + TEXTFIELD_PADDING;
+        zoneEventTextField.leadingIcon.x = x + TEXTFIELD_PADDING;
+        zoneEventTextField.leadingIcon.y = y + 20;
+        zoneEventTextField.leadingIcon.width = TEXTFIELD_ICONS_SIZE;
+        zoneEventTextField.leadingIcon.height = TEXTFIELD_ICONS_SIZE;
     }
     else {
+        zoneEventTextField.leadingIcon.x = 0;
+        zoneEventTextField.leadingIcon.y = 0;
+        zoneEventTextField.leadingIcon.width = 0;
+        zoneEventTextField.leadingIcon.height = 0;
+    }
+    zoneEventTextField.leadingIcon.selector = false;
+
+    if (prefixText.length() > 0) {
+        textDataText = texts->getTextData(prefixText, mainTextStyleData);
+        texts->draw(x + prefixIconPos, y + 30, mainTextStyleData, TEXTFIELD_HELPER_COLOR, prefixText);
+        prefixTextPos += textDataText.width;
+    }
+
+
+    if (text.length() > 0) {
+
+        //label
         if (selector) {
-            texts->draw(x + TEXTFIELD_PADDING, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
+            texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
         }
         else {
-            texts->draw(x + TEXTFIELD_PADDING, y + 26, Body1, errorText.length() > 0 ? TEXTFIELD_ERROR_COLOR : (typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal), std::move(label));
+            texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, std::move(label));
+        }
+
+        //text
+        texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, std::move(text));
+    }
+    else {
+        //label
+        if (selector) {
+            texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
+        }
+        else {
+            texts->draw(x + prefixIconPos, y + 26, Body1, errorText.length() > 0 ? TEXTFIELD_ERROR_COLOR : (typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal), std::move(label));
         }
     }
 
 
     if (suffixText.length() > 0) {
 
+    }
+
+    //draw helper
+    if (errorText.length() > 0) {
+        texts->draw(x + prefixIconPos, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
+    }
+    else if (helperText.length() > 0) {
+        texts->draw(x + prefixIconPos, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
     }
 
     return zoneEventTextField;

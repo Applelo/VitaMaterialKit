@@ -14,6 +14,8 @@
 #define TEXTFIELD_WIDTH 300
 #define TEXTFIELD_HEIGTH 76
 
+#define TEXTFIELD_ICONS_SIZE 35
+
 //colors
 #define TEXTFIELD_BACKGROUND_NOFOCUS_COLOR (unsigned int) RGBA8(242, 242, 242, 255)
 #define TEXTFIELD_BACKGROUND_FOCUS_COLOR (unsigned int) RGBA8(212, 212, 212, 255)
@@ -37,7 +39,7 @@ private:
     ZoneEventTextField zoneEventTextField;
     TextStyleData bottomTextStyleData, mainTextStyleData;
     TextData textDataText;
-    int prefixPos, suffixPos;
+    int prefixIconPos, suffixIconPos, prefixTextPos, suffixTextPos;
     void init();
 public:
     UiTextFields(UiTheme *theme);
