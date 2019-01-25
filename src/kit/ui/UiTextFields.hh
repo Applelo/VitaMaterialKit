@@ -10,11 +10,14 @@
 //https://material.io/design/components/text-fields.html
 
 //positions / dimensions
-#define TEXTFIELD_PADDING 20
 #define TEXTFIELD_WIDTH 300
 #define TEXTFIELD_HEIGTH 76
+#define TEXTFIELD_PADDING 20
 
+//size
 #define TEXTFIELD_ICONS_SIZE 35
+#define TEXTFIELD_FOCUSBAR_SIZE 4
+#define TEXTFIELD_NOFOCUSBAR_SIZE 2
 
 //colors
 #define TEXTFIELD_BACKGROUND_NOFOCUS_COLOR (unsigned int) RGBA8(242, 242, 242, 255)
@@ -23,7 +26,10 @@
 #define TEXTFIELD_ERROR_COLOR (unsigned int) RGBA8(159, 0, 25, 255)
 #define TEXTFIELD_HELPER_COLOR (unsigned int) RGBA8(91, 91, 91, 255)
 
-
+typedef enum TextFieldSuffixPosition {
+    TEXTFIELD_SP_INDICATOR,
+    TEXTFIELD_SP_STICK
+} TextFieldSuffixPosition;
 
 typedef struct ZoneEventTextField : public ZoneEvent {
     ZoneEvent leadingIcon;
@@ -39,7 +45,7 @@ private:
     ZoneEventTextField zoneEventTextField;
     TextStyleData bottomTextStyleData, mainTextStyleData;
     TextData textDataText;
-    int prefixIconPos, suffixIconPos, prefixTextPos, suffixTextPos;
+    int prefixIconPos, prefixTextPos, suffixTextPos;
     void init();
 public:
     UiTextFields(UiTheme *theme);
@@ -60,8 +66,9 @@ public:
             const char *trailingIcon = "",
             std::string prefixText = "",
             std::string suffixText = "",
+            TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR,
             int charCounter = 0
-            );
+    );
 
 
 

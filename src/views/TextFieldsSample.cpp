@@ -5,7 +5,7 @@ TextFieldsSample::TextFieldsSample(const std::string &name) : View(name) {
 }
 
 void TextFieldsSample::contents() {
-    textFieldFilledBasic = ui->textFields->filledDraw(0, 0, selector == 1, "Label", "Test", THEME_PRIMARY, "Je suis là pour aider", "", ICON_MDI_CALENDAR, "", "$");
+    textFieldFilledBasic = ui->textFields->filledDraw(0, 0, selector == 1, "Label", "Test", THEME_PRIMARY, "Je suis là pour aider", "", "", ICON_MDI_FORMAT_CLEAR);
 
     back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_TEXTFIELDS);
 }
