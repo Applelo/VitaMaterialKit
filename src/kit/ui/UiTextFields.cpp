@@ -22,6 +22,7 @@ UiTextFields::UiTextFields(UiTheme *theme, UiTexts *texts, UiIcons *icons) : the
 ZoneEventTextField UiTextFields::filledDraw(
         int x,
         int y,
+        int width,
         bool selector,
         std::string label,
         std::string text,
@@ -37,22 +38,23 @@ ZoneEventTextField UiTextFields::filledDraw(
  ) {
 
     prefixIconPos = TEXTFIELD_PADDING;
+    suffixIconPos = 0;
     prefixTextPos = 2;
     suffixTextPos = 2;
 
 
     //draw background
-    vita2d_draw_rectangle(x, y, TEXTFIELD_WIDTH, TEXTFIELD_HEIGTH, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
+    vita2d_draw_rectangle(x, y, width, TEXTFIELD_HEIGTH, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
 
     //draw bar status
     if (errorText.length() > 0) {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), TEXTFIELD_WIDTH, TEXTFIELD_FOCUSBAR_SIZE, TEXTFIELD_ERROR_COLOR);
+        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, TEXTFIELD_ERROR_COLOR);
     }
     else if (selector) {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), TEXTFIELD_WIDTH, TEXTFIELD_FOCUSBAR_SIZE, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
     }
     else {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_NOFOCUSBAR_SIZE), TEXTFIELD_WIDTH, TEXTFIELD_NOFOCUSBAR_SIZE, TEXTFIELD_NOFOCUSBAR_COLOR);
+        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_NOFOCUSBAR_SIZE), width, TEXTFIELD_NOFOCUSBAR_SIZE, TEXTFIELD_NOFOCUSBAR_COLOR);
     }
 
     //prefixIcon
@@ -74,11 +76,13 @@ ZoneEventTextField UiTextFields::filledDraw(
 
     //suffixIcon
     if (strlen(trailingIcon) > 0) {
-        icons->draw(trailingIcon, x + TEXTFIELD_WIDTH - TEXTFIELD_PADDING - TEXTFIELD_ICONS_SIZE, y + 20, TEXTFIELD_HELPER_COLOR, TEXTFIELD_ICONS_SIZE);
-        zoneEventTextField.leadingIcon.x = x + TEXTFIELD_WIDTH - TEXTFIELD_PADDING - TEXTFIELD_ICONS_SIZE;
+        icons->draw(trailingIcon, x + width - TEXTFIELD_PADDING - TEXTFIELD_ICONS_SIZE, y + 20, TEXTFIELD_HELPER_COLOR, TEXTFIELD_ICONS_SIZE);
+        zoneEventTextField.leadingIcon.x = x + width - TEXTFIELD_PADDING - TEXTFIELD_ICONS_SIZE;
         zoneEventTextField.leadingIcon.y = y + 20;
-        zoneEventTextField.leadingIcon.width = TEXTFIELD_WIDTH;
+        zoneEventTextField.leadingIcon.width = width;
         zoneEventTextField.leadingIcon.height = TEXTFIELD_HEIGTH;
+
+        suffixIconPos = TEXTFIELD_ICONS_SIZE + TEXTFIELD_PADDING;
     }
     else {
         zoneEventTextField.leadingIcon.x = 0;
@@ -98,7 +102,7 @@ ZoneEventTextField UiTextFields::filledDraw(
     //suffix
     if (suffixText.length() > 0) {
         textDataText = texts->getTextData(suffixText, mainTextStyleData);
-        suffixTextPos = TEXTFIELD_WIDTH - textDataText.width - TEXTFIELD_PADDING;
+        suffixTextPos = width - textDataText.width - TEXTFIELD_PADDING;
         texts->draw(x + suffixTextPos, y + 30, mainTextStyleData, TEXTFIELD_HELPER_COLOR, suffixText);
     }
 
@@ -113,13 +117,22 @@ ZoneEventTextField UiTextFields::filledDraw(
             texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, std::move(label));
         }
 
-        //text
-        if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
-            textDataText = texts->getTextData(text, mainTextStyleData);
-            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, text);
+        ////text
+        textDataText = texts->getTextData(text, mainTextStyleData);
+
+        //adjust showed text
+        if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
         }
         else {
-            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, text);
+            showedText = text;
+        }
+
+        if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
+            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, showedText);
+        }
+        else {
+            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, showedText);
         }
 
     }
@@ -146,8 +159,17 @@ ZoneEventTextField UiTextFields::filledDraw(
     if (charCounter > 0) {
         charCounterText = std::to_string(text.length()) + "/" + std::to_string(charCounter);
         textDataText = texts->getTextData(charCounterText, bottomTextStyleData);
-        texts->draw(x + TEXTFIELD_WIDTH - TEXTFIELD_PADDING - textDataText.width, y + TEXTFIELD_HEIGTH, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, charCounterText);
+        texts->draw(x + width - TEXTFIELD_PADDING - textDataText.width, y + TEXTFIELD_HEIGTH, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, charCounterText);
     }
+
+
+    //vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, TEXTFIELD_HEIGTH, RGBA8(255, 0, 0, 150));
+
+    zoneEventTextField.x = x + prefixIconPos;
+    zoneEventTextField.y = y;
+    zoneEventTextField.width = width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos;
+    zoneEventTextField.height = TEXTFIELD_HEIGTH;
+    zoneEventTextField.selector = selector;
 
     return zoneEventTextField;
 }

@@ -10,7 +10,7 @@
 //https://material.io/design/components/text-fields.html
 
 //positions / dimensions
-#define TEXTFIELD_WIDTH 300
+#define TEXTFIELD_WIDTH 400
 #define TEXTFIELD_HEIGTH 76
 #define TEXTFIELD_PADDING 20
 
@@ -45,8 +45,8 @@ private:
     ZoneEventTextField zoneEventTextField;
     TextStyleData bottomTextStyleData, mainTextStyleData;
     TextData textDataText;
-    int prefixIconPos, prefixTextPos, suffixTextPos;
-    std::string charCounterText;
+    int prefixIconPos, suffixIconPos, prefixTextPos, suffixTextPos;
+    std::string charCounterText, showedText;
 
     void init();
 public:
@@ -58,6 +58,7 @@ public:
     ZoneEventTextField filledDraw(
             int x,
             int y,
+            int width,
             bool selector,
             std::string label,
             std::string text = "",

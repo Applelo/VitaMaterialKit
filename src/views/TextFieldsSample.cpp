@@ -5,7 +5,15 @@ TextFieldsSample::TextFieldsSample(const std::string &name) : View(name) {
 }
 
 void TextFieldsSample::contents() {
-    textFieldFilledBasic = ui->textFields->filledDraw(0, 0, selector == 1, "Label", "Test", THEME_PRIMARY, "Je suis là pour aider", "", "", "", "", "", TEXTFIELD_SP_STICK, 10);
+    textFieldFilledBasic = ui->textFields->filledDraw(
+            0, 0, TEXTFIELD_WIDTH, selector == 1, "Label", "Je sais que ce kit fait des choses mais faudrait qu'il prenne en charge les longs", THEME_PRIMARY, "Je suis là pour aider",
+            "", //error
+            "", //leading icon
+            ICON_MDI_CHECKBOX_BLANK, //trailing icon
+            "", //prefix text
+            "", //suffix text
+            TEXTFIELD_SP_INDICATOR,
+            0);
 
     back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_TEXTFIELDS);
 }
