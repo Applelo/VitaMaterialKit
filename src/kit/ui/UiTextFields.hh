@@ -46,6 +46,8 @@ private:
     TextStyleData bottomTextStyleData, mainTextStyleData;
     TextData textDataText;
     int prefixIconPos, prefixTextPos, suffixTextPos;
+    std::string charCounterText;
+
     void init();
 public:
     UiTextFields(UiTheme *theme);

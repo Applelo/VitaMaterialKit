@@ -116,10 +116,10 @@ ZoneEventTextField UiTextFields::filledDraw(
         //text
         if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
             textDataText = texts->getTextData(text, mainTextStyleData);
-            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, std::move(text));
+            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, text);
         }
         else {
-            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, std::move(text));
+            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, text);
         }
 
     }
@@ -143,7 +143,11 @@ ZoneEventTextField UiTextFields::filledDraw(
     }
 
     //draw char counter
-
+    if (charCounter > 0) {
+        charCounterText = std::to_string(text.length()) + "/" + std::to_string(charCounter);
+        textDataText = texts->getTextData(charCounterText, bottomTextStyleData);
+        texts->draw(x + TEXTFIELD_WIDTH - TEXTFIELD_PADDING - textDataText.width, y + TEXTFIELD_HEIGTH, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, charCounterText);
+    }
 
     return zoneEventTextField;
 }
