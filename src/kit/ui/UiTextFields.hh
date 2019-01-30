@@ -10,8 +10,9 @@
 //https://material.io/design/components/text-fields.html
 
 //positions / dimensions
-#define TEXTFIELD_WIDTH 400
-#define TEXTFIELD_HEIGTH 76
+#define TEXTFIELD_DEFAULT_WIDTH 400
+#define TEXTFIELD_DEFAULT_HEIGHT 76
+#define TEXTFIELD_DEFAULT_TEXTAREA_HEIGHT TEXTFIELD_DEFAULT_HEIGHT * 3
 #define TEXTFIELD_PADDING 20
 
 //size
@@ -37,6 +38,12 @@ typedef struct ZoneEventTextField : public ZoneEvent {
     std::string text;
 } ZoneEventTextField;
 
+typedef enum TextFieldMode {
+    TEXTFIELD_MODE_SINGLE,
+    TEXTFIELD_MODE_MULTI,
+    TEXTFIELD_MODE_TEXTAREA
+} TextFieldMode;
+
 class UiTextFields : public UiEvent {
 private:
     UiTheme *theme;
@@ -47,8 +54,11 @@ private:
     TextData textDataText;
     int prefixIconPos, suffixIconPos, prefixTextPos, suffixTextPos;
     std::string charCounterText, showedText;
+    int height;
 
     void init();
+    int keySearch(const std::string& s, const std::string& key);
+    std::string applyTextWidthLimit(std::string text, int width);
 public:
     UiTextFields(UiTheme *theme);
     UiTextFields(UiTheme *theme, UiTexts *texts);
@@ -63,6 +73,7 @@ public:
             std::string label,
             std::string text = "",
             TypeTheme typeTheme = THEME_PRIMARY,
+            TextFieldMode textFieldMode = TEXTFIELD_MODE_SINGLE,
             std::string helperText = "",
             std::string errorText = "",
             const char *leadingIcon = "",

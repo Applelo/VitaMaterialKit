@@ -1,5 +1,4 @@
-#include <utility>
-
+#include <psp2/kernel/clib.h>
 #include "UiTextFields.hh"
 
 UiTextFields::UiTextFields(UiTheme *theme) : theme(theme) {
@@ -27,6 +26,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         std::string label,
         std::string text,
         TypeTheme typeTheme,
+        TextFieldMode textFieldMode,
         std::string helperText,
         std::string errorText,
         const char *leadingIcon,
@@ -37,6 +37,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         int charCounter
  ) {
 
+    height = textFieldMode == TEXTFIELD_MODE_TEXTAREA ? TEXTFIELD_DEFAULT_TEXTAREA_HEIGHT : TEXTFIELD_DEFAULT_HEIGHT;
     prefixIconPos = TEXTFIELD_PADDING;
     suffixIconPos = 0;
     prefixTextPos = 2;
@@ -44,17 +45,17 @@ ZoneEventTextField UiTextFields::filledDraw(
 
 
     //draw background
-    vita2d_draw_rectangle(x, y, width, TEXTFIELD_HEIGTH, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
+    vita2d_draw_rectangle(x, y, width, height, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
 
     //draw bar status
     if (errorText.length() > 0) {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, TEXTFIELD_ERROR_COLOR);
+        vita2d_draw_rectangle(x, y + (height - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, TEXTFIELD_ERROR_COLOR);
     }
     else if (selector) {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
+        vita2d_draw_rectangle(x, y + (height - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal);
     }
     else {
-        vita2d_draw_rectangle(x, y + (TEXTFIELD_HEIGTH - TEXTFIELD_NOFOCUSBAR_SIZE), width, TEXTFIELD_NOFOCUSBAR_SIZE, TEXTFIELD_NOFOCUSBAR_COLOR);
+        vita2d_draw_rectangle(x, y + (height - TEXTFIELD_NOFOCUSBAR_SIZE), width, TEXTFIELD_NOFOCUSBAR_SIZE, TEXTFIELD_NOFOCUSBAR_COLOR);
     }
 
     //prefixIcon
@@ -80,7 +81,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         zoneEventTextField.leadingIcon.x = x + width - TEXTFIELD_PADDING - TEXTFIELD_ICONS_SIZE;
         zoneEventTextField.leadingIcon.y = y + 20;
         zoneEventTextField.leadingIcon.width = width;
-        zoneEventTextField.leadingIcon.height = TEXTFIELD_HEIGTH;
+        zoneEventTextField.leadingIcon.height = height;
 
         suffixIconPos = TEXTFIELD_ICONS_SIZE + TEXTFIELD_PADDING;
     }
@@ -106,6 +107,26 @@ ZoneEventTextField UiTextFields::filledDraw(
         texts->draw(x + suffixTextPos, y + 30, mainTextStyleData, TEXTFIELD_HELPER_COLOR, suffixText);
     }
 
+    //adjust text
+    if (text.length() > 0) {
+        textDataText = texts->getTextData(text, mainTextStyleData);
+
+        //adjust showed text
+        if (textFieldMode == TEXTFIELD_MODE_SINGLE && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
+        }
+        else if (textFieldMode == TEXTFIELD_MODE_MULTI && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
+            height = TEXTFIELD_DEFAULT_HEIGHT * keySearch(showedText, "\n");
+        }
+        else if (textFieldMode == TEXTFIELD_MODE_TEXTAREA && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            showedText = this->applyTextWidthLimit(text, width);
+        }
+        else {
+            showedText = text;
+        }
+    }
+
 
     if (text.length() > 0) {
 
@@ -117,17 +138,7 @@ ZoneEventTextField UiTextFields::filledDraw(
             texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, std::move(label));
         }
 
-        ////text
-        textDataText = texts->getTextData(text, mainTextStyleData);
-
-        //adjust showed text
-        if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
-            showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
-        }
-        else {
-            showedText = text;
-        }
-
+        //text
         if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
             texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, showedText);
         }
@@ -149,26 +160,27 @@ ZoneEventTextField UiTextFields::filledDraw(
 
     //draw helper
     if (errorText.length() > 0) {
-        texts->draw(x + prefixIconPos, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
+        texts->draw(x + prefixIconPos, y + height + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
     }
     else if (helperText.length() > 0) {
-        texts->draw(x + prefixIconPos, y + TEXTFIELD_HEIGTH + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
+        texts->draw(x + prefixIconPos, y + height + 2, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, helperText);
     }
 
     //draw char counter
     if (charCounter > 0) {
         charCounterText = std::to_string(text.length()) + "/" + std::to_string(charCounter);
         textDataText = texts->getTextData(charCounterText, bottomTextStyleData);
-        texts->draw(x + width - TEXTFIELD_PADDING - textDataText.width, y + TEXTFIELD_HEIGTH, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, charCounterText);
+        texts->draw(x + width - TEXTFIELD_PADDING - textDataText.width, y + height, bottomTextStyleData, TEXTFIELD_HELPER_COLOR, charCounterText);
     }
 
 
-    //vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, TEXTFIELD_HEIGTH, RGBA8(255, 0, 0, 150));
+    //vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, height, RGBA8(255, 0, 0, 150));
+
 
     zoneEventTextField.x = x + prefixIconPos;
     zoneEventTextField.y = y;
     zoneEventTextField.width = width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos;
-    zoneEventTextField.height = TEXTFIELD_HEIGTH;
+    zoneEventTextField.height = height;
     zoneEventTextField.selector = selector;
 
     return zoneEventTextField;
@@ -186,3 +198,33 @@ void UiTextFields::init() {
     mainTextStyleData.type = "Regular";
 }
 
+int UiTextFields::keySearch(const std::string& s, const std::string& key) {
+    int count = 0;
+    size_t pos=0;
+    while ((pos = s.find(key, pos)) != std::string::npos) {
+        ++count;
+        ++pos;
+    }
+    return count;
+}
+
+std::string UiTextFields::applyTextWidthLimit(std::string text, int width) {
+    textDataText = texts->getTextData(text, mainTextStyleData);
+
+    unsigned int posBreak = (unsigned int)(this->keySearch(text, "\n") + 1);
+    posBreak = posBreak * (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos);
+    posBreak = posBreak / (mainTextStyleData.size / 2);
+    std::string::size_type found = text.find(' ', posBreak);
+
+    if (found != std::string::npos) {
+        text.replace(found, 1, "\n");
+
+        textDataText = texts->getTextData(text, mainTextStyleData);
+
+        if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            return this->applyTextWidthLimit(text, width);
+        }
+    }
+
+    return text;
+}
