@@ -54,13 +54,12 @@ private:
     TextData textDataText;
     int prefixIconPos, suffixIconPos, prefixTextPos, suffixTextPos;
     std::string charCounterText, showedText;
-    int height;
+    unsigned int posBreak;
 
     void init();
     int keySearch(const std::string& s, const std::string& key);
     std::string applyTextWidthLimit(std::string text, int width);
     std::string applyTextHeightLimit(std::string text, int height);
-    //std::string applyTextWidthLimitWithCutText(std::string text, int width, unsigned int n = 0);
 public:
     UiTextFields(UiTheme *theme);
     UiTextFields(UiTheme *theme, UiTexts *texts);
@@ -70,10 +69,11 @@ public:
     ZoneEventTextField filledDraw(
             int x,
             int y,
-            int width,
             bool selector,
             std::string label,
             std::string text = "",
+            int width = TEXTFIELD_DEFAULT_WIDTH,
+            int height = 0,
             TypeTheme typeTheme = THEME_PRIMARY,
             TextFieldMode textFieldMode = TEXTFIELD_MODE_SINGLE,
             std::string helperText = "",

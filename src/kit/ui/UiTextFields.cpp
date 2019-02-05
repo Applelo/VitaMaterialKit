@@ -21,10 +21,11 @@ UiTextFields::UiTextFields(UiTheme *theme, UiTexts *texts, UiIcons *icons) : the
 ZoneEventTextField UiTextFields::filledDraw(
         int x,
         int y,
-        int width,
         bool selector,
         std::string label,
         std::string text,
+        int width,
+        int height,
         TypeTheme typeTheme,
         TextFieldMode textFieldMode,
         std::string helperText,
@@ -37,7 +38,9 @@ ZoneEventTextField UiTextFields::filledDraw(
         unsigned int charCounter
  ) {
 
-    height = textFieldMode == TEXTFIELD_MODE_TEXTAREA ? TEXTFIELD_DEFAULT_TEXTAREA_HEIGHT : TEXTFIELD_DEFAULT_HEIGHT;
+    if (height == 0) {
+        height = textFieldMode == TEXTFIELD_MODE_TEXTAREA ? TEXTFIELD_DEFAULT_TEXTAREA_HEIGHT : TEXTFIELD_DEFAULT_HEIGHT;
+    }
     prefixIconPos = TEXTFIELD_PADDING;
     suffixIconPos = 0;
     prefixTextPos = 2;
@@ -176,7 +179,7 @@ ZoneEventTextField UiTextFields::filledDraw(
     }
 
 
-    vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, height, RGBA8(255, 0, 0, 150));
+    //vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, height, RGBA8(255, 0, 0, 150));
 
 
     zoneEventTextField.x = x + prefixIconPos;
@@ -212,23 +215,36 @@ int UiTextFields::keySearch(const std::string& s, const std::string& key) {
 
 std::string UiTextFields::applyTextWidthLimit(std::string text, int width) {
     textDataText = texts->getTextData(text, mainTextStyleData);
-
+    sceClibPrintf(text.c_str());
     if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
 
-        unsigned int posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
+        posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
         posBreak = posBreak * (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos);
         posBreak = posBreak / (mainTextStyleData.size / 2);
+
+        std::string::size_type lastFound = text.find_last_of('\n');
         std::string::size_type found = text.find(' ', posBreak);
 
-        if (found != std::string::npos) {
-            text.replace(found, 1, "\n");
-
-            textDataText = texts->getTextData(text, mainTextStyleData);
-
-
-            return this->applyTextWidthLimit(text, width);
+        if (lastFound == std::string::npos) {
+            lastFound = 0;
         }
 
+        if (found == std::string::npos) {
+            found = text.length() - 1;
+        }
+
+        sceClibPrintf(text.substr(lastFound, (posBreak - lastFound)).c_str());
+        sceClibPrintf(std::to_string(posBreak - lastFound).c_str());
+        sceClibPrintf(std::to_string(found - lastFound).c_str());
+
+        if ((found - lastFound) > 28) {
+            text.insert(posBreak, "-\n");
+        }
+        else {
+            text.replace(found, 1, "\n");
+        }
+
+        return this->applyTextWidthLimit(text, width);
     }
 
     return text;
@@ -248,19 +264,3 @@ std::string UiTextFields::applyTextHeightLimit(std::string text, int height) {
 
     return text;
 }
-
-/*std::string UiTextFields::applyTextWidthLimitWithCutText(std::string text, int width, unsigned int n) {
-    std::string::size_type found = text.find('\n', n);
-    if (found == std::string::npos) {
-        return text;
-    }
-
-    std::string lineText = text.substr(n, found);
-
-    textDataText = texts->getTextData(lineText, mainTextStyleData);
-    if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
-
-    }
-
-    return this->applyTextWidthLimitWithCutText(text, width, found);
-}*/
