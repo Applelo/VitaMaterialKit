@@ -59,6 +59,8 @@ private:
     void init();
     int keySearch(const std::string& s, const std::string& key);
     std::string applyTextWidthLimit(std::string text, int width);
+    std::string applyTextHeightLimit(std::string text, int height);
+    //std::string applyTextWidthLimitWithCutText(std::string text, int width, unsigned int n = 0);
 public:
     UiTextFields(UiTheme *theme);
     UiTextFields(UiTheme *theme, UiTexts *texts);
@@ -81,7 +83,7 @@ public:
             std::string prefixText = "",
             std::string suffixText = "",
             TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR,
-            int charCounter = 0
+            unsigned int charCounter = 0
     );
 
 

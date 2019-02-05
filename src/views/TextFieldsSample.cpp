@@ -6,7 +6,7 @@ TextFieldsSample::TextFieldsSample(const std::string &name) : View(name) {
 
 void TextFieldsSample::contents() {
     textFieldFilledBasic = ui->textFields->filledDraw(
-            0, 0, 400, selector == 1, "Label", "Je sais que ce kit fait des choses mais faudrait qu'il prenne en charge les longs textes", THEME_PRIMARY, TEXTFIELD_MODE_TEXTAREA ,"Je suis là pour aider",
+            0, 0, 400, selector == 1, "Label", "Je sais que ce kit fait des choses mais faudrait qu'il prenn eencha rgeleslon gstextes jlkj lkjlkjlkj lkjlkjlkjlkj jjj j jjjlkjlkjlkj lkjjj jkjkjlkjlksdjlksj lkjlkdjlkjlkjsfldj lksdjlfkjdlfjslkfdj lskdjlsj", THEME_PRIMARY, TEXTFIELD_MODE_TEXTAREA ,"Je suis là pour aider",
             "", //error
             ICON_MDI_CALENDAR, //leading icon
             "", //trailing icon

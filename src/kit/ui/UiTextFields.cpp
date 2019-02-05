@@ -34,7 +34,7 @@ ZoneEventTextField UiTextFields::filledDraw(
         std::string prefixText,
         std::string suffixText,
         TextFieldSuffixPosition suffixPosition,
-        int charCounter
+        unsigned int charCounter
  ) {
 
     height = textFieldMode == TEXTFIELD_MODE_TEXTAREA ? TEXTFIELD_DEFAULT_TEXTAREA_HEIGHT : TEXTFIELD_DEFAULT_HEIGHT;
@@ -116,11 +116,13 @@ ZoneEventTextField UiTextFields::filledDraw(
             showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
         }
         else if (textFieldMode == TEXTFIELD_MODE_MULTI && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
-            showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
             height = TEXTFIELD_DEFAULT_HEIGHT * keySearch(showedText, "\n");
+            showedText = this->applyTextWidthLimit(text, width);
+            showedText = this->applyTextHeightLimit(showedText, height);
         }
         else if (textFieldMode == TEXTFIELD_MODE_TEXTAREA && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
             showedText = this->applyTextWidthLimit(text, width);
+            showedText = this->applyTextHeightLimit(showedText, height);
         }
         else {
             showedText = text;
@@ -174,7 +176,7 @@ ZoneEventTextField UiTextFields::filledDraw(
     }
 
 
-    //vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, height, RGBA8(255, 0, 0, 150));
+    vita2d_draw_rectangle(x + prefixIconPos, y, width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos, height, RGBA8(255, 0, 0, 150));
 
 
     zoneEventTextField.x = x + prefixIconPos;
@@ -211,20 +213,54 @@ int UiTextFields::keySearch(const std::string& s, const std::string& key) {
 std::string UiTextFields::applyTextWidthLimit(std::string text, int width) {
     textDataText = texts->getTextData(text, mainTextStyleData);
 
-    unsigned int posBreak = (unsigned int)(this->keySearch(text, "\n") + 1);
-    posBreak = posBreak * (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos);
-    posBreak = posBreak / (mainTextStyleData.size / 2);
-    std::string::size_type found = text.find(' ', posBreak);
+    if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
 
-    if (found != std::string::npos) {
-        text.replace(found, 1, "\n");
+        unsigned int posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
+        posBreak = posBreak * (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos);
+        posBreak = posBreak / (mainTextStyleData.size / 2);
+        std::string::size_type found = text.find(' ', posBreak);
 
-        textDataText = texts->getTextData(text, mainTextStyleData);
+        if (found != std::string::npos) {
+            text.replace(found, 1, "\n");
 
-        if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+            textDataText = texts->getTextData(text, mainTextStyleData);
+
+
             return this->applyTextWidthLimit(text, width);
+        }
+
+    }
+
+    return text;
+}
+
+std::string UiTextFields::applyTextHeightLimit(std::string text, int height) {
+    textDataText = texts->getTextData(text, mainTextStyleData);
+
+    if (textDataText.height > (height - 32)) {
+        std::string::size_type found = text.find_first_of('\n');
+
+        if (found != std::string::npos) {
+            text = text.substr(found + 1, text.length() - 1);
+            return this->applyTextHeightLimit(text, height);
         }
     }
 
     return text;
 }
+
+/*std::string UiTextFields::applyTextWidthLimitWithCutText(std::string text, int width, unsigned int n) {
+    std::string::size_type found = text.find('\n', n);
+    if (found == std::string::npos) {
+        return text;
+    }
+
+    std::string lineText = text.substr(n, found);
+
+    textDataText = texts->getTextData(lineText, mainTextStyleData);
+    if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
+
+    }
+
+    return this->applyTextWidthLimitWithCutText(text, width, found);
+}*/
