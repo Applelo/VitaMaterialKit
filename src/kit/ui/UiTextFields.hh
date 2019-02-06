@@ -91,26 +91,41 @@ public:
     ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
     //with leading icon
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawLeadingIcon(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawLeadingIcon(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawLeadingIcon(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
     //with trailing icon
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawTrailingIcon(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawTrailingIcon(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawTrailingIcon(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
     //with both icons
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawBothIcons(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawBothIcons(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawBothIcons(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+    //with prefix text
+    ZoneEventTextField filledDrawPrefixText(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string prefixText, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawPrefixText(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string prefixText, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawPrefixText(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string prefixText, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+    //with suffix text
+    ZoneEventTextField filledDrawSuffixText(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawSuffixText(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawSuffixText(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+    //with leading icon and suffix text
+    ZoneEventTextField filledDrawLeadingIconAndSuffixText(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawLeadingIconAndSuffixText(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawLeadingIconAndSuffixText(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon, std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR, std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+    //with prefix text and trailing icon
+    ZoneEventTextField filledDrawPrefixTextAndTrailingIcon(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string prefixText, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawPrefixTextAndTrailingIcon(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string prefixText, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawPrefixTextAndTrailingIcon(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string prefixText, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
 
-    //with prefix
-
-    //with suffix
-
-    //with prefix and suffix
 
 
 };
