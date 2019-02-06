@@ -40,7 +40,6 @@ typedef struct ZoneEventTextField : public ZoneEvent {
 
 typedef enum TextFieldMode {
     TEXTFIELD_MODE_SINGLE,
-    TEXTFIELD_MODE_MULTI,
     TEXTFIELD_MODE_TEXTAREA
 } TextFieldMode;
 

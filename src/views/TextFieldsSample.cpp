@@ -12,7 +12,6 @@ void TextFieldsSample::contents() {
     singleSuffixTextEvent = ui->textFields->filledDrawSuffixText(10, 40 + (TEXTFIELD_DEFAULT_HEIGHT * 3), TEXTFIELD_MODE_SINGLE, selector == 4, "Suffix Text", singleSuffixText, "/100", TEXTFIELD_SP_STICK, "Helping");
 
     textareaEvent = ui->textFields->filledDraw(20 + TEXTFIELD_DEFAULT_WIDTH, 10, TEXTFIELD_MODE_TEXTAREA, selector == (NUMBER_OF_BUTTONS_TEXTFIELDS - 2), "TextField TextArea", textarea);
-    multipleEvent = ui->textFields->filledDraw(20 + TEXTFIELD_DEFAULT_WIDTH, 40 + (TEXTFIELD_DEFAULT_HEIGHT * 3), TEXTFIELD_MODE_MULTI, selector == (NUMBER_OF_BUTTONS_TEXTFIELDS - 1), "TextField Multiple", multiple, "", "Error", 40);
 
     back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_TEXTFIELDS);
 }
@@ -50,22 +49,17 @@ void TextFieldsSample::controls() {
 
     if (ui->textFields->onTouch(singlePrefixTextEvent, utils->touch->lastClickPoint) ||
         ui->textFields->onPad(singlePrefixTextEvent, utils->pad->pressed.cross)) {
-        singlePrefixText = ime->getUserText("Text", singlePrefixText.c_str());
+        singlePrefixText = ime->getUserText("Text", singlePrefixText.c_str(), SCE_IME_TYPE_NUMBER);
     }
 
     if (ui->textFields->onTouch(singleSuffixTextEvent, utils->touch->lastClickPoint) ||
         ui->textFields->onPad(singleSuffixTextEvent, utils->pad->pressed.cross)) {
-        singleSuffixText = ime->getUserText("Text", singleSuffixText.c_str());
+        singleSuffixText = ime->getUserText("Text", singleSuffixText.c_str(), SCE_IME_TYPE_NUMBER);
     }
 
     if (ui->textFields->onTouch(textareaEvent, utils->touch->lastClickPoint) ||
         ui->textFields->onPad(textareaEvent, utils->pad->pressed.cross)) {
-        textarea = ime->getUserText("Text", textarea.c_str());
-    }
-
-    if (ui->textFields->onTouch(multipleEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(multipleEvent, utils->pad->pressed.cross)) {
-        multiple = ime->getUserText("Text", multiple.c_str());
+        textarea = ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, SCE_IME_OPTION_MULTILINE);
     }
 
     if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||

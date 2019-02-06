@@ -14,8 +14,8 @@
 class TextFieldsSample : public View {
 private:
     int selector = 1;
-    std::string singleLeadingIcon, singleTrailingIcon, singleSuffixText, singlePrefixText, multiple, textarea;
-    ZoneEventTextField singleLeadingIconEvent, singleTrailingIconEvent, singleSuffixTextEvent, singlePrefixTextEvent, multipleEvent, textareaEvent;
+    std::string singleLeadingIcon, singleTrailingIcon, singleSuffixText, singlePrefixText, textarea;
+    ZoneEventTextField singleLeadingIconEvent, singleTrailingIconEvent, singleSuffixTextEvent, singlePrefixTextEvent, textareaEvent;
     ZoneEvent back;
     IME *ime;
 public:

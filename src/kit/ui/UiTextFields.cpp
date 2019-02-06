@@ -59,7 +59,6 @@ ZoneEventTextField UiTextFields::filledDraw(
     prefixTextPos = 2;
     suffixTextPos = 2;
 
-
     //draw background
     vita2d_draw_rectangle(x, y, width, height, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
 
@@ -130,11 +129,6 @@ ZoneEventTextField UiTextFields::filledDraw(
         //adjust showed text
         if (textFieldMode == TEXTFIELD_MODE_SINGLE && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
             showedText = text.substr(textDataText.width / (mainTextStyleData.size - 10), text.size());
-        }
-        else if (textFieldMode == TEXTFIELD_MODE_MULTI && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
-            height = TEXTFIELD_DEFAULT_HEIGHT * keySearch(showedText, "\n");
-            showedText = this->applyTextWidthLimit(text, width);
-            showedText = this->applyTextHeightLimit(showedText, height);
         }
         else if (textFieldMode == TEXTFIELD_MODE_TEXTAREA && textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
             showedText = this->applyTextWidthLimit(text, width);

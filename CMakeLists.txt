@@ -53,9 +53,9 @@ add_executable(${SHORT_NAME}
         src/kit/core/App.cpp
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
+        src/kit/core/UiEvent.cpp
         src/kit/Ui.cpp
         src/kit/Utils.cpp
-        src/kit/core/UiEvent.cpp
 
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
@@ -74,7 +74,6 @@ add_executable(${SHORT_NAME}
         src/views/ButtonsSample.cpp
         src/views/IconsSample.cpp
         src/views/TextsSample.cpp
-        src/views/ImeSample.cpp
         src/views/CheckboxesSample.cpp
         src/views/TextFieldsSample.cpp
         )

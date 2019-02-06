@@ -5,7 +5,7 @@ CheckboxesSample::CheckboxesSample(const std::string &name) : View(name) {
 }
 
 void CheckboxesSample::contents() {
-    ui->texts->draw(100, 40, Body1, "Unchecked");
+   ui->texts->draw(100, 40, Body1, "Unchecked");
     ui->texts->draw(100, 140, Body1, "Indeterminate");
     ui->texts->draw(100, 240, Body1, "Checked");
 
