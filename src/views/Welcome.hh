@@ -11,8 +11,8 @@ private:
     ZoneEvent i18nTZE;
     ZoneEvent iconsTZE;
     ZoneEvent textsTZE;
-    ZoneEvent imeTZE;
     ZoneEvent checkboxesTZE;
+    ZoneEvent textfieldsTZE;
     ZoneEvent exitTZE;
     int selector;
 

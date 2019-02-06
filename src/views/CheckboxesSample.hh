@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-01-22.
-//
-
 #ifndef VITAMATERIALKIT_CHECKBOXESSAMPLE_HH
 #define VITAMATERIALKIT_CHECKBOXESSAMPLE_HH
 

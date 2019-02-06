@@ -5,28 +5,28 @@
 #include "views/Welcome.hh"
 #include "views/IconsSample.hh"
 #include "views/TextsSample.hh"
-#include "views/ImeSample.hh"
 #include "views/CheckboxesSample.hh"
+#include "views/TextFieldsSample.hh"
 
 int main() {
-
-    auto *app = new App("Welcome");//declare first to avoid problem
 
     auto *welcome = new Welcome("Welcome");
     auto *i18nSample = new I18nSample("I18nSample");
     auto *buttonsSample = new ButtonsSample("ButtonsSample");
     auto *iconsSample = new IconsSample("IconsSample");
     auto *textsSample = new TextsSample("TextsSample");
-    auto *imeSample = new ImeSample("ImeSample");
     auto *checkboxesSample = new CheckboxesSample("CheckboxesSample");
+    auto *textFieldsSample = new TextFieldsSample("TextFieldsSample");
+
+    auto *app = new App("Welcome");
 
     app->insertView(welcome);
     app->insertView(buttonsSample);
     app->insertView(i18nSample);
     app->insertView(iconsSample);
-    app->insertView(imeSample);
     app->insertView(textsSample);
     app->insertView(checkboxesSample);
+    app->insertView(textFieldsSample);
 
     app->main();
 

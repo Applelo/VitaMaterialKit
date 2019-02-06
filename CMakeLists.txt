@@ -31,7 +31,7 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.52")
+set(VITA_VERSION "00.53")
 
 #Vita3K PATHS
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
@@ -53,14 +53,16 @@ add_executable(${SHORT_NAME}
         src/kit/core/App.cpp
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
+        src/kit/core/UiEvent.cpp
         src/kit/Ui.cpp
         src/kit/Utils.cpp
-        src/kit/core/UiEvent.cpp
 
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp
         src/kit/ui/UiTexts.cpp
+        src/kit/ui/UiCheckboxes.cpp
+        src/kit/ui/UiTextFields.cpp
 
         src/kit/utils/I18n.cpp
         src/kit/utils/IME.cpp
@@ -70,7 +72,11 @@ add_executable(${SHORT_NAME}
         src/views/Welcome.cpp
         src/views/I18nSample.cpp
         src/views/ButtonsSample.cpp
-        src/views/IconsSample.cpp src/views/TextsSample.cpp src/views/TextsSample.hh src/views/ImeSample.cpp src/views/ImeSample.hh src/kit/ui/UiCheckboxes.cpp src/kit/ui/UiCheckboxes.hh src/views/CheckboxesSample.cpp src/views/CheckboxesSample.hh)
+        src/views/IconsSample.cpp
+        src/views/TextsSample.cpp
+        src/views/CheckboxesSample.cpp
+        src/views/TextFieldsSample.cpp
+        )
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.

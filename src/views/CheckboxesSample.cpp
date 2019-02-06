@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-01-22.
-//
-
 #include "CheckboxesSample.hh"
 
 CheckboxesSample::CheckboxesSample(const std::string &name) : View(name) {
@@ -9,7 +5,7 @@ CheckboxesSample::CheckboxesSample(const std::string &name) : View(name) {
 }
 
 void CheckboxesSample::contents() {
-    ui->texts->draw(100, 40, Body1, "Unchecked");
+   ui->texts->draw(100, 40, Body1, "Unchecked");
     ui->texts->draw(100, 140, Body1, "Indeterminate");
     ui->texts->draw(100, 240, Body1, "Checked");
 
@@ -17,7 +13,7 @@ void CheckboxesSample::contents() {
     inderterminateZE = ui->checkboxes->draw(10, 140  - 30, two, selector == 2);
     checkedZE = ui->checkboxes->draw(10, 240  - 30, three, selector == 3);
 
-    back = ui->buttons->containedDraw("Back", 800, 480, selector == NUMBER_OF_BUTTONS_CHECKBOXES);
+    back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_CHECKBOXES);
 }
 
 void CheckboxesSample::controls() {
@@ -52,7 +48,6 @@ void CheckboxesSample::controls() {
         two = ui->checkboxes->onPadAuto(inderterminateZE, utils->pad->pressed.cross);
         three = ui->checkboxes->onPadAuto(checkedZE, utils->pad->pressed.cross);
     }
-
 
 
     if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||

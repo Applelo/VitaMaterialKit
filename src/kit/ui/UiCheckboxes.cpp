@@ -44,6 +44,7 @@ ZoneEventCheckbox UiCheckboxes::draw(int x, int y, UiCheckboxesStatus status, bo
     return zoneEvent;
 }
 
+
 UiCheckboxesStatus UiCheckboxes::onPadAuto(ZoneEventCheckboxes zoneEvent, bool button) {
     if (UiEvent::onPad(zoneEvent, button)) {
         if (zoneEvent.status == UNCHECKED || zoneEvent.status == INDERTERMINATE) {
