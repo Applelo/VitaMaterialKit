@@ -7,6 +7,7 @@
 
 
 #include "../kit/core/View.hh"
+#include "../kit/utils/IME.hpp"
 
 #define NUMBER_OF_BUTTONS_TEXTFIELDS 7
 
@@ -16,6 +17,7 @@ private:
     std::string singleLeadingIcon, singleTrailingIcon, singleSuffixText, singlePrefixText, multiple, textarea;
     ZoneEventTextField singleLeadingIconEvent, singleTrailingIconEvent, singleSuffixTextEvent, singlePrefixTextEvent, multipleEvent, textareaEvent;
     ZoneEvent back;
+    IME *ime;
 public:
     TextFieldsSample(const std::string &name);
 

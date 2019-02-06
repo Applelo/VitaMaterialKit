@@ -1,10 +1,5 @@
-#include <utility>
-
-#include <utility>
-
 #include "UiTexts.hpp"
 
-#include <utility>
 #include <stdarg.h>
 
 UiTexts::UiTexts() {
