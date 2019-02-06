@@ -8,10 +8,10 @@ void TextFieldsSample::contents() {
     textFieldFilledBasic = ui->textFields->filledDraw(
             0, 0, selector == 1, "Label",
             "Bonjour j'adore le fromage blanc avec du caramel même si antioconstitutionellement je ne peux pas en manger convenablement uouou.",
+            TEXTFIELD_MODE_TEXTAREA ,
             TEXTFIELD_DEFAULT_WIDTH,
             0,
             THEME_PRIMARY,
-            TEXTFIELD_MODE_TEXTAREA ,
             "Je suis là pour aider",
             "", //error
             ICON_MDI_CALENDAR, //leading icon

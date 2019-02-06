@@ -1,4 +1,3 @@
-#include <psp2/kernel/clib.h>
 #include "UiTextFields.hh"
 
 UiTextFields::UiTextFields(UiTheme *theme) : theme(theme) {
@@ -16,6 +15,19 @@ UiTextFields::UiTextFields(UiTheme *theme, UiTexts *texts, UiIcons *icons) : the
     this->init();
 }
 
+void UiTextFields::init() {
+    bottomTextStyleData.size = 18;
+    bottomTextStyleData.offset = 0;
+    bottomTextStyleData.uppercase = false;
+    bottomTextStyleData.type = "Regular";
+
+    mainTextStyleData.size = 26;
+    mainTextStyleData.offset = 0;
+    mainTextStyleData.uppercase = false;
+    mainTextStyleData.type = "Regular";
+}
+
+//#region filledDraw
 
 
 ZoneEventTextField UiTextFields::filledDraw(
@@ -24,10 +36,10 @@ ZoneEventTextField UiTextFields::filledDraw(
         bool selector,
         std::string label,
         std::string text,
+        TextFieldMode textFieldMode,
         int width,
         int height,
         TypeTheme typeTheme,
-        TextFieldMode textFieldMode,
         std::string helperText,
         std::string errorText,
         const char *leadingIcon,
@@ -191,17 +203,163 @@ ZoneEventTextField UiTextFields::filledDraw(
     return zoneEventTextField;
 }
 
-void UiTextFields::init() {
-    bottomTextStyleData.size = 18;
-    bottomTextStyleData.offset = 0;
-    bottomTextStyleData.uppercase = false;
-    bottomTextStyleData.type = "Regular";
+//#region single
 
-    mainTextStyleData.size = 26;
-    mainTextStyleData.offset = 0;
-    mainTextStyleData.uppercase = false;
-    mainTextStyleData.type = "Regular";
+ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_SINGLE,
+            TEXTFIELD_DEFAULT_WIDTH,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+            );
 }
+
+ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_SINGLE,
+            width,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_SINGLE,
+            width,
+            height,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+//#endregion
+
+//#region multi
+
+ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_MULTI,
+            TEXTFIELD_DEFAULT_WIDTH,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_MULTI,
+            width,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_MULTI,
+            width,
+            height,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+//#endregion
+
+//#region textarea
+
+ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_TEXTAREA,
+            TEXTFIELD_DEFAULT_WIDTH,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_TEXTAREA,
+            width,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            TEXTFIELD_MODE_TEXTAREA,
+            width,
+            height,
+            typeTheme,
+            std::move(helper),
+            std::move(error)
+    );
+}
+//#endregion
+
+//#endregion
+
+//#region utils
 
 int UiTextFields::keySearch(const std::string& s, const std::string& key) {
     int count = 0;
@@ -215,7 +373,7 @@ int UiTextFields::keySearch(const std::string& s, const std::string& key) {
 
 std::string UiTextFields::applyTextWidthLimit(std::string text, int width) {
     textDataText = texts->getTextData(text, mainTextStyleData);
-    sceClibPrintf(text.c_str());
+
     if (textDataText.width > (width - TEXTFIELD_PADDING - prefixIconPos - suffixIconPos)) {
 
         posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
@@ -232,10 +390,6 @@ std::string UiTextFields::applyTextWidthLimit(std::string text, int width) {
         if (found == std::string::npos) {
             found = text.length() - 1;
         }
-
-        sceClibPrintf(text.substr(lastFound, (posBreak - lastFound)).c_str());
-        sceClibPrintf(std::to_string(posBreak - lastFound).c_str());
-        sceClibPrintf(std::to_string(found - lastFound).c_str());
 
         if ((found - lastFound) > 28) {
             text.insert(posBreak, "-\n");
@@ -264,3 +418,7 @@ std::string UiTextFields::applyTextHeightLimit(std::string text, int height) {
 
     return text;
 }
+
+
+//#endregion
+

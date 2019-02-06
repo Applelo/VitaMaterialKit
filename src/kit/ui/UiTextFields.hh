@@ -65,17 +65,16 @@ public:
     UiTextFields(UiTheme *theme, UiTexts *texts);
     UiTextFields(UiTheme *theme, UiTexts *texts, UiIcons *icons);
 
-
     ZoneEventTextField filledDraw(
             int x,
             int y,
             bool selector,
             std::string label,
             std::string text = "",
+            TextFieldMode textFieldMode = TEXTFIELD_MODE_SINGLE,
             int width = TEXTFIELD_DEFAULT_WIDTH,
             int height = 0,
             TypeTheme typeTheme = THEME_PRIMARY,
-            TextFieldMode textFieldMode = TEXTFIELD_MODE_SINGLE,
             std::string helperText = "",
             std::string errorText = "",
             const char *leadingIcon = "",
@@ -86,7 +85,17 @@ public:
             unsigned int charCounter = 0
     );
 
+    ZoneEventTextField filledDrawSingle(int x, int y, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawSingle(int x, int y, int width, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawSingle(int x, int y, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
 
+    ZoneEventTextField filledDrawMulti(int x, int y, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawMulti(int x, int y, int width, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawMulti(int x, int y, int width, int height, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+
+    ZoneEventTextField filledDrawTextArea(int x, int y, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawTextArea(int x, int y, int width, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDrawTextArea(int x, int y, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
 
 };
 
