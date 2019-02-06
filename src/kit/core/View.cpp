@@ -1,7 +1,9 @@
+#include <utility>
+
 #include "View.hh"
 
 View::View(std::string name)  {
-    this->name = name;
+    this->name = std::move(name);
 }
 
 std::string View::getName() const {

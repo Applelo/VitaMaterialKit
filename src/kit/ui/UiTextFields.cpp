@@ -1,4 +1,5 @@
 #include "UiTextFields.hh"
+#include <psp2/kernel/clib.h>
 
 UiTextFields::UiTextFields(UiTheme *theme) : theme(theme) {
     this->texts = new UiTexts();
@@ -63,7 +64,7 @@ ZoneEventTextField UiTextFields::filledDraw(
     vita2d_draw_rectangle(x, y, width, height, selector ? TEXTFIELD_BACKGROUND_FOCUS_COLOR : TEXTFIELD_BACKGROUND_NOFOCUS_COLOR);
 
     //draw bar status
-    if (errorText.length() > 0) {
+    if (!errorText.empty()) {
         vita2d_draw_rectangle(x, y + (height - TEXTFIELD_FOCUSBAR_SIZE), width, TEXTFIELD_FOCUSBAR_SIZE, TEXTFIELD_ERROR_COLOR);
     }
     else if (selector) {
@@ -109,21 +110,21 @@ ZoneEventTextField UiTextFields::filledDraw(
     zoneEventTextField.trailingIcon.selector = false;
 
     //prefix
-    if (prefixText.length() > 0) {
+    if (!prefixText.empty()) {
         textDataText = texts->getTextData(prefixText, mainTextStyleData);
         texts->draw(x + prefixIconPos, y + 30, mainTextStyleData, TEXTFIELD_HELPER_COLOR, prefixText);
         prefixTextPos += textDataText.width;
     }
 
     //suffix
-    if (suffixText.length() > 0) {
+    if (!suffixText.empty()) {
         textDataText = texts->getTextData(suffixText, mainTextStyleData);
         suffixTextPos = width - textDataText.width - TEXTFIELD_PADDING;
         texts->draw(x + suffixTextPos, y + 30, mainTextStyleData, TEXTFIELD_HELPER_COLOR, suffixText);
     }
 
     //adjust text
-    if (text.length() > 0) {
+    if (!text.empty()) {
         textDataText = texts->getTextData(text, mainTextStyleData);
 
         //adjust showed text
@@ -144,25 +145,14 @@ ZoneEventTextField UiTextFields::filledDraw(
         }
     }
 
-
-    if (text.length() > 0) {
-
-        //label
+    //label
+    if (!text.empty() || !prefixText.empty() || !suffixText.empty()) {
         if (selector) {
             texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, typeTheme == THEME_PRIMARY ? theme->getPrimaryRGBA().normal : theme->getSecondaryRGBA().normal, std::move(label));
         }
         else {
             texts->draw(x + prefixIconPos, y + 4, bottomTextStyleData, std::move(label));
         }
-
-        //text
-        if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
-            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, showedText);
-        }
-        else {
-            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, showedText);
-        }
-
     }
     else {
         //label
@@ -175,8 +165,20 @@ ZoneEventTextField UiTextFields::filledDraw(
     }
 
 
+    //text
+    if (!text.empty()) {
+
+        if (suffixText.length() > 0 && suffixPosition == TEXTFIELD_SP_STICK) {//suffix case
+            texts->draw(x + suffixTextPos - textDataText.width - 4, y + 30, mainTextStyleData, showedText);
+        }
+        else {
+            texts->draw(x + prefixIconPos + prefixTextPos, y + 30, mainTextStyleData, showedText);
+        }
+    }
+
+
     //draw helper
-    if (errorText.length() > 0) {
+    if (!errorText.empty()) {
         texts->draw(x + prefixIconPos, y + height + 2, bottomTextStyleData, TEXTFIELD_ERROR_COLOR, errorText);
     }
     else if (helperText.length() > 0) {
@@ -455,6 +457,7 @@ ZoneEventTextField UiTextFields::filledDrawBothIcons(int x, int y, TextFieldMode
 //#endregion
 
 //#region with prefix text
+
 ZoneEventTextField UiTextFields::filledDrawPrefixText(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label,
                                                       std::string prefixText, std::string text, std::string helper, std::string error,
                                                       unsigned int charCounter, TypeTheme typeTheme) {
@@ -523,6 +526,7 @@ ZoneEventTextField UiTextFields::filledDrawPrefixText(int x, int y, TextFieldMod
 //#endregion
 
 //#region with suffix text
+
 ZoneEventTextField UiTextFields::filledDrawSuffixText(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label,
                                                       std::string text, std::string suffixText, TextFieldSuffixPosition suffixPosition,
                                                       std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
@@ -599,6 +603,7 @@ ZoneEventTextField UiTextFields::filledDrawSuffixText(int x, int y, TextFieldMod
 //#endregion
 
 //#region with leading icon and suffix text
+
 ZoneEventTextField UiTextFields::filledDrawLeadingIconAndSuffixText(int x, int y, TextFieldMode textFieldMode, bool selector,
                                                                     std::string label, const char *leadingIcon, std::string text,
                                                                     std::string suffixText, TextFieldSuffixPosition suffixPosition,
@@ -679,6 +684,7 @@ ZoneEventTextField UiTextFields::filledDrawLeadingIconAndSuffixText(int x, int y
 //#endregion
 
 //#region with prefix text and trailing icon
+
 ZoneEventTextField UiTextFields::filledDrawPrefixTextAndTrailingIcon(int x, int y, TextFieldMode textFieldMode, bool selector,
                                                                     std::string label, std::string prefixText, std::string text,
                                                                     const char *trailingIcon, std::string helper, std::string error,
@@ -748,7 +754,6 @@ ZoneEventTextField UiTextFields::filledDrawPrefixTextAndTrailingIcon(int x, int 
     );
 }
 //#endregion
-
 
 
 //#region utils

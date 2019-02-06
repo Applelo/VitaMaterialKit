@@ -8,12 +8,13 @@
 
 #include "../kit/core/View.hh"
 
-#define NUMBER_OF_BUTTONS_TEXTFIELDS 2
+#define NUMBER_OF_BUTTONS_TEXTFIELDS 7
 
 class TextFieldsSample : public View {
 private:
     int selector = 1;
-    ZoneEventTextField textFieldFilledBasic;
+    std::string singleLeadingIcon, singleTrailingIcon, singleSuffixText, singlePrefixText, multiple, textarea;
+    ZoneEventTextField singleLeadingIconEvent, singleTrailingIconEvent, singleSuffixTextEvent, singlePrefixTextEvent, multipleEvent, textareaEvent;
     ZoneEvent back;
 public:
     TextFieldsSample(const std::string &name);
