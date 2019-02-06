@@ -23,6 +23,7 @@ protected:
     ViewsController *viewsController;
     std::map<std::string, View *> views;
     int run;
+    std::string oldViewName;
 
     virtual void beforeView();
     virtual void afterView();

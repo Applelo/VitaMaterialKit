@@ -77,25 +77,41 @@ public:
             TypeTheme typeTheme = THEME_PRIMARY,
             std::string helperText = "",
             std::string errorText = "",
+            unsigned int charCounter = 0,
             const char *leadingIcon = "",
             const char *trailingIcon = "",
             std::string prefixText = "",
             std::string suffixText = "",
-            TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR,
-            unsigned int charCounter = 0
+            TextFieldSuffixPosition suffixPosition = TEXTFIELD_SP_INDICATOR
     );
 
-    ZoneEventTextField filledDrawSingle(int x, int y, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawSingle(int x, int y, int width, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawSingle(int x, int y, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    //simple
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
-    ZoneEventTextField filledDrawMulti(int x, int y, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawMulti(int x, int y, int width, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawMulti(int x, int y, int width, int height, bool selector, std::string label,std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    //with leading icon
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
 
-    ZoneEventTextField filledDrawTextArea(int x, int y, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawTextArea(int x, int y, int width, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
-    ZoneEventTextField filledDrawTextArea(int x, int y, int width, int height, bool selector, std::string label, std::string text = "", std::string helper = "", std::string error = "", TypeTheme typeTheme = THEME_PRIMARY);
+    //with trailing icon
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+    //with both icons
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEventTextField filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, const char *leadingIcon = "", std::string text = "", const char *trailingIcon = "", std::string helper = "", std::string error = "", unsigned int charCounter = 0, TypeTheme typeTheme = THEME_PRIMARY);
+
+
+    //with prefix
+
+    //with suffix
+
+    //with prefix and suffix
+
 
 };
 

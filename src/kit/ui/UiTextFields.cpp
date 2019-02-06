@@ -42,12 +42,12 @@ ZoneEventTextField UiTextFields::filledDraw(
         TypeTheme typeTheme,
         std::string helperText,
         std::string errorText,
+        unsigned int charCounter,
         const char *leadingIcon,
         const char *trailingIcon,
         std::string prefixText,
         std::string suffixText,
-        TextFieldSuffixPosition suffixPosition,
-        unsigned int charCounter
+        TextFieldSuffixPosition suffixPosition
  ) {
 
     if (height == 0) {
@@ -203,161 +203,261 @@ ZoneEventTextField UiTextFields::filledDraw(
     return zoneEventTextField;
 }
 
-//#region single
+//#region simple
 
-ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text, std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_SINGLE,
+            textFieldMode,
             TEXTFIELD_DEFAULT_WIDTH,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter
             );
 }
 
-ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_SINGLE,
+            textFieldMode,
             width,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter
     );
 }
 
-ZoneEventTextField UiTextFields::filledDrawSingle(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_SINGLE,
+            textFieldMode,
             width,
             height,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter
     );
 }
 
+
 //#endregion
 
-//#region multi
+//#region with leading icon
 
-ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, const char *leadingIcon, std::string text, std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_MULTI,
+            textFieldMode,
             TEXTFIELD_DEFAULT_WIDTH,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            leadingIcon
     );
 }
 
-ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label,
+                                            const char *leadingIcon, std::string text, std::string helper, std::string error, unsigned int charCounter,
+                                            TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_MULTI,
+            textFieldMode,
             width,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            leadingIcon
     );
 }
 
-ZoneEventTextField UiTextFields::filledDrawMulti(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector,
+                                            std::string label, const char *leadingIcon, std::string text, std::string helper,
+                                            std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_MULTI,
+            textFieldMode,
             width,
             height,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            leadingIcon
     );
 }
+
 //#endregion
 
-//#region textarea
+//#region with trailing icon
 
-ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label, std::string text, const char *trailingIcon, std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_TEXTAREA,
+            textFieldMode,
             TEXTFIELD_DEFAULT_WIDTH,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            "",
+            trailingIcon
     );
 }
 
-ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, int width, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label,
+                                            std::string text, const char *trailingIcon, std::string helper, std::string error, unsigned int charCounter,
+                                            TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_TEXTAREA,
+            textFieldMode,
             width,
             0,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            "",
+            trailingIcon
     );
 }
 
-ZoneEventTextField UiTextFields::filledDrawTextArea(int x, int y, int width, int height, bool selector, std::string label, std::string text, std::string helper, std::string error, TypeTheme typeTheme) {
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector,
+                                            std::string label, std::string text, const char *trailingIcon, std::string helper,
+                                            std::string error, unsigned int charCounter, TypeTheme typeTheme) {
     return this->filledDraw(
             x,
             y,
             selector,
             std::move(label),
             std::move(text),
-            TEXTFIELD_MODE_TEXTAREA,
+            textFieldMode,
             width,
             height,
             typeTheme,
             std::move(helper),
-            std::move(error)
+            std::move(error),
+            charCounter,
+            "",
+            trailingIcon
     );
 }
-//#endregion
 
 //#endregion
+
+//#region with both icons
+
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, bool selector, std::string label,
+                                            const char *leadingIcon, std::string text, const char *trailingIcon,
+                                            std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            textFieldMode,
+            TEXTFIELD_DEFAULT_WIDTH,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error),
+            charCounter,
+            leadingIcon,
+            trailingIcon
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, bool selector, std::string label,
+                                            const char *leadingIcon, std::string text, const char *trailingIcon, std::string helper,
+                                            std::string error, unsigned int charCounter, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            textFieldMode,
+            width,
+            0,
+            typeTheme,
+            std::move(helper),
+            std::move(error),
+            charCounter,
+            leadingIcon,
+            trailingIcon
+    );
+}
+
+ZoneEventTextField UiTextFields::filledDraw(int x, int y, TextFieldMode textFieldMode, int width, int height, bool selector,
+                                            std::string label, const char *leadingIcon, std::string text, const char *trailingIcon,
+                                            std::string helper, std::string error, unsigned int charCounter, TypeTheme typeTheme) {
+    return this->filledDraw(
+            x,
+            y,
+            selector,
+            std::move(label),
+            std::move(text),
+            textFieldMode,
+            width,
+            height,
+            typeTheme,
+            std::move(helper),
+            std::move(error),
+            charCounter,
+            leadingIcon,
+            trailingIcon
+    );
+}
+
+//#endregion
+
+
+//#endregion
+
+
 
 //#region utils
 

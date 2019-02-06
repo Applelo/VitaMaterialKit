@@ -25,8 +25,19 @@ void App::main() {
     while (run) {
         vita2d_start_drawing();
         vita2d_clear_screen();
-
         this->utils->read();
+
+        //view enter and exit functions
+        if (oldViewName != viewsController->getActualView()) {
+
+            if (!oldViewName.empty()) {
+                this->views[oldViewName]->beforeExit();
+            }
+
+            this->views[viewsController->getActualView()]->beforeEnter();
+
+            oldViewName = viewsController->getActualView();
+        }
 
         this->beforeView();
 

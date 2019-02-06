@@ -5,7 +5,8 @@
 * Improve theme (in all ui components) to match with Material Design
 * Add dynamic font imports for texts (fix size issue & load only fonts needed)
 * Add missing function in UiTexts class
-* Add textfields sample
+* Add beforeEnter and beforeExit functions in View triggered in view change
+* Add text fields sample
 
 ## Version 0.5.2
 * Add Checkbox class

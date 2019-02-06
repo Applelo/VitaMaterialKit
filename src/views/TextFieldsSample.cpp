@@ -14,12 +14,12 @@ void TextFieldsSample::contents() {
             THEME_PRIMARY,
             "Je suis là pour aider",
             "", //error
+            0,
             ICON_MDI_CALENDAR, //leading icon
             "", //trailing icon
             "", //prefix text
             "", //suffix text
-            TEXTFIELD_SP_INDICATOR,
-            0);
+            TEXTFIELD_SP_INDICATOR);
 
     back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_TEXTFIELDS);
 }
