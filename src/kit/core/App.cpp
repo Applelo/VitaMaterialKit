@@ -30,11 +30,13 @@ void App::main() {
         //view enter and exit functions
         if (oldViewName != viewsController->getActualView()) {
 
-            if (!oldViewName.empty()) {
+            if (!oldViewName.empty() && this->views.find(oldViewName) != this->views.end()) {
                 this->views[oldViewName]->beforeExit();
             }
 
-            this->views[viewsController->getActualView()]->beforeEnter();
+            if (this->views.find(viewsController->getActualView()) != this->views.end()) {
+                this->views[viewsController->getActualView()]->beforeEnter();
+            }
 
             oldViewName = viewsController->getActualView();
         }
