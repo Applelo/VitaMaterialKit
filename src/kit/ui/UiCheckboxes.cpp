@@ -57,7 +57,7 @@ UiCheckboxesStatus UiCheckboxes::onPadAuto(ZoneEventCheckboxes zoneEvent, bool b
     return zoneEvent.status;
 }
 
-UiCheckboxesStatus UiCheckboxes::onTouchAuto(ZoneEventCheckboxes zoneEvent, vector2 touchInfo) {
+UiCheckboxesStatus UiCheckboxes::onTouchAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo) {
     if (UiEvent::onTouch(zoneEvent, touchInfo)) {
         if (zoneEvent.status == UNCHECKED || zoneEvent.status == INDERTERMINATE) {
             return CHECKED;

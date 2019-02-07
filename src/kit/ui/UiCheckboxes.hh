@@ -31,10 +31,10 @@ public:
     ZoneEventCheckbox draw(int x, int y, UiCheckboxesStatus status, bool selector, unsigned int size = DEFAULT_CHECKBOX_SIZE);
 
     UiCheckboxesStatus onPadAuto(ZoneEventCheckboxes zoneEvent, bool button);
-    UiCheckboxesStatus onTouchAuto(ZoneEventCheckboxes zoneEvent, vector2 touchInfo);
+    UiCheckboxesStatus onTouchAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo);
 
     bool onPad(ZoneEventCheckboxes zoneEvent, bool button);
-    bool onTouch(ZoneEventCheckboxes zoneEvent, vector2 touchInfo);
+    bool onTouch(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo);
 };
 
 

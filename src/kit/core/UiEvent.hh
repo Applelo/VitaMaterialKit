@@ -15,7 +15,7 @@ class UiEvent {
 public:
     virtual bool onPad(ZoneEvent zoneEvent, bool button);
 
-    virtual bool onTouch(ZoneEvent zoneEvent, vector2 touchInfo);
+    virtual bool onTouch(ZoneEvent zoneEvent, SceIVector2 touchInfo);
 };
 
 
