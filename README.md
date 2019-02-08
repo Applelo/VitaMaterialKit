@@ -51,4 +51,5 @@ make emulate
 * *Google* for Material Guidelines, Fonts, Components, Themes
 * [Material Design Icons](https://github.com/Templarian/MaterialDesign-Webfont/) teams for all icons
 * *juliettef* for [Material Design Icons Headers](https://github.com/juliettef/IconFontCppHeaders)
+* [unilib](https://github.com/ufal/unilib) for lowercase & UPPERCASE work with unicode char
 

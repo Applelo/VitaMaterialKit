@@ -59,7 +59,7 @@ void TextFieldsSample::controls() {
 
     if (ui->textFields->onTouch(textareaEvent, utils->touch->lastClickPoint) ||
         ui->textFields->onPad(textareaEvent, utils->pad->pressed.cross)) {
-        textarea = ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, SCE_IME_OPTION_MULTILINE);
+        textarea = ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, 200, SCE_IME_OPTION_MULTILINE);
     }
 
     if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||

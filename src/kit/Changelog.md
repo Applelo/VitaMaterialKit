@@ -1,9 +1,13 @@
 # Changelog
 
-## Version 0.5.4 (work in progress)
+## Version 0.6.0 (work in progress)
 * Add RadioButtons class
 * Improve Checkbox class
-* Global improvements
+* Add simple CtrlTouchController class for menu
+* Add mounted function in View
+* Improve IME class
+* Fix Pad (padButtons.clicking was not added)
+* Fix uppercase to work with all unicode char thanks to unilib
 
 ## Version 0.5.3
 * Add TextFields class (filledDraw only)

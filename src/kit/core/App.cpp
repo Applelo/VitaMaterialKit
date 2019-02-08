@@ -22,6 +22,8 @@ void App::insertView(View *view) {
 
 void App::main() {
 
+    this->launchMountedViews();
+
     while (run) {
         vita2d_start_drawing();
         vita2d_clear_screen();
@@ -100,4 +102,10 @@ void App::beforeView() {
 
 void App::afterView() {
 
+}
+
+void App::launchMountedViews() {
+    for(auto const &kv : views) {
+        kv.second->mounted();
+    }
 }

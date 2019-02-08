@@ -2,7 +2,7 @@
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 
-Version: 0.5.3
+Version: 0.6.0
 
 Need to see the changelog ? Go to Changelog.md file available in the same folder.
 
@@ -17,3 +17,4 @@ Need to see the changelog ? Go to Changelog.md file available in the same folder
 * *Google* for Material Guidelines, Fonts, Components, Themes
 * [Material Design Icons](https://github.com/Templarian/MaterialDesign-Webfont/) teams for all icons
 * *juliettef* for [Material Design Icons Headers](https://github.com/juliettef/IconFontCppHeaders)
+* [unilib](https://github.com/ufal/unilib) for lowercase & UPPERCASE work with unicode char

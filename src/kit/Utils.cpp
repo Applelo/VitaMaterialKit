@@ -7,6 +7,7 @@ Utils::Utils() {
 void Utils::init() {
    this->touch = new Touch();
    this->pad = new Pad();
+   this->i18n = new I18n();
 }
 
 void Utils::read() {

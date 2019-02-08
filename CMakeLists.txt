@@ -31,7 +31,7 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.54")
+set(VITA_VERSION "00.60")
 
 #Vita3K PATHS
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
@@ -54,6 +54,10 @@ add_executable(${SHORT_NAME}
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
         src/kit/core/UiEvent.cpp
+
+        src/kit/lib/unilib/unicode.cpp
+        src/kit/lib/unilib/utf8.cpp
+
         src/kit/Ui.cpp
         src/kit/Utils.cpp
 

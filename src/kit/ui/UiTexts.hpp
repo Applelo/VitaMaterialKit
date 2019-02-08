@@ -6,11 +6,15 @@
 #include <iostream>
 #include <math.h>
 #include <algorithm>
+#include <stdarg.h>
 
 #include <psp2/io/fcntl.h>
 #include <psp2/io/dirent.h>
 
 #include "vita2d.h"
+#include "../lib/unilib/unicode.h"
+#include "../lib/unilib/utf8.h"
+
 #include "UiTheme.hpp"
 
 
@@ -57,8 +61,8 @@ private:
     UiTheme *theme;
     std::pair<std::string, unsigned int> keyFont;
     std::string family, fontPath;
+    std::u32string text32;
 
-    std::string toUppercase(std::string text);
     void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
     void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 
@@ -100,6 +104,10 @@ public:
     //Dynamic import
     void cleanFonts();
     void cleanFont(std::string type, int size);
+
+    //Font Transformation
+    std::string toUppercase(std::string text);
+    std::string toLowercase(std::string text);
 
 };
 
