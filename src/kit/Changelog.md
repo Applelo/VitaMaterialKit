@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.6.0 (work in progress)
+## Version 0.6 (work in progress)
 * Add RadioButtons class
 * Improve Checkbox class
 * Add simple CtrlTouchController class for menu

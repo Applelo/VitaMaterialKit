@@ -3,8 +3,6 @@
 
 #include "../kit/core/View.hh"
 
-#define NUMBER_OF_BUTTONS 7
-
 class Welcome: public View {
 private:
     ZoneEvent buttonsTZE;
@@ -14,12 +12,13 @@ private:
     ZoneEvent checkboxesTZE;
     ZoneEvent textfieldsTZE;
     ZoneEvent exitTZE;
-    int selector;
 
 public:
     Welcome(const char *name);
     void contents() override;
     void controls() override;
+
+    void beforeEnter() override;
 };
 
 #endif //VITAMATERIALKIT_WELCOME_HH

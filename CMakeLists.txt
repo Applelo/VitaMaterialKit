@@ -72,6 +72,7 @@ add_executable(${SHORT_NAME}
         src/kit/utils/IME.cpp
         src/kit/utils/Pad.cpp
         src/kit/utils/Touch.cpp
+        src/kit/utils/PadTouchCtrl.cpp
 
         src/views/Welcome.cpp
         src/views/I18nSample.cpp

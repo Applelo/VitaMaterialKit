@@ -2,7 +2,7 @@
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 
-Version: 0.6.0
+Version: 0.6
 
 Need to see the changelog ? Go to Changelog.md file available in the same folder.
 

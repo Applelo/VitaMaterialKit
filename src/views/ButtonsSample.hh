@@ -8,10 +8,12 @@ class ButtonsSample : public View {
 private:
     ZoneEvent back;
 public:
-    ButtonsSample(std::string name);
+    ButtonsSample(const std::string &name);
 
     void contents() override;
     void controls() override;
+
+    void beforeEnter() override;
 };
 
 

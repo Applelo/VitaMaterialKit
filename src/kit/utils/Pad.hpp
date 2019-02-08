@@ -53,7 +53,7 @@ class Pad{
 		Pad();
 		~Pad();
 		void read();
-		PadButtons pressed, held, released;
+		PadButtons pressed, held;//, released;
 		PadAnalog right, left;
 	private:
 		int buttonAssign;
