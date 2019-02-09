@@ -5,11 +5,12 @@
 * Add Card class
 * Add Shadow system
 * Improve RadioBoxes & Checkboxes functions with text to support changes (Text type & color)
+* Add possibility to choose a start value in PadTouchController
 
 ## Version 0.6
 * Add RadioBoxes class
 * Improve Checkbox class
-* Add simple CtrlTouchController class for menu
+* Add simple PadTouchController class for menu
 * Add mounted function in View
 * Improve IME class
 * Fix Pad (padButtons.clicking was not added)
