@@ -4,11 +4,11 @@ UiCheckboxes::UiCheckboxes(UiTheme *theme) : UiParentBoxes(theme) {}
 UiCheckboxes::UiCheckboxes(UiTheme *theme, UiIcons *icons) : UiParentBoxes(theme, icons) {}
 UiCheckboxes::UiCheckboxes(UiTheme *theme, UiIcons *icons, UiTexts *texts) : UiParentBoxes(theme, icons, texts) {}
 
-ZoneEventCheckboxes UiCheckboxes::draw(int x, int y, UiCheckboxesStatus status, bool selector, unsigned int size) {
-    return this->drawWithText(x, y, status, "", selector, size);
+ZoneEventCheckboxes UiCheckboxes::draw(int x, int y, UiCheckboxesStatus status, bool selector, TypeTheme typeTheme, unsigned int size) {
+    return this->drawWithText(x, y, status, "", selector, typeTheme, size);
 }
 
-ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus status, std::string text, bool selector,
+ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus status, std::string text, bool selector, TypeTheme typeTheme,
                                                unsigned int size) {
     zoneEvent.x = x;
     zoneEvent.y = y;
@@ -17,20 +17,20 @@ ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus 
     zoneEvent.selector = selector;
     zoneEvent.status = status;
 
-    this->drawSelector(x, y, selector);
+    this->drawSelector(x, y, selector, typeTheme);
 
     if (status == CHECKBOX_INDERTERMINATE || status == CHECKBOX_CHECKED) {
-        this->drawBoxButtonColor(x, y, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size);
+        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size);
     }
 
     if (status == CHECKBOX_UNCHECKED) {
-        this->drawBoxButtonColor(x, y, ICON_MDI_CHECKBOX_BLANK_OUTLINE, (unsigned int) RGBA8(92, 92, 92, 255), size);
+        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_BLANK_OUTLINE, BOXES_DEFAULT_COLOR_UNCHECKED, size);
     }
     else if (status == CHECKBOX_INDERTERMINATE) {
-        this->drawBoxButton(x, y, ICON_MDI_MINUS_BOX, size);
+        this->drawBoxButton(x, y, ICON_MDI_MINUS_BOX, typeTheme, size);
     }
     else {
-        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_MARKED, size);
+        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_MARKED, typeTheme, size);
     }
 
     if (!text.empty()) {

@@ -26,8 +26,8 @@ public:
     UiCheckboxes(UiTheme *theme, UiIcons *icons);
     UiCheckboxes(UiTheme *theme, UiIcons *icons, UiTexts *texts);
 
-    ZoneEventCheckboxes draw(int x, int y, UiCheckboxesStatus status, bool selector, unsigned int size = BOXES_DEFAULT_SIZE);
-    ZoneEventCheckboxes drawWithText(int x, int y, UiCheckboxesStatus status, std::string text, bool selector, unsigned int size = BOXES_DEFAULT_SIZE);
+    ZoneEventCheckboxes draw(int x, int y, UiCheckboxesStatus status, bool selector, TypeTheme typeTheme = THEME_PRIMARY, unsigned int size = BOXES_DEFAULT_SIZE);
+    ZoneEventCheckboxes drawWithText(int x, int y, UiCheckboxesStatus status, std::string text, bool selector, TypeTheme typeTheme = THEME_PRIMARY, unsigned int size = BOXES_DEFAULT_SIZE);
 
     UiCheckboxesStatus onPadAuto(ZoneEventCheckboxes zoneEvent, bool button);
     UiCheckboxesStatus onTouchAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo);

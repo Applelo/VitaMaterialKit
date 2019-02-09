@@ -22,8 +22,8 @@ public:
     UiRadioBoxes(UiTheme *theme, UiIcons *icons);
     UiRadioBoxes(UiTheme *theme, UiIcons *icons, UiTexts *texts);
 
-    ZoneEventRadioBoxes draw(int x, int y, UiRadioBoxesStatus status, bool selector, unsigned int size = BOXES_DEFAULT_SIZE);
-    ZoneEventRadioBoxes drawWithText(int x, int y, UiRadioBoxesStatus status, std::string text, bool selector, unsigned int size = BOXES_DEFAULT_SIZE);
+    ZoneEventRadioBoxes draw(int x, int y, UiRadioBoxesStatus status, bool selector, TypeTheme typeTheme = THEME_PRIMARY, unsigned int size = BOXES_DEFAULT_SIZE);
+    ZoneEventRadioBoxes drawWithText(int x, int y, UiRadioBoxesStatus status, std::string text, bool selector, TypeTheme typeTheme = THEME_PRIMARY, unsigned int size = BOXES_DEFAULT_SIZE);
 
     UiRadioBoxesStatus onPadAuto(ZoneEventRadioBoxes zoneEvent, bool button);
     UiRadioBoxesStatus onTouchAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo);

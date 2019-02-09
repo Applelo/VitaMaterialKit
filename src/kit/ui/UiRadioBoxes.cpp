@@ -1,17 +1,16 @@
 
 #include "UiRadioBoxes.hh"
-#include "UiCheckboxes.hh"
 
 UiRadioBoxes::UiRadioBoxes(UiTheme *theme) : UiParentBoxes(theme) {}
 UiRadioBoxes::UiRadioBoxes(UiTheme *theme, UiIcons *icons) : UiParentBoxes(theme, icons) {}
 UiRadioBoxes::UiRadioBoxes(UiTheme *theme, UiIcons *icons, UiTexts *texts) : UiParentBoxes(theme, icons,
                                                                                                     texts) {}
 
-ZoneEventRadioBoxes UiRadioBoxes::draw(int x, int y, UiRadioBoxesStatus status, bool selector, unsigned int size) {
-    return this->drawWithText(x, y, status, "", selector, size);
+ZoneEventRadioBoxes UiRadioBoxes::draw(int x, int y, UiRadioBoxesStatus status, bool selector, TypeTheme typeTheme, unsigned int size) {
+    return this->drawWithText(x, y, status, "", selector, typeTheme, size);
 }
 
-ZoneEventRadioBoxes UiRadioBoxes::drawWithText(int x, int y, UiRadioBoxesStatus status, std::string text, bool selector, unsigned int size) {
+ZoneEventRadioBoxes UiRadioBoxes::drawWithText(int x, int y, UiRadioBoxesStatus status, std::string text, bool selector, TypeTheme typeTheme, unsigned int size) {
     zoneEvent.x = x;
     zoneEvent.y = y;
     zoneEvent.width = size * 2;
@@ -19,14 +18,13 @@ ZoneEventRadioBoxes UiRadioBoxes::drawWithText(int x, int y, UiRadioBoxesStatus 
     zoneEvent.selector = selector;
     zoneEvent.status = status;
 
-    this->drawSelector(x, y, selector);
+    this->drawSelector(x, y, selector, typeTheme);
 
     if (status == RADIOBOX_CHECKED) {
-        this->drawBoxButtonColor(x, y, ICON_MDI_RADIOBOX_BLANK, (unsigned int) RGBA8(92, 92, 92, 255), size);
+        this->drawBoxButton(x, y,  ICON_MDI_RADIOBOX_MARKED, typeTheme, size);
     }
     else {
-        //this->drawBoxButtonColor(x, y, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size);
-        this->drawBoxButton(x, y, ICON_MDI_RADIOBOX_MARKED, size);
+        this->drawBoxButton(x, y, ICON_MDI_RADIOBOX_BLANK, BOXES_DEFAULT_COLOR_UNCHECKED, size);
     }
 
     if (!text.empty()) {
