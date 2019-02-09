@@ -5,59 +5,52 @@ CheckboxesSample::CheckboxesSample(const std::string &name) : View(name) {
 }
 
 void CheckboxesSample::contents() {
-   ui->texts->draw(100, 40, Body1, "Unchecked");
-    ui->texts->draw(100, 140, Body1, "Indeterminate");
-    ui->texts->draw(100, 240, Body1, "Checked");
+    uncheckedZE = ui->checkboxes->drawWithText(10, 10, one, "Unchecked", utils->PTC->isY(PADTOUCHCTRL_IS_FIRST));
+    inderterminateZE = ui->checkboxes->drawWithText(10, 100, two, "Indeterminate", utils->PTC->isY(2));
+    checkedZE = ui->checkboxes->drawWithText(10, 200, three, "Checked", utils->PTC->isY(3));
 
-    uncheckedZE = ui->checkboxes->draw(10, 40 - 30, one, selector == 1);
-    inderterminateZE = ui->checkboxes->draw(10, 140  - 30, two, selector == 2);
-    checkedZE = ui->checkboxes->draw(10, 240  - 30, three, selector == 3);
+    uncheckedZERB = ui->radioBoxes->drawWithText(10, 300, four, "Unchecked", utils->PTC->isY(4));
+    checkedZERB = ui->radioBoxes->drawWithText(10, 400, five, "Checked", utils->PTC->isY(5));
 
-    back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, selector == NUMBER_OF_BUTTONS_CHECKBOXES);
+    back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, utils->PTC->isY(PADTOUCHCTRL_IS_LAST));
 }
 
 void CheckboxesSample::controls() {
 
-    //pad
-    if (utils->pad->pressed.down) {
-        selector++;
-    }
-    if (utils->pad->pressed.up) {
-        selector--;
-    }
-    if (selector > NUMBER_OF_BUTTONS_CHECKBOXES)
-        selector = 1;
-    if (selector == 0)
-        selector = NUMBER_OF_BUTTONS_CHECKBOXES;
 
-    //touch & pad switch
-    if (utils->touch->clicking) {
-        selector = -1;
-    }
-    if (utils->pad->held.clicking && selector == -1) {
-        selector = 1;
-    }
-
-    if (selector == -1) {
+    if (utils->PTC->isTouchMode()) {
         one = ui->checkboxes->onTouchAuto(uncheckedZE, utils->touch->lastClickPoint);
         two = ui->checkboxes->onTouchAuto(inderterminateZE, utils->touch->lastClickPoint);
         three = ui->checkboxes->onTouchAuto(checkedZE, utils->touch->lastClickPoint);
+
+        four = ui->radioBoxes->onTouchAuto(uncheckedZERB, utils->touch->lastClickPoint);
+        five = ui->radioBoxes->onTouchAuto(checkedZERB, utils->touch->lastClickPoint);
     }
     else {
         one = ui->checkboxes->onPadAuto(uncheckedZE, utils->pad->pressed.cross);
         two = ui->checkboxes->onPadAuto(inderterminateZE, utils->pad->pressed.cross);
         three = ui->checkboxes->onPadAuto(checkedZE, utils->pad->pressed.cross);
+
+        four = ui->radioBoxes->onPadAuto(uncheckedZERB, utils->pad->pressed.cross);
+        five = ui->radioBoxes->onPadAuto(checkedZERB, utils->pad->pressed.cross);
     }
 
 
-    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(back, utils->pad->pressed.cross) ||
+    if (UiButtons::onTouch(back, utils->touch->lastClickPoint) ||
+            UiButtons::onPad(back, utils->pad->pressed.cross) ||
         utils->pad->pressed.circle) {
-
-        one = UNCHECKED;
-        two = INDERTERMINATE;
-        three = CHECKED;
 
         viewsController->setActualView("Welcome");
     }
+}
+
+void CheckboxesSample::beforeEnter() {
+    one = CHECKBOX_UNCHECKED;
+    two = CHECKBOX_INDERTERMINATE;
+    three = CHECKBOX_CHECKED;
+
+    four = RADIOBOX_UNCHECKED;
+    five = RADIOBOX_CHECKED;
+
+    this->utils->PTC->setLimit(PADTOUCHCTRL_TYPE_Y, 6);
 }

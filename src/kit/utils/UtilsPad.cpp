@@ -1,6 +1,6 @@
-#include "Pad.hpp"
+#include "UtilsPad.hpp"
 
-Pad::Pad(){
+UtilsPad::UtilsPad(){
 	buttonAssign = checkButtonAssign();
 	sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
 
@@ -10,11 +10,11 @@ Pad::Pad(){
 }
 
 
-Pad::~Pad(){
+UtilsPad::~UtilsPad(){
 	
 }
 
-void Pad::read(){
+void UtilsPad::read(){
 	
 	ctrlPress = ctrlPeek;
 	sceCtrlPeekBufferPositive(0, &ctrlPeek, 1);
@@ -28,7 +28,7 @@ void Pad::read(){
 
 }
 
-int Pad::checkButtonAssign(){
+int UtilsPad::checkButtonAssign(){
 	
 	int ret = 0;
 	
@@ -43,7 +43,7 @@ int Pad::checkButtonAssign(){
 	}
 }
 
-PadButtons Pad::resetPadButtons(PadButtons padButtons) {
+PadButtons UtilsPad::resetPadButtons(PadButtons padButtons) {
 	padButtons.up = false;
 	padButtons.right = false;
 	padButtons.down = false;
@@ -62,7 +62,7 @@ PadButtons Pad::resetPadButtons(PadButtons padButtons) {
 	return padButtons;
 }
 
-PadAnalog Pad::readAnalog(SceCtrlData sceCtrlData, PadAnalog padAnalog, PadAnalogPosition padAnalogPosition) {
+PadAnalog UtilsPad::readAnalog(SceCtrlData sceCtrlData, PadAnalog padAnalog, PadAnalogPosition padAnalogPosition) {
 
 	padAnalog = this->resetPadAnalog(padAnalog);
 
@@ -95,7 +95,7 @@ PadAnalog Pad::readAnalog(SceCtrlData sceCtrlData, PadAnalog padAnalog, PadAnalo
 	return padAnalog;
 }
 
-PadButtons Pad::readButtons(unsigned int buttons, PadButtons padButtons) {
+PadButtons UtilsPad::readButtons(unsigned int buttons, PadButtons padButtons) {
 
 	padButtons = this->resetPadButtons(padButtons);
 
@@ -118,10 +118,16 @@ PadButtons Pad::readButtons(unsigned int buttons, PadButtons padButtons) {
 	padButtons.cross = buttonAssign ? this->getButtonStatus(buttons, SCE_CTRL_CIRCLE) : this->getButtonStatus(buttons, SCE_CTRL_CROSS);
 	padButtons.circle = buttonAssign ? this->getButtonStatus(buttons, SCE_CTRL_CROSS) : this->getButtonStatus(buttons, SCE_CTRL_CIRCLE);
 
+	padButtons.clicking =	padButtons.select || padButtons.start ||
+							padButtons.up || padButtons.right || padButtons.down || padButtons.left ||
+							padButtons.leftTrigger || padButtons.rightTrigger ||
+							padButtons.voldown || padButtons.volup ||
+							padButtons.triangle || padButtons.square || padButtons.cross || padButtons.circle;
+
 	return padButtons;
 }
 
-PadAnalog Pad::resetPadAnalog(PadAnalog padAnalog) {
+PadAnalog UtilsPad::resetPadAnalog(PadAnalog padAnalog) {
 	padAnalog.moving = false;
 	padAnalog.xCalibrated = 0;
 	padAnalog.yCalibrated = 0;
@@ -129,7 +135,7 @@ PadAnalog Pad::resetPadAnalog(PadAnalog padAnalog) {
 	return padAnalog;
 }
 
-bool Pad::getButtonStatus(unsigned int buttons, SceCtrlButtons sceCtrlButtons) {
+bool UtilsPad::getButtonStatus(unsigned int buttons, SceCtrlButtons sceCtrlButtons) {
 	return (buttons & sceCtrlButtons) != 0;
 }
 

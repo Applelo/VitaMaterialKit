@@ -1,23 +1,27 @@
 #include "UiTexts.hpp"
 
-#include <stdarg.h>
+using namespace ufal::unilib;
 
 UiTexts::UiTexts() {
     family = "Roboto";
+    utilsTexts = new UtilsTexts();
 }
 
 UiTexts::UiTexts(UiTheme *theme) {
     this->theme = theme;
     this->family = "Roboto";
+    utilsTexts = new UtilsTexts();
 }
 
 UiTexts::UiTexts(std::string family) {
     this->family = std::move(family);
+    utilsTexts = new UtilsTexts();
 }
 
 UiTexts::UiTexts(std::string family, UiTheme *theme) {
     this->theme = theme;
     this->family = std::move(family);
+    utilsTexts = new UtilsTexts();
 }
 
 UiTexts::~UiTexts() {
@@ -28,13 +32,13 @@ void UiTexts::drawFinal(int x, int y, TextStyle textStyle, unsigned int color, b
     this->calcTextStyleData(textStyle, italic);
     this->loadFont(textStyleData.type, textStyleData.size);
 
-    vita2d_font_draw_text(fonts[keyFont], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(fonts[keyFont], x, (int) floor(y + textStyleData.size - textStyleData.offset), color, textStyleData.size, textStyleData.uppercase ? utilsTexts->toUppercase(text).c_str() : text.c_str());
 }
 
 void UiTexts::drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text) {
     this->loadFont(_textStyleData.type, _textStyleData.size);
 
-    vita2d_font_draw_text(fonts[keyFont], x, (int) floor(y + _textStyleData.size - _textStyleData.offset), color, _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str());
+    vita2d_font_draw_text(fonts[keyFont], x, (int) floor(y + _textStyleData.size - _textStyleData.offset), color, _textStyleData.size, _textStyleData.uppercase ? utilsTexts->toUppercase(text).c_str() : text.c_str());
 }
 
 //Draw with Material Style
@@ -120,27 +124,22 @@ TextData UiTexts::getTextData(std::string text, TextStyle textStyle, bool italic
     return textData;
 }
 
-//private
 
-//set text to uppercase
-std::string UiTexts::toUppercase(std::string text) {
-    std::transform(text.begin(), text.end(),text.begin(), ::toupper);
-    return text;
-}
+//private
 
 void UiTexts::calcTextData(std::string text, TextStyle textStyle, bool italic) {
 
     this->calcTextStyleData(textStyle, italic);
     this->loadFont(textStyleData.type, textStyleData.size);
 
-    vita2d_font_text_dimensions(fonts[keyFont], textStyleData.size, textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
+    vita2d_font_text_dimensions(fonts[keyFont], textStyleData.size, textStyleData.uppercase ? utilsTexts->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
 }
 
 
 TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
 
     this->loadFont(std::string(_textStyleData.type), textStyleData.size);
-    vita2d_font_text_dimensions(fonts[keyFont], _textStyleData.size, _textStyleData.uppercase ? this->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
+    vita2d_font_text_dimensions(fonts[keyFont], _textStyleData.size, _textStyleData.uppercase ? utilsTexts->toUppercase(text).c_str() : text.c_str(), &textData.width, &textData.height);
 
     return textData;
 }

@@ -31,7 +31,7 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.53")
+set(VITA_VERSION "00.60")
 
 #Vita3K PATHS
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
@@ -54,20 +54,28 @@ add_executable(${SHORT_NAME}
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
         src/kit/core/UiEvent.cpp
+
+        src/kit/lib/unilib/unicode.cpp
+        src/kit/lib/unilib/utf8.cpp
+
         src/kit/Ui.cpp
         src/kit/Utils.cpp
 
+        src/kit/ui/parent/UiParentBoxes.cpp
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp
         src/kit/ui/UiTexts.cpp
         src/kit/ui/UiCheckboxes.cpp
         src/kit/ui/UiTextFields.cpp
+        src/kit/ui/UiRadioBoxes.cpp
 
-        src/kit/utils/I18n.cpp
-        src/kit/utils/IME.cpp
-        src/kit/utils/Pad.cpp
-        src/kit/utils/Touch.cpp
+        src/kit/utils/UtilsI18n.cpp
+        src/kit/utils/UtilsIME.cpp
+        src/kit/utils/UtilsPad.cpp
+        src/kit/utils/UtilsTouch.cpp
+        src/kit/utils/UtilsPadTouchCtrl.cpp
+        src/kit/utils/UtilsTexts.cpp
 
         src/views/Welcome.cpp
         src/views/I18nSample.cpp

@@ -6,12 +6,17 @@
 #include <iostream>
 #include <math.h>
 #include <algorithm>
+#include <stdarg.h>
 
 #include <psp2/io/fcntl.h>
 #include <psp2/io/dirent.h>
 
 #include "vita2d.h"
+#include "../lib/unilib/unicode.h"
+#include "../lib/unilib/utf8.h"
+
 #include "UiTheme.hpp"
+#include "../utils/UtilsTexts.hh"
 
 
 #define TEXTS_DEFAULT_FONT_COLOR (unsigned int) RGBA8(0, 0, 0, 255)
@@ -57,8 +62,8 @@ private:
     UiTheme *theme;
     std::pair<std::string, unsigned int> keyFont;
     std::string family, fontPath;
+    UtilsTexts *utilsTexts;
 
-    std::string toUppercase(std::string text);
     void drawFinal(int x, int y, TextStyle textStyle, unsigned int color, bool italic, std::string text);
     void drawFinal(int x, int y, TextStyleData _textStyleData, unsigned int color, std::string text);
 

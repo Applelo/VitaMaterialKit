@@ -8,6 +8,7 @@
 #include "ui/UiButtons.hpp"
 #include "ui/UiCheckboxes.hh"
 #include "ui/UiTextFields.hh"
+#include "ui/UiRadioBoxes.hh"
 
 
 class Ui {
@@ -23,6 +24,7 @@ public:
     UiIcons *icons;
     UiCheckboxes *checkboxes;
     UiTextFields *textFields;
+    UiRadioBoxes *radioBoxes;
 
     Ui();
 };
