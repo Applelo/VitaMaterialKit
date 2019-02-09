@@ -1,15 +1,15 @@
 # Changelog
 
 ## Version 0.6
-* Add RadioButtons class
+* Add RadioBoxes class
 * Improve Checkbox class
 * Add simple CtrlTouchController class for menu
 * Add mounted function in View
 * Improve IME class
-* Add theme support for TextField
 * Fix Pad (padButtons.clicking was not added)
 * Fix uppercase to work with all unicode char thanks to unilib
-* Add UtilsTexts class with uppercase, lowercase functions & utf8ToUtf16/utf16ToUtf8 
+* Add UtilsTexts class with uppercase, lowercase functions & utf8ToUtf16/utf16ToUtf8
+* All functions in utils have been renamed (Pad to UtilsPad for example)
 
 ## Version 0.5.3
 * Add TextFields class (filledDraw only)

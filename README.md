@@ -2,7 +2,7 @@
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 
-Wiki will be available soon to explain how to create an app and details each functions in each class.
+Wiki will be available soon to explain how to create an app, the view system and details each functions in each class.
 
 ## Showcase
 

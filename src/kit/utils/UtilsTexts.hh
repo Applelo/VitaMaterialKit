@@ -15,7 +15,7 @@ public:
     void utf16ToUtf8(uint16_t *src, uint8_t *dst);
     void utf8ToUtf16(uint8_t *src, uint16_t *dst);
 
-    //transformation
+    //transformation text
     std::string toUppercase(std::string text);
     std::string toLowercase(std::string text);
 };
