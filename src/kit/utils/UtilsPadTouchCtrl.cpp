@@ -113,23 +113,33 @@ void UtilsPadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
 void UtilsPadTouchCtrl::setLimit(PadTouchCtrlType type, int limit, int start) {
     this->setLimit(type, limit);
     if (type == PADTOUCHCTRL_TYPE_X) {
-        xItem = start;
+        xOldItem = start;
+        if (ctrlMode) {
+            xItem = start;
+        }
     }
     else {
-        yItem = start;
+        yOldItem = start;
+        if (ctrlMode) {
+            yItem = start;
+        }
     }
 }
 
 void UtilsPadTouchCtrl::setLimit(int xLimit, int yLimit) {
     this->clearLimits();
-    this->xLimit = xLimit;
-    this->yLimit = yLimit;
+    this->xOldItem = xLimit;
+    this->yOldItem = yLimit;
 }
 
 void UtilsPadTouchCtrl::setLimit(int xLimit, int yLimit, int xStart, int yStart) {
     this->setLimit(xLimit, yLimit);
     xItem = xStart;
     yItem = yStart;
+    if (ctrlMode) {
+        xItem = xStart;
+        yItem = yStart;
+    }
 }
 
 bool UtilsPadTouchCtrl::isX(int x) {
