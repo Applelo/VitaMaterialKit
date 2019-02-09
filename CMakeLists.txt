@@ -61,6 +61,7 @@ add_executable(${SHORT_NAME}
         src/kit/Ui.cpp
         src/kit/Utils.cpp
 
+        src/kit/ui/parent/UiParentBoxButtons.cpp
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
         src/kit/ui/UiButtons.cpp

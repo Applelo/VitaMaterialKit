@@ -1,18 +1,15 @@
 #include "UiCheckboxes.hh"
 
-UiCheckboxes::UiCheckboxes(UiTheme *theme) {
-    this->theme = theme;
-    icons = new UiIcons();
-    this->selectorColor = theme->convertHexToRGBA(theme->getSecondaryHEX().light, 150);
-}
-
-UiCheckboxes::UiCheckboxes(UiTheme *theme, UiIcons *icons) : theme(theme), icons(icons) {
-    this->theme = theme;
-    this->icons = icons;
-    this->selectorColor = theme->convertHexToRGBA(theme->getSecondaryHEX().light, 150);
-}
+UiCheckboxes::UiCheckboxes(UiTheme *theme) : UiParentBoxButtons(theme) {}
+UiCheckboxes::UiCheckboxes(UiTheme *theme, UiIcons *icons) : UiParentBoxButtons(theme, icons) {}
+UiCheckboxes::UiCheckboxes(UiTheme *theme, UiIcons *icons, UiTexts *texts) : UiParentBoxButtons(theme, icons, texts) {}
 
 ZoneEventCheckboxes UiCheckboxes::draw(int x, int y, UiCheckboxesStatus status, bool selector, unsigned int size) {
+    return this->drawWithText(x, y, status, "", selector, size);
+}
+
+ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus status, std::string text, bool selector,
+                                               unsigned int size) {
     zoneEvent.x = x;
     zoneEvent.y = y;
     zoneEvent.width = size * 2;
@@ -20,24 +17,24 @@ ZoneEventCheckboxes UiCheckboxes::draw(int x, int y, UiCheckboxesStatus status, 
     zoneEvent.selector = selector;
     zoneEvent.status = status;
 
-
-    if (selector) {
-        vita2d_draw_fill_circle(x + size, y + size, size, selectorColor);
-    }
+    this->drawSelector(x, y, selector);
 
     if (status == INDERTERMINATE || status == CHECKED) {
-        icons->draw(ICON_MDI_CHECKBOX_BLANK, x + (size / 2), y + (size / 2), (unsigned int) RGBA8(255, 255, 255, 255), size);
+        this->drawBoxButtonColor(x, y, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size);
     }
-
 
     if (status == UNCHECKED) {
-        icons->draw(ICON_MDI_CHECKBOX_BLANK_OUTLINE, x + (size / 2), y + (size / 2), (unsigned int) RGBA8(92, 92, 92, 255), size);
+        this->drawBoxButtonColor(x, y, ICON_MDI_CHECKBOX_BLANK_OUTLINE, (unsigned int) RGBA8(92, 92, 92, 255), size);
     }
     else if (status == INDERTERMINATE) {
-        icons->draw(ICON_MDI_MINUS_BOX, x + (size / 2), y + (size / 2), theme->getSecondaryRGBA().dark, size);
+        this->drawBoxButton(x, y, ICON_MDI_MINUS_BOX, size);
     }
     else {
-        icons->draw(ICON_MDI_CHECKBOX_MARKED, x + (size / 2), y + (size / 2), theme->getSecondaryRGBA().dark, size);
+        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_MARKED, size);
+    }
+
+    if (!text.empty()) {
+        this->drawText(x, y , size, text);
     }
 
 
@@ -68,4 +65,6 @@ UiCheckboxesStatus UiCheckboxes::onTouchAuto(ZoneEventCheckboxes zoneEvent, SceI
     }
     return zoneEvent.status;
 }
+
+
 

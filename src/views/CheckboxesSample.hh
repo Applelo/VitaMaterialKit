@@ -8,7 +8,6 @@
 
 class CheckboxesSample : public View {
 private:
-    int selector = -1;
     ZoneEvent back;
     ZoneEventCheckboxes uncheckedZE, inderterminateZE, checkedZE;
     UiCheckboxesStatus one = UNCHECKED, two = INDERTERMINATE, three = CHECKED;
@@ -19,6 +18,8 @@ public:
     void contents() override;
 
     void controls() override;
+
+    void beforeEnter() override;
 };
 
 
