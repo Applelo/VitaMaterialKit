@@ -1,31 +1,31 @@
-#ifndef VITAMATERIALKIT_UIPARENTBOXBUTTONS_HH
-#define VITAMATERIALKIT_UIPARENTBOXBUTTONS_HH
+#ifndef VITAMATERIALKIT_UIPARENTBOXES_HH
+#define VITAMATERIALKIT_UIPARENTBOXES_HH
 
 #include "../UiTheme.hpp"
 #include "../UiTexts.hpp"
 #include "../UiIcons.hpp"
 
-#define BOXBUTTONS_DEFAULT_SIZE 40
+#define BOXES_DEFAULT_SIZE 40
 
-class UiParentBoxButtons {
+class UiParentBoxes {
 private:
     unsigned int selectorColor;
     UiTheme *theme;
     UiIcons *icons;
     UiTexts *texts;
 protected:
-    UiParentBoxButtons(UiTheme *theme);
-    UiParentBoxButtons(UiTheme *theme, UiIcons *icons);
-    UiParentBoxButtons(UiTheme *theme, UiIcons *icons, UiTexts *texts);
+    UiParentBoxes(UiTheme *theme);
+    UiParentBoxes(UiTheme *theme, UiIcons *icons);
+    UiParentBoxes(UiTheme *theme, UiIcons *icons, UiTexts *texts);
 
-    void drawSelector(int x, int y, bool selector, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);
+    void drawSelector(int x, int y, bool selector, unsigned int size = BOXES_DEFAULT_SIZE);
 
     TextData drawText(int x, int y, int size, std::string text);
 
-    void drawBoxButton(int x, int y, const char* icon, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);
-    void drawBoxButtonColor(int x, int y, const char* icon, unsigned int color, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);
+    void drawBoxButton(int x, int y, const char* icon, unsigned int size = BOXES_DEFAULT_SIZE);
+    void drawBoxButtonColor(int x, int y, const char* icon, unsigned int color, unsigned int size = BOXES_DEFAULT_SIZE);
 
 };
 
 
-#endif //VITAMATERIALKIT_UIPARENTBOXBUTTONS_HH
+#endif //VITAMATERIALKIT_UIPARENTBOXES_HH
