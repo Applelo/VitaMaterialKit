@@ -26,7 +26,7 @@ private:
     int xOldItem, yOldItem;
     bool touchMode, ctrlMode;
 
-    std::list <std::pair<int, int> > xLimits, yLimits;
+    std::list < std::pair<int, std::pair<int, int> > > xLimits, yLimits;
     void clearLimits();
 public:
 
@@ -37,7 +37,7 @@ public:
     void setLimit(PadTouchCtrlType type, int limit);
     void setLimit(int xLimit, int yLimit);
 
-    void addLimit(PadTouchCtrlType type, int first, int last);
+    void addLimit(PadTouchCtrlType type, int line, int first, int last);
 
 
     bool isX(int x);

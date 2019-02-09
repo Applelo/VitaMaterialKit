@@ -17,7 +17,7 @@ void ButtonsSample::contents() {
     ui->buttons->outlinedDraw("Outlined & Icon", 300, 300, THEME_PRIMARY, this->utils->PTC->isXY(2, 3), ICON_MDI_ACCOUNT);
 
     ui->buttons->floatDraw(ICON_MDI_PLUS, 50, 450, THEME_PRIMARY, this->utils->PTC->isXY(PADTOUCHCTRL_IS_FIRST, PADTOUCHCTRL_IS_LAST));
-    ui->buttons->floatDraw(ICON_MDI_PLUS, 300, 450, THEME_PRIMARY, this->utils->PTC->isXY(1, PADTOUCHCTRL_IS_LAST), "Extended Float");
+    ui->buttons->floatDraw(ICON_MDI_PLUS, 300, 450, THEME_PRIMARY, this->utils->PTC->isXY(2, PADTOUCHCTRL_IS_LAST), "Extended Float");
 
     back = ui->buttons->containedDraw("Back", 800, 480, THEME_PRIMARY, this->utils->PTC->isXY(PADTOUCHCTRL_IS_LAST, PADTOUCHCTRL_IS_LAST));
 }
@@ -33,5 +33,7 @@ void ButtonsSample::controls() {
 
 void ButtonsSample::beforeEnter() {
     this->utils->PTC->setLimit(3, 4);
-    this->utils->PTC->addLimit(PADTOUCHCTRL_TYPE_X, 1, 2);
+    this->utils->PTC->addLimit(PADTOUCHCTRL_TYPE_X, 1, 1, 2);
+    this->utils->PTC->addLimit(PADTOUCHCTRL_TYPE_X, 2, 1, 2);
+    this->utils->PTC->addLimit(PADTOUCHCTRL_TYPE_X, 3, 1, 2);
 }

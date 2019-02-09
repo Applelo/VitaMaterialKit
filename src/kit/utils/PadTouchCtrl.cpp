@@ -57,29 +57,50 @@ void PadTouchCtrl::controller() {
             xItem--;
         }
 
+        if (yItem > yLimit) {
+            yItem = 1;
+        }
+        if (yItem < 1) {
+            yItem = yLimit;
+        }
+
+        if (xItem > xLimit) {
+            xItem = 1;
+        }
+        if (xItem < 1) {
+            xItem = xLimit;
+        }
+
         for (auto& limit: yLimits) {
-            if (yItem > limit.second) {
-                yItem = limit.first;
-            }
-            if (yItem < limit.first) {
-                yItem = limit.second;
+
+            if (xItem == limit.first) {
+                if (yItem > limit.second.second) {
+                    yItem = limit.second.second;
+                }
+                if (yItem < limit.second.first) {
+                    yItem = limit.second.first;
+                }
             }
         }
 
         for (auto& limit: xLimits) {
-            if (xItem > limit.second) {
-                xItem = limit.first;
-            }
-            if (xItem < limit.first) {
-                xItem = limit.second;
+
+            if (yItem == limit.first) {
+                if (xItem > limit.second.second) {
+                    xItem = limit.second.second;
+                }
+                if (xItem < limit.second.first) {
+                    xItem = limit.second.first;
+                }
             }
         }
     }
 }
 
+
+
 void PadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
     this->clearLimits();
-    this->addLimit(type, 1, limit);
     if (type == PADTOUCHCTRL_TYPE_X) {
         xLimit = limit;
     }
@@ -90,8 +111,6 @@ void PadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
 
 void PadTouchCtrl::setLimit(int xLimit, int yLimit) {
     this->clearLimits();
-    this->addLimit(PADTOUCHCTRL_TYPE_X, 1, xLimit);
-    this->addLimit(PADTOUCHCTRL_TYPE_Y, 1, yLimit);
     this->xLimit = xLimit;
     this->yLimit = yLimit;
 }
@@ -134,13 +153,13 @@ bool PadTouchCtrl::isXY(PadTouchCtrlIs x, int y) {
     return isX(x) && isY(y);
 }
 
-void PadTouchCtrl::addLimit(PadTouchCtrlType type, int first, int last) {
+void PadTouchCtrl::addLimit(PadTouchCtrlType type, int line, int first, int last) {
     //rework add limit to add 4 conditions !
     if (type == PADTOUCHCTRL_TYPE_X) {
-        xLimits.emplace(xLimits.begin(), first, last);
+        xLimits.emplace(xLimits.begin(), line, std::make_pair(first, last));
     }
     else {
-        yLimits.emplace(yLimits.begin(), first, last);
+        yLimits.emplace(yLimits.begin(), line, std::make_pair(first, last));
     }
 }
 
