@@ -9,6 +9,8 @@
 #include "UiTheme.hpp"
 #include "../core/UiEvent.hh"
 
+#define BUTTONS_OUTLINED_SIZE 3
+
 class UiButtons : public UiEvent {
 private:
     UiIcons *icons;
@@ -18,7 +20,7 @@ private:
     ZoneEvent zoneEvent;
     TextStyle textStyle = Button;
 
-    void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int color);
+    void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int size, unsigned int color);
     void textDrawFinal(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, const char* icon = "");
 public:
     UiButtons(UiTheme *theme);
