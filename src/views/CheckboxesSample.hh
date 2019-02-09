@@ -10,16 +10,18 @@ class CheckboxesSample : public View {
 private:
     ZoneEvent back;
     ZoneEventCheckboxes uncheckedZE, inderterminateZE, checkedZE;
-    UiCheckboxesStatus one = UNCHECKED, two = INDERTERMINATE, three = CHECKED;
+    ZoneEventRadioBoxes uncheckedZERB, checkedZERB;
+    UiCheckboxesStatus one, two, three;
+    UiRadioBoxesStatus four, five;
 
 public:
     CheckboxesSample(const std::string &name);
 
     void contents() override;
-
     void controls() override;
 
     void beforeEnter() override;
+
 };
 
 

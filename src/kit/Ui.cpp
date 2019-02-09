@@ -11,6 +11,7 @@ void Ui::init() {
     this->icons         = new UiIcons(this->theme);
     this->buttons       = new UiButtons(this->theme, this->texts, this->icons);
     this->checkboxes    = new UiCheckboxes(this->theme, this->icons, this->texts);
+    this->radioBoxes    = new UiRadioBoxes(this->theme, this->icons, this->texts);
     this->textFields    = new UiTextFields(this->theme, this->texts, this->icons);
 }
 
