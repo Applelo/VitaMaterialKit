@@ -5,10 +5,10 @@ Utils::Utils() {
 }
 
 void Utils::init() {
-   this->touch = new Touch();
-   this->pad = new Pad();
-   this->i18n = new I18n();
-   this->PTC = new PadTouchCtrl(this->pad, this->touch);
+   this->touch = new UtilsTouch();
+   this->pad = new UtilsPad();
+   this->i18n = new UtilsI18n();
+   this->PTC = new UtilsPadTouchCtrl(this->pad, this->touch);
 }
 
 void Utils::read() {

@@ -6,8 +6,8 @@
 class I18nSample: public View {
 private:
     ZoneEvent back;
-    I18n *frLang;
-    I18n *enLang;
+    UtilsI18n *frLang;
+    UtilsI18n *enLang;
     std::map<std::string, std::string> defaultL, frL, enL;
 
 public:

@@ -4,8 +4,8 @@
 #include <psp2/kernel/sysmem.h>
 #include <list>
 
-#include "Pad.hpp"
-#include "Touch.hpp"
+#include "UtilsPad.hpp"
+#include "UtilsTouch.hpp"
 
 typedef enum PadTouchCtrlType {
     PADTOUCHCTRL_TYPE_X,
@@ -17,10 +17,10 @@ typedef enum PadTouchCtrlIs {
     PADTOUCHCTRL_IS_LAST
 } PadTouchCtrlIs;
 
-class PadTouchCtrl {
+class UtilsPadTouchCtrl {
 private:
-    Pad *pad;
-    Touch *touch;
+    UtilsPad *pad;
+    UtilsTouch *touch;
     int model;
     int xItem, yItem, xLimit, yLimit;
     int xOldItem, yOldItem;
@@ -30,8 +30,8 @@ private:
     void clearLimits();
 public:
 
-    PadTouchCtrl(Pad *pad);
-    PadTouchCtrl(Pad *pad, Touch *touch);
+    UtilsPadTouchCtrl(UtilsPad *pad);
+    UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch);
 
     void controller();
     void setLimit(PadTouchCtrlType type, int limit);

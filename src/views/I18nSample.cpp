@@ -23,8 +23,8 @@ void I18nSample::controls() {
 }
 
 void I18nSample::mounted() {
-    I18n *frLang = new I18n(SCE_SYSTEM_PARAM_LANG_FRENCH);
-    I18n *enLang = new I18n(SCE_SYSTEM_PARAM_LANG_ENGLISH_US);
+    UtilsI18n *frLang = new UtilsI18n(SCE_SYSTEM_PARAM_LANG_FRENCH);
+    UtilsI18n *enLang = new UtilsI18n(SCE_SYSTEM_PARAM_LANG_ENGLISH_US);
 
     defaultL = utils->i18n->getI18nByCat("test");
     frL = frLang->getI18nByCat("test");

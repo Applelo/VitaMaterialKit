@@ -13,13 +13,13 @@
 #define MIN_DIST_TO_SCROLL_X 2
 
 
-class Touch{
+class UtilsTouch{
 	private:
 		int port;
 		SceIVector2 emptyClickPoint;
 
 	public:
-		Touch();
+		UtilsTouch();
 
 		SceTouchData touch_old[SCE_TOUCH_PORT_MAX_NUM];
 		SceTouchData touch[SCE_TOUCH_PORT_MAX_NUM];

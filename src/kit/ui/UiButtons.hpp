@@ -1,8 +1,8 @@
 #ifndef VITA_MATERIAL_KIT_UI_BUTTON_HPP
 #define VITA_MATERIAL_KIT_UI_BUTTON_HPP
 
-#include "../utils/Touch.hpp"
-#include "../utils/Pad.hpp"
+#include "../utils/UtilsTouch.hpp"
+#include "../utils/UtilsPad.hpp"
 
 #include "UiTexts.hpp"
 #include "UiIcons.hpp"

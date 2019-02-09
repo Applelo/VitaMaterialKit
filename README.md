@@ -43,7 +43,7 @@ make emulate
 ## Credits
 
 * Developed & maintained by *Applelo*
-* *coderx3* (aka devingDev) for IME, Pad and Touch functions used in VitaCord
+* *coderx3* (aka devingDev) for this work on VitaCord inspired me for my own IME, Pad and Touch functions
 * *Tuxbot123* for his suggestions and his support
 * My master, *MisterAlex*
 

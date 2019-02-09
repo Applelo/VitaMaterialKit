@@ -70,11 +70,12 @@ add_executable(${SHORT_NAME}
         src/kit/ui/UiTextFields.cpp
         src/kit/ui/UiRadioBoxes.cpp
 
-        src/kit/utils/I18n.cpp
-        src/kit/utils/IME.cpp
-        src/kit/utils/Pad.cpp
-        src/kit/utils/Touch.cpp
-        src/kit/utils/PadTouchCtrl.cpp
+        src/kit/utils/UtilsI18n.cpp
+        src/kit/utils/UtilsIME.cpp
+        src/kit/utils/UtilsPad.cpp
+        src/kit/utils/UtilsTouch.cpp
+        src/kit/utils/UtilsPadTouchCtrl.cpp
+        src/kit/utils/UtilsTexts.cpp
 
         src/views/Welcome.cpp
         src/views/I18nSample.cpp

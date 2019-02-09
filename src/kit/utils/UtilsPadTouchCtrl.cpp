@@ -1,12 +1,12 @@
-#include "PadTouchCtrl.hh"
+#include "UtilsPadTouchCtrl.hh"
 
-PadTouchCtrl::PadTouchCtrl(Pad *pad) {
+UtilsPadTouchCtrl::UtilsPadTouchCtrl(UtilsPad *pad) {
     touchMode = false;
     ctrlMode = true;
 }
 
 
-PadTouchCtrl::PadTouchCtrl(Pad *pad, Touch *touch) : pad(pad), touch(touch) {
+UtilsPadTouchCtrl::UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch) : pad(pad), touch(touch) {
     model = sceKernelGetModel();
 
     if (model == SCE_KERNEL_MODEL_VITATV) {
@@ -19,7 +19,7 @@ PadTouchCtrl::PadTouchCtrl(Pad *pad, Touch *touch) : pad(pad), touch(touch) {
     }
 }
 
-void PadTouchCtrl::controller() {
+void UtilsPadTouchCtrl::controller() {
 
     if (this->touch != nullptr) {
         if (this->touch->clicking && ctrlMode) {
@@ -99,7 +99,7 @@ void PadTouchCtrl::controller() {
 
 
 
-void PadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
+void UtilsPadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
     this->clearLimits();
     if (type == PADTOUCHCTRL_TYPE_X) {
         xLimit = limit;
@@ -109,51 +109,51 @@ void PadTouchCtrl::setLimit(PadTouchCtrlType type, int limit) {
     }
 }
 
-void PadTouchCtrl::setLimit(int xLimit, int yLimit) {
+void UtilsPadTouchCtrl::setLimit(int xLimit, int yLimit) {
     this->clearLimits();
     this->xLimit = xLimit;
     this->yLimit = yLimit;
 }
 
-bool PadTouchCtrl::isX(int x) {
+bool UtilsPadTouchCtrl::isX(int x) {
     return xItem == x;
 }
 
-bool PadTouchCtrl::isY(int y) {
+bool UtilsPadTouchCtrl::isY(int y) {
     return yItem == y;
 }
 
-bool PadTouchCtrl::isXY(int x, int y) {
+bool UtilsPadTouchCtrl::isXY(int x, int y) {
     return isX(x) && isY(y);
 }
 
-bool PadTouchCtrl::isX(PadTouchCtrlIs x) {
+bool UtilsPadTouchCtrl::isX(PadTouchCtrlIs x) {
     if (x == PADTOUCHCTRL_IS_FIRST) {
         return xItem == 1;
     }
     return xItem == xLimit;
 }
 
-bool PadTouchCtrl::isY(PadTouchCtrlIs y) {
+bool UtilsPadTouchCtrl::isY(PadTouchCtrlIs y) {
     if (y == PADTOUCHCTRL_IS_FIRST) {
         return yItem == 1;
     }
     return yItem == yLimit;
 }
 
-bool PadTouchCtrl::isXY(PadTouchCtrlIs x, PadTouchCtrlIs y) {
+bool UtilsPadTouchCtrl::isXY(PadTouchCtrlIs x, PadTouchCtrlIs y) {
     return isX(x) && isY(y);
 }
 
-bool PadTouchCtrl::isXY(int x, PadTouchCtrlIs y) {
+bool UtilsPadTouchCtrl::isXY(int x, PadTouchCtrlIs y) {
     return isX(x) && isY(y);
 }
 
-bool PadTouchCtrl::isXY(PadTouchCtrlIs x, int y) {
+bool UtilsPadTouchCtrl::isXY(PadTouchCtrlIs x, int y) {
     return isX(x) && isY(y);
 }
 
-void PadTouchCtrl::addLimit(PadTouchCtrlType type, int line, int first, int last) {
+void UtilsPadTouchCtrl::addLimit(PadTouchCtrlType type, int line, int first, int last) {
     //rework add limit to add 4 conditions !
     if (type == PADTOUCHCTRL_TYPE_X) {
         xLimits.emplace(xLimits.begin(), line, std::make_pair(first, last));
@@ -164,15 +164,15 @@ void PadTouchCtrl::addLimit(PadTouchCtrlType type, int line, int first, int last
 }
 
 
-bool PadTouchCtrl::isTouchMode() const {
+bool UtilsPadTouchCtrl::isTouchMode() const {
     return touchMode;
 }
 
-bool PadTouchCtrl::isCtrlMode() const {
+bool UtilsPadTouchCtrl::isCtrlMode() const {
     return ctrlMode;
 }
 
-void PadTouchCtrl::clearLimits() {
+void UtilsPadTouchCtrl::clearLimits() {
     xLimits.clear();
     yLimits.clear();
 }

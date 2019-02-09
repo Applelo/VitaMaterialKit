@@ -1,7 +1,7 @@
 #include "TextFieldsSample.hh"
 
 TextFieldsSample::TextFieldsSample(const std::string &name) : View(name) {
-    ime = new IME();
+    ime = new UtilsIME();
 }
 
 void TextFieldsSample::contents() {
