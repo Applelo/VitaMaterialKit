@@ -29,8 +29,9 @@ void UiParentBoxButtons::drawBoxButtonColor(int x, int y, const char *icon, unsi
     icons->draw(icon, x + (size / 2), y + (size / 2), color, size);
 }
 
-void UiParentBoxButtons::drawText(int x, int y, int size, std::string text) {
-    texts->draw(x + (size * 2), y + (int) (size * 0.75), Body1, std::move(text));
+TextData UiParentBoxButtons::drawText(int x, int y, int size, std::string text) {
+    texts->draw(x + (size * 2), y + (int) (size * 0.75), Body1, text);
+    return texts->getTextData(text, Body1);
 }
 
 

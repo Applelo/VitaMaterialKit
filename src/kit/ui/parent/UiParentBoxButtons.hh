@@ -20,7 +20,7 @@ protected:
 
     void drawSelector(int x, int y, bool selector, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);
 
-    void drawText(int x, int y, int size, std::string text);
+    TextData drawText(int x, int y, int size, std::string text);
 
     void drawBoxButton(int x, int y, const char* icon, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);
     void drawBoxButtonColor(int x, int y, const char* icon, unsigned int color, unsigned int size = BOXBUTTONS_DEFAULT_SIZE);

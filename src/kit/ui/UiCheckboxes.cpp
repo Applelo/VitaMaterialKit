@@ -34,7 +34,7 @@ ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus 
     }
 
     if (!text.empty()) {
-        this->drawText(x, y , size, text);
+        zoneEvent.width += this->drawText(x, y , size, text).width;
     }
 
 
