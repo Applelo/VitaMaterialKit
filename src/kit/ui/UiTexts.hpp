@@ -50,8 +50,12 @@ typedef struct TextStyleData {
 typedef struct TextData {
     int width;
     int height;
-
 } TextData;
+
+typedef enum TextLimit {
+    TEXT_LIMIT_START,
+    TEXT_LIMIT_END
+} TextLimit;
 
 class UiTexts {
 private:
@@ -104,6 +108,7 @@ public:
     //TextData functions
     TextData getTextData(std::string text, TextStyle textStyle, bool italic = false);
     TextData getTextData(std::string text, TextStyleData _textStyleData);
+    TextStyleData getTextStyleData(TextStyle textStyle, bool italic = false);
 
     //Dynamic import
     void cleanFonts();
@@ -111,8 +116,8 @@ public:
 
     //Helpers functions
     int keySearch(const std::string& s, const std::string& key);
-    std::string applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData);
-    std::string applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData);
+    std::string applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData, TextLimit textLimit = TEXT_LIMIT_END);
+    std::string applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData, TextLimit textLimit = TEXT_LIMIT_END);
 
     //transformation text
     std::string toUppercase(std::string text);

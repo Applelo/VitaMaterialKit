@@ -27,7 +27,7 @@ ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme) {
     zoneEvent.width = width;
     zoneEvent.height = height;
 
-    vita2d_draw_rectangle(x, y, width, height, RGBA8(255, 255, 255, 255));
+    vita2d_draw_rectangle(x, y, width, height, CARDS_DEFAULT_COLOR_BACKGROUND);
 
     //reset &  start to draw new card
     this->resetCard();
@@ -40,30 +40,39 @@ ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme) {
 }
 
 
-ZoneEvent UiCards::drawPrimaryTitle(std::string headerText, std::string subHead) {
+ZoneEvent UiCards::drawPrimaryTitle(std::string headerText, std::string subHead, int height) {
     this->resetOffset();
 
     zoneEvent.x = x;
     zoneEvent.y = y;
     zoneEvent.width = width;
 
-
     heightOffset = CARDS_DEFAULT_PADDING;
     xOffset = x + CARDS_DEFAULT_PADDING;
     yOffset = y + CARDS_DEFAULT_PADDING;
 
+    headerText = texts->applyTextWidthLimit(headerText, width - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(H6));
+    if (height > 0) {
+        headerText = texts->applyTextHeightLimit(headerText, (height / 2) - CARDS_DEFAULT_PADDING, texts->getTextStyleData(H6));
+        headerText.replace(headerText.length() - 4, 3, "...");
+    }
     texts->draw(xOffset, yOffset, H6, CARDS_DEFAULT_COLOR_HEADER_TEXT, headerText);
     textData = texts->getTextData(headerText, H6);
     heightOffset += textData.height;
 
-    texts->draw(xOffset, yOffset + textData.height, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, subHead);
+    subHead = texts->applyTextWidthLimit(subHead, width - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1));
+    if (height > 0) {
+        subHead = texts->applyTextHeightLimit(subHead, (height / 2) - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1));
+        subHead.replace(subHead.length() - 4, 3, "...");
+    }
+    texts->draw(xOffset, yOffset + textData.height + 4, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, subHead);
     textData = texts->getTextData(subHead, Body1);
-    heightOffset += textData.height;
+    heightOffset += textData.height + 4;
 
     heightOffset += CARDS_DEFAULT_PADDING;
 
     zoneEvent.height = heightOffset;
-    height = heightOffset;
+    this->height = heightOffset;
 
     y += heightOffset;
 
@@ -94,8 +103,14 @@ ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
     return zoneEvent;
 }
 
-ZoneEvent UiCards::drawSummary(std::string text) {
+ZoneEvent UiCards::drawSummary(std::string text, int height) {
     this->resetOffset();
+
+    text = texts->applyTextWidthLimit(text, width - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1));
+    if (height > 0) {
+        text = texts->applyTextHeightLimit(text, height - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1), TEXT_LIMIT_START);
+        text.replace(text.length() - 4, 3, "...");
+    }
 
     texts->draw(x + CARDS_DEFAULT_PADDING, y + CARDS_DEFAULT_PADDING, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, text);
     textData = texts->getTextData(text, Body1);
@@ -107,7 +122,7 @@ ZoneEvent UiCards::drawSummary(std::string text) {
     zoneEvent.width = width;
     zoneEvent.height = heightOffset;
 
-    height += heightOffset;
+    this->height += heightOffset;
 
     return zoneEvent;
 }

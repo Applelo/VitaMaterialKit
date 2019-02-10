@@ -140,6 +140,11 @@ TextData UiTexts::getTextData(std::string text, TextStyleData _textStyleData) {
     return textData;
 }
 
+TextStyleData UiTexts::getTextStyleData(TextStyle textStyle, bool italic) {
+    this->calcTextStyleData(textStyle, italic);
+    return textStyleData;
+}
+
 //You can override this function to put your style here (if you don't want to use roboto at all)
 void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
 
@@ -277,7 +282,7 @@ int UiTexts::keySearch(const std::string& s, const std::string& key) {
 }
 
 
-std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
+std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData, TextLimit textLimit) {
     textDataText = this->getTextData(text, textStyleData);
 
     if (textDataText.width > width) {
@@ -310,14 +315,19 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
     return text;
 }
 
-std::string UiTexts::applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData) {
+std::string UiTexts::applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData, TextLimit textLimit) {
     textDataText = this->getTextData(text, textStyleData);
 
     if (textDataText.height > height) {
         std::string::size_type found = text.find_first_of('\n');
 
         if (found != std::string::npos) {
-            text = text.substr(found + 1, text.length() - 1);
+            if (textLimit == TEXT_LIMIT_END) {
+                text = text.substr(found + 1, text.length() - 1);
+            }
+            else {
+                text = text.substr(0, found + 1);
+            }
             return this->applyTextHeightLimit(text, height, textStyleData);
         }
     }

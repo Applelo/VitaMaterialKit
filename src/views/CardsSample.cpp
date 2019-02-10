@@ -8,9 +8,9 @@ void CardsSample::contents() {
 
     for (int i = 0; i < 8; ++i) {
         ui->cards->initCard(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10);
-        ui->cards->drawPrimaryTitle("Primary", "Hello i'm secondary");
+        ui->cards->drawPrimaryTitle("Primary oiejzfoizfj oiejzfoeijf fozeijfoizejf", "Hello i'm secondary");
         ui->cards->drawMedia(nullptr);
-        ui->cards->drawSummary("Once Upon a time, a child\ncame into a forest to find\nsomething");
+        ui->cards->drawSummary("Once Upon a time, a child came into a forest to find something", 100);
     }
 
 }
