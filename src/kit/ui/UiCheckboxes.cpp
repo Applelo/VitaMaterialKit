@@ -20,7 +20,7 @@ ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus 
     this->drawSelector(x, y, selector, typeTheme);
 
     if (status == CHECKBOX_INDERTERMINATE || status == CHECKBOX_CHECKED) {
-        this->drawBoxButton(x, y, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size);
+        this->drawBoxButton(x + 2, y + 2, ICON_MDI_CHECKBOX_BLANK, (unsigned int) RGBA8(255, 255, 255, 255), size - 2);
     }
 
     if (status == CHECKBOX_UNCHECKED) {

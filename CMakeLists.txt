@@ -76,7 +76,6 @@ add_executable(${SHORT_NAME}
         src/kit/utils/UtilsPad.cpp
         src/kit/utils/UtilsTouch.cpp
         src/kit/utils/UtilsPadTouchCtrl.cpp
-        src/kit/utils/UtilsTexts.cpp
 
         src/views/Welcome.cpp
         src/views/I18nSample.cpp
