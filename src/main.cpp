@@ -7,6 +7,7 @@
 #include "views/TextsSample.hh"
 #include "views/CheckboxesSample.hh"
 #include "views/TextFieldsSample.hh"
+#include "views/CardsSample.hh"
 
 int main() {
 
@@ -17,8 +18,9 @@ int main() {
     auto *textsSample = new TextsSample("TextsSample");
     auto *checkboxesSample = new CheckboxesSample("CheckboxesSample");
     auto *textFieldsSample = new TextFieldsSample("TextFieldsSample");
+    auto *cardsSample = new CardsSample("CardsSample");
 
-    auto *app = new App("Welcome");
+    auto *app = new App("CardsSample");
 
     app->insertView(welcome);
     app->insertView(buttonsSample);
@@ -27,6 +29,7 @@ int main() {
     app->insertView(textsSample);
     app->insertView(checkboxesSample);
     app->insertView(textFieldsSample);
+    app->insertView(cardsSample);
 
     app->main();
 

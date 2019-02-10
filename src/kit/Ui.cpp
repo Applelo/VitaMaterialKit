@@ -13,6 +13,7 @@ void Ui::init() {
     this->checkboxes    = new UiCheckboxes(this->theme, this->icons, this->texts);
     this->radioBoxes    = new UiRadioBoxes(this->theme, this->icons, this->texts);
     this->textFields    = new UiTextFields(this->theme, this->texts, this->icons);
+    this->cards         = new UiCards(this->theme, this->texts, this->icons, this->buttons);
 }
 
 void Ui::initTheme() {

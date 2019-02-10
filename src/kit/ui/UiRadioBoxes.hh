@@ -14,7 +14,7 @@ typedef struct ZoneEventRadioBoxes : public ZoneEvent {
     UiRadioBoxesStatus status;
 } ZoneEventRadioBoxes;
 
-class UiRadioBoxes : public ZoneEvent, UiParentBoxes {
+class UiRadioBoxes : public UiEvent, UiParentBoxes {
 private:
     ZoneEventRadioBoxes zoneEvent;
 public:

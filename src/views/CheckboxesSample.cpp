@@ -36,8 +36,8 @@ void CheckboxesSample::controls() {
     }
 
 
-    if (UiButtons::onTouch(back, utils->touch->lastClickPoint) ||
-            UiButtons::onPad(back, utils->pad->pressed.cross) ||
+    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||
+            ui->buttons->onPad(back, utils->pad->pressed.cross) ||
         utils->pad->pressed.circle) {
 
         viewsController->setActualView("Welcome");

@@ -9,6 +9,7 @@
 #include "ui/UiCheckboxes.hh"
 #include "ui/UiTextFields.hh"
 #include "ui/UiRadioBoxes.hh"
+#include "ui/UiCards.hh"
 
 
 class Ui {
@@ -25,6 +26,7 @@ public:
     UiCheckboxes *checkboxes;
     UiTextFields *textFields;
     UiRadioBoxes *radioBoxes;
+    UiCards *cards;
 
     Ui();
 };
