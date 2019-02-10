@@ -1,11 +1,13 @@
 # Changelog
 
 ## Version 0.7
-* Add Scroll class to manage scroll elements
 * Add Card class
-* Add Shadow system
+* Add Scroll class to manage scroll elements
 * Improve RadioBoxes & Checkboxes functions with text to support changes (Text type & color)
+* Add a param to change the size of the button
+* Move applyTextHeightLimit & applyTextWidthLimit of TextFields into UtilsTexts
 * Add possibility to choose a start value in PadTouchController
+* Improve PadTouchController class when the menu change
 * Fixes everywhere, every commit
 
 ## Version 0.6
