@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-02-09.
-//
-
 #include "CardsSample.hh"
 
 CardsSample::CardsSample(const std::string &name) : View(name) {

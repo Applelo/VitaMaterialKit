@@ -1,7 +1,3 @@
-//
-// Created by Loïs Boubault on 2019-02-09.
-//
-
 #ifndef VITAMATERIALKIT_CARDSSAMPLE_HH
 #define VITAMATERIALKIT_CARDSSAMPLE_HH
 
