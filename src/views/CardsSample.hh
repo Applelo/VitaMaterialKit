@@ -16,6 +16,8 @@ public:
     void contents() override;
 
     void mounted() override;
+
+    void controls() override;
 };
 
 

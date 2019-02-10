@@ -6,6 +6,7 @@
 #include "utils/UtilsTouch.hpp"
 #include "utils/UtilsPad.hpp"
 #include "utils/UtilsPadTouchCtrl.hh"
+#include "utils/UtilsScroll.hh"
 
 class Utils {
 protected:
@@ -15,6 +16,7 @@ public:
     UtilsPad *pad;
     UtilsI18n *i18n;
     UtilsPadTouchCtrl *PTC;
+    UtilsScroll *scroll;
     Utils();
     virtual void read();
 };

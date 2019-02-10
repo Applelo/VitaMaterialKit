@@ -9,6 +9,7 @@ void Utils::init() {
    this->pad = new UtilsPad();
    this->i18n = new UtilsI18n();
    this->PTC = new UtilsPadTouchCtrl(this->pad, this->touch);
+   this->scroll = new UtilsScroll(this->touch);
 }
 
 void Utils::read() {

@@ -1,11 +1,12 @@
 # Changelog
 
 ## Version 0.7
-* Add Scroll class to manage scroll element
+* Add Scroll class to manage scroll elements
 * Add Card class
 * Add Shadow system
 * Improve RadioBoxes & Checkboxes functions with text to support changes (Text type & color)
 * Add possibility to choose a start value in PadTouchController
+* Fixes everywhere, every commit
 
 ## Version 0.6
 * Add RadioBoxes class

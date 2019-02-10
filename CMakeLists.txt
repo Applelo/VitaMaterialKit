@@ -85,7 +85,7 @@ add_executable(${SHORT_NAME}
         src/views/TextsSample.cpp
         src/views/CheckboxesSample.cpp
         src/views/TextFieldsSample.cpp
-        src/views/CardsSample.cpp)
+        src/views/CardsSample.cpp src/kit/utils/UtilsScroll.cpp src/kit/utils/UtilsScroll.hh)
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
