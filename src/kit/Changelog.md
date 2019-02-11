@@ -4,11 +4,11 @@
 * Add Card class
 * Add Scroll class to manage scroll elements
 * Improve RadioBoxes & Checkboxes functions with text to support changes (Text type & color)
-* Add args to change the size of buttons
 * Remove UtilsTexts and revert all changes to UiTexts & UtilsIme to simplify logic
 * Move applyTextHeightLimit & applyTextWidthLimit of TextFields into UiTexts
 * Add possibility to choose a start value in PadTouchController
 * Improve PadTouchController class to update value
+* Increase size of the float button (without text)
 * Fixes everywhere, every commit
 
 ## Version 0.6
