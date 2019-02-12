@@ -28,6 +28,8 @@ private:
 
     int xOffset, yOffset, heightOffset;
     TextData textData;
+    std::string showedText;
+    int heightHeaderText, heightSubHead;
 
     void resetCard();
     void resetOffset();

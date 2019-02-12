@@ -289,10 +289,15 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
 
         posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
         posBreak = posBreak * width;
-        posBreak = posBreak / (textStyleData.size / 2);
+        posBreak = posBreak / (int)(textStyleData.size * 0.7);
 
         std::string::size_type lastFound = text.find_last_of('\n');
         std::string::size_type found = text.find(' ', posBreak);
+
+        //abort the mission
+        if ((lastFound == std::string::npos && found == std::string::npos) || posBreak > text.length()) {
+            return text;
+        }
 
         if (lastFound == std::string::npos) {
             lastFound = 0;
@@ -309,7 +314,8 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
             text.replace(found, 1, "\n");
         }
 
-        return this->applyTextWidthLimit(text, width, textStyleData);
+
+        return this->applyTextWidthLimit(text, width, textStyleData, textLimit);
     }
 
     return text;
@@ -318,19 +324,21 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
 std::string UiTexts::applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData, TextLimit textLimit) {
     textDataText = this->getTextData(text, textStyleData);
 
-    if (textDataText.height > height) {
-        std::string::size_type found = text.find_first_of('\n');
 
-        if (found != std::string::npos) {
-            if (textLimit == TEXT_LIMIT_END) {
-                text = text.substr(found + 1, text.length() - 1);
-            }
-            else {
-                text = text.substr(0, found + 1);
-            }
-            return this->applyTextHeightLimit(text, height, textStyleData);
+    if (textDataText.height > height) {
+
+        if (textLimit == TEXT_LIMIT_START) {
+            text = text.substr(0, text.length() - 2);
         }
+        else {
+            text = text.substr(1, text.length() - 1);
+        }
+
+        return this->applyTextHeightLimit(text, height, textStyleData, textLimit);
+
     }
 
     return text;
 }
+
+
