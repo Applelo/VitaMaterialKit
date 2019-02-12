@@ -307,6 +307,11 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
             found = text.length() - 1;
         }
 
+        //abort the mission episode 2
+        if (found - lastFound == 0) {
+            return text;
+        }
+
         if ((found - lastFound) > 28) {
             text.insert(posBreak, "-\n");
         }
