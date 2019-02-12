@@ -84,7 +84,7 @@ add_executable(${SHORT_NAME}
         src/views/TextsSample.cpp
         src/views/CheckboxesSample.cpp
         src/views/TextFieldsSample.cpp
-        src/views/CardsSample.cpp src/kit/utils/UtilsScroll.cpp src/kit/utils/UtilsScroll.hh)
+        src/views/CardsSample.cpp src/kit/utils/UtilsScroll.cpp src/kit/utils/UtilsScroll.hh src/kit/utils/UtilsTwitter.cpp src/kit/utils/UtilsTwitter.hh)
 
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
@@ -98,6 +98,10 @@ target_link_libraries(${SHORT_NAME}
         SceCommonDialog_stub
         SceAppUtil_stub
         SceRegistryMgr_stub
+        SceNet_stub
+        SceNetCtl_stub
+        SceHttp_stub
+        SceSsl_stub
         jansson
         freetype
         png

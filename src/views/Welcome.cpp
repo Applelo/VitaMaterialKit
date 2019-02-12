@@ -5,7 +5,8 @@ Welcome::Welcome(const char *name) : View(name) {
 }
 
 void Welcome::contents() {
-    ui->texts->draw(10, 10, Body1, THEME_PRIMARY, "Choose a sample :");
+    //ui->texts->draw(10, 10, Body1, THEME_PRIMARY, "Choose a sample :");
+    ui->texts->drawF(10, 10, Body1, THEME_PRIMARY, false, "ERROR: sceTwDialogGetResult = 0x%08x\n", twitter.getResult());
 
     buttonsTZE = ui->buttons->containedDraw("Buttons", 10, 60, THEME_PRIMARY, utils->PTC->isY(PADTOUCHCTRL_IS_FIRST), ICON_MDI_MOUSE);
     i18nTZE = ui->buttons->containedDraw("I18n", 10, 130, THEME_PRIMARY, utils->PTC->isY(2),ICON_MDI_TRANSLATE);
@@ -64,3 +65,6 @@ void Welcome::beforeEnter() {
     this->utils->PTC->setLimit(PADTOUCHCTRL_TYPE_Y, 7);
 }
 
+void Welcome::mounted() {
+    twitter.renderTwitterDialog();
+}
