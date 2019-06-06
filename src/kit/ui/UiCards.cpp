@@ -151,13 +151,13 @@ CardPrePrimaryTitle UiCards::prePrimaryTitle(std::string headerText, std::string
             }
         }
 
-        showedText = texts->applyTextHeightLimit(headerText, heightHeaderText, texts->getTextStyleData(H6), TEXT_LIMIT_START);
+        showedText = texts->applyTextHeightLimitCut(headerText, heightHeaderText, texts->getTextStyleData(H6), TEXT_LIMIT_START);
         if (headerText.length() > showedText.length()) {
             showedText.append("...");
         }
         headerText = showedText;
 
-        showedText = texts->applyTextHeightLimit(subHead, heightSubHead, texts->getTextStyleData(Body1), TEXT_LIMIT_START);
+        showedText = texts->applyTextHeightLimitCut(subHead, heightSubHead, texts->getTextStyleData(Body1), TEXT_LIMIT_START);
         if (subHead.length() > showedText.length()) {
             showedText.append("...");
         }
@@ -174,7 +174,7 @@ CardPrePrimaryTitle UiCards::prePrimaryTitle(std::string headerText, std::string
 CardPreSummary UiCards::preSummaryTitle(std::string text, int width, int height) {
     text = texts->applyTextWidthLimit(text, width - (CARDS_DEFAULT_PADDING), texts->getTextStyleData(Body1));
     if (height > 0) {
-        text = texts->applyTextHeightLimit(text, height - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1), TEXT_LIMIT_START);
+        text = texts->applyTextHeightLimitCut(text, height - (CARDS_DEFAULT_PADDING * 2), texts->getTextStyleData(Body1), TEXT_LIMIT_START);
         text.append("...");
     }
 

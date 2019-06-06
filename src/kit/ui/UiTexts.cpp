@@ -1,4 +1,5 @@
 #include "UiTexts.hpp"
+#include <psp2/kernel/clib.h>
 
 using namespace ufal::unilib;
 
@@ -271,6 +272,17 @@ std::string UiTexts::toLowercase(std::string text) {
     return text;
 }
 
+std::string UiTexts::toTitlecase(std::string text) {
+    utf8::decode(text, text32);
+
+    for (auto&& chr :  text32) chr = unicode::titlecase(chr);
+
+    utf8::encode(text32, text);
+
+    return text;
+}
+
+
 int UiTexts::keySearch(const std::string& s, const std::string& key) {
     int count = 0;
     size_t pos=0;
@@ -282,7 +294,7 @@ int UiTexts::keySearch(const std::string& s, const std::string& key) {
 }
 
 
-std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData, TextLimit textLimit) {
+/*std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
     textDataText = this->getTextData(text, textStyleData);
 
     if (textDataText.width > width) {
@@ -320,15 +332,47 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
         }
 
 
-        return this->applyTextWidthLimit(text, width, textStyleData, textLimit);
+        return this->applyTextWidthLimit(text, width, textStyleData);
+    }
+
+    return text;
+}*/
+
+
+std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
+    textDataText = this->getTextData(text, textStyleData);
+
+    posEnd = width / (int)(textStyleData.size * 0.4);
+    int i = 0;
+
+    while (textDataText.width > width) {
+
+
+        adjust = 0;
+        subString = text.substr(pos, pos + posEnd);
+        sceClibPrintf("--");
+        sceClibPrintf(subString.c_str());
+        substringTextData = this->getTextData(subString, textStyleData);
+
+        while (substringTextData.width > width) {
+            adjust++;
+            subString = text.substr(pos, pos + posEnd - adjust);
+            substringTextData = this->getTextData(subString, textStyleData);
+        }
+        sceClibPrintf(subString.c_str());
+        sceClibPrintf("--");
+        text.insert(pos + posEnd - adjust, "\n");
+        textDataText = this->getTextData(text, textStyleData);
+        i++;
+        if (i > 4)
+            break;
     }
 
     return text;
 }
 
-std::string UiTexts::applyTextHeightLimit(std::string text, int height, TextStyleData textStyleData, TextLimit textLimit) {
+std::string UiTexts::applyTextHeightLimitCut(std::string text, int height, TextStyleData textStyleData, TextLimit textLimit) {
     textDataText = this->getTextData(text, textStyleData);
-
 
     if (textDataText.height > height) {
 
@@ -339,8 +383,7 @@ std::string UiTexts::applyTextHeightLimit(std::string text, int height, TextStyl
             text = text.substr(1, text.length() - 1);
         }
 
-        return this->applyTextHeightLimit(text, height, textStyleData, textLimit);
-
+        return this->applyTextHeightLimitCut(text, height, textStyleData, textLimit);
     }
 
     return text;

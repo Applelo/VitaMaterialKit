@@ -8,6 +8,7 @@ void IconsSample::contents() {
     ui->icons->draw(ICON_MDI_STAR, 10, 60);
     ui->icons->draw(ICON_MDI_MICROSOFT, 10, 100, (unsigned int) RGBA8(255, 255, 0, 255));
     ui->icons->draw(ICON_MDI_APPLE, 10, 140, THEME_PRIMARY, 100);
+    ui->icons->drawPSVita(ICON_PSVITA_PLAYSTATION, 10, 260, THEME_PRIMARY, 1.5f);
 
     back = ui->buttons->containedDraw("Back", 800, 480);
 }

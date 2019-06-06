@@ -1,7 +1,6 @@
 #ifndef VITAMATERIALKIT_UTILS_HH
 #define VITAMATERIALKIT_UTILS_HH
 
-
 #include "utils/UtilsI18n.hpp"
 #include "utils/UtilsTouch.hpp"
 #include "utils/UtilsPad.hpp"
@@ -17,6 +16,7 @@ public:
     UtilsI18n *i18n;
     UtilsPadTouchCtrl *PTC;
     UtilsScroll *scroll;
+
     Utils();
     virtual void read();
 };

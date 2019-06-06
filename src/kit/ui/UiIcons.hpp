@@ -6,26 +6,31 @@
 #include <vita2d.h>
 #include <string>
 
-#include "UiIconsCodes.hh"
+#include "UiIconsCodesPSVita.hh"
+#include "UiIconsCodesMDI.hh"
 #include "UiTheme.hpp"
 #include <math.h>
 
-#define DEFAULT_MATERIAL_ICON_COLOR (unsigned int) RGBA8(255, 255, 255, 255)
+#define DEFAULT_ICON_COLOR (unsigned int) RGBA8(255, 255, 255, 255)
 #define DEFAULT_MATERIAL_ICON_SIZE (unsigned int) 50
+#define DEFAULT_PSVITA_ICON_SCALE 1.5f
 #define DEFAULT_MATERIAL_ICON_PATH "app0:assets/fonts/mdi/" FONT_ICON_FILE_NAME_MDI
+#define DEFAULT_PSVITA_ICON_PATH "sa0:data/font/pvf/psexchar.pvf"
 
 class UiIcons {
     private:
         UiTheme *theme;
-        vita2d_font *font;
+        vita2d_font *mdi;
+        vita2d_pvf  *psvita;
     public:
         UiIcons();
         UiIcons(UiTheme *theme);
-        UiIcons(const char *path);
-        UiIcons(const char *path, UiTheme *theme);
 
-        void draw(const char* iconCode, int x, int y, unsigned int color = DEFAULT_MATERIAL_ICON_COLOR, unsigned int size = DEFAULT_MATERIAL_ICON_SIZE);
+        void draw(const char* iconCode, int x, int y, unsigned int color = DEFAULT_ICON_COLOR, unsigned int size = DEFAULT_MATERIAL_ICON_SIZE);
         void draw(const char* iconCode, int x, int y, TypeTheme iconThemeColor, unsigned int size = DEFAULT_MATERIAL_ICON_SIZE);
+
+        void drawPSVita(const char *iconCode, int x, int y, unsigned int color = DEFAULT_ICON_COLOR, float scale = DEFAULT_PSVITA_ICON_SCALE);
+        void drawPSVita(const char *iconCode, int x, int y, TypeTheme iconThemeColor, float scale = DEFAULT_PSVITA_ICON_SCALE);
 };
 
 
