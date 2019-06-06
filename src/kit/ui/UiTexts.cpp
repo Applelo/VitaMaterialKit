@@ -272,7 +272,7 @@ std::string UiTexts::toLowercase(std::string text) {
     return text;
 }
 
-std::string UiTexts::toTitlecase(std::string text) {
+std::string UiTexts::toTitleCase(std::string text) {
     utf8::decode(text, text32);
 
     for (auto&& chr :  text32) chr = unicode::titlecase(chr);
@@ -294,14 +294,14 @@ int UiTexts::keySearch(const std::string& s, const std::string& key) {
 }
 
 
-/*std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
+std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
     textDataText = this->getTextData(text, textStyleData);
 
     if (textDataText.width > width) {
 
         posBreak = (unsigned int) (this->keySearch(text, "\n") + 1);
         posBreak = posBreak * width;
-        posBreak = posBreak / (int)(textStyleData.size * 0.7);
+        posBreak = posBreak / (int)(textStyleData.size * 0.6);
 
         std::string::size_type lastFound = text.find_last_of('\n');
         std::string::size_type found = text.find(' ', posBreak);
@@ -333,39 +333,6 @@ int UiTexts::keySearch(const std::string& s, const std::string& key) {
 
 
         return this->applyTextWidthLimit(text, width, textStyleData);
-    }
-
-    return text;
-}*/
-
-
-std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleData textStyleData) {
-    textDataText = this->getTextData(text, textStyleData);
-
-    posEnd = width / (int)(textStyleData.size * 0.4);
-    int i = 0;
-
-    while (textDataText.width > width) {
-
-
-        adjust = 0;
-        subString = text.substr(pos, pos + posEnd);
-        sceClibPrintf("--");
-        sceClibPrintf(subString.c_str());
-        substringTextData = this->getTextData(subString, textStyleData);
-
-        while (substringTextData.width > width) {
-            adjust++;
-            subString = text.substr(pos, pos + posEnd - adjust);
-            substringTextData = this->getTextData(subString, textStyleData);
-        }
-        sceClibPrintf(subString.c_str());
-        sceClibPrintf("--");
-        text.insert(pos + posEnd - adjust, "\n");
-        textDataText = this->getTextData(text, textStyleData);
-        i++;
-        if (i > 4)
-            break;
     }
 
     return text;

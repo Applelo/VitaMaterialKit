@@ -22,10 +22,13 @@ void UiIcons::draw(const char* iconCode, int x, int y, TypeTheme iconThemeColor,
    this->draw(iconCode, x, y, iconThemeColor == THEME_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, size);
 }
 
+//Note: don't work with Vita3K
 void UiIcons::drawPSVita(const char* iconCode, int x, int y, unsigned int color, float scale) {
-    vita2d_pvf_draw_text(psvita, x, y, color, scale, iconCode);
+    if (psvita != nullptr)//prevent vita3k crash
+        vita2d_pvf_draw_text(psvita, x, y, color, scale, iconCode);
 }
 
+//Note: don't work with Vita3K
 void UiIcons::drawPSVita(const char* iconCode, int x, int y, TypeTheme iconThemeColor, float scale) {
     this->drawPSVita(iconCode, x, y, iconThemeColor == THEME_PRIMARY ? theme->getPrimaryRGBA().text : theme->getSecondaryRGBA().text, scale);
 }

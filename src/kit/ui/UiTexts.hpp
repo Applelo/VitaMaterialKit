@@ -126,7 +126,7 @@ public:
     //transformation text
     std::string toUppercase(std::string text);
     std::string toLowercase(std::string text);
-    std::string toTitlecase(std::string text);
+    std::string toTitleCase(std::string text);
 
 };
 
