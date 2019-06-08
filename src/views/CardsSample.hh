@@ -8,6 +8,7 @@ class CardsSample : public View {
 private:
     CardPrePrimaryTitle cardPrePrimaryTitle;
     CardPreSummary cardPreSummary;
+    ZoneEvent back;
 
 public:
     CardsSample(const std::string &name);

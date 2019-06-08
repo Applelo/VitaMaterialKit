@@ -6,21 +6,29 @@ CardsSample::CardsSample(const std::string &name) : View(name) {
 
 void CardsSample::contents() {
 
-    for (int i = 0; i < 1; ++i) {
+    for (int i = 0; i < 10; ++i) {
         ui->cards->initCard(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10);
         ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
         ui->cards->drawMedia(nullptr);
         ui->cards->drawSummary(cardPreSummary);
     }
 
+    back = ui->buttons->containedDraw("Back", 800, 480);
 }
 
 void CardsSample::controls() {
+    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint)||
+        ui->buttons->onPad(back, utils->pad->pressed.cross) ||
+        utils->pad->pressed.circle
+            ) {
+        viewsController->setActualView("Welcome");
+    }
+
     utils->scroll->controller("cards", utils->pad->pressed.left, utils->pad->pressed.right, 400);
 }
 
 void CardsSample::mounted() {
-    cardPrePrimaryTitle = ui->cards->prePrimaryTitle("[Vita] Vita Homebrew Browser Wiki : une solution alternative pour télécharger les applications bannies de VitaDB (ONElua notamment)", "test", CARDS_DEFAULT_WIDTH, 200);
-    cardPreSummary = ui->cards->preSummaryTitle("Once Upon a time, a child came into a forest to find something", CARDS_DEFAULT_WIDTH, 100);
+    cardPrePrimaryTitle = ui->cards->prePrimaryTitle("Lorem ipsum dolor sit amet.", "Applelo", CARDS_DEFAULT_WIDTH, 150);
+    cardPreSummary = ui->cards->preSummaryTitle("Maecenas et luctus augue, non volutpat orci. Vestibulum ultrices rutrum metus, ut malesuada velit malesuada sit amet.", CARDS_DEFAULT_WIDTH, 100);
     utils->scroll->create("cards", SCROLL_DIR_X, 0, 400 * 6, 10, 10, 960, 400);
 }

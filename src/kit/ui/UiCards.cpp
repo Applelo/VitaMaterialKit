@@ -79,12 +79,12 @@ ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
     this->resetOffset();
 
     if (media == nullptr) {
-        heightOffset = 250;
-        vita2d_draw_rectangle(x, y, width, height == 0 ? heightOffset : height, CARDS_DEFAULT_COLOR_HEADER_TEXT);
+        heightOffset = height == 0 ? 200 : height;
+        vita2d_draw_rectangle(x, y, width, heightOffset, CARDS_DEFAULT_COLOR_HEADER_TEXT);
     }
     else {
-        heightOffset = vita2d_texture_get_height(media);
-        vita2d_draw_texture_part(media, x, y, 0, 0, width, height == 0 ? heightOffset : height);
+        heightOffset = height == 0 ? vita2d_texture_get_height(media) : height;
+        vita2d_draw_texture_part(media, x, y, 0, 0, width, heightOffset);
     }
 
 
@@ -94,7 +94,7 @@ ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
     zoneEvent.height = heightOffset;
 
     y += heightOffset;
-    this->height +=heightOffset;
+    this->height += heightOffset;
 
     return zoneEvent;
 }
