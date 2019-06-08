@@ -1,5 +1,4 @@
 #include "UiTexts.hpp"
-#include <psp2/kernel/clib.h>
 
 using namespace ufal::unilib;
 

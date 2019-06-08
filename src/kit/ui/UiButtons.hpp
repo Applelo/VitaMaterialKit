@@ -19,6 +19,7 @@ private:
     TextData textData;
     ZoneEvent zoneEvent;
     TextStyle textStyle = Button;
+    int circleHeight;
 
     void drawOutlinedRectangle(int x, int y, int w, int h, unsigned int size, unsigned int color);
     void textDrawFinal(std::string text, int x, int y, TypeTheme typeTheme = THEME_PRIMARY, const char* icon = "");

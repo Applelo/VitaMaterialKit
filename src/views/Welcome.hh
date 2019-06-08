@@ -11,12 +11,14 @@ private:
     ZoneEvent textsTZE;
     ZoneEvent checkboxesTZE;
     ZoneEvent textfieldsTZE;
+    ZoneEvent cardsTZE;
     ZoneEvent exitTZE;
 
 public:
     Welcome(const char *name);
     void contents() override;
     void controls() override;
+    int getXMenuItemPosition(int item);
 
     void beforeEnter() override;
 };

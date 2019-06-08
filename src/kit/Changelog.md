@@ -12,6 +12,7 @@
 * Increase size of the float button (without text)
 * Add PSVita Icons in UiIcons class (don't work with Vita3K)
 * Improve CMakeLists for better readability
+* Add debug function and mode (auto by default, ctrl, touch) for UtilsPadTouchCtrl
 * Fixes everywhere, every commit
 
 ## Version 0.6
