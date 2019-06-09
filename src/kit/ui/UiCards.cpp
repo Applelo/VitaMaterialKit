@@ -9,6 +9,7 @@ void UiCards::resetCard() {
     y = 0;
     width = 0;
     height = 0;
+    selected = false;
 }
 
 void UiCards::resetOffset() {
@@ -17,7 +18,22 @@ void UiCards::resetOffset() {
     heightOffset = 0;
 }
 
-ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme) {
+bool UiCards::outsideScreen() {
+    return x + width < 0 || y + height < 0 || x > SCREEN_WIDTH || y > SCREEN_HEIGHT;
+}
+
+ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme, bool selected) {
+
+    //reset card
+    this->resetCard();
+    this->x = x;
+    this->y = y;
+    this->width = width;
+    if (outsideScreen())
+        return {};
+
+    this->typeTheme = typeTheme;
+    this->selected = selected;
 
     //draw container
     zoneEvent.x = x;
@@ -25,19 +41,17 @@ ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme) {
     zoneEvent.width = width;
     zoneEvent.height = height;
 
+
     vita2d_draw_rectangle(x, y, width, height, CARDS_DEFAULT_COLOR_BACKGROUND);
 
-    //reset &  start to draw new card
-    this->resetCard();
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->typeTheme = typeTheme;
 
     return zoneEvent;
 }
 
 ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
+    if (outsideScreen())
+        return {};
+
     this->resetOffset();
 
     zoneEvent.x = x;
@@ -76,6 +90,9 @@ ZoneEvent UiCards::drawPrimaryTitle(std::string headerText, std::string subHead,
 }
 
 ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
+    if (outsideScreen())
+        return {};
+
     this->resetOffset();
 
     if (media == nullptr) {
@@ -102,7 +119,8 @@ ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
 ZoneEvent UiCards::drawSummary(CardPreSummary cardPreSummary) {
     this->resetOffset();
 
-    texts->draw(x + CARDS_DEFAULT_PADDING, y + CARDS_DEFAULT_PADDING, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, cardPreSummary.text);
+    if (outsideScreen())
+        return {};
 
     if (cardPreSummary.height == 0) {
         textData = texts->getTextData(cardPreSummary.text, Body1);
@@ -111,6 +129,12 @@ ZoneEvent UiCards::drawSummary(CardPreSummary cardPreSummary) {
     else {
         heightOffset = cardPreSummary.height;
     }
+
+    if (this->selected) {
+        vita2d_draw_rectangle(x, y + CARDS_DEFAULT_PADDING, width, heightOffset, CARDS_DEFAULT_COLOR_SELECTED);
+    }
+    texts->draw(x + CARDS_DEFAULT_PADDING, y + CARDS_DEFAULT_PADDING, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, cardPreSummary.text);
+
 
     zoneEvent.x = x;
     zoneEvent.y = y;
@@ -123,7 +147,7 @@ ZoneEvent UiCards::drawSummary(CardPreSummary cardPreSummary) {
 }
 
 ZoneEvent UiCards::drawSummary(std::string text, int height) {
-    this->preSummaryTitle(std::move(text), width, height);
+    cardPreSummary = this->preSummaryTitle(std::move(text), width, height);
     return this->drawSummary(cardPreSummary);
 }
 

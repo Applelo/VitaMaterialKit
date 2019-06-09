@@ -7,9 +7,9 @@ CardsSample::CardsSample(const std::string &name) : View(name) {
 void CardsSample::contents() {
 
     for (int i = 0; i < 10; ++i) {
-        ui->cards->initCard(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10);
-        ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
+        ui->cards->initCard(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10, CARDS_DEFAULT_WIDTH, THEME_PRIMARY, true);
         ui->cards->drawMedia(nullptr);
+        ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
         ui->cards->drawSummary(cardPreSummary);
     }
 

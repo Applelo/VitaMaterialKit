@@ -4,15 +4,19 @@
 #include <vita2d.h>
 #include <string>
 #include "../core/UiEvent.hh"
+#include "../core/Config.hh"
 #include "UiTheme.hpp"
 #include "UiTexts.hpp"
 #include "UiButtons.hpp"
+
+//https://material-components.github.io/material-components-web-catalog/#/component/card?type=basicMediaText
 
 #define CARDS_DEFAULT_WIDTH 400
 #define CARDS_DEFAULT_PADDING 16
 #define CARDS_DEFAULT_COLOR_HEADER_TEXT (unsigned int)RGBA8(0, 0, 0, 222)
 #define CARDS_DEFAULT_COLOR_SUBHEAD_TEXT (unsigned int)RGBA8(0, 0, 0, 111)
 #define CARDS_DEFAULT_COLOR_BACKGROUND (unsigned int)RGBA8(255, 255, 255, 255)
+#define CARDS_DEFAULT_COLOR_SELECTED (unsigned int)RGBA8(242, 242, 242, 255)
 
 typedef struct CardPrePrimaryTitle {
     std::string headerText;
@@ -34,6 +38,7 @@ private:
     int x, y;
     int width, height;
     int typeTheme;
+    bool selected;
     ZoneEvent zoneEvent;
 
     int xOffset, yOffset, heightOffset;
@@ -46,10 +51,11 @@ private:
 
     void resetCard();
     void resetOffset();
+    bool outsideScreen();
 public:
     UiCards(UiTheme *theme, UiTexts *texts, UiIcons *icons, UiButtons *buttons);
 
-    ZoneEvent initCard(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY);
+    ZoneEvent initCard(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false);
 
     ZoneEvent drawPrimaryTitle(std::string headerText, std::string subHead = "", int height = 0);
     ZoneEvent drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle);
