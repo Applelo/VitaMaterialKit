@@ -9,6 +9,7 @@ void UiCards::resetCard() {
     y = 0;
     width = 0;
     height = 0;
+    mediaFirst = 0;
     selected = false;
 }
 
@@ -42,7 +43,6 @@ ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme, bool s
     zoneEvent.height = height;
 
 
-    vita2d_draw_rectangle(x, y, width, height, CARDS_DEFAULT_COLOR_BACKGROUND);
 
 
     return zoneEvent;
@@ -51,6 +51,9 @@ ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme, bool s
 ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
     if (outsideScreen())
         return {};
+
+    if (mediaFirst == 0)
+        mediaFirst = -1;
 
     this->resetOffset();
 
@@ -62,18 +65,26 @@ ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
     yOffset = y + CARDS_DEFAULT_PADDING;
 
     textData = texts->getTextData(prePrimaryTitle.headerText, H6);
-    texts->draw(xOffset, yOffset, H6, CARDS_DEFAULT_COLOR_HEADER_TEXT, prePrimaryTitle.headerText);
-    texts->draw(xOffset, yOffset + textData.height + 4, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, prePrimaryTitle.subHead);
 
     if (prePrimaryTitle.height == 0) {
         heightOffset = CARDS_DEFAULT_PADDING;
         heightOffset += textData.height;
-        textData = texts->getTextData(prePrimaryTitle.subHead, Body1);
-        heightOffset += textData.height + 4;
+        if (!prePrimaryTitle.subHead.empty()) {
+            textData = texts->getTextData(prePrimaryTitle.subHead, Body1);
+            heightOffset += textData.height + CARDS_DEFAULT_PADDING_SMALL;
+        }
         heightOffset += CARDS_DEFAULT_PADDING;
     }
     else {
         heightOffset = prePrimaryTitle.height;
+    }
+
+    vita2d_draw_rectangle(x, y - CARDS_DEFAULT_PADDING, width, heightOffset + CARDS_DEFAULT_PADDING, this->selected && this->mediaFirst == 1 ? CARDS_DEFAULT_COLOR_SELECTED : CARDS_DEFAULT_COLOR_BACKGROUND);
+
+    texts->draw(xOffset, yOffset, H6, CARDS_DEFAULT_COLOR_HEADER_TEXT, prePrimaryTitle.headerText);
+    if (!prePrimaryTitle.subHead.empty()) {
+        textData = texts->getTextData(prePrimaryTitle.headerText, H6);
+        texts->draw(xOffset, yOffset + textData.height + CARDS_DEFAULT_PADDING_SMALL, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, prePrimaryTitle.subHead);
     }
 
     zoneEvent.height = heightOffset;
@@ -89,19 +100,41 @@ ZoneEvent UiCards::drawPrimaryTitle(std::string headerText, std::string subHead,
    return this->drawPrimaryTitle(cardPrePrimaryTitle);
 }
 
-ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
+ZoneEvent UiCards::drawMedia(vita2d_texture *media, CardPrePrimaryTitle prePrimaryTitle) {
     if (outsideScreen())
         return {};
+
+    if (mediaFirst == 0)
+        mediaFirst = 1;
 
     this->resetOffset();
 
     if (media == nullptr) {
-        heightOffset = height == 0 ? 200 : height;
+        heightOffset = prePrimaryTitle.height == 0 ? 200 : prePrimaryTitle.height;
         vita2d_draw_rectangle(x, y, width, heightOffset, CARDS_DEFAULT_COLOR_HEADER_TEXT);
     }
     else {
-        heightOffset = height == 0 ? vita2d_texture_get_height(media) : height;
+        heightOffset = prePrimaryTitle.height == 0 ? vita2d_texture_get_height(media) : prePrimaryTitle.height;
         vita2d_draw_texture_part(media, x, y, 0, 0, width, heightOffset);
+    }
+
+    yOffset = y - CARDS_DEFAULT_PADDING + heightOffset;
+    xOffset = x + CARDS_DEFAULT_PADDING;
+
+    if (!prePrimaryTitle.subHead.empty()) {
+        textData = texts->getTextData(prePrimaryTitle.subHead, Body1);
+        yOffset -= textData.height + CARDS_DEFAULT_PADDING;
+        texts->draw(xOffset, yOffset, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT_MEDIA, prePrimaryTitle.subHead);
+    }
+    if (!prePrimaryTitle.subHead.empty()) {
+        textData = texts->getTextData(prePrimaryTitle.headerText, H6);
+        yOffset -= textData.height + CARDS_DEFAULT_PADDING_SMALL;
+        texts->draw(xOffset, yOffset, H6, CARDS_DEFAULT_COLOR_HEADER_TEXT_MEDIA, prePrimaryTitle.headerText);
+    }
+
+
+    if (this->selected) {
+        vita2d_draw_rectangle(x, y, width, heightOffset, CARDS_DEFAULT_COLOR_SELECTED_MEDIA);
     }
 
 
@@ -116,11 +149,28 @@ ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
     return zoneEvent;
 }
 
+ZoneEvent UiCards::drawMedia(vita2d_texture *media, std::string headerText, std::string subHead, int height) {
+    cardPrePrimaryTitle.headerText = headerText;
+    cardPrePrimaryTitle.subHead = subHead;
+    cardPrePrimaryTitle.height = height;
+    return this->drawMedia(media, cardPrePrimaryTitle);
+}
+
+ZoneEvent UiCards::drawMedia(vita2d_texture *media, int height) {
+    cardPrePrimaryTitle.headerText = "";
+    cardPrePrimaryTitle.subHead = "";
+    cardPrePrimaryTitle.height = height;
+    return this->drawMedia(media, cardPrePrimaryTitle);
+}
+
 ZoneEvent UiCards::drawSummary(CardPreSummary cardPreSummary) {
     this->resetOffset();
 
     if (outsideScreen())
         return {};
+
+    if (mediaFirst == 0)
+        mediaFirst = -1;
 
     if (cardPreSummary.height == 0) {
         textData = texts->getTextData(cardPreSummary.text, Body1);
@@ -130,9 +180,8 @@ ZoneEvent UiCards::drawSummary(CardPreSummary cardPreSummary) {
         heightOffset = cardPreSummary.height;
     }
 
-    if (this->selected) {
-        vita2d_draw_rectangle(x, y + CARDS_DEFAULT_PADDING, width, heightOffset, CARDS_DEFAULT_COLOR_SELECTED);
-    }
+    vita2d_draw_rectangle(x, y - CARDS_DEFAULT_PADDING, width, heightOffset + CARDS_DEFAULT_PADDING, this->selected ? CARDS_DEFAULT_COLOR_SELECTED : CARDS_DEFAULT_COLOR_BACKGROUND);
+
     texts->draw(x + CARDS_DEFAULT_PADDING, y + CARDS_DEFAULT_PADDING, Body1, CARDS_DEFAULT_COLOR_SUBHEAD_TEXT, cardPreSummary.text);
 
 

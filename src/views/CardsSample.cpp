@@ -8,8 +8,8 @@ void CardsSample::contents() {
 
     for (int i = 0; i < 10; ++i) {
         ui->cards->initCard(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10, CARDS_DEFAULT_WIDTH, THEME_PRIMARY, true);
-        ui->cards->drawMedia(nullptr);
-        ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
+        ui->cards->drawMedia(nullptr, cardPrePrimaryTitle);
+        //ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
         ui->cards->drawSummary(cardPreSummary);
     }
 
@@ -28,7 +28,7 @@ void CardsSample::controls() {
 }
 
 void CardsSample::mounted() {
-    cardPrePrimaryTitle = ui->cards->prePrimaryTitle("Lorem ipsum dolor sit amet.", "Applelo", CARDS_DEFAULT_WIDTH, 150);
+    cardPrePrimaryTitle = ui->cards->prePrimaryTitle("Lorem ipsum dolor sit amet.", "Applelo", CARDS_DEFAULT_WIDTH);
     cardPreSummary = ui->cards->preSummaryTitle("Maecenas et luctus augue, non volutpat orci. Vestibulum ultrices rutrum metus, ut malesuada velit malesuada sit amet.", CARDS_DEFAULT_WIDTH, 100);
     utils->scroll->create("cards", SCROLL_DIR_X, 0, 400 * 6, 10, 10, 960, 400);
 }
