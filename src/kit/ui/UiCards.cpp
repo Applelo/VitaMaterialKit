@@ -23,29 +23,12 @@ bool UiCards::outsideScreen() {
     return x + width < 0 || y + height < 0 || x > SCREEN_WIDTH || y > SCREEN_HEIGHT;
 }
 
-ZoneEvent UiCards::initCard(int x, int y, int width, TypeTheme typeTheme, bool selected) {
-
-    //reset card
-    this->resetCard();
+void UiCards::startCard(int x, int y, int width, TypeTheme typeTheme, bool selected) {
     this->x = x;
     this->y = y;
     this->width = width;
-    if (outsideScreen())
-        return {};
-
     this->typeTheme = typeTheme;
     this->selected = selected;
-
-    //draw container
-    zoneEvent.x = x;
-    zoneEvent.y = y;
-    zoneEvent.width = width;
-    zoneEvent.height = height;
-
-
-
-
-    return zoneEvent;
 }
 
 ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
@@ -255,5 +238,18 @@ CardPreSummary UiCards::preSummaryTitle(std::string text, int width, int height)
     cardPreSummary.height = height;
 
     return cardPreSummary;
+}
+
+ZoneEvent UiCards::endCard() {
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.width = width;
+    zoneEvent.height = height;
+
+    //clean for the next draw card
+    this->resetCard();
+    this->resetOffset();
+
+    return zoneEvent;
 }
 

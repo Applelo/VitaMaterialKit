@@ -9,7 +9,7 @@
 #include "UiTexts.hpp"
 #include "UiButtons.hpp"
 
-//https://material-components.github.io/material-components-web-catalog/#/component/card?type=basicMediaText
+//https://material-components.github.io/material-components-web-catalog/#/component/card
 
 #define CARDS_DEFAULT_WIDTH 400
 #define CARDS_DEFAULT_PADDING 16
@@ -61,7 +61,8 @@ private:
 public:
     UiCards(UiTheme *theme, UiTexts *texts, UiIcons *icons, UiButtons *buttons);
 
-    ZoneEvent initCard(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false);
+    void startCard(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false);
+    ZoneEvent endCard();
 
     ZoneEvent drawPrimaryTitle(std::string headerText, std::string subHead = "", int height = 0);
     ZoneEvent drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle);
