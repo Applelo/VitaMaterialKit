@@ -1,4 +1,5 @@
 # VitaMaterialProject
+[![Travis Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 

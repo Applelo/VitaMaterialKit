@@ -9,6 +9,7 @@ private:
     CardPrePrimaryTitle cardPrePrimaryTitle;
     CardPreSummary cardPreSummary;
     ZoneEvent back;
+    int cardsSelector;
 
 public:
     CardsSample(const std::string &name);

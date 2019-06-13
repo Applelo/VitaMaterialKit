@@ -22,11 +22,12 @@ typedef struct ScrollChannelData {
     int yZone;
     int widthZone;
     int heightZone;
+    int animation;
+    int targetAnimation;
 } ScrollChannelData;
 
 class UtilsScroll {
 private:
-    UtilsPad *pad;
     UtilsTouch *touch;
 
     std::map<std::string, ScrollChannelData> channels;
@@ -35,15 +36,13 @@ public:
     UtilsScroll();
     UtilsScroll(UtilsTouch *touch);
 
-    void create(std::string channel, ScrollDirection scrollDirection, int min, int max, int xZone, int yZone, int widthZone, int heightZone);
-    void remove(std::string channel);
+    void create(const std::string& channel, ScrollDirection scrollDirection, int min, int max, int xZone, int yZone, int widthZone, int heightZone);
+    void remove(const std::string& channel);
 
-    void controller(std::string channel, bool decreaseTrigger = false, bool increaseTrigger = false, int speed = 6);
+    void padController(const std::string& channel, bool decreaseTrigger, bool increaseTrigger, int moveValue, int animationSpeed = 0);
+    void touchController(const std::string& channel);
 
     int getScroll(std::string channel);
-
-
-
 
 };
 

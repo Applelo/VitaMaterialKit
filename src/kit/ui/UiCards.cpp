@@ -23,12 +23,25 @@ bool UiCards::outsideScreen() {
     return x + width < 0 || y + height < 0 || x > SCREEN_WIDTH || y > SCREEN_HEIGHT;
 }
 
-void UiCards::startCard(int x, int y, int width, TypeTheme typeTheme, bool selected) {
+void UiCards::start(int x, int y, int width, TypeTheme typeTheme, bool selected) {
     this->x = x;
     this->y = y;
     this->width = width;
     this->typeTheme = typeTheme;
     this->selected = selected;
+}
+
+ZoneEvent UiCards::end() {
+    zoneEvent.x = x;
+    zoneEvent.y = y;
+    zoneEvent.width = width;
+    zoneEvent.height = height;
+
+    //clean for the next draw card
+    this->resetCard();
+    this->resetOffset();
+
+    return zoneEvent;
 }
 
 ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
@@ -62,7 +75,7 @@ ZoneEvent UiCards::drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle) {
         heightOffset = prePrimaryTitle.height;
     }
 
-    vita2d_draw_rectangle(x, y - CARDS_DEFAULT_PADDING, width, heightOffset + CARDS_DEFAULT_PADDING, this->selected && this->mediaFirst == 1 ? CARDS_DEFAULT_COLOR_SELECTED : CARDS_DEFAULT_COLOR_BACKGROUND);
+    vita2d_draw_rectangle(x, yOffset - CARDS_DEFAULT_PADDING, width, heightOffset + CARDS_DEFAULT_PADDING, this->selected && this->mediaFirst == 1 ? CARDS_DEFAULT_COLOR_SELECTED : CARDS_DEFAULT_COLOR_BACKGROUND);
 
     texts->draw(xOffset, yOffset, H6, CARDS_DEFAULT_COLOR_HEADER_TEXT, prePrimaryTitle.headerText);
     if (!prePrimaryTitle.subHead.empty()) {
@@ -239,17 +252,3 @@ CardPreSummary UiCards::preSummaryTitle(std::string text, int width, int height)
 
     return cardPreSummary;
 }
-
-ZoneEvent UiCards::endCard() {
-    zoneEvent.x = x;
-    zoneEvent.y = y;
-    zoneEvent.width = width;
-    zoneEvent.height = height;
-
-    //clean for the next draw card
-    this->resetCard();
-    this->resetOffset();
-
-    return zoneEvent;
-}
-

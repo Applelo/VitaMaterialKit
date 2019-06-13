@@ -61,8 +61,8 @@ private:
 public:
     UiCards(UiTheme *theme, UiTexts *texts, UiIcons *icons, UiButtons *buttons);
 
-    void startCard(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false);
-    ZoneEvent endCard();
+    void start(int x, int y, int width = CARDS_DEFAULT_WIDTH, TypeTheme typeTheme = THEME_PRIMARY, bool selected = false);
+    ZoneEvent end();
 
     ZoneEvent drawPrimaryTitle(std::string headerText, std::string subHead = "", int height = 0);
     ZoneEvent drawPrimaryTitle(CardPrePrimaryTitle prePrimaryTitle);
