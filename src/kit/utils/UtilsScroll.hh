@@ -22,8 +22,6 @@ typedef struct ScrollChannelData {
     int yZone;
     int widthZone;
     int heightZone;
-    int animation;
-    int targetAnimation;
 } ScrollChannelData;
 
 class UtilsScroll {
@@ -39,7 +37,7 @@ public:
     void create(const std::string& channel, ScrollDirection scrollDirection, int min, int max, int xZone, int yZone, int widthZone, int heightZone);
     void remove(const std::string& channel);
 
-    void padController(const std::string& channel, bool decreaseTrigger, bool increaseTrigger, int moveValue, int animationSpeed = 0);
+    void padController(const std::string& channel, int value);
     void touchController(const std::string& channel);
 
     int getScroll(std::string channel);

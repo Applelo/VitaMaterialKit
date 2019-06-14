@@ -50,36 +50,16 @@ void UtilsScroll::touchController(const std::string& channel) {
 
 }
 
-void UtilsScroll::padController(const std::string& channel, bool decreaseTrigger, bool increaseTrigger, int moveValue, int animationSpeed) {
-    if (animationSpeed == 0) {
-        animationSpeed = channels[channel].max / moveValue * 4;
-    }
+void UtilsScroll::padController(const std::string& channel, int value) {
 
-    if (decreaseTrigger) {
-        channels[channel].animation = -1;
-        channels[channel].targetAnimation = channels[channel].value - moveValue;
-    }
-    if (increaseTrigger) {
-        channels[channel].animation = 1;
-        channels[channel].targetAnimation = channels[channel].value + moveValue;
-    }
-
-    if (channels[channel].animation == -1 && channels[channel].targetAnimation <= channels[channel].value) {
-        channels[channel].value -= animationSpeed;
-    }
-
-    if (channels[channel].animation == 1 && channels[channel].targetAnimation >= channels[channel].value) {
-        channels[channel].value += animationSpeed;
-    }
+    channels[channel].value = value;
 
     if(channels[channel].value < channels[channel].min) {
         channels[channel].value = channels[channel].min;
-        channels[channel].animation = 0;
     }
 
     if (channels[channel].value > channels[channel].max) {
         channels[channel].value = channels[channel].max;
-        channels[channel].animation = 0;
     }
 }
 
