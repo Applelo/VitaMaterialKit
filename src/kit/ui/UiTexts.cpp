@@ -323,7 +323,7 @@ std::string UiTexts::applyTextWidthLimit(std::string text, int width, TextStyleD
             return text;
         }
 
-        if ((found - lastFound) > 28) {
+        if ((found - lastFound) > 25) {
             text.insert(posBreak, "-\n");
         }
         else {

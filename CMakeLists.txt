@@ -32,6 +32,74 @@ set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION "00.70")
 
+
+#Download and install externals dependencies
+include(FetchContent)
+FetchContent_Declare(
+        unilib
+        GIT_REPOSITORY https://github.com/ufal/unilib.git
+        GIT_TAG        v3.1.1
+)
+FetchContent_Declare(
+        materialdesign-webfont
+        GIT_REPOSITORY https://github.com/Templarian/MaterialDesign-Webfont.git
+        GIT_TAG        v3.6.95
+)
+FetchContent_Declare(
+        icon-font-cpp-headers
+        GIT_REPOSITORY https://github.com/juliettef/IconFontCppHeaders
+)
+FetchContent_MakeAvailable(unilib materialdesign-webfont icon-font-cpp-headers)
+
+#Unilib
+set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
+file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
+file(COPY
+        ${unilib_SOURCE_DIR}/unilib/unicode.cpp
+        DESTINATION ${UNILIB_LOCATION}
+)
+file(COPY
+        ${unilib_SOURCE_DIR}/unilib/unicode.h
+        DESTINATION ${UNILIB_LOCATION}
+        )
+file(COPY
+        ${unilib_SOURCE_DIR}/unilib/utf8.cpp
+        DESTINATION ${UNILIB_LOCATION}
+        )
+file(COPY
+        ${unilib_SOURCE_DIR}/unilib/utf8.h
+        DESTINATION ${UNILIB_LOCATION}
+        )
+file(COPY
+        ${unilib_SOURCE_DIR}/LICENSE
+        DESTINATION ${UNILIB_LOCATION}
+        )
+
+#MaterialDesign Webfont
+set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
+file(REMOVE_RECURSE ${MDI_LOCATION}*)
+file(COPY
+        ${materialdesign-webfont_SOURCE_DIR}/fonts/materialdesignicons-webfont.ttf
+        DESTINATION ${MDI_LOCATION}
+)
+file(COPY
+        ${materialdesign-webfont_SOURCE_DIR}/license.md
+        DESTINATION ${MDI_LOCATION}
+        )
+
+#IconFontCppHeaders
+set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
+file(REMOVE_RECURSE ${IFCH_LOCATION}*)
+file(COPY
+        ${icon-font-cpp-headers_SOURCE_DIR}/IconsMaterialDesignIcons.h
+        DESTINATION ${IFCH_LOCATION}
+        )
+file(COPY
+        ${icon-font-cpp-headers_SOURCE_DIR}/licence.txt
+        DESTINATION ${IFCH_LOCATION}
+        )
+
+
 #Vita3K
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
 set(VITA3K_FOLDER_PATH "/Users/Applelo/Library/Application\ Support/Vita3K/Vita3K/ux0/app/${VITA_TITLEID}")

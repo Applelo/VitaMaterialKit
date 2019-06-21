@@ -56,7 +56,6 @@ public:
 
     void addLimit(PadTouchCtrlType type, int line, int first, int last);
 
-
     bool isX(int x);
     bool isX(PadTouchCtrlIs x);
     bool isY(int y);

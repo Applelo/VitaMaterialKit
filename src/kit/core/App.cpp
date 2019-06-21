@@ -83,10 +83,9 @@ void App::initVita2d() {
 void App::debug() {
 
     ui->texts->drawF(0, 0, Body1, (unsigned int)RGBA8(255, 0, 0, 255), false,
-            "Current view: *%s*\nView found: %s\n%s",
+            "Current view: *%s*\nView found: %s",
             viewsController->getActualView().c_str(),
-            this->views.find(viewsController->getActualView()) != this->views.end() ? "true" : "false",
-            this->utils->PTC->debug().c_str()
+            this->views.find(viewsController->getActualView()) != this->views.end() ? "true" : "false"
     );
     int i = 0;
     for(auto const &kv : views) {

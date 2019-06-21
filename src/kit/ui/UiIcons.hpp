@@ -7,7 +7,7 @@
 #include <string>
 
 #include "UiIconsCodesPSVita.hh"
-#include "UiIconsCodesMDI.hh"
+#include "../lib/IconFontCppHeaders/IconsMaterialDesignIcons.h"
 #include "UiTheme.hpp"
 #include <math.h>
 
