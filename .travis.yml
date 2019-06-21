@@ -20,7 +20,7 @@ before_install:
 install:
   # install all of the dependencies you need here
   # NOTE: Commands to execute in docker must go in scripts/scripts/setup.sh and not here.
-  - docker run --name setup -v "${TRAVIS_BUILD_DIR}:/build/git" gnuton/vitasdk-docker /bin/bash /build/git/scripts/travis/setup.sh
+  - docker run --name setup -v "${TRAVIS_BUILD_DIR}:/build/git" Applelo/vitasdk-docker /bin/bash /build/git/scripts/travis/setup.sh
   - docker logs setup
   - docker commit setup build_img
 
@@ -35,7 +35,6 @@ script:
   - docker logs build
   # the lines below just show you how the dirs looks like. But they are not actually needed
   - ls
-  - cmake --version
   - ls build
 
 deploy:
