@@ -35,6 +35,7 @@ script:
   - docker logs build
   # the lines below just show you how the dirs looks like. But they are not actually needed
   - ls
+  - cmake --version
   - ls build
 
 deploy:
