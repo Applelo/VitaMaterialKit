@@ -11,7 +11,7 @@
 * Improve PadTouchController class to update value
 * Increase size of the float button (without text)
 * Add PSVita Icons in UiIcons class (don't work with Vita3K)
-* Improve CMakeLists for better readability
+* Improve CMakeLists for better readability and to download/update dependencies (material design icons, icons font cpp headers, unilib)
 * Add Travis CI (thanks @gnuton for the Travis CI for PSVita homebrews)
 * Add debug function and mode (auto by default, ctrl, touch) for UtilsPadTouchCtrl
 * Fixes everywhere, every commit

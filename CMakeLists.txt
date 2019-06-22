@@ -1,5 +1,4 @@
-## This file is a quick tutorial on writing CMakeLists for targeting the Vita
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.11)
 
 ## This includes the Vita toolchain, must go before project definition
 # It is a convenience so you do not have to type
@@ -33,7 +32,7 @@ set(VITA_TITLEID "MKIT00001")
 set(VITA_VERSION "00.70")
 
 
-#Download and install externals dependencies
+#Download and install externals dependencies only the first cmake load
 include(FetchContent)
 FetchContent_Declare(
         unilib
@@ -41,63 +40,77 @@ FetchContent_Declare(
         GIT_TAG        v3.1.1
 )
 FetchContent_Declare(
+        icon-font-cpp-headers
+        GIT_REPOSITORY https://github.com/juliettef/IconFontCppHeaders
+)
+
+FetchContent_Declare(
         materialdesign-webfont
         GIT_REPOSITORY https://github.com/Templarian/MaterialDesign-Webfont.git
         GIT_TAG        v3.6.95
 )
-FetchContent_Declare(
-        icon-font-cpp-headers
-        GIT_REPOSITORY https://github.com/juliettef/IconFontCppHeaders
-)
-FetchContent_MakeAvailable(unilib materialdesign-webfont icon-font-cpp-headers)
+
+FetchContent_Populate(unilib)
+FetchContent_Populate(icon-font-cpp-headers)
+FetchContent_Populate(materialdesign-webfont)
+
+FetchContent_GetProperties(unilib)
+FetchContent_GetProperties(icon-font-cpp-headers)
+FetchContent_GetProperties(materialdesign-webfont)
 
 #Unilib
-set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
-file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
-file(COPY
-        ${unilib_SOURCE_DIR}/unilib/unicode.cpp
-        DESTINATION ${UNILIB_LOCATION}
-)
-file(COPY
-        ${unilib_SOURCE_DIR}/unilib/unicode.h
-        DESTINATION ${UNILIB_LOCATION}
-        )
-file(COPY
-        ${unilib_SOURCE_DIR}/unilib/utf8.cpp
-        DESTINATION ${UNILIB_LOCATION}
-        )
-file(COPY
-        ${unilib_SOURCE_DIR}/unilib/utf8.h
-        DESTINATION ${UNILIB_LOCATION}
-        )
-file(COPY
-        ${unilib_SOURCE_DIR}/LICENSE
-        DESTINATION ${UNILIB_LOCATION}
-        )
-
-#MaterialDesign Webfont
-set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
-file(REMOVE_RECURSE ${MDI_LOCATION}*)
-file(COPY
-        ${materialdesign-webfont_SOURCE_DIR}/fonts/materialdesignicons-webfont.ttf
-        DESTINATION ${MDI_LOCATION}
-)
-file(COPY
-        ${materialdesign-webfont_SOURCE_DIR}/license.md
-        DESTINATION ${MDI_LOCATION}
-        )
+if(NOT unilib_POPULATED)
+    set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
+    file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/unicode.cpp
+            DESTINATION ${UNILIB_LOCATION}
+    )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/unicode.h
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/utf8.cpp
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/utf8.h
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/LICENSE
+            DESTINATION ${UNILIB_LOCATION}
+            )
+endif()
 
 #IconFontCppHeaders
-set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
-file(REMOVE_RECURSE ${IFCH_LOCATION}*)
-file(COPY
-        ${icon-font-cpp-headers_SOURCE_DIR}/IconsMaterialDesignIcons.h
-        DESTINATION ${IFCH_LOCATION}
-        )
-file(COPY
-        ${icon-font-cpp-headers_SOURCE_DIR}/licence.txt
-        DESTINATION ${IFCH_LOCATION}
-        )
+if(NOT icon-font-cpp-headers_POPULATED)
+    set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
+    file(REMOVE_RECURSE ${IFCH_LOCATION}*)
+    file(COPY
+            ${icon-font-cpp-headers_SOURCE_DIR}/IconsMaterialDesignIcons.h
+            DESTINATION ${IFCH_LOCATION}
+            )
+    file(COPY
+            ${icon-font-cpp-headers_SOURCE_DIR}/licence.txt
+            DESTINATION ${IFCH_LOCATION}
+            )
+endif()
+
+#MaterialDesign Webfont
+if(NOT materialdesignicons-webfont_POPULATED)
+    set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
+    file(REMOVE_RECURSE ${MDI_LOCATION}*)
+    file(COPY
+            ${materialdesign-webfont_SOURCE_DIR}/fonts/materialdesignicons-webfont.ttf
+            DESTINATION ${MDI_LOCATION}
+    )
+    file(COPY
+            ${materialdesign-webfont_SOURCE_DIR}/license.md
+            DESTINATION ${MDI_LOCATION}
+            )
+endif()
 
 
 #Vita3K

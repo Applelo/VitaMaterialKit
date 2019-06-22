@@ -7,12 +7,12 @@ CardsSample::CardsSample(const std::string &name) : View(name) {
 void CardsSample::contents() {
 
     for (int i = 0; i < 10; ++i) {
-        ui->cards->start(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10, CARDS_DEFAULT_WIDTH, THEME_PRIMARY,  cardsSelector == i);
+        ui->cards->start(10 + (10 * i) + (i * 400) - utils->scroll->getChannelData("cards").value, 10, CARDS_DEFAULT_WIDTH, THEME_PRIMARY,  cardsSelector == i);
         ui->cards->drawPrimaryTitle(cardPrePrimaryTitle);
         ui->cards->drawMedia(nullptr);
         ui->cards->drawSummary(cardPreSummary);
         ui->cards->end();
-        ui->texts->draw(10 + (10 * i) + (i * 400) - utils->scroll->getScroll("cards"), 10, Body1, std::to_string(i));
+        ui->texts->draw(10 + (10 * i) + (i * 400) - utils->scroll->getChannelData("cards").value, 10, Body1, std::to_string(i));
     }
 
     back = ui->buttons->containedDraw("Back", 800, 480);
@@ -33,8 +33,7 @@ void CardsSample::controls() {
         cardsSelector++;
     }
 
-    utils->scroll->touchController("cards");
-    utils->scroll->padController("cards", (CARDS_DEFAULT_WIDTH * cardsSelector) + (10 * cardsSelector));
+    utils->scroll->controller("cards");
 }
 
 void CardsSample::mounted() {

@@ -37,10 +37,9 @@ public:
     void create(const std::string& channel, ScrollDirection scrollDirection, int min, int max, int xZone, int yZone, int widthZone, int heightZone);
     void remove(const std::string& channel);
 
-    void padController(const std::string& channel, int value);
-    void touchController(const std::string& channel);
+    int controller(const std::string& channel, bool isCtrl = false, int value = 0);
 
-    int getScroll(std::string channel);
+    ScrollChannelData getChannelData(const std::string& channel);
 
 };
 

@@ -1,8 +1,6 @@
 #include "UtilsScroll.hh"
 
-UtilsScroll::UtilsScroll() {
-    this->touch = new UtilsTouch();
-}
+UtilsScroll::UtilsScroll() {}
 
 UtilsScroll::UtilsScroll(UtilsTouch *touch) : touch(touch) {}
 
@@ -27,16 +25,26 @@ void UtilsScroll::remove(const std::string& channel) {
     channels.erase(channel);
 }
 
+ScrollChannelData UtilsScroll::getChannelData(const std::string& channel) {
+    return channels[channel];
+}
 
-void UtilsScroll::touchController(const std::string& channel) {
-    if (touch != nullptr) {
-        if(touch->lastTouchPoint.x <= channels[channel].xZone + channels[channel].widthZone
-        && touch->lastTouchPoint.x >= channels[channel].xZone
-        && touch->lastTouchPoint.y <= channels[channel].yZone + channels[channel].heightZone
-        && touch->lastTouchPoint.y >= channels[channel].yZone){
+int UtilsScroll::controller(const std::string &channel, bool isCtrl, int value) {
 
-            channels[channel].value -= (channels[channel].scrollDirection == SCROLL_DIR_X) ? touch->scrollDirX : touch->scrollDirY;
+    if (isCtrl) {
+        channels[channel].value = value;
+    }
+    else {
+        if (touch != nullptr) {
+            if (touch->lastTouchPoint.x <= channels[channel].xZone + channels[channel].widthZone
+                && touch->lastTouchPoint.x >= channels[channel].xZone
+                && touch->lastTouchPoint.y <= channels[channel].yZone + channels[channel].heightZone
+                && touch->lastTouchPoint.y >= channels[channel].yZone) {
 
+                channels[channel].value -= (channels[channel].scrollDirection == SCROLL_DIR_X) ? touch->scrollDirX
+                                                                                               : touch->scrollDirY;
+
+            }
         }
     }
 
@@ -48,22 +56,6 @@ void UtilsScroll::touchController(const std::string& channel) {
         channels[channel].value = channels[channel].max;
     }
 
-}
-
-void UtilsScroll::padController(const std::string& channel, int value) {
-
-    channels[channel].value = value;
-
-    if(channels[channel].value < channels[channel].min) {
-        channels[channel].value = channels[channel].min;
-    }
-
-    if (channels[channel].value > channels[channel].max) {
-        channels[channel].value = channels[channel].max;
-    }
-}
-
-int UtilsScroll::getScroll(std::string channel) {
     return channels[channel].value;
 }
 

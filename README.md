@@ -23,6 +23,8 @@ cmake .
 make
 ```
 
+CMake will download and update all dependencies.
+
 You can also use this followed commands to send directly built files and launch Vita3K :
 
 ```shell
