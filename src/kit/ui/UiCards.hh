@@ -39,7 +39,7 @@ private:
     UiTexts *texts;
     UiIcons *icons;
     UiButtons *buttons;
-    int x, y;
+    int x, y, xStart, yStart;
     int width, height;
     int typeTheme;
     bool selected;

@@ -26,14 +26,16 @@ bool UiCards::outsideScreen() {
 void UiCards::start(int x, int y, int width, TypeTheme typeTheme, bool selected) {
     this->x = x;
     this->y = y;
+    this->xStart = x;
+    this->yStart = y;
     this->width = width;
     this->typeTheme = typeTheme;
     this->selected = selected;
 }
 
 ZoneEvent UiCards::end() {
-    zoneEvent.x = x;
-    zoneEvent.y = y;
+    zoneEvent.x = xStart;
+    zoneEvent.y = yStart;
     zoneEvent.width = width;
     zoneEvent.height = height;
 

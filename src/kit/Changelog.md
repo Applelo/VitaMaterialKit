@@ -15,6 +15,7 @@
 * Improve CMakeLists for better readability and to download/update dependencies (material design icons, icons font cpp headers, unilib)
 * Add Travis CI (thanks @gnuton for the Travis CI setup and the docker image for PSVita homebrews)
 * Add debug function and mode (auto by default, ctrl, touch) for UtilsPadTouchCtrl
+* Update Material Design Icons
 * Fixes everywhere, every commit
 
 ## Version 0.6

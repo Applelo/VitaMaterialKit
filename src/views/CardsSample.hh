@@ -9,7 +9,6 @@ private:
     CardPrePrimaryTitle cardPrePrimaryTitle;
     CardPreSummary cardPreSummary;
     ZoneEvent back;
-    int scrollValue;
 
 public:
     CardsSample(const std::string &name);
