@@ -7,7 +7,7 @@
 
 
 #include "../kit/core/View.hh"
-#include "../kit/utils/UtilsIME.hpp"
+#include "../kit/utils/UtilsIME.hh"
 
 #define NUMBER_OF_BUTTONS_TEXTFIELDS 7
 

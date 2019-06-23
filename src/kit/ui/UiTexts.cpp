@@ -1,4 +1,4 @@
-#include "UiTexts.hpp"
+#include "UiTexts.hh"
 
 using namespace ufal::unilib;
 

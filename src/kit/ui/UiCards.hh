@@ -5,9 +5,9 @@
 #include <string>
 #include "../core/UiEvent.hh"
 #include "../core/Config.hh"
-#include "UiTheme.hpp"
-#include "UiTexts.hpp"
-#include "UiButtons.hpp"
+#include "UiTheme.hh"
+#include "UiTexts.hh"
+#include "UiButtons.hh"
 
 //https://material-components.github.io/material-components-web-catalog/#/component/card
 

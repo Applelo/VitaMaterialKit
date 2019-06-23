@@ -5,8 +5,9 @@
 #include <string>
 #include <list>
 
-#include "UtilsPad.hpp"
-#include "UtilsTouch.hpp"
+#include "UtilsPad.hh"
+#include "UtilsTouch.hh"
+#include "UtilsScroll.hh"
 
 typedef enum PadTouchCtrlType {
     PADTOUCHCTRL_TYPE_X,
@@ -28,19 +29,23 @@ class UtilsPadTouchCtrl {
 private:
     UtilsPad *pad;
     UtilsTouch *touch;
+    UtilsScroll *scroll;
     int model;
     int xItem, yItem, xGlobalLimit, yGlobalLimit;
     int xOldItem, yOldItem;
     bool touchMode, ctrlMode;
     PadTouchCtrlMode mode;
+    std::map<std::string, int> scrollBuffers;
     std::string debugText;
 
     std::list <std::pair<int, std::pair<int, int> >> xLimits, yLimits;
     void clearLimits();
+    void setMode();
 public:
 
     UtilsPadTouchCtrl(UtilsPad *pad);
     UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch);
+    UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch, UtilsScroll *scroll);
 
     void controller();
 
@@ -56,6 +61,8 @@ public:
 
     void addLimit(PadTouchCtrlType type, int line, int first, int last);
 
+    void scrollController(const std::string& channel, int line, int size);
+
     bool isX(int x);
     bool isX(PadTouchCtrlIs x);
     bool isY(int y);
@@ -70,7 +77,7 @@ public:
     bool isCtrlMode() const;
 
     PadTouchCtrlMode getMode();
-    void setMode(PadTouchCtrlMode mode);
+    void updateMode(PadTouchCtrlMode mode);
 
     std::string debug();
 };

@@ -1,12 +1,12 @@
-#ifndef VITA_MATERIAL_KIT_UI_BUTTON_HPP
-#define VITA_MATERIAL_KIT_UI_BUTTON_HPP
+#ifndef VITA_MATERIAL_KIT_UI_BUTTON_HH
+#define VITA_MATERIAL_KIT_UI_BUTTON_HH
 
-#include "../utils/UtilsTouch.hpp"
-#include "../utils/UtilsPad.hpp"
+#include "../utils/UtilsTouch.hh"
+#include "../utils/UtilsPad.hh"
 
-#include "UiTexts.hpp"
-#include "UiIcons.hpp"
-#include "UiTheme.hpp"
+#include "UiTexts.hh"
+#include "UiIcons.hh"
+#include "UiTheme.hh"
 #include "../core/UiEvent.hh"
 
 #define BUTTONS_OUTLINED_SIZE 3
@@ -40,4 +40,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_UI_BUTTON_HPP
+#endif //VITA_MATERIAL_KIT_UI_BUTTON_HH

@@ -2,10 +2,10 @@
 #define VITAMATERIALKIT_UI_HH
 
 
-#include "ui/UiTheme.hpp"
-#include "ui/UiIcons.hpp"
-#include "ui/UiTexts.hpp"
-#include "ui/UiButtons.hpp"
+#include "ui/UiTheme.hh"
+#include "ui/UiIcons.hh"
+#include "ui/UiTexts.hh"
+#include "ui/UiButtons.hh"
 #include "ui/UiCheckboxes.hh"
 #include "ui/UiTextFields.hh"
 #include "ui/UiRadioBoxes.hh"

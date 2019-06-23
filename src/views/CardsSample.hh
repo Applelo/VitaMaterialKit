@@ -9,7 +9,7 @@ private:
     CardPrePrimaryTitle cardPrePrimaryTitle;
     CardPreSummary cardPreSummary;
     ZoneEvent back;
-    int cardsSelector;
+    int scrollValue;
 
 public:
     CardsSample(const std::string &name);
@@ -19,6 +19,8 @@ public:
     void mounted() override;
 
     void controls() override;
+
+    void beforeEnter() override;
 };
 
 

@@ -1,14 +1,14 @@
 // https://material.io/tools/color/#!/?view.left=0&view.right=0&primary.color=212121&secondary.color=90A4AE&secondary.text.color=FAFAFA&primary.text.color=FAFAFA
 
-#ifndef VITA_MATERIAL_KIT_UI_ICONS_HPP
-#define VITA_MATERIAL_KIT_UI_ICONS_HPP
+#ifndef VITA_MATERIAL_KIT_UI_ICONS_HH
+#define VITA_MATERIAL_KIT_UI_ICONS_HH
 
 #include <vita2d.h>
 #include <string>
 
 #include "UiIconsCodesPSVita.hh"
 #include "../lib/IconFontCppHeaders/IconsMaterialDesignIcons.h"
-#include "UiTheme.hpp"
+#include "UiTheme.hh"
 #include <math.h>
 
 #define DEFAULT_ICON_COLOR (unsigned int) RGBA8(255, 255, 255, 255)
@@ -34,4 +34,4 @@ class UiIcons {
 };
 
 
-#endif //VITA_MATERIAL_KIT_UI_ICONS_HPP
+#endif //VITA_MATERIAL_KIT_UI_ICONS_HH

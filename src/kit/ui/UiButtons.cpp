@@ -1,4 +1,4 @@
-#include "UiButtons.hpp"
+#include "UiButtons.hh"
 
 UiButtons::UiButtons(UiTheme *theme) {
     this->theme = theme;

@@ -1,5 +1,5 @@
-#ifndef VITA_MATERIAL_KIT_UI_TEXT_HPP
-#define VITA_MATERIAL_KIT_UI_TEXT_HPP
+#ifndef VITA_MATERIAL_KIT_UI_TEXT_HH
+#define VITA_MATERIAL_KIT_UI_TEXT_HH
 
 
 #include <map>
@@ -15,7 +15,7 @@
 #include "../lib/unilib/unicode.h"
 #include "../lib/unilib/utf8.h"
 
-#include "UiTheme.hpp"
+#include "UiTheme.hh"
 
 
 #define TEXTS_DEFAULT_FONT_COLOR (unsigned int) RGBA8(0, 0, 0, 255)
@@ -131,4 +131,4 @@ public:
 };
 
 
-#endif //VITA_MATERIAL_KIT_UI_TEXT_HPP
+#endif //VITA_MATERIAL_KIT_UI_TEXT_HH

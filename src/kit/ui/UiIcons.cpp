@@ -1,5 +1,5 @@
 #include <string.h>
-#include "UiIcons.hpp"
+#include "UiIcons.hh"
 
 UiIcons::UiIcons() {
     mdi = vita2d_load_font_file(DEFAULT_MATERIAL_ICON_PATH);

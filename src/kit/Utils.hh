@@ -1,9 +1,9 @@
 #ifndef VITAMATERIALKIT_UTILS_HH
 #define VITAMATERIALKIT_UTILS_HH
 
-#include "utils/UtilsI18n.hpp"
-#include "utils/UtilsTouch.hpp"
-#include "utils/UtilsPad.hpp"
+#include "utils/UtilsI18n.hh"
+#include "utils/UtilsTouch.hh"
+#include "utils/UtilsPad.hh"
 #include "utils/UtilsPadTouchCtrl.hh"
 #include "utils/UtilsScroll.hh"
 

@@ -2,8 +2,8 @@
 #define VITAMATERIALKIT_UTILSSCROLL_HH
 
 
-#include "UtilsTouch.hpp"
-#include "UtilsPad.hpp"
+#include "UtilsTouch.hh"
+#include "UtilsPad.hh"
 
 #include <string>
 #include <map>
@@ -40,6 +40,14 @@ public:
     int controller(const std::string& channel, bool isCtrl = false, int value = 0);
 
     ScrollChannelData getChannelData(const std::string& channel);
+    ScrollDirection getScrollDirection(const std::string& channel);
+    int getMax(const std::string& channel);
+    int getMin(const std::string& channel);
+    int getValue(const std::string& channel);
+    int getXZone(const std::string& channel);
+    int getYZone(const std::string& channel);
+    int getWidthZone(const std::string& channel);
+    int getHeightZone(const std::string& channel);
 
 };
 

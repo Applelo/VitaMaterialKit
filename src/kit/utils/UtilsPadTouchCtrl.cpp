@@ -6,8 +6,15 @@ UtilsPadTouchCtrl::UtilsPadTouchCtrl(UtilsPad *pad) {
     mode = PADTOUCHCTRL_MODE_CTRL;
 }
 
-
 UtilsPadTouchCtrl::UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch) : pad(pad), touch(touch) {
+    this->setMode();
+}
+
+UtilsPadTouchCtrl::UtilsPadTouchCtrl(UtilsPad *pad, UtilsTouch *touch, UtilsScroll *scroll) : pad(pad), touch(touch), scroll(scroll) {
+    this->setMode();
+}
+
+void UtilsPadTouchCtrl::setMode() {
     model = sceKernelGetModel();
     mode = PADTOUCHCTRL_MODE_AUTO;
 
@@ -255,7 +262,7 @@ PadTouchCtrlMode UtilsPadTouchCtrl::getMode() {
     return mode;
 }
 
-void UtilsPadTouchCtrl::setMode(PadTouchCtrlMode mode) {
+void UtilsPadTouchCtrl::updateMode(PadTouchCtrlMode mode) {
     this->mode = mode;
 
     if (this->mode == PADTOUCHCTRL_MODE_CTRL) {
@@ -266,5 +273,23 @@ void UtilsPadTouchCtrl::setMode(PadTouchCtrlMode mode) {
         touchMode = true;
         ctrlMode = false;
     }
+}
+
+void UtilsPadTouchCtrl::scrollController(const std::string& channel, int line, int size) {
+
+    if (ctrlMode) {
+
+        if (scroll->getScrollDirection(channel) == SCROLL_DIR_X && line == yItem) {
+            scrollBuffers[channel] = size * (xItem - 1);
+        }
+
+        if (scroll->getScrollDirection(channel) == SCROLL_DIR_Y && line == xItem) {
+            scrollBuffers[channel] = size * (yItem - 1);
+        }
+
+    }
+
+
+    scrollBuffers[channel] = scroll->controller(channel, ctrlMode, scrollBuffers[channel]);
 }
 
