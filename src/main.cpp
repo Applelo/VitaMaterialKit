@@ -1,12 +1,13 @@
 #include <psp2/kernel/processmgr.h>
 #include "kit/core/App.hh"
-#include "views/I18nSample.hh"
-#include "views/ButtonsSample.hh"
-#include "views/Welcome.hh"
-#include "views/IconsSample.hh"
-#include "views/TextsSample.hh"
-#include "views/CheckboxesSample.hh"
-#include "views/TextFieldsSample.hh"
+#include "app/views/I18nSample.hh"
+#include "app/views/ButtonsSample.hh"
+#include "app/views/Welcome.hh"
+#include "app/views/IconsSample.hh"
+#include "app/views/TextsSample.hh"
+#include "app/views/CheckboxesSample.hh"
+#include "app/views/TextFieldsSample.hh"
+#include "app/views/CardsSample.hh"
 
 int main() {
 
@@ -17,6 +18,7 @@ int main() {
     auto *textsSample = new TextsSample("TextsSample");
     auto *checkboxesSample = new CheckboxesSample("CheckboxesSample");
     auto *textFieldsSample = new TextFieldsSample("TextFieldsSample");
+    auto *cardsSample = new CardsSample("CardsSample");
 
     auto *app = new App("Welcome");
 
@@ -27,6 +29,7 @@ int main() {
     app->insertView(textsSample);
     app->insertView(checkboxesSample);
     app->insertView(textFieldsSample);
+    app->insertView(cardsSample);
 
     app->main();
 

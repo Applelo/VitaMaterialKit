@@ -1,7 +1,7 @@
 #ifndef VITAMATERIALKIT_UIEVENT_HH
 #define VITAMATERIALKIT_UIEVENT_HH
 
-#include "../utils/UtilsTouch.hpp"
+#include "../utils/UtilsTouch.hh"
 
 typedef struct ZoneEvent {
     int x;
@@ -13,8 +13,8 @@ typedef struct ZoneEvent {
 
 class UiEvent {
 public:
-    static bool onPad(ZoneEvent zoneEvent, bool button);
-    static bool onTouch(ZoneEvent zoneEvent, SceIVector2 touchInfo);
+    bool onPad(ZoneEvent zoneEvent, bool button);
+    bool onTouch(ZoneEvent zoneEvent, SceIVector2 touchInfo);
 };
 
 

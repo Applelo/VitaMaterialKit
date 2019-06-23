@@ -1,4 +1,4 @@
-# VitaMaterialProject
+# VitaMaterialProject [![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 
@@ -6,7 +6,7 @@ Wiki will be available soon to explain how to create an app, the view system and
 
 ## Showcase
 
-* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
+* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut), soon
 
 (More to come :smiley: )
 
@@ -22,6 +22,8 @@ Install **VitaSDK** with [**VDPM**](https://github.com/vitasdk/vdpm) and run the
 cmake .
 make
 ```
+
+CMake will download and update all dependencies.
 
 You can also use this followed commands to send directly built files and launch Vita3K :
 
@@ -43,11 +45,12 @@ make emulate
 ## Credits
 
 * Developed & maintained by *Applelo*
-* *coderx3* (aka devingDev) for this work on VitaCord inspired me for my own IME, Pad and Touch functions
 * *Tuxbot123* for his suggestions and his support
 * My master, *MisterAlex*
 
 
+* *coderx3* (aka devingDev) for his work on VitaCord inspired me for my own IME, Scroll, Pad and Touch functions
+* *gnuton* for Travis CI for PSVita homebrews
 * *Google* for Material Guidelines, Fonts, Components, Themes
 * [Material Design Icons](https://github.com/Templarian/MaterialDesign-Webfont/) teams for all icons
 * *juliettef* for [Material Design Icons Headers](https://github.com/juliettef/IconFontCppHeaders)

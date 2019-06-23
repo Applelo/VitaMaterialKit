@@ -13,6 +13,7 @@
 .idea
 cmake-build-debug/
 
+
 # CMake data
 CMakeCache.txt
 CMakeFiles

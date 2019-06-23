@@ -1,5 +1,4 @@
-## This file is a quick tutorial on writing CMakeLists for targeting the Vita
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.11)
 
 ## This includes the Vita toolchain, must go before project definition
 # It is a convenience so you do not have to type
@@ -13,10 +12,9 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     endif ()
 endif ()
 
-## Define project parameters here
-# Name of the project
+
 set(SHORT_NAME VitaMaterialKit)
-set(PSVITAIP "192.168.1.37")
+set(PSVITAIP "192.168.0.192")
 
 project(${SHORT_NAME})
 # This line adds Vita helper macros, must go after project definition in order
@@ -31,11 +29,158 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.60")
+set(VITA_VERSION "00.70")
 
-#Vita3K PATHS
+
+#Download and install externals dependencies only the first cmake load
+include(FetchContent)
+FetchContent_Declare(
+        unilib
+        GIT_REPOSITORY https://github.com/ufal/unilib.git
+        GIT_TAG        v3.1.1
+)
+FetchContent_Declare(
+        icon-font-cpp-headers
+        GIT_REPOSITORY https://github.com/juliettef/IconFontCppHeaders
+)
+
+FetchContent_Declare(
+        materialdesign-webfont
+        GIT_REPOSITORY https://github.com/Templarian/MaterialDesign-Webfont.git
+        GIT_TAG        v3.6.95
+)
+
+FetchContent_Populate(unilib)
+FetchContent_Populate(icon-font-cpp-headers)
+FetchContent_Populate(materialdesign-webfont)
+
+FetchContent_GetProperties(unilib)
+FetchContent_GetProperties(icon-font-cpp-headers)
+FetchContent_GetProperties(materialdesign-webfont)
+
+#Unilib
+if(NOT unilib_POPULATED)
+    set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
+    file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/unicode.cpp
+            DESTINATION ${UNILIB_LOCATION}
+    )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/unicode.h
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/utf8.cpp
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/unilib/utf8.h
+            DESTINATION ${UNILIB_LOCATION}
+            )
+    file(COPY
+            ${unilib_SOURCE_DIR}/LICENSE
+            DESTINATION ${UNILIB_LOCATION}
+            )
+endif()
+
+#IconFontCppHeaders
+if(NOT icon-font-cpp-headers_POPULATED)
+    set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
+    file(REMOVE_RECURSE ${IFCH_LOCATION}*)
+    file(COPY
+            ${icon-font-cpp-headers_SOURCE_DIR}/IconsMaterialDesignIcons.h
+            DESTINATION ${IFCH_LOCATION}
+            )
+    file(COPY
+            ${icon-font-cpp-headers_SOURCE_DIR}/licence.txt
+            DESTINATION ${IFCH_LOCATION}
+            )
+endif()
+
+#MaterialDesign Webfont
+if(NOT materialdesignicons-webfont_POPULATED)
+    set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
+    file(REMOVE_RECURSE ${MDI_LOCATION}*)
+    file(COPY
+            ${materialdesign-webfont_SOURCE_DIR}/fonts/materialdesignicons-webfont.ttf
+            DESTINATION ${MDI_LOCATION}
+    )
+    file(COPY
+            ${materialdesign-webfont_SOURCE_DIR}/license.md
+            DESTINATION ${MDI_LOCATION}
+            )
+endif()
+
+
+#Vita3K
 set(VITA3K_APP_PATH "/Applications/Vita3K.app/Contents/MacOS/Vita3K")
 set(VITA3K_FOLDER_PATH "/Users/Applelo/Library/Application\ Support/Vita3K/Vita3K/ux0/app/${VITA_TITLEID}")
+
+#Files
+set(FILES_SCE_SYS
+        sce_sys/icon0.png                       sce_sys/icon0.png
+        sce_sys/livearea/pic0.png               sce_sys/livearea/pic0.png
+        sce_sys/livearea/contents/bg.png        sce_sys/livearea/contents/bg.png
+        sce_sys/livearea/contents/startup.png   sce_sys/livearea/contents/startup.png
+        sce_sys/livearea/contents/template.xml  sce_sys/livearea/contents/template.xml
+        )
+
+set(FILES_FONTS
+        assets/fonts/mdi/materialdesignicons-webfont.ttf    assets/fonts/mdi/materialdesignicons-webfont.ttf
+        assets/fonts/Roboto/Roboto-Black.ttf                assets/fonts/Roboto/Roboto-Black.ttf
+        assets/fonts/Roboto/Roboto-BlackItalic.ttf          assets/fonts/Roboto/Roboto-BlackItalic.ttf
+        assets/fonts/Roboto/Roboto-Bold.ttf                 assets/fonts/Roboto/Roboto-Bold.ttf
+        assets/fonts/Roboto/Roboto-BoldItalic.ttf           assets/fonts/Roboto/Roboto-BoldItalic.ttf
+        assets/fonts/Roboto/Roboto-Italic.ttf               assets/fonts/Roboto/Roboto-Italic.ttf
+        assets/fonts/Roboto/Roboto-Light.ttf                assets/fonts/Roboto/Roboto-Light.ttf
+        assets/fonts/Roboto/Roboto-LightItalic.ttf          assets/fonts/Roboto/Roboto-LightItalic.ttf
+        assets/fonts/Roboto/Roboto-Medium.ttf               assets/fonts/Roboto/Roboto-Medium.ttf
+        assets/fonts/Roboto/Roboto-MediumItalic.ttf         assets/fonts/Roboto/Roboto-MediumItalic.ttf
+        assets/fonts/Roboto/Roboto-Regular.ttf              assets/fonts/Roboto/Roboto-Regular.ttf
+        assets/fonts/Roboto/Roboto-Thin.ttf                 assets/fonts/Roboto/Roboto-Thin.ttf
+        assets/fonts/Roboto/Roboto-ThinItalic.ttf           assets/fonts/Roboto/Roboto-ThinItalic.ttf
+        )
+
+set(FILES_LANGUAGES
+        i18n/en_us.json i18n/en_us.json
+        i18n/fr.json    i18n/fr.json
+        )
+
+#VITAMATERIALKIT
+set(MKIT_LIB
+        src/kit/lib/unilib/unicode.cpp
+        src/kit/lib/unilib/utf8.cpp
+        )
+
+set(MKIT_CORE
+        src/kit/core/App.cpp
+        src/kit/core/ViewsController.cpp
+        src/kit/core/View.cpp
+        src/kit/core/UiEvent.cpp
+        )
+
+set(MKIT_UI
+        src/app/Ui.cpp
+        src/kit/ui/parent/UiParentBoxes.cpp
+        src/kit/ui/UiTheme.cpp
+        src/kit/ui/UiIcons.cpp
+        src/kit/ui/UiButtons.cpp
+        src/kit/ui/UiTexts.cpp
+        src/kit/ui/UiCheckboxes.cpp
+        src/kit/ui/UiTextFields.cpp
+        src/kit/ui/UiRadioBoxes.cpp
+        src/kit/ui/UiCards.cpp
+        )
+
+set(MKIT_UTILS
+        src/app/Utils.cpp
+        src/kit/utils/UtilsI18n.cpp
+        src/kit/utils/UtilsIME.cpp
+        src/kit/utils/UtilsPad.cpp
+        src/kit/utils/UtilsTouch.cpp
+        src/kit/utils/UtilsPadTouchCtrl.cpp
+        )
 
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags
@@ -50,40 +195,20 @@ include_directories(
 add_executable(${SHORT_NAME}
         src/main.cpp
 
-        src/kit/core/App.cpp
-        src/kit/core/ViewsController.cpp
-        src/kit/core/View.cpp
-        src/kit/core/UiEvent.cpp
+        ${MKIT_LIB}
+        ${MKIT_CORE}
+        ${MKIT_UI}
+        ${MKIT_UTILS}
 
-        src/kit/lib/unilib/unicode.cpp
-        src/kit/lib/unilib/utf8.cpp
-
-        src/kit/Ui.cpp
-        src/kit/Utils.cpp
-
-        src/kit/ui/parent/UiParentBoxes.cpp
-        src/kit/ui/UiTheme.cpp
-        src/kit/ui/UiIcons.cpp
-        src/kit/ui/UiButtons.cpp
-        src/kit/ui/UiTexts.cpp
-        src/kit/ui/UiCheckboxes.cpp
-        src/kit/ui/UiTextFields.cpp
-        src/kit/ui/UiRadioBoxes.cpp
-
-        src/kit/utils/UtilsI18n.cpp
-        src/kit/utils/UtilsIME.cpp
-        src/kit/utils/UtilsPad.cpp
-        src/kit/utils/UtilsTouch.cpp
-        src/kit/utils/UtilsPadTouchCtrl.cpp
-        src/kit/utils/UtilsTexts.cpp
-
-        src/views/Welcome.cpp
-        src/views/I18nSample.cpp
-        src/views/ButtonsSample.cpp
-        src/views/IconsSample.cpp
-        src/views/TextsSample.cpp
-        src/views/CheckboxesSample.cpp
-        src/views/TextFieldsSample.cpp
+        src/app/views/Welcome.cpp
+        src/app/views/I18nSample.cpp
+        src/app/views/ButtonsSample.cpp
+        src/app/views/IconsSample.cpp
+        src/app/views/TextsSample.cpp
+        src/app/views/CheckboxesSample.cpp
+        src/app/views/TextFieldsSample.cpp
+        src/app/views/CardsSample.cpp
+        src/kit/utils/UtilsScroll.cpp
         )
 
 
@@ -92,6 +217,7 @@ target_link_libraries(${SHORT_NAME}
         vita2d
         SceDisplay_stub
         SceGxm_stub
+        ScePvf_stub
         SceSysmodule_stub
         SceCtrl_stub
         SceTouch_stub
@@ -112,28 +238,7 @@ vita_create_self(eboot.bin ${SHORT_NAME})
 vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         VERSION ${VITA_VERSION}
         NAME ${VITA_APP_NAME}
-        FILE sce_sys/icon0.png      sce_sys/icon0.png
-        sce_sys/livearea/pic0.png   sce_sys/livearea/pic0.png
-        sce_sys/livearea/contents/bg.png        sce_sys/livearea/contents/bg.png
-        sce_sys/livearea/contents/startup.png   sce_sys/livearea/contents/startup.png
-        sce_sys/livearea/contents/template.xml  sce_sys/livearea/contents/template.xml
-
-        assets/fonts/mdi/materialdesignicons-webfont.ttf assets/fonts/mdi/materialdesignicons-webfont.ttf
-        assets/fonts/Roboto/Roboto-Black.ttf        assets/fonts/Roboto/Roboto-Black.ttf
-        assets/fonts/Roboto/Roboto-BlackItalic.ttf  assets/fonts/Roboto/Roboto-BlackItalic.ttf
-        assets/fonts/Roboto/Roboto-Bold.ttf         assets/fonts/Roboto/Roboto-Bold.ttf
-        assets/fonts/Roboto/Roboto-BoldItalic.ttf   assets/fonts/Roboto/Roboto-BoldItalic.ttf
-        assets/fonts/Roboto/Roboto-Italic.ttf       assets/fonts/Roboto/Roboto-Italic.ttf
-        assets/fonts/Roboto/Roboto-Light.ttf        assets/fonts/Roboto/Roboto-Light.ttf
-        assets/fonts/Roboto/Roboto-LightItalic.ttf  assets/fonts/Roboto/Roboto-LightItalic.ttf
-        assets/fonts/Roboto/Roboto-Medium.ttf       assets/fonts/Roboto/Roboto-Medium.ttf
-        assets/fonts/Roboto/Roboto-MediumItalic.ttf assets/fonts/Roboto/Roboto-MediumItalic.ttf
-        assets/fonts/Roboto/Roboto-Regular.ttf      assets/fonts/Roboto/Roboto-Regular.ttf
-        assets/fonts/Roboto/Roboto-Thin.ttf         assets/fonts/Roboto/Roboto-Thin.ttf
-        assets/fonts/Roboto/Roboto-ThinItalic.ttf   assets/fonts/Roboto/Roboto-ThinItalic.ttf
-
-        i18n/en_us.json i18n/en_us.json
-        i18n/fr.json i18n/fr.json
+        FILE ${FILES_SCE_SYS} ${FILES_FONTS} ${FILES_LANGUAGES}
         )
 
 
