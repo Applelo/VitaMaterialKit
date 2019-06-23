@@ -2,7 +2,7 @@
 #define VITAMATERIALKIT_CHECKBOXESSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 #define NUMBER_OF_BUTTONS_CHECKBOXES 4
 

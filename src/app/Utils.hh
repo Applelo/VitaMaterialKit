@@ -1,11 +1,11 @@
 #ifndef VITAMATERIALKIT_UTILS_HH
 #define VITAMATERIALKIT_UTILS_HH
 
-#include "utils/UtilsI18n.hh"
-#include "utils/UtilsTouch.hh"
-#include "utils/UtilsPad.hh"
-#include "utils/UtilsPadTouchCtrl.hh"
-#include "utils/UtilsScroll.hh"
+#include "../kit/utils/UtilsI18n.hh"
+#include "../kit/utils/UtilsTouch.hh"
+#include "../kit/utils/UtilsPad.hh"
+#include "../kit/utils/UtilsPadTouchCtrl.hh"
+#include "../kit/utils/UtilsScroll.hh"
 
 class Utils {
 protected:

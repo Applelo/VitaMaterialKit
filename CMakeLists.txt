@@ -161,7 +161,7 @@ set(MKIT_CORE
         )
 
 set(MKIT_UI
-        src/kit/Ui.cpp
+        src/app/Ui.cpp
         src/kit/ui/parent/UiParentBoxes.cpp
         src/kit/ui/UiTheme.cpp
         src/kit/ui/UiIcons.cpp
@@ -174,7 +174,7 @@ set(MKIT_UI
         )
 
 set(MKIT_UTILS
-        src/kit/Utils.cpp
+        src/app/Utils.cpp
         src/kit/utils/UtilsI18n.cpp
         src/kit/utils/UtilsIME.cpp
         src/kit/utils/UtilsPad.cpp
@@ -200,14 +200,14 @@ add_executable(${SHORT_NAME}
         ${MKIT_UI}
         ${MKIT_UTILS}
 
-        src/views/Welcome.cpp
-        src/views/I18nSample.cpp
-        src/views/ButtonsSample.cpp
-        src/views/IconsSample.cpp
-        src/views/TextsSample.cpp
-        src/views/CheckboxesSample.cpp
-        src/views/TextFieldsSample.cpp
-        src/views/CardsSample.cpp
+        src/app/views/Welcome.cpp
+        src/app/views/I18nSample.cpp
+        src/app/views/ButtonsSample.cpp
+        src/app/views/IconsSample.cpp
+        src/app/views/TextsSample.cpp
+        src/app/views/CheckboxesSample.cpp
+        src/app/views/TextFieldsSample.cpp
+        src/app/views/CardsSample.cpp
         src/kit/utils/UtilsScroll.cpp
         )
 

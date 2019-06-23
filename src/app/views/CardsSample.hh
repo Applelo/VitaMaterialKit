@@ -2,7 +2,7 @@
 #define VITAMATERIALKIT_CARDSSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 class CardsSample : public View {
 private:

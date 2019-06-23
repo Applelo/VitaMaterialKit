@@ -1,7 +1,7 @@
 #ifndef VITAMATERIALKIT_I18NSAMPLE_HH
 #define VITAMATERIALKIT_I18NSAMPLE_HH
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 class I18nSample: public View {
 private:

@@ -2,7 +2,7 @@
 #define VITAMATERIALKIT_ICONSSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 class IconsSample : public View {
 private:

@@ -6,8 +6,8 @@
 #define VITAMATERIALKIT_TEXTFIELDSSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
-#include "../kit/utils/UtilsIME.hh"
+#include "../../kit/core/View.hh"
+#include "../../kit/utils/UtilsIME.hh"
 
 #define NUMBER_OF_BUTTONS_TEXTFIELDS 7
 

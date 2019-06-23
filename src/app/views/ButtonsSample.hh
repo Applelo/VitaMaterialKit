@@ -2,7 +2,7 @@
 #define VITAMATERIALKIT_BUTTONSSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 class ButtonsSample : public View {
 private:

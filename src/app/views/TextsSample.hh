@@ -2,7 +2,7 @@
 #define VITAMATERIALKIT_TEXTSSAMPLE_HH
 
 
-#include "../kit/core/View.hh"
+#include "../../kit/core/View.hh"
 
 class TextsSample : public View {
 private:
