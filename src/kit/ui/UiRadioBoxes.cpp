@@ -37,7 +37,7 @@ ZoneEventRadioBoxes UiRadioBoxes::drawWithText(int x, int y, UiRadioBoxesStatus 
 
 
 UiRadioBoxesStatus UiRadioBoxes::onPadAuto(ZoneEventRadioBoxes zoneEvent, bool button) {
-    if (UiEvent::onPad(zoneEvent, button)) {
+    if (EventUi::onPad(zoneEvent, button)) {
         if (zoneEvent.status == RADIOBOX_UNCHECKED) {
             return RADIOBOX_CHECKED;
         }
@@ -49,7 +49,7 @@ UiRadioBoxesStatus UiRadioBoxes::onPadAuto(ZoneEventRadioBoxes zoneEvent, bool b
 }
 
 UiRadioBoxesStatus UiRadioBoxes::onTouchAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo) {
-    if (UiEvent::onTouch(zoneEvent, touchInfo)) {
+    if (EventUi::onTouch(zoneEvent, touchInfo)) {
         if (zoneEvent.status == RADIOBOX_UNCHECKED) {
             return RADIOBOX_CHECKED;
         }
@@ -58,6 +58,24 @@ UiRadioBoxesStatus UiRadioBoxes::onTouchAuto(ZoneEventRadioBoxes zoneEvent, SceI
         }
     }
     return zoneEvent.status;
+}
+
+UiRadioBoxesStatus UiRadioBoxes::onAuto(ZoneEventRadioBoxes zoneEvent, bool button) {
+    return this->onPadAuto(zoneEvent, button);
+}
+
+UiRadioBoxesStatus UiRadioBoxes::onAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo) {
+    return this->onTouchAuto(zoneEvent, touchInfo);
+}
+
+UiRadioBoxesStatus
+UiRadioBoxes::onAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo, bool button, bool isTouch) {
+    if (isTouch) {
+        return this->onTouchAuto(zoneEvent, touchInfo);
+    }
+    else {
+        return this->onPadAuto(zoneEvent, button);
+    }
 }
 
 

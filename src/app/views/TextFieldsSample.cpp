@@ -37,33 +37,33 @@ void TextFieldsSample::controls() {
         selector = 1;
     }
 
-    if (ui->textFields->onTouch(singleLeadingIconEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(singleLeadingIconEvent, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(singleLeadingIconEvent, utils->touch->lastClickPoint) ||
+            EventUi::onPad(singleLeadingIconEvent, utils->pad->pressed.cross)) {
         singleLeadingIcon = ime->getUserText("Text", singleLeadingIcon.c_str());
     }
 
-    if (ui->textFields->onTouch(singleTrailingIconEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(singleTrailingIconEvent, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(singleTrailingIconEvent, utils->touch->lastClickPoint) ||
+            EventUi::onPad(singleTrailingIconEvent, utils->pad->pressed.cross)) {
         singleTrailingIcon = ime->getUserText("Text", singleTrailingIcon.c_str());
     }
 
-    if (ui->textFields->onTouch(singlePrefixTextEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(singlePrefixTextEvent, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(singlePrefixTextEvent, utils->touch->lastClickPoint) ||
+            EventUi::onPad(singlePrefixTextEvent, utils->pad->pressed.cross)) {
         singlePrefixText = ime->getUserText("Text", singlePrefixText.c_str(), SCE_IME_TYPE_NUMBER);
     }
 
-    if (ui->textFields->onTouch(singleSuffixTextEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(singleSuffixTextEvent, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(singleSuffixTextEvent, utils->touch->lastClickPoint) ||
+            EventUi::onPad(singleSuffixTextEvent, utils->pad->pressed.cross)) {
         singleSuffixText = ime->getUserText("Text", singleSuffixText.c_str(), SCE_IME_TYPE_NUMBER);
     }
 
-    if (ui->textFields->onTouch(textareaEvent, utils->touch->lastClickPoint) ||
-        ui->textFields->onPad(textareaEvent, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(textareaEvent, utils->touch->lastClickPoint) ||
+            EventUi::onPad(textareaEvent, utils->pad->pressed.cross)) {
         textarea = ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, 200, SCE_IME_OPTION_MULTILINE);
     }
 
-    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(back, utils->pad->pressed.cross) ||
+    if (EventUi::onTouch(back, utils->touch->lastClickPoint) ||
+            EventUi::onPad(back, utils->pad->pressed.cross) ||
         utils->pad->pressed.circle) {
 
         viewsController->setActualView("Welcome");

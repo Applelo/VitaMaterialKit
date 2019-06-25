@@ -1,7 +1,6 @@
 #ifndef VITAMATERIALKIT_UIRADIOBOXES_HH
 #define VITAMATERIALKIT_UIRADIOBOXES_HH
 
-#include "../core/UiEvent.hh"
 #include "parent/UiParentBoxes.hh"
 
 typedef enum UiRadioBoxesStatus {
@@ -14,7 +13,7 @@ typedef struct ZoneEventRadioBoxes : public ZoneEvent {
     UiRadioBoxesStatus status;
 } ZoneEventRadioBoxes;
 
-class UiRadioBoxes : public UiEvent, UiParentBoxes {
+class UiRadioBoxes : public UiParentBoxes {
 private:
     ZoneEventRadioBoxes zoneEvent;
 public:
@@ -27,6 +26,9 @@ public:
 
     UiRadioBoxesStatus onPadAuto(ZoneEventRadioBoxes zoneEvent, bool button);
     UiRadioBoxesStatus onTouchAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo);
+    UiRadioBoxesStatus onAuto(ZoneEventRadioBoxes zoneEvent, bool button);
+    UiRadioBoxesStatus onAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo);
+    UiRadioBoxesStatus onAuto(ZoneEventRadioBoxes zoneEvent, SceIVector2 touchInfo, bool button, bool isTouch);
 
 };
 

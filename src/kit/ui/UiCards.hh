@@ -3,7 +3,6 @@
 
 #include <vita2d.h>
 #include <string>
-#include "../core/UiEvent.hh"
 #include "../core/Config.hh"
 #include "UiTheme.hh"
 #include "UiTexts.hh"
@@ -33,7 +32,7 @@ typedef struct CardPreSummary {
     int height;
 } CardPreSummary;
 
-class UiCards : public UiEvent {
+class UiCards {
 private:
     UiTheme *theme;
     UiTexts *texts;

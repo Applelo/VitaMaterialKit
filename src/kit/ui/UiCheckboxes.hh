@@ -4,7 +4,6 @@
 
 #include "UiTheme.hh"
 #include "UiIcons.hh"
-#include "../core/UiEvent.hh"
 #include "parent/UiParentBoxes.hh"
 
 typedef enum UiCheckboxesStatus {
@@ -18,7 +17,7 @@ typedef struct ZoneEventCheckboxes : public ZoneEvent {
     UiCheckboxesStatus status;
 } ZoneEventCheckboxes;
 
-class UiCheckboxes : public UiEvent, UiParentBoxes {
+class UiCheckboxes : public UiParentBoxes {
 private:
     ZoneEventCheckboxes zoneEvent;
 public:
@@ -32,6 +31,9 @@ public:
 
     UiCheckboxesStatus onPadAuto(ZoneEventCheckboxes zoneEvent, bool button);
     UiCheckboxesStatus onTouchAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo);
+    UiCheckboxesStatus onAuto(ZoneEventCheckboxes zoneEvent, bool button);
+    UiCheckboxesStatus onAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo);
+    UiCheckboxesStatus onAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo, bool button, bool isTouch);
 };
 
 

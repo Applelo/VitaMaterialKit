@@ -21,44 +21,44 @@ void Welcome::contents() {
 void Welcome::controls() {
 
     //events
-    if (ui->buttons->onTouch(buttonsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(buttonsTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(buttonsTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(buttonsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("ButtonsSample");
     }
 
-    if (ui->buttons->onTouch(i18nTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(i18nTZE, utils->pad->pressed.cross)
+    if (EventUi::onTouch(i18nTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(i18nTZE, utils->pad->pressed.cross)
     ) {
         viewsController->setActualView("I18nSample");
     }
 
-    if (ui->buttons->onTouch(iconsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(iconsTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(iconsTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(iconsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("IconsSample");
     }
 
-    if (ui->buttons->onTouch(textsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(textsTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(textsTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(textsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("TextsSample");
     }
 
-    if (ui->buttons->onTouch(checkboxesTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(checkboxesTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(checkboxesTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(checkboxesTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("CheckboxesSample");
     }
 
-    if (ui->buttons->onTouch(textfieldsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(textfieldsTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(textfieldsTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(textfieldsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("TextFieldsSample");
     }
 
-    if (ui->buttons->onTouch(cardsTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(cardsTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(cardsTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(cardsTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView("CardsSample");
     }
 
-    if (ui->buttons->onTouch(exitTZE, utils->touch->lastClickPoint) ||
-        ui->buttons->onPad(exitTZE, utils->pad->pressed.cross)) {
+    if (EventUi::onTouch(exitTZE, utils->touch->lastClickPoint) ||
+            EventUi::onPad(exitTZE, utils->pad->pressed.cross)) {
         viewsController->setActualView(VIEWS_CONTROLLER_EXIT);
     }
 

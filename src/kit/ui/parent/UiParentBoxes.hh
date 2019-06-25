@@ -4,6 +4,7 @@
 #include "../UiTheme.hh"
 #include "../UiTexts.hh"
 #include "../UiIcons.hh"
+#include "../../core/EventUi.hh"
 
 #define BOXES_DEFAULT_SIZE 40
 #define BOXES_DEFAULT_SELECTOR_ALPHA 100

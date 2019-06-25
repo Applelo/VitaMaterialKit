@@ -1,7 +1,7 @@
 #ifndef VITAMATERIALKIT_UITEXTFIELDS_HH
 #define VITAMATERIALKIT_UITEXTFIELDS_HH
 
-#include "../core/UiEvent.hh"
+#include "../core/EventUi.hh"
 #include "UiTheme.hh"
 #include "UiIcons.hh"
 #include "UiTexts.hh"
@@ -43,7 +43,7 @@ typedef enum TextFieldMode {
     TEXTFIELD_MODE_TEXTAREA
 } TextFieldMode;
 
-class UiTextFields : public UiEvent {
+class UiTextFields {
 private:
     UiTheme *theme;
     UiTexts *texts;

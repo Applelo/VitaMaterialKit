@@ -17,27 +17,13 @@ void CheckboxesSample::contents() {
 
 void CheckboxesSample::controls() {
 
+    one = ui->checkboxes->onAuto(uncheckedZE, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode());
+    two = ui->checkboxes->onAuto(inderterminateZE, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode());
+    three = ui->checkboxes->onAuto(checkedZE, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode());
+    four = ui->radioBoxes->onAuto(uncheckedZERB, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode());
+    five = ui->radioBoxes->onAuto(checkedZERB, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode());
 
-    if (utils->PTC->isTouchMode()) {
-        one = ui->checkboxes->onTouchAuto(uncheckedZE, utils->touch->lastClickPoint);
-        two = ui->checkboxes->onTouchAuto(inderterminateZE, utils->touch->lastClickPoint);
-        three = ui->checkboxes->onTouchAuto(checkedZE, utils->touch->lastClickPoint);
-
-        four = ui->radioBoxes->onTouchAuto(uncheckedZERB, utils->touch->lastClickPoint);
-        five = ui->radioBoxes->onTouchAuto(checkedZERB, utils->touch->lastClickPoint);
-    }
-    else {
-        one = ui->checkboxes->onPadAuto(uncheckedZE, utils->pad->pressed.cross);
-        two = ui->checkboxes->onPadAuto(inderterminateZE, utils->pad->pressed.cross);
-        three = ui->checkboxes->onPadAuto(checkedZE, utils->pad->pressed.cross);
-
-        four = ui->radioBoxes->onPadAuto(uncheckedZERB, utils->pad->pressed.cross);
-        five = ui->radioBoxes->onPadAuto(checkedZERB, utils->pad->pressed.cross);
-    }
-
-
-    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint) ||
-            ui->buttons->onPad(back, utils->pad->pressed.cross) ||
+    if (EventUi::on(back, utils->touch->lastClickPoint, utils->pad->pressed.cross, utils->PTC->isTouchMode()) ||
         utils->pad->pressed.circle) {
 
         viewsController->setActualView("Welcome");

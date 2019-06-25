@@ -14,8 +14,8 @@ void I18nSample::contents() {
 }
 
 void I18nSample::controls() {
-    if (ui->buttons->onTouch(back, utils->touch->lastClickPoint)||
-        ui->buttons->onPad(back, utils->pad->pressed.cross) ||
+    if (EventUi::onTouch(back, utils->touch->lastClickPoint)||
+            EventUi::onPad(back, utils->pad->pressed.cross) ||
         utils->pad->pressed.circle
             ) {
         viewsController->setActualView("Welcome");

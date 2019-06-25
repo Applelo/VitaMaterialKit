@@ -3,15 +3,15 @@
 
 #include "../utils/UtilsTouch.hh"
 #include "../utils/UtilsPad.hh"
+#include "../core/EventUi.hh"
 
 #include "UiTexts.hh"
 #include "UiIcons.hh"
 #include "UiTheme.hh"
-#include "../core/UiEvent.hh"
 
 #define BUTTONS_OUTLINED_SIZE 3
 
-class UiButtons : public UiEvent {
+class UiButtons {
 private:
     UiIcons *icons;
     UiTexts *texts;

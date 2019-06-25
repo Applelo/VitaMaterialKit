@@ -43,7 +43,7 @@ ZoneEventCheckboxes UiCheckboxes::drawWithText(int x, int y, UiCheckboxesStatus 
 
 
 UiCheckboxesStatus UiCheckboxes::onPadAuto(ZoneEventCheckboxes zoneEvent, bool button) {
-    if (UiEvent::onPad(zoneEvent, button)) {
+    if (EventUi::onPad(zoneEvent, button)) {
         if (zoneEvent.status == CHECKBOX_UNCHECKED || zoneEvent.status == CHECKBOX_INDERTERMINATE) {
             return CHECKBOX_CHECKED;
         }
@@ -55,7 +55,7 @@ UiCheckboxesStatus UiCheckboxes::onPadAuto(ZoneEventCheckboxes zoneEvent, bool b
 }
 
 UiCheckboxesStatus UiCheckboxes::onTouchAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo) {
-    if (UiEvent::onTouch(zoneEvent, touchInfo)) {
+    if (EventUi::onTouch(zoneEvent, touchInfo)) {
         if (zoneEvent.status == CHECKBOX_UNCHECKED || zoneEvent.status == CHECKBOX_INDERTERMINATE) {
             return CHECKBOX_CHECKED;
         }
@@ -64,6 +64,23 @@ UiCheckboxesStatus UiCheckboxes::onTouchAuto(ZoneEventCheckboxes zoneEvent, SceI
         }
     }
     return zoneEvent.status;
+}
+
+UiCheckboxesStatus UiCheckboxes::onAuto(ZoneEventCheckboxes zoneEvent, bool button) {
+    return this->onPadAuto(zoneEvent, button);
+}
+
+UiCheckboxesStatus UiCheckboxes::onAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo) {
+    return this->onTouchAuto(zoneEvent, touchInfo);
+}
+
+UiCheckboxesStatus UiCheckboxes::onAuto(ZoneEventCheckboxes zoneEvent, SceIVector2 touchInfo, bool button, bool isTouch) {
+    if (isTouch) {
+        return this->onTouchAuto(zoneEvent, touchInfo);
+    }
+    else {
+        return this->onPadAuto(zoneEvent, button);
+    }
 }
 
 
