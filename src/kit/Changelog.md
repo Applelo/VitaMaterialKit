@@ -1,9 +1,11 @@
 # Changelog
 
 ## Version 0.7.5
+* Add a documentation is available :D Yeah !
 * Rename UiEvent to EventUi
 * EventUi is now a static function (not parent anymore by Ui components)
-* Add a documentation :D Yeah !
+* Some language code in UtilsI18n have been change regarding of what Sony said
+* Split CmakeLists.txt to be more readable and easy to configure
 
 ## Version 0.7
 * Add UiCard class

@@ -4,16 +4,7 @@
 [![GitHub](https://img.shields.io/github/license/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/releases)
 
-
-### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
-
-
-
-## Showcase
-
-* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
-
-(More to come :smiley: )
+> C++ framework/boilerplate to create beautiful MaterialDesign app quickly and easily for PSVita
 
 ## Documentation
 
@@ -33,3 +24,5 @@
 * *juliettef* for [Material Design Icons Headers](https://github.com/juliettef/IconFontCppHeaders)
 * [unilib](https://github.com/ufal/unilib) for lowercase & UPPERCASE work with unicode char
 
+
+* Documentation propulsed by [docsify](https://docsify.js.org/#/)

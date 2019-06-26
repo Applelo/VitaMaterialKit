@@ -31,10 +31,10 @@ set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
 set(VITA_VERSION "00.75")
 
-include(cmake/Dependencies.txt)
-include(cmake/Vita3K.txt)
-include(cmake/Files.txt)
-include(cmake/VitaMaterialKit.txt)
+include(cmake/Dependencies.cmake)
+include(cmake/Vita3K.cmake)
+include(cmake/Files.cmake)
+include(cmake/VitaMaterialKit.cmake)
 
 ## Flags and includes for building
 # Note that we make sure not to overwrite previous flags

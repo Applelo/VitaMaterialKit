@@ -17,20 +17,19 @@
 
   - [Buttons](ui/buttons.md)
   - [Cards](ui/cards.md)
+  - [Checkboxes](ui/checkboxes.md)
   - [Icons](ui/icons.md)
-  - Forms
-    - [Checkboxes](ui/checkboxes.md)
-    - [RadioBoxes](ui/radioboxes.md)
-    - [TextFields](ui/textfields.md)
+  - [RadioBoxes](ui/radioboxes.md)
   - [Texts](ui/texts.md)
+  - [TextFields](ui/textfields.md)
   - [Theme](ui/theme.md)
 
 
 - Utils
 
-  - [I18n](utils/i18n.md)
-  - [IME](utils/ime.md)
-  - [Pad](utils/pad.md)
+  - [I18n](utils/I18n.md)
+  - [IME](utils/IME.md)
+  - [Pad](utils/Pad.md)
   - [PadTouchCtrl](utils/padtouchctrl.md)
   - [Scroll](utils/scroll.md)
   - [Touch](utils/touch.md)
