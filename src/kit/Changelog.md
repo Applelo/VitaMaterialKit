@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.7.5
+* Rename UiEvent to EventUi
+* EventUi is now a static function (not parent anymore by Ui components)
+* Add a documentation :D Yeah !
+
 ## Version 0.7
 * Add UiCard class
 * Add UtilsScroll class to manage scroll elements

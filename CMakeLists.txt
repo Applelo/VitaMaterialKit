@@ -29,7 +29,7 @@ set(VITA_APP_NAME "VitaMaterialKit")
 
 set(VITA_TITLEID "MKIT00001")
 # Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.70")
+set(VITA_VERSION "00.75")
 
 
 #Download and install externals dependencies only the first cmake load
