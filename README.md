@@ -1,46 +1,23 @@
-# VitaMaterialProject [![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
+# VitaMaterialProject 
+
+[![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
+[![GitHub](https://img.shields.io/github/license/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/releases)
+
 
 ### Kit in C++ inspired by Material UI to create quickly a beautiful application for PSVita systems
 
-Wiki will be available soon to explain how to create an app, the view system and details each functions in each class.
+
 
 ## Showcase
 
-* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut), soon
+* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
 
 (More to come :smiley: )
 
-## Changelog
-
-See [Changelog](https://github.com/Applelo/VitaMaterialKit/blob/master/src/kit/Changelog.md) file
+## Documentation
 
 
-## Build
-Install **VitaSDK** with [**VDPM**](https://github.com/vitasdk/vdpm) and run the followed commands :
-
-```shell
-cmake .
-make
-```
-
-CMake will download and update all dependencies.
-
-You can also use this followed commands to send directly built files and launch Vita3K :
-
-```shell
-#send eboot.bin file with FTP
-make send
-#send vpk with FTP
-make send_vpk
-#copy eboot.bin file with USB
-make copy
-#send vpk with USB
-make copy_vpk
-#emulate Update eboot.bin and launch app in Vita3K
-make emulate
-#emulate_vpk Install the app in Vita3K
-make emulate
-```
 
 ## Credits
 

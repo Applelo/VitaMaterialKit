@@ -53,7 +53,7 @@ int UtilsI18n::getDefaultLanguage() {
 const char *UtilsI18n::getLanguageCode(int lang) {
     switch(lang) {
         case SCE_SYSTEM_PARAM_LANG_JAPANESE:
-            return "jap";
+            return "jp";
         case SCE_SYSTEM_PARAM_LANG_ENGLISH_US:
             return "en_us";
         case SCE_SYSTEM_PARAM_LANG_FRENCH:
@@ -67,7 +67,7 @@ const char *UtilsI18n::getLanguageCode(int lang) {
         case SCE_SYSTEM_PARAM_LANG_DUTCH:
             return "nl";
         case SCE_SYSTEM_PARAM_LANG_PORTUGUESE_PT:
-            return "pt";
+            return "pt_pt";
         case SCE_SYSTEM_PARAM_LANG_RUSSIAN:
             return "ru";
         case SCE_SYSTEM_PARAM_LANG_KOREAN:
@@ -87,11 +87,11 @@ const char *UtilsI18n::getLanguageCode(int lang) {
         case SCE_SYSTEM_PARAM_LANG_POLISH:
             return "pl";
         case SCE_SYSTEM_PARAM_LANG_PORTUGUESE_BR:
-            return "br";
+            return "pt_br";
         case SCE_SYSTEM_PARAM_LANG_ENGLISH_GB:
             return "en_gb";
         case SCE_SYSTEM_PARAM_LANG_TURKISH:
-            return "tk";
+            return "tr";
         default:
             return "en_us";
     }
