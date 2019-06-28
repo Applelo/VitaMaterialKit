@@ -2,6 +2,7 @@
 
 
 Welcome::Welcome(const char *name) : View(name) {
+
 }
 
 void Welcome::contents() {
@@ -59,7 +60,7 @@ void Welcome::controls() {
 
     if (EventUi::onTouch(exitTZE, utils->touch->lastClickPoint) ||
             EventUi::onPad(exitTZE, utils->pad->pressed.cross)) {
-        viewsController->setActualView(VIEWS_CONTROLLER_EXIT);
+        viewsController->setActualView(VIEWS_CONTROLLER_EXIT_APP);
     }
 
 }

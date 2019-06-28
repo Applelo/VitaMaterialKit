@@ -30,14 +30,15 @@ private:
 
 	void oslOskGetText(char *text);
 	void initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int type, unsigned int option);
+    void utf16ToUtf8(uint16_t *src, uint8_t *dst);
+    void utf8ToUtf16(uint8_t *src, uint16_t *dst);
 
 	public:
 		UtilsIME();
-		std::string getUserText(const char *title, const char *showText = "", unsigned int type = SCE_IME_TYPE_BASIC_LATIN, int maxTextLength = 128, unsigned int option = 0);
+		std::string getUserText(const char *title, const char *showText = "", unsigned int type = SCE_IME_TYPE_BASIC_LATIN, int maxTextLength = SCE_IME_DIALOG_MAX_TITLE_LENGTH, unsigned int option = 0);
 		SceCommonDialogStatus getStatus() const;
 
-		void utf16ToUtf8(uint16_t *src, uint8_t *dst);
-		void utf8ToUtf16(uint8_t *src, uint16_t *dst);
+
 };
 
 #endif

@@ -1,4 +1,4 @@
-# VitaMaterialProject 
+# VitaMaterialKit
 
 [![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
 [![GitHub](https://img.shields.io/github/license/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/blob/master/LICENSE)
@@ -6,9 +6,14 @@
 
 > C++ framework/boilerplate to create beautiful MaterialDesign app quickly and easily for PSVita
 
-## Documentation
+Current version: 0.7.5
 
+## Showcase
 
+* [Sample app](https://github.com/Applelo/VitaMaterialKit/releases)
+* [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
+
+(More to come :smiley: )
 
 ## Credits
 

@@ -22,7 +22,8 @@ void App::insertView(View *view) {
 
 void App::main() {
 
-    this->launchMountedViews();
+    this->beforeMountViews();
+    this->mountViews();
 
     while (run) {
         vita2d_start_drawing();
@@ -69,7 +70,7 @@ void App::checkExit() {
     if (viewsController->getActualView() == VIEWS_CONTROLLER_EXIT_LOOP) {
         run = 0;
     }
-    else if (viewsController->getActualView() == VIEWS_CONTROLLER_EXIT) {
+    else if (viewsController->getActualView() == VIEWS_CONTROLLER_EXIT_APP) {
         vita2d_fini();
         sceKernelExitProcess(0);
     }
@@ -104,7 +105,11 @@ void App::afterView() {
 
 }
 
-void App::launchMountedViews() {
+void App::beforeMountViews() {
+
+}
+
+void App::mountViews() {
     for(auto const &kv : views) {
         kv.second->mounted();
     }

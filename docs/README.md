@@ -2,17 +2,23 @@
 
 > C++ framework/boilerplate to create beautiful MaterialDesign app quickly and easily for PSVita
 
+[![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
+[![GitHub](https://img.shields.io/github/license/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/releases)
+
+## What it is
+
 When you develop an application, you want to focus the development in features and not really in the UI (event if it's important). 
 It's why I create this project to be more productive to create really cool app for the PSVita community.
 
 The project is inspired by Vue.JS and by Material Design guidelines for the Ui.
 
-You can use this project like a boilerplate to create your app. It is structured to be really easy to understand and to be maintained with the future kit update.
+You can use this project like a boilerplate to create your own app. It is structured to be really easy to understand and to be maintained with the future kit update.
 
-If you want to see all components available, I advise you to download [the sample app](https://github.com/Applelo/VitaMaterialKit/releases) and try it on your device.
 
-## Showcase
+## Examples
 
+* [Sample app](https://github.com/Applelo/VitaMaterialKit/releases)
 * [Vita-CTP-Shortcut](https://github.com/CTPBenchmark/Vita-CTP-Shortcut)
 
 (More to come :smiley: )

@@ -16,7 +16,7 @@ class App {
 private:
     void checkExit();
     void initVita2d();
-    void launchMountedViews();
+    void mountViews();
 
 protected:
     Utils *utils;
@@ -26,6 +26,8 @@ protected:
     int run;
     std::string oldViewName;
 
+    //hook can be override
+    virtual void beforeMountViews();
     virtual void beforeView();
     virtual void afterView();
     virtual void debug();
