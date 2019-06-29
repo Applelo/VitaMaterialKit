@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
 
-## This includes the Vita toolchain, must go before project definition
-# It is a convenience so you do not have to type
-# -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake for cmake. It is
-# highly recommended that you include this block for all projects.
 if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     if (DEFINED ENV{VITASDK})
         set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
@@ -12,25 +8,10 @@ if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     endif ()
 endif ()
 
-
-set(SHORT_NAME VitaMaterialKit)
-set(PSVITAIP "192.168.0.192")
-
-project(${SHORT_NAME})
-# This line adds Vita helper macros, must go after project definition in order
-# to build Vita specific artifacts (self/vpk).
+project(VitaMaterialKit)
 include("${VITASDK}/share/vita.cmake" REQUIRED)
 
-## Configuration options for this app
-# Display name (under bubble in LiveArea)
-set(VITA_APP_NAME "VitaMaterialKit")
-# Unique ID must be exactly 9 characters. Recommended: XXXXYYYYY where X =
-# unique string of developer and Y = a unique number for this app
-
-set(VITA_TITLEID "MKIT00001")
-# Optional version string to show in LiveArea's more info screen
-set(VITA_VERSION "00.75")
-
+include(cmake/Config.cmake)
 include(cmake/Dependencies.cmake)
 include(cmake/Vita3K.cmake)
 include(cmake/Files.cmake)
@@ -46,7 +27,7 @@ include_directories(
         ../common
 )
 
-add_executable(${SHORT_NAME}
+add_executable(${PROJECT_NAME}
         src/main.cpp
 
         ${MKIT_LIB}
@@ -64,9 +45,21 @@ add_executable(${SHORT_NAME}
         src/app/views/CardsSample.cpp
         )
 
+#Add definitions
+target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_IP=${DEBUG_IP} DEBUG_PORT=${DEBUG_PORT} VMKIT_VERSION=${VITA_VERSION})
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_APP=1)
+    target_link_libraries(${PROJECT_NAME}
+            debugnet
+            SceNetCtl_stub
+            SceNet_stub)
+else()
+    target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_APP=0)
+endif()
+
 
 # Library to link to (drop the -l prefix). This will mostly be stubs.
-target_link_libraries(${SHORT_NAME}
+target_link_libraries(${PROJECT_NAME}
         vita2d
         SceDisplay_stub
         SceGxm_stub
@@ -86,14 +79,12 @@ target_link_libraries(${SHORT_NAME}
         c
         )
 
-
-vita_create_self(eboot.bin ${SHORT_NAME})
-vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} eboot.bin
+vita_create_self(eboot.bin ${PROJECT_NAME})
+vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         VERSION ${VITA_VERSION}
         NAME ${VITA_APP_NAME}
         FILE ${FILES_SCE_SYS} ${FILES_FONTS} ${FILES_LANGUAGES}
         )
-
 
 add_custom_target(send
         COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
@@ -101,18 +92,18 @@ add_custom_target(send
         )
 
 add_custom_target(copy
-        COMMAND cp eboot.bin F:/app/${VITA_TITLEID}/eboot.bin
+        COMMAND cp eboot.bin  /Volumes/Untitled/app/${VITA_TITLEID}/eboot.bin
         DEPENDS eboot.bin
         )
 
 add_custom_target(send_vpk
-        COMMAND curl -T ${SHORT_NAME}.vpk ftp://${PSVITAIP}:1337/ux0:/data/
-        DEPENDS ${SHORT_NAME}.vpk
+        COMMAND curl -T ${PROJECT_NAME}.vpk ftp://${PSVITAIP}:1337/ux0:/data/
+        DEPENDS ${PROJECT_NAME}.vpk
         )
 
 add_custom_target(copy_vpk
-        COMMAND cp ${SHORT_NAME}.vpk F:/data/${VITA_TITLEID}/${SHORT_NAME}.vpk
-        DEPENDS ${SHORT_NAME}.vpk
+        COMMAND cp ${PROJECT_NAME}.vpk F:/data/${VITA_TITLEID}/${PROJECT_NAME}.vpk
+        DEPENDS ${PROJECT_NAME}.vpk
         )
 
 add_custom_target(emulate
@@ -122,7 +113,7 @@ add_custom_target(emulate
         )
 
 add_custom_target(emulate_vpk
-        COMMAND ${VITA3K_APP_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${SHORT_NAME}.vpk
-        DEPENDS ${SHORT_NAME}.vpk
+        COMMAND ${VITA3K_APP_PATH} ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.vpk
+        DEPENDS ${PROJECT_NAME}.vpk
         )
 

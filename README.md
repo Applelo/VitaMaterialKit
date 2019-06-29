@@ -22,8 +22,10 @@ Current version: 0.7.5
 * My master, *MisterAlex*
 
 
+* All people involved to VitaSDK project
 * *coderx3* (aka devingDev) for his work on VitaCord inspired me for my own IME, Scroll, Pad and Touch functions
 * *gnuton* for Travis CI for PSVita homebrews
+* *psxdev* for debugnet library
 * *Google* for Material Guidelines, Fonts, Components, Themes
 * [Material Design Icons](https://github.com/Templarian/MaterialDesign-Webfont/) teams for all icons
 * *juliettef* for [Material Design Icons Headers](https://github.com/juliettef/IconFontCppHeaders)

@@ -1,6 +1,7 @@
 #ifndef VITAMATERIALKIT_UTILS_HH
 #define VITAMATERIALKIT_UTILS_HH
 
+#include "../kit/utils/Screen.hh"
 #include "../kit/utils/UtilsI18n.hh"
 #include "../kit/utils/UtilsTouch.hh"
 #include "../kit/utils/UtilsPad.hh"

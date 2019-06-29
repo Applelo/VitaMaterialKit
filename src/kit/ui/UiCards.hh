@@ -3,7 +3,7 @@
 
 #include <vita2d.h>
 #include <string>
-#include "../core/Config.hh"
+#include "../utils/Screen.hh"
 #include "UiTheme.hh"
 #include "UiTexts.hh"
 #include "UiButtons.hh"

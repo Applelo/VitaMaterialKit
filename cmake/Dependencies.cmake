@@ -26,6 +26,7 @@ FetchContent_GetProperties(materialdesign-webfont)
 
 #Unilib
 if(NOT unilib_POPULATED)
+    message("Install unilib")
     set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
     file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
     file(COPY
@@ -52,6 +53,7 @@ endif()
 
 #IconFontCppHeaders
 if(NOT icon-font-cpp-headers_POPULATED)
+    message("Install IconFontCppHeaders")
     set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
     file(REMOVE_RECURSE ${IFCH_LOCATION}*)
     file(COPY
@@ -66,6 +68,7 @@ endif()
 
 #MaterialDesign Webfont
 if(NOT materialdesignicons-webfont_POPULATED)
+    message("Install MaterialDesign Webfont")
     set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
     file(REMOVE_RECURSE ${MDI_LOCATION}*)
     file(COPY

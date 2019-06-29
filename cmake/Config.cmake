@@ -1,0 +1,11 @@
+#PSVita App info
+set(VITA_APP_NAME "VitaMaterialKit")
+set(VITA_TITLEID "MKIT00001")
+set(VITA_VERSION "00.75")
+
+set(PSVITAIP "192.168.0.192")
+
+#Debug
+set(DEBUG_IP "192.168.0.108")
+set(DEBUG_PORT 18194)
+

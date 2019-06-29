@@ -2,9 +2,11 @@
 
 ## Version 0.7.5
 * Add a documentation is available :D Yeah !
+* Add debugnet to easily debug your app (use cmake debug to activate it)
 * Rename UiEvent to EventUi
 * Add a hook in App before mount views
 * EventUi is now a static function (not parent anymore by Ui components)
+* Improve the CMakeLists.txt configurations
 * Some language code in UtilsI18n have been change regarding of what Sony said
 * Split CmakeLists.txt to be more readable and easy to configure
 

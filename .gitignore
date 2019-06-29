@@ -8,21 +8,13 @@
 *.sfo
 *.cbp
 
-
+#Mac
 .DS_Store
+
+#CLion
 .idea
-cmake-build-debug/
+cmake-build-debug
+cmake-build-release
 
-
-# CMake data
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-
+#Vita3K
 vita3k.log
