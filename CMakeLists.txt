@@ -18,14 +18,8 @@ include(cmake/Files.cmake)
 include(cmake/VitaMaterialKit.cmake)
 
 ## Flags and includes for building
-# Note that we make sure not to overwrite previous flags
-
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fpermissive -std=gnu11 -Wall ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fpermissive -std=c++11 -Wall ")
-
-include_directories(
-        ../common
-)
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
@@ -46,7 +40,7 @@ add_executable(${PROJECT_NAME}
         )
 
 #Add definitions
-target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_IP=${DEBUG_IP} DEBUG_PORT=${DEBUG_PORT} VMKIT_VERSION=${VITA_VERSION})
+target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_IP="\\"${DEBUG_IP}\\"" DEBUG_PORT=${DEBUG_PORT} VMKIT_VERSION=${VITA_VERSION})
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_APP=1)
     target_link_libraries(${PROJECT_NAME}
