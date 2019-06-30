@@ -86,26 +86,29 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} eboot.bin
         FILE ${FILES_SCE_SYS} ${FILES_FONTS} ${FILES_LANGUAGES}
         )
 
+#Send through the FTP
 add_custom_target(send
-        COMMAND curl -T eboot.bin ftp://${PSVITAIP}:1337/ux0:/app/${VITA_TITLEID}/
-        DEPENDS eboot.bin
-        )
-
-add_custom_target(copy
-        COMMAND cp eboot.bin  /Volumes/Untitled/app/${VITA_TITLEID}/eboot.bin
+        COMMAND curl -T eboot.bin ftp://${PSVITA_IP}:1337/ux0:/app/${VITA_TITLEID}/
         DEPENDS eboot.bin
         )
 
 add_custom_target(send_vpk
-        COMMAND curl -T ${PROJECT_NAME}.vpk ftp://${PSVITAIP}:1337/ux0:/data/
+        COMMAND curl -T ${PROJECT_NAME}.vpk ftp://${PSVITA_IP}:1337/ux0:/data/
         DEPENDS ${PROJECT_NAME}.vpk
+        )
+
+#Copy to the device
+add_custom_target(copy
+        COMMAND cp eboot.bin ${PSVITA_VOLUME}app/${VITA_TITLEID}/eboot.bin
+        DEPENDS eboot.bin
         )
 
 add_custom_target(copy_vpk
-        COMMAND cp ${PROJECT_NAME}.vpk F:/data/${VITA_TITLEID}/${PROJECT_NAME}.vpk
+        COMMAND cp ${PROJECT_NAME}.vpk ${PSVITA_VOLUME}data/${VITA_TITLEID}/${PROJECT_NAME}.vpk
         DEPENDS ${PROJECT_NAME}.vpk
         )
 
+#Vita3K
 add_custom_target(emulate
         COMMAND cp eboot.bin ${VITA3K_FOLDER_PATH}/eboot.bin
         COMMAND ${VITA3K_APP_PATH} -r ${VITA_TITLEID}
