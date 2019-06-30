@@ -40,13 +40,20 @@ add_executable(${PROJECT_NAME}
         )
 
 #Add definitions
-target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_IP="\\"${DEBUG_IP}\\"" DEBUG_PORT=${DEBUG_PORT} VMKIT_VERSION=${VITA_VERSION})
+add_definitions(-DDEBUG_LOG_DIR="${DEBUG_LOG_DIR}" -DDEBUG_NET_IP="${DEBUG_NET_IP}" )
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+        DEBUG_NET=${DEBUG_NET}
+        DEBUG_NET_PORT=${DEBUG_NET_PORT}
+        DEBUG_LOG=${DEBUG_LOG}
+        VMKIT_VERSION=${VITA_VERSION})
 if (CMAKE_BUILD_TYPE MATCHES Debug)
     target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_APP=1)
-    target_link_libraries(${PROJECT_NAME}
-            debugnet
-            SceNetCtl_stub
-            SceNet_stub)
+    if (${DEBUG_NET} EQUAL 1)
+        target_link_libraries(${PROJECT_NAME}
+                debugnet
+                SceNetCtl_stub
+                SceNet_stub)
+    endif ()
 else()
     target_compile_definitions(${PROJECT_NAME} PRIVATE DEBUG_APP=0)
 endif()

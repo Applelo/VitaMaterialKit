@@ -8,6 +8,10 @@ set(PSVITA_IP "192.168.0.192")
 set(PSVITA_VOLUME "/Volumes/Untitled/")
 
 #Debug
-set(DEBUG_IP "192.168.0.108")
-set(DEBUG_PORT 18194)
+set(DEBUG_LOG 1)
+set(DEBUG_LOG_DIR "ux0:/data/log/")
+
+set(DEBUG_NET 1)
+set(DEBUG_NET_IP "192.168.0.108")
+set(DEBUG_NET_PORT 18194)
 

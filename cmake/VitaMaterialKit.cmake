@@ -6,9 +6,10 @@ set(MKIT_LIB
 
 set(MKIT_CORE
         src/kit/core/App.cpp
+        src/kit/core/Debug.cpp
+        src/kit/core/EventUi.cpp
         src/kit/core/ViewsController.cpp
         src/kit/core/View.cpp
-        src/kit/core/EventUi.cpp
         )
 
 set(MKIT_UI

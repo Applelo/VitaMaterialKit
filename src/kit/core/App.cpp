@@ -22,12 +22,11 @@ void App::insertView(View *view) {
 
 void App::main() {
 
+    log_init();
+
     this->beforeMountViews();
     this->mountViews();
 
-    if (DEBUG_APP == 1) {
-        debugNetInit(DEBUG_IP, DEBUG_PORT, 3);
-    }
 
     while (run) {
         vita2d_start_drawing();
@@ -78,9 +77,7 @@ void App::checkExit() {
     else if (viewsController->getActualView() == VIEWS_CONTROLLER_EXIT_APP) {
         vita2d_fini();
         sceKernelExitProcess(0);
-        if (DEBUG_APP == 1) {
-            debugNetFinish();
-        }
+        log_term();
     }
 }
 

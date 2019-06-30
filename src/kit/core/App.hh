@@ -9,14 +9,7 @@
 #include "ViewsController.hh"
 #include "../../app/Ui.hh"
 #include "../../app/Utils.hh"
-
-#if DEBUG_APP
-    #include <debugnet.h>
-#else
-    #define debugNetInit(...)
-    #define debugNetPrintf(...)
-    #define debugNetFinish()
-#endif
+#include "Debug.hh"
 
 class App {
 private:
