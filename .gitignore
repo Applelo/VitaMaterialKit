@@ -14,5 +14,8 @@
 #Vscode
 build
 
+#Lib
+src/kit/lib
+
 #Vita3K
 vita3k.log

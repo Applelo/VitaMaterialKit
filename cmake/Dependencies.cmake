@@ -13,7 +13,7 @@ FetchContent_Declare(
 FetchContent_Declare(
         materialdesign-webfont
         GIT_REPOSITORY https://github.com/Templarian/MaterialDesign-Webfont.git
-        GIT_TAG        v3.6.95
+        GIT_TAG        v4.5.95
 )
 
 FetchContent_Populate(unilib)
