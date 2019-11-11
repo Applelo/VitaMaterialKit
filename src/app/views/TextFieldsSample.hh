@@ -17,7 +17,6 @@ private:
     std::string singleLeadingIcon, singleTrailingIcon, singleSuffixText, singlePrefixText, textarea;
     ZoneEventTextField singleLeadingIconEvent, singleTrailingIconEvent, singleSuffixTextEvent, singlePrefixTextEvent, textareaEvent;
     ZoneEvent back;
-    UtilsIME *ime;
 public:
     TextFieldsSample(const std::string &name);
 

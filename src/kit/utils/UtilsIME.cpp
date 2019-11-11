@@ -1,138 +1,85 @@
+#include <utility>
+
 #include "UtilsIME.hh"
-
-
-static uint16_t ime_title_utf16[SCE_IME_DIALOG_MAX_TITLE_LENGTH];
-static uint16_t ime_initial_text_utf16[SCE_IME_DIALOG_MAX_TEXT_LENGTH];
-static uint16_t ime_input_text_utf16[SCE_IME_DIALOG_MAX_TEXT_LENGTH + 1];
-static uint8_t ime_input_text_utf8[SCE_IME_DIALOG_MAX_TEXT_LENGTH + 1];
+#include "../core/App.hh"
 
 UtilsIME::UtilsIME(){
-	SceAppUtilInitParam initParam;
-	SceAppUtilBootParam bootParam;
-	SceCommonDialogConfigParam dialogParam;
-
-	memset(&initParam, 0, sizeof(SceAppUtilInitParam));
-	memset(&bootParam, 0, sizeof(SceAppUtilBootParam));
-	memset(&dialogParam, 0, sizeof(SceCommonDialogConfigParam));
-
-	sceAppUtilInit(&initParam, &bootParam);
-	sceCommonDialogSetConfigParam(&dialogParam);
 }
 
-void UtilsIME::utf16ToUtf8(uint16_t *src, uint8_t *dst) {
-	for (i = 0; src[i]; i++) {
-		if ((src[i] & 0xFF80) == 0) {
-			*(dst++) = (uint8_t) (src[i] & 0xFF);
-		} else if((src[i] & 0xF800) == 0) {
-			*(dst++) = (uint8_t) (((src[i] >> 6) & 0xFF) | 0xC0);
-			*(dst++) = (uint8_t) ((src[i] & 0x3F) | 0x80);
-		} else if((src[i] & 0xFC00) == 0xD800 && (src[i + 1] & 0xFC00) == 0xDC00) {
-			*(dst++) = (uint8_t) ((((src[i] + 64) >> 8) & 0x3) | 0xF0);
-			*(dst++) = (uint8_t) ((((src[i] >> 2) + 16) & 0x3F) | 0x80);
-			*(dst++) = (uint8_t) (((src[i] >> 4) & 0x30) | 0x80 | ((src[i + 1] << 2) & 0xF));
-			*(dst++) = (uint8_t) ((src[i + 1] & 0x3F) | 0x80);
-			i += 1;
-		} else {
-			*(dst++) = (uint8_t) (((src[i] >> 12) & 0xF) | 0xE0);
-			*(dst++) = (uint8_t) (((src[i] >> 6) & 0x3F) | 0x80);
-			*(dst++) = (uint8_t) ((src[i] & 0x3F) | 0x80);
-		}
-	}
+void UtilsIME::prepare(std::string id, std::string title, std::string initialText, unsigned int type, SceUInt32 maxTextLength, unsigned int option) {
+    IMEData data;
+    std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
 
-	*dst = '\0';
+    data.title = converter.from_bytes(title);
+    data.initialText = converter.from_bytes(initialText);
+    data.type = type;
+    data.maxTextLength = maxTextLength;
+    data.option = option;
+
+    datas[id] = data;
 }
 
-void UtilsIME::utf8ToUtf16(uint8_t *src, uint16_t *dst) {
-	for (i = 0; src[i];) {
-		if ((src[i] & 0xE0) == 0xE0) {
-			*(dst++) = (uint16_t) (((src[i] & 0x0F) << 12) | ((src[i + 1] & 0x3F) << 6) | (src[i + 2] & 0x3F));
-			i += 3;
-		} else if ((src[i] & 0xC0) == 0xC0) {
-			*(dst++) = (uint16_t) (((src[i] & 0x1F) << 6) | (src[i + 1] & 0x3F));
-			i += 2;
-		} else {
-			*(dst++) = src[i];
-			i += 1;
-		}
-	}
-
-	*dst = '\0';
+void UtilsIME::start(std::string id) {
+    App::disableViewContents = true;
+    current_id = std::move(id);
+    initImeDialog();
 }
- 
-void UtilsIME::initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int type, unsigned int option) {
+
+void UtilsIME::initImeDialog() {
     // Convert UTF8 to UTF16
-	this->utf8ToUtf16((uint8_t *)title, ime_title_utf16);
-	this->utf8ToUtf16((uint8_t *)initialText, ime_initial_text_utf16);
- 
-    SceImeDialogParam param;
-	sceImeDialogParamInit(&param);
+    delete input_text_buffer_utf16;
+    input_text_buffer_utf16 = new SceWChar16[datas[current_id].maxTextLength + 1];
 
-	param.sdkVersion = 0x03150021,
-	param.supportedLanguages = 0x0001FFFF;
-	param.languagesForced = SCE_TRUE;
-	param.type = type;
-	param.option = option;
-	if (option == SCE_IME_OPTION_MULTILINE)
+    SceImeDialogParam param;
+    sceImeDialogParamInit(&param);
+
+    param.sdkVersion = 0x03150021,
+    param.supportedLanguages = 0x0001FFFF;
+    param.languagesForced = SCE_TRUE;
+	param.type = datas[current_id].type;
+	param.option = datas[current_id].option;
+	if (datas[current_id].option == SCE_IME_OPTION_MULTILINE)
 		param.dialogMode = SCE_IME_DIALOG_DIALOG_MODE_WITH_CANCEL;
-	param.title = ime_title_utf16;
-	param.maxTextLength = (SceUInt32) maxTextLength;
-	param.initialText = ime_initial_text_utf16;
-	param.inputTextBuffer = ime_input_text_utf16;
+	param.title = (const SceWChar16 *) datas[current_id].title.c_str();
+	param.maxTextLength = datas[current_id].maxTextLength;
+    param.inputMethod = 0;
+    param.initialText = (SceWChar16 *) datas[current_id].initialText.c_str();
+    param.inputTextBuffer = input_text_buffer_utf16;
 
 	sceImeDialogInit(&param);
+    show_ime = true;
 }
 
-void UtilsIME::oslOskGetText(char *text){
-	// Convert UTF16 to UTF8
-	this->utf16ToUtf8(ime_input_text_utf16, ime_input_text_utf8);
-	strcpy(text,(char*)ime_input_text_utf8);
-}
-
-std::string UtilsIME::getUserText(const char *title , const char *showText, unsigned int type, int maxTextLength, unsigned int option) {
-    bool shown_dial = false;
-   
-    char userText[SCE_IME_DIALOG_MAX_TEXT_LENGTH];
-    strcpy(userText, showText);
-   	int run = 1;
-
-   
-    while (run) {
-        vita2d_start_drawing();
-        vita2d_clear_screen();
-       
-        if (!shown_dial) {
-            initImeDialog(title, userText, maxTextLength, type, option);
-            shown_dial = true;
-            }
-       
+void UtilsIME::controller() {
+    if (show_ime) {
         status = sceImeDialogGetStatus();
-       
-        if (status == (SceCommonDialogStatus)IME_DIALOG_RESULT_FINISHED) {
-            SceImeDialogResult result;
-            memset(&result, 0, sizeof(SceImeDialogResult));
-            sceImeDialogGetResult(&result);
- 
-            if (result.button == SCE_IME_DIALOG_BUTTON_CLOSE)
-                status = (SceCommonDialogStatus)IME_DIALOG_RESULT_CANCELED;
-            else
-                oslOskGetText(userText);
- 
-            sceImeDialogTerm();
-            shown_dial = 0;
-            run = 0;
-		}
-       
-        vita2d_end_drawing();
-        vita2d_common_dialog_update();
-        vita2d_swap_buffers();
-        sceDisplayWaitVblankStart();
-	}
-    return userText;
-}
 
+        if (status == SCE_COMMON_DIALOG_STATUS_FINISHED) {
+            SceImeDialogResult result={};
+            sceImeDialogGetResult(&result);
+
+            if (result.button == SCE_IME_DIALOG_BUTTON_CLOSE)
+                status = SCE_COMMON_DIALOG_STATUS_FINISHED;
+            else {
+                std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+                input_text_buffer_utf8 = converter.to_bytes((char16_t*) input_text_buffer_utf16);
+                datas[current_id].result = std::string(input_text_buffer_utf8);
+            }
+
+            sceImeDialogTerm();
+            App::disableViewContents = false;
+            current_id = "";
+
+            show_ime = false;
+        }
+    }
+}
 
 
 SceCommonDialogStatus UtilsIME::getStatus() const {
-	return status;
+    return status;
 }
 
+std::string UtilsIME::getResult(std::string id) {
+    return datas[id].result;
+}

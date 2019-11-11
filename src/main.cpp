@@ -20,7 +20,7 @@ int main() {
     auto *textFieldsSample = new TextFieldsSample("TextFieldsSample");
     auto *cardsSample = new CardsSample("CardsSample");
 
-    auto *app = new App("Welcome");
+    auto *app = new App("TextFieldsSample");
 
     app->insertView(welcome);
     app->insertView(buttonsSample);

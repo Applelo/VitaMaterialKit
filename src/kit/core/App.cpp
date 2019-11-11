@@ -1,5 +1,7 @@
 #include "App.hh"
 
+bool App::disableViewContents = false;
+
 App::App(const char *firstView) {
     this->initVita2d();
 
@@ -7,7 +9,6 @@ App::App(const char *firstView) {
     this->utils = new Utils();
 
     this->viewsController = new ViewsController(firstView);
-
     run = 1;
 };
 
@@ -50,20 +51,30 @@ void App::main() {
         this->beforeView();
 
         if (this->views.find(viewsController->getActualView()) != this->views.end()) {
-            this->views[viewsController->getActualView()]->contents();
+            if (!App::disableViewContents) {
+                this->views[viewsController->getActualView()]->contents();
+            }
             this->views[viewsController->getActualView()]->controls();
         }
 
         this->afterView();
 
-        if (DEBUG_APP == 1) {
+        if (DEBUG_APP == 1 && !App::disableViewContents) {
             this->debug();
         }
 
         this->checkExit();
 
-        vita2d_end_drawing();
-        vita2d_swap_buffers();
+        if (App::disableViewContents) {
+            vita2d_end_drawing();
+            vita2d_common_dialog_update();
+            vita2d_swap_buffers();
+            sceDisplayWaitVblankStart();
+        }
+        else {
+            vita2d_end_drawing();
+            vita2d_swap_buffers();
+        }
     }
 
 }

@@ -31,10 +31,14 @@ protected:
     virtual void afterView();
     virtual void debug();
 public:
+    static bool disableViewContents;
     App(const char *firstView);
 
     void insertView(View *view);
     void main();
+
+    static bool isDisableViewContents();
+    static void setDisableViewContents(bool disableViewContents);
 };
 
 

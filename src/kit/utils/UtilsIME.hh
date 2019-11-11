@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 #include <string>
+#include <map>
+#include <locale>
+#include <codecvt>
 #include <string.h>
 #include <stdbool.h>
 
@@ -17,27 +20,38 @@
 #include <psp2/gxm.h>
 #include <psp2/kernel/sysmem.h>
 
-#define IME_DIALOG_RESULT_NONE 0
-#define IME_DIALOG_RESULT_RUNNING 1
-#define IME_DIALOG_RESULT_FINISHED 2
-#define IME_DIALOG_RESULT_CANCELED 3
+typedef struct IMEData {
+    std::basic_string<char16_t> title;
+    std::basic_string<char16_t> initialText;
+    unsigned int type;
+    SceUInt32 maxTextLength;
+    unsigned int option;
+    std::string result;
+} IMEData;
 
 
 class UtilsIME{
 private:
 	int i;
+    bool show_ime;
+    std::string current_id;
 	SceCommonDialogStatus status;
+    std::map<std::string, IMEData> datas;
+    std::string input_text_buffer_utf8;
+    SceWChar16 *input_text_buffer_utf16 = nullptr;
 
-	void oslOskGetText(char *text);
-	void initImeDialog(const char *title, const char *initialText, int maxTextLength, unsigned int type, unsigned int option);
-    void utf16ToUtf8(uint16_t *src, uint8_t *dst);
-    void utf8ToUtf16(uint8_t *src, uint16_t *dst);
+	void initImeDialog();
 
 	public:
 		UtilsIME();
-		std::string getUserText(const char *title, const char *showText = "", unsigned int type = SCE_IME_TYPE_BASIC_LATIN, int maxTextLength = SCE_IME_DIALOG_MAX_TITLE_LENGTH, unsigned int option = 0);
+
+		void prepare(std::string id, std::string title = "", std::string initialText = "", unsigned int type = SCE_IME_TYPE_BASIC_LATIN, SceUInt32 maxTextLength = SCE_IME_DIALOG_MAX_TITLE_LENGTH, unsigned int option = 0);
+		void start(std::string id);
+
+        std::string getResult(std::string id);
 		SceCommonDialogStatus getStatus() const;
 
+        void controller();
 
 };
 

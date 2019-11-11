@@ -6,19 +6,19 @@ UtilsScroll::UtilsScroll(UtilsTouch *touch) : touch(touch) {}
 
 
 void UtilsScroll::create(const std::string& channel, ScrollDirection scrollDirection, int min, int max, int xZone, int yZone, int widthZone, int heightZone) {
-    ScrollChannelData scrollChannelData;
+    ScrollData scrollData;
 
-    scrollChannelData.scrollDirection = scrollDirection;
-    scrollChannelData.max = max;
-    scrollChannelData.min = min;
-    scrollChannelData.value = 0;
+    scrollData.scrollDirection = scrollDirection;
+    scrollData.max = max;
+    scrollData.min = min;
+    scrollData.value = 0;
 
-    scrollChannelData.xZone = xZone;
-    scrollChannelData.yZone = yZone;
-    scrollChannelData.widthZone = widthZone;
-    scrollChannelData.heightZone = heightZone;
+    scrollData.xZone = xZone;
+    scrollData.yZone = yZone;
+    scrollData.widthZone = widthZone;
+    scrollData.heightZone = heightZone;
 
-    channels[channel] = scrollChannelData;
+    channels[channel] = scrollData;
 }
 
 void UtilsScroll::remove(const std::string& channel) {
@@ -55,7 +55,7 @@ int UtilsScroll::controller(const std::string &channel, bool isCtrl, int value) 
     return channels[channel].value;
 }
 
-ScrollChannelData UtilsScroll::getChannelData(const std::string& channel) {
+ScrollData UtilsScroll::getChannelData(const std::string& channel) {
     return channels[channel];
 }
 

@@ -1,0 +1,14 @@
+{
+  "name": "vmkit-documentation",
+  "description": "The documentation of VitaMaterialKit",
+  "author": "Applelo",
+  "license" : "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Applelo/VitaMaterialKit.git"
+  },
+  "scripts": {
+    "install": "npm i docsify-cli -g",
+    "dev": "docsify serve ."
+  }
+}

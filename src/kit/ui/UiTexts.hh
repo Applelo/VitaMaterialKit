@@ -43,6 +43,7 @@ typedef enum TextStyle {
 typedef struct TextStyleData {
     std::string type;
     unsigned int size;
+    float letter_spacing;
     bool uppercase;
     double offset;
 } TextStyleData;

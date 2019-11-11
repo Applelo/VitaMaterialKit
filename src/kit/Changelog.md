@@ -5,6 +5,7 @@
 * Add debugnet to easily debug your app (use cmake debug to activate it)
 * Rename UiEvent to EventUi
 * Add a hook in App before mount views
+* Rework IME to fix main problem on it (check the documentation)
 * EventUi is now a static function (not parent anymore by Ui components)
 * Improve the CMakeLists.txt configurations
 * Some language code in UtilsI18n have been change regarding of what Sony said

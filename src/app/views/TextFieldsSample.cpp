@@ -1,7 +1,7 @@
 #include "TextFieldsSample.hh"
 
 TextFieldsSample::TextFieldsSample(const std::string &name) : View(name) {
-    ime = new UtilsIME();
+
 }
 
 void TextFieldsSample::contents() {
@@ -37,30 +37,37 @@ void TextFieldsSample::controls() {
         selector = 1;
     }
 
+
+
     if (EventUi::onTouch(singleLeadingIconEvent, utils->touch->lastClickPoint) ||
             EventUi::onPad(singleLeadingIconEvent, utils->pad->pressed.cross)) {
-        singleLeadingIcon = ime->getUserText("Text", singleLeadingIcon.c_str());
+        utils->ime->prepare("singleLeadingIcon", "Text", singleLeadingIcon, SCE_IME_TYPE_BASIC_LATIN);
+        utils->ime->start("singleLeadingIcon");
     }
 
-    if (EventUi::onTouch(singleTrailingIconEvent, utils->touch->lastClickPoint) ||
-            EventUi::onPad(singleTrailingIconEvent, utils->pad->pressed.cross)) {
-        singleTrailingIcon = ime->getUserText("Text", singleTrailingIcon.c_str());
-    }
+    singleLeadingIcon = utils->ime->getResult("singleLeadingIcon");
 
-    if (EventUi::onTouch(singlePrefixTextEvent, utils->touch->lastClickPoint) ||
-            EventUi::onPad(singlePrefixTextEvent, utils->pad->pressed.cross)) {
-        singlePrefixText = ime->getUserText("Text", singlePrefixText.c_str(), SCE_IME_TYPE_NUMBER);
-    }
+    utils->ime->controller();
 
-    if (EventUi::onTouch(singleSuffixTextEvent, utils->touch->lastClickPoint) ||
-            EventUi::onPad(singleSuffixTextEvent, utils->pad->pressed.cross)) {
-        singleSuffixText = ime->getUserText("Text", singleSuffixText.c_str(), SCE_IME_TYPE_NUMBER);
-    }
-
-    if (EventUi::onTouch(textareaEvent, utils->touch->lastClickPoint) ||
-            EventUi::onPad(textareaEvent, utils->pad->pressed.cross)) {
-        textarea = ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, 200, SCE_IME_OPTION_MULTILINE);
-    }
+//    if (EventUi::onTouch(singleTrailingIconEvent, utils->touch->lastClickPoint) ||
+//            EventUi::onPad(singleTrailingIconEvent, utils->pad->pressed.cross)) {
+//        singleTrailingIcon = utils->ime->getUserText("Text", singleTrailingIcon.c_str());
+//    }
+//
+//    if (EventUi::onTouch(singlePrefixTextEvent, utils->touch->lastClickPoint) ||
+//            EventUi::onPad(singlePrefixTextEvent, utils->pad->pressed.cross)) {
+//        singlePrefixText = utils->ime->getUserText("Text", singlePrefixText.c_str(), SCE_IME_TYPE_NUMBER);
+//    }
+//
+//    if (EventUi::onTouch(singleSuffixTextEvent, utils->touch->lastClickPoint) ||
+//            EventUi::onPad(singleSuffixTextEvent, utils->pad->pressed.cross)) {
+//        singleSuffixText = utils->ime->getUserText("Text", singleSuffixText.c_str(), SCE_IME_TYPE_NUMBER);
+//    }
+//
+//    if (EventUi::onTouch(textareaEvent, utils->touch->lastClickPoint) ||
+//            EventUi::onPad(textareaEvent, utils->pad->pressed.cross)) {
+//        textarea = utils->ime->getUserText("Text", textarea.c_str(), SCE_IME_TYPE_BASIC_LATIN, 200, SCE_IME_OPTION_MULTILINE);
+//    }
 
     if (EventUi::onTouch(back, utils->touch->lastClickPoint) ||
             EventUi::onPad(back, utils->pad->pressed.cross) ||

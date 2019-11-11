@@ -1,7 +1,6 @@
 #ifndef VITAMATERIALKIT_UTILSSCROLL_HH
 #define VITAMATERIALKIT_UTILSSCROLL_HH
 
-
 #include "UtilsTouch.hh"
 #include "UtilsPad.hh"
 
@@ -13,7 +12,7 @@ typedef enum ScrollDirection {
     SCROLL_DIR_Y
 } ScrollDirection;
 
-typedef struct ScrollChannelData {
+typedef struct ScrollData {
     ScrollDirection scrollDirection;
     int max;
     int min;
@@ -22,13 +21,13 @@ typedef struct ScrollChannelData {
     int yZone;
     int widthZone;
     int heightZone;
-} ScrollChannelData;
+} ScrollData;
 
 class UtilsScroll {
 private:
     UtilsTouch *touch;
 
-    std::map<std::string, ScrollChannelData> channels;
+    std::map<std::string, ScrollData> channels;
 
 public:
     UtilsScroll();
@@ -39,7 +38,7 @@ public:
 
     int controller(const std::string& channel, bool isCtrl = false, int value = 0);
 
-    ScrollChannelData getChannelData(const std::string& channel);
+    ScrollData getChannelData(const std::string& channel);
     ScrollDirection getScrollDirection(const std::string& channel);
     int getMax(const std::string& channel);
     int getMin(const std::string& channel);

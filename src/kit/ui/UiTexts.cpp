@@ -151,15 +151,18 @@ void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
     textStyleData.type = "Regular";
     textStyleData.size = 16;
     textStyleData.uppercase = false;
+    textStyleData.letter_spacing = 0;
 
     switch (textStyle) {
         case H1:
             textStyleData.type = italic ? "LightItalic" : "Light";
             textStyleData.size = 96;
+            textStyleData.letter_spacing = -1.5;
             break;
         case H2:
             textStyleData.type = italic ? "LightItalic" : "Light";
             textStyleData.size = 60;
+            textStyleData.letter_spacing = -0.5;
             break;
         case H3:
             textStyleData.type = italic ? "Italic" : "Regular";
@@ -168,6 +171,7 @@ void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
         case H4:
             textStyleData.type = italic ? "Italic" : "Regular";
             textStyleData.size = 34;
+            textStyleData.letter_spacing = 0.25;
             break;
         case H5:
             textStyleData.type = italic ? "Italic" : "Regular";
@@ -176,29 +180,43 @@ void UiTexts::calcTextStyleData(TextStyle textStyle, bool italic) {
         case H6:
             textStyleData.type = italic ? "MediumItalic" : "Medium";
             textStyleData.size = 20;
+            textStyleData.letter_spacing = 0.15;
             break;
         case Sub1:
+            textStyleData.type = italic ? "Italic" : "Regular";
+            textStyleData.size = 16;
+            textStyleData.letter_spacing = 0.15;
+            break;
+        case Sub2:
+            textStyleData.type = italic ? "MediumItalic" : "Medium";
+            textStyleData.size = 14;
+            textStyleData.letter_spacing = 0.1;
+            break;
         case Body1:
             textStyleData.type = italic ? "Italic" : "Regular";
             textStyleData.size = 16;
+            textStyleData.letter_spacing = 0.5;
             break;
-        case Sub2:
         case Body2:
             textStyleData.type = italic ? "MediumItalic" : "Medium";
             textStyleData.size = 14;
+            textStyleData.letter_spacing = 0.25;
             break;
         case Button:
             textStyleData.type = italic ? "MediumItalic" : "Medium";
             textStyleData.size = 14;
             textStyleData.uppercase = true;
+            textStyleData.letter_spacing = 1.25;
             break;
         case Caption:
             textStyleData.type = italic ? "Italic" : "Regular";
             textStyleData.size = 12;
+            textStyleData.letter_spacing = 0.4;
             break;
         case Overline:
             textStyleData.type = italic ? "Italic" : "Regular";
             textStyleData.size = 10;
+            textStyleData.letter_spacing = 1.5;
             textStyleData.uppercase = true;
             break;
 

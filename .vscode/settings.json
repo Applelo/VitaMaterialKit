@@ -1,0 +1,11 @@
+{
+  "search.exclude": {
+    "assets": true,
+    "sce_sys": true,
+    "docs": true,
+  },
+  "files.associations": {
+    "locale": "cpp",
+    "iosfwd": "cpp"
+  },
+}

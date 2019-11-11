@@ -7,6 +7,7 @@
 #include "../kit/utils/UtilsPad.hh"
 #include "../kit/utils/UtilsPadTouchCtrl.hh"
 #include "../kit/utils/UtilsScroll.hh"
+#include "../kit/utils/UtilsIME.hh"
 
 class Utils {
 protected:
@@ -17,6 +18,7 @@ public:
     UtilsI18n *i18n;
     UtilsPadTouchCtrl *PTC;
     UtilsScroll *scroll;
+    UtilsIME *ime;
 
     Utils();
     virtual void read();
