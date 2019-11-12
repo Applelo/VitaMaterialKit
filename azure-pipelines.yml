@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+- dev
+
+pool:
+  vmImage: 'ubuntu-16.04'
+container: gnuton/vitasdk-docker:latest
+
+
+steps:
+
+- script: |
+    mkdir build
+    cd build
+    cmake ..
+  displayName: 'Configure CMake'
+
+- script: |
+    cd build
+    make -j4
+  displayName: 'Build'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    path: build/VitaMaterialKit.vpk
+    artifact: 'Vita Package (VPK)'
+
