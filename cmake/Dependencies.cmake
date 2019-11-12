@@ -1,82 +1,41 @@
-#Download and install externals dependencies only the first cmake load
-include(FetchContent)
-FetchContent_Declare(
-        unilib
-        GIT_REPOSITORY https://github.com/ufal/unilib.git
-        GIT_TAG        v3.1.1
-)
-FetchContent_Declare(
-        icon-font-cpp-headers
-        GIT_REPOSITORY https://github.com/juliettef/IconFontCppHeaders
+set(IFCH_FILES_COPY
+"IconsMaterialDesignIcons.h"
+"licence.txt"
 )
 
-FetchContent_Declare(
-        materialdesign-webfont
-        GIT_REPOSITORY https://github.com/Templarian/MaterialDesign-Webfont.git
-        GIT_TAG        v4.5.95
+set(MDI_FILES_COPY
+"fonts/materialdesignicons-webfont.ttf"
+"license.md"
 )
 
-FetchContent_Populate(unilib)
-FetchContent_Populate(icon-font-cpp-headers)
-FetchContent_Populate(materialdesign-webfont)
+set(UNILIB_FILES_COPY
+"unilib/unicode.cpp"
+"unilib/unicode.h"
+"unilib/utf8.cpp"
+"unilib/utf8.h"
+"LICENSE"
+)
 
-FetchContent_GetProperties(unilib)
-FetchContent_GetProperties(icon-font-cpp-headers)
-FetchContent_GetProperties(materialdesign-webfont)
+install_dep(
+        "icon-font-cpp-headers"
+        "https://github.com/juliettef/IconFontCppHeaders"
+        "8a8e4a3ec40a9d8fc4d87614f02ed78f29836f62"
+        "src/kit/lib/IconFontCppHeaders"
+        "${IFCH_FILES_COPY}"
+)
 
-#Unilib
-if(NOT unilib_POPULATED)
-    message("Install unilib")
-    set(UNILIB_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/unilib/)
-    file(REMOVE_RECURSE ${UNILIB_LOCATION}*)
-    file(COPY
-            ${unilib_SOURCE_DIR}/unilib/unicode.cpp
-            DESTINATION ${UNILIB_LOCATION}
-    )
-    file(COPY
-            ${unilib_SOURCE_DIR}/unilib/unicode.h
-            DESTINATION ${UNILIB_LOCATION}
-            )
-    file(COPY
-            ${unilib_SOURCE_DIR}/unilib/utf8.cpp
-            DESTINATION ${UNILIB_LOCATION}
-            )
-    file(COPY
-            ${unilib_SOURCE_DIR}/unilib/utf8.h
-            DESTINATION ${UNILIB_LOCATION}
-            )
-    file(COPY
-            ${unilib_SOURCE_DIR}/LICENSE
-            DESTINATION ${UNILIB_LOCATION}
-            )
-endif()
+install_dep(
+        "materialdesignicons-webfont"
+        "https://github.com/Templarian/MaterialDesign-Webfont.git"
+        "v4.5.95"
+        "assets/fonts/mdi"
+        "${MDI_FILES_COPY}"
+)
 
-#IconFontCppHeaders
-if(NOT icon-font-cpp-headers_POPULATED)
-    message("Install IconFontCppHeaders")
-    set(IFCH_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/src/kit/lib/IconFontCppHeaders)
-    file(REMOVE_RECURSE ${IFCH_LOCATION}*)
-    file(COPY
-            ${icon-font-cpp-headers_SOURCE_DIR}/IconsMaterialDesignIcons.h
-            DESTINATION ${IFCH_LOCATION}
-            )
-    file(COPY
-            ${icon-font-cpp-headers_SOURCE_DIR}/licence.txt
-            DESTINATION ${IFCH_LOCATION}
-            )
-endif()
-
-#MaterialDesign Webfont
-if(NOT materialdesignicons-webfont_POPULATED)
-    message("Install MaterialDesign Webfont")
-    set(MDI_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/assets/fonts/mdi/)
-    file(REMOVE_RECURSE ${MDI_LOCATION}*)
-    file(COPY
-            ${materialdesign-webfont_SOURCE_DIR}/fonts/materialdesignicons-webfont.ttf
-            DESTINATION ${MDI_LOCATION}
-    )
-    file(COPY
-            ${materialdesign-webfont_SOURCE_DIR}/license.md
-            DESTINATION ${MDI_LOCATION}
-            )
-endif()
+install_dep(
+        "unilib"
+        "https://github.com/ufal/unilib.git"
+        "v3.1.1"
+        "src/kit/lib/unilib"
+        "${UNILIB_FILES_COPY}"
+)

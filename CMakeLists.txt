@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.14)
 
 if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     if (DEFINED ENV{VITASDK})
@@ -12,6 +12,7 @@ project(VitaMaterialKit)
 include("${VITASDK}/share/vita.cmake" REQUIRED)
 
 include(cmake/Config.cmake)
+include(cmake/Functions.cmake)
 include(cmake/Dependencies.cmake)
 include(cmake/Vita3K.cmake)
 include(cmake/Files.cmake)
