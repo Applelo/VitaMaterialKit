@@ -1,6 +1,6 @@
 # VitaMaterialKit
 
-[![Build Status](https://travis-ci.org/Applelo/VitaMaterialKit.svg?branch=master)](https://travis-ci.org/Applelo/VitaMaterialKit)
+![Azure DevOps builds (branch)](https://img.shields.io/azure-devops/build/boubaultlois/938fb2af-0bf0-448c-a05b-25745a28091e/1/master)
 [![GitHub](https://img.shields.io/github/license/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/blob/master/LICENSE)
 [![GitHub release](https://img.shields.io/github/release/Applelo/VitaMaterialKit.svg)](https://github.com/Applelo/VitaMaterialKit/releases)
 

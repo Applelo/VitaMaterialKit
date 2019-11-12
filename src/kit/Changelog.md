@@ -10,6 +10,7 @@
 * Improve the CMakeLists.txt configurations
 * Some language code in UtilsI18n have been change regarding of what Sony said
 * Split CmakeLists.txt to be more readable and easy to configure
+* Use Azure Pipelines instead of Travis
 
 ## Version 0.7
 * Add UiCard class
